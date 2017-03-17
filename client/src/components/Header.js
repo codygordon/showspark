@@ -1,8 +1,15 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-const Header = () => (
+import LocationSearch from './LocationSearch'
+
+const Header = props => (
   <div className="header">
-    <span className="header-logo" />
+    <Link to={'/'} className="header-logo" />
+    <LocationSearch
+      locationSelected={props.locationSelected}
+      selectedLocation={props.selectedLocation}
+    />
   </div>
 )
 

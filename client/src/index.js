@@ -18,7 +18,8 @@ import NotFound from './components/NotFound'
 
 function mapStateToProps(state) {
   return {
-
+    selectedLocation: state.selectedLocation,
+    venues: state.venues
   }
 }
 
@@ -31,10 +32,10 @@ const Root = connect(mapStateToProps, mapDispatchToProps)(App)
 render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-        <Switch>
-          <Route exact path="/" component={Root}/>
-          <Route component={NotFound} />
-        </Switch>
+      <Switch>
+        <Route exact path="/" component={Root} />
+        <Route component={NotFound} />
+      </Switch>
     </ConnectedRouter>
   </Provider>,
   document.querySelector('#root')

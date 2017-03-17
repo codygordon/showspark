@@ -56,6 +56,7 @@ mongo.connectToServer((err) => {
     /* eslint-disable global-require */
     app.use('/api', require('./routes/api/index'))
     app.use('/api/token', require('./routes/api/token'))
+    app.use('/api/venues', require('./routes/api/venues'))
 
     app.use((req, res) => {
       res.status(400)

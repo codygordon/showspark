@@ -23,6 +23,7 @@
     "react-dom": "^15.4.1",
     "react-google-maps": "^6.0.1",
     "react-icons": "^2.2.1",
+    "react-places-autocomplete": "^4.1.1",
     "react-redux": "^4.4.6",
     "react-router": "latest",
     "react-router-dom": "^4.0.0",
@@ -41,6 +42,68 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "airbnb"
+    ],
+    "env": {
+      "browser": true
+    },
+    "rules": {
+      "import/extensions": "off",
+      "import/no-extraneous-dependencies": [
+        "error",
+        {
+          "devDependencies": false,
+          "optionalDependencies": false,
+          "peerDependencies": false
+        }
+      ],
+      "import/prefer-default-export": "warn",
+      "no-unused-vars": [
+        "warn",
+        {
+          "argsIgnorePattern": "res|req|next|^err"
+        }
+      ],
+      "no-shadow": [
+        "error",
+        {
+          "allow": [
+            "res",
+            "req",
+            "err"
+          ]
+        }
+      ],
+      "no-unused-expressions": [
+        "error",
+        {
+          "allowTernary": true
+        }
+      ],
+      "no-console": "warn",
+      "no-underscore-dangle": "off",
+      "comma-dangle": "off",
+      "semi": "off",
+      "prefer-const": "warn",
+      "consistent-return": "warn",
+      "max-len": [
+        1,
+        180,
+        4
+      ],
+      "react/jsx-filename-extension": [
+        "error",
+        {
+          "extensions": [
+            ".js",
+            ".jsx"
+          ]
+        }
+      ],
+      "react/prefer-stateless-function": "warn",
+      "react/prop-types": "warn"
+    }
   }
 }

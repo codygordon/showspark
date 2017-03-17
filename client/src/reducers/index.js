@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
 
-import map from './map'
+import venues from './venues'
+import selectedLocation from './selectedLocation'
 
 const rootReducer = combineReducers({
-  map,
+  selectedLocation,
+  venues,
   router: routerReducer,
 })
 

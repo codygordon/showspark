@@ -4,10 +4,18 @@ import jwtDecode from 'jwt-decode'
 require('es6-promise').polyfill()
 
 const API = {
-  get(dataType, cb, query) {
+  get(dataType, query, cb) {
     this.getToken((token) => {
-      let path;
-      !query ? path = `/api/${dataType}` : path = `/api/${dataType}${query}`
+      let path = `/api/${dataType}`
+      if (query) {
+        const queryItems = Object.entries(query)
+
+        queryItems.forEach((queryItem, i) => {
+          if (i === 0) path += `?${queryItem[0]}=${queryItem[1]}`
+          else path += `&${queryItem[0]}=${queryItem[1]}`
+        })
+      }
+
       return fetch(path, {
         method: 'get',
         headers: {
@@ -21,10 +29,18 @@ const API = {
     });
   },
 
-  post(dataType, data, cb, query) {
+  post(dataType, data, query, cb) {
     this.getToken((token) => {
-      let path;
-      !query ? path = `/api/${dataType}` : path = `/api/${dataType}${query}`
+      let path = `/api/${dataType}`
+      if (query) {
+        const queryItems = Object.entries(query)
+
+        queryItems.forEach((queryItem, i) => {
+          if (i === 0) path += `?${queryItem[0]}=${queryItem[1]}`
+          else path += `&${queryItem[0]}=${queryItem[1]}`
+        })
+      }
+
       return fetch(path, {
         method: 'post',
         headers: {

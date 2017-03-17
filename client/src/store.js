@@ -8,7 +8,13 @@ import rootReducer from './reducers/index'
 export const history = createBrowserHistory()
 
 const defaultState = {
-
+  selectedLocation: {
+    location: null
+  },
+  venues: {
+    isFetching: false,
+    data: []
+  }
 }
 
 const middleware = [routerMiddleware(history), thunk]
