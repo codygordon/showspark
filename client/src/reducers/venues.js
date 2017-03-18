@@ -1,7 +1,6 @@
-function venues(state = {
-  isFetching: false,
-  data: [],
-}, action) {
+import initialState from './initialState'
+
+function venues(state = initialState.venues, action) {
   switch (action.type) {
     case 'REQUEST_VENUES':
       return { ...state,

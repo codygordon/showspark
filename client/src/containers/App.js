@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import { Dimmer, Loader } from 'semantic-ui-react'
-
 import PlacesAutocomplete from 'react-places-autocomplete'
 
 import Header from '../components/Header'
 // import Venues from './Venues'
-// import Map from './Map'
+import Map from '../components/Map'
 
 export default class App extends Component {
   static propTypes = {
@@ -18,26 +17,26 @@ export default class App extends Component {
 
   render() {
     let loading;
-    const { venues } = this.props;
-    venues.isFetching ? loading = 'active' : loading = '';
-
-    if (venues.data) console.log(`${venues.data.length} venues loaded.`)
+    const { venues } = this.props
 
     return (
       <div className="app">
         <Header
           locationSelectedAndRequestVenues={this.props.locationSelectedAndRequestVenues}
           locationSelected={this.props.locationSelected}
-          selectedLocation={this.props.selectedLocation.location}
+          selectedLocation={this.props.selectedLocation}
         />
-        <div>
-          <Dimmer className={loading}>
-            <Loader size="large" content="Loading venues...">&nbsp;</Loader>
-          </Dimmer>
-        </div>
+        <Dimmer active={venues.isFetching}>
+          <Loader size="large" content="Loading map...">&nbsp;</Loader>
+        </Dimmer>
 
-        {/* TODO: display venue cards matching Search
-            TODO: display map with markers for matching venues */}
+        <Map
+          venues={this.props.venues}
+          map={this.props.map}
+          selectedLocation={this.props.selectedLocation}
+        />
+
+        {/* TODO: display venue cards matching Search */}
       </div>
     )
   }

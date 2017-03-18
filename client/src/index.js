@@ -19,7 +19,8 @@ import NotFound from './components/NotFound'
 function mapStateToProps(state) {
   return {
     selectedLocation: state.selectedLocation,
-    venues: state.venues
+    venues: state.venues,
+    map: state.map
   }
 }
 

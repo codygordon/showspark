@@ -4,18 +4,9 @@ import thunk from 'redux-thunk'
 import { createBrowserHistory } from 'history'
 
 import rootReducer from './reducers/index'
+import initialState from './reducers/initialState'
 
 export const history = createBrowserHistory()
-
-const defaultState = {
-  selectedLocation: {
-    location: null
-  },
-  venues: {
-    isFetching: false,
-    data: []
-  }
-}
 
 const middleware = [routerMiddleware(history), thunk]
 
@@ -24,4 +15,4 @@ const enhancers = compose(
   window.devToolsExtension ? window.devToolsExtension() : f => f
 )
 
-export const store = createStore(rootReducer, defaultState, enhancers)
+export const store = createStore(rootReducer, initialState, enhancers)

@@ -9,7 +9,7 @@ export default class LocationSearch extends Component {
   }
 
   handleChange = (location) => {
-    this.props.locationSelected(location)
+    this.props.locationSelected(location, this.props.selectedLocation.coords)
   }
 
   render() {
@@ -25,13 +25,13 @@ export default class LocationSearch extends Component {
     return (
       <div className="location-search-container">
         <PlacesAutocomplete
-          value={this.props.selectedLocation}
+          value={this.props.selectedLocation.text}
           onChange={this.handleChange}
           onSelect={this.handleSelect}
           onEnterKeyDown={this.handleSelect}
           classNames={{ input: 'location-search-input' }}
           autocompleteItem={AutocompleteItem}
-          placeholder="Search by City"
+          placeholder="Search by city"
           hideLabel
           typeAhead
           inputName="location-search-input"

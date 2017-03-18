@@ -1,9 +1,11 @@
+import { geocodeByAddress } from 'react-places-autocomplete'
 import API from '../utils/API'
 
-export function locationSelected(location) {
+export function locationSelected(locationText, locationCoords) {
   return {
     type: 'LOCATION_SELECTED',
-    location
+    locationText,
+    locationCoords
   }
 }
 
@@ -37,14 +39,24 @@ export function fetchVenues(city, state, country) {
 
 // set location state and start fetching venues
 // called from this.props.locationSelected function in child component
-export function locationSelectedAndRequestVenues(location) {
+export function locationSelectedAndRequestVenues(locationText) {
   return (dispatch) => {
-    const locationArray = location.split(',')
+    const locationArray = locationText.split(',')
     const city = locationArray[0]
     const state = locationArray[1]
     const country = locationArray[2]
 
-    dispatch(locationSelected(location))
+    // just send the text to state first
+    dispatch(locationSelected(locationText, null))
+
+    // then async geocode and send text and coords
+    geocodeByAddress(locationText, (err, res) => { // eslint-disable-line
+      if (err) throw err // TODO: handle error in browser
+      const locationCoords = [res.lng, res.lat]
+      dispatch(locationSelected(locationText, locationCoords))
+    })
+
+    // then async fetch venues
     dispatch(fetchVenues(city, state, country))
   }
 }
