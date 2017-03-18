@@ -7,6 +7,7 @@ const Header = props => (
   <div className="header">
     <Link to={'/'} className="header-logo" />
     <LocationSearch
+      locationSelectedAndRequestVenues={props.locationSelectedAndRequestVenues}
       locationSelected={props.locationSelected}
       selectedLocation={props.selectedLocation}
     />

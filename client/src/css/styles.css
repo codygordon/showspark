@@ -13,7 +13,6 @@ html, body {
   padding: 0;
   height: 100%;
   width: 100%;
-  font-family: 'Roboto', sans-serif;
   background-color: #222 !important;
   color: #fefefe;
 }
@@ -77,6 +76,8 @@ h1, h2, h3, h4, h5 {
 }
 
 .location-search-input {
+  font-family: 'Roboto';
+  font-weight: 500;
   padding-left: 1em;
   width: 100%;
   height: 58px;
@@ -87,9 +88,19 @@ h1, h2, h3, h4, h5 {
   border: none;
 }
 
-.location-search-autocomplete {
+.suggestion-item {
 
+}
 
+.suggestion-item i {
+  padding-right: 10px;
+  padding-left: 5px;
+}
+
+img.powered-by-google {
+  width: 120px;
+  float: right;
+  padding-top: 30px;
 }
 
 .map-loading-container {

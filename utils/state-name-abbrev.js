@@ -1,6 +1,4 @@
-/* eslint-disable import/prefer-default-export */
-
-export function stateNameAbbrev(stateName) {
+module.exports = function stateNameAbbrev(stateName) {
   const states = [
     { abbrev: 'AL', stateName: 'Alabama' },
     { abbrev: 'AK', stateName: 'Alaska' },
@@ -55,7 +53,11 @@ export function stateNameAbbrev(stateName) {
     { abbrev: 'WY', stateName: 'Wyoming' },
   ]
 
-  return states.forEach((state) => { // eslint-disable-line consistent-return
-    if (stateName === state.stateName) return state.abbrev
+  let stateAbbrev;
+
+  states.forEach((state) => { // eslint-disable-line consistent-return
+    if (stateName === state.stateName) stateAbbrev = state.abbrev
   })
+
+  return stateAbbrev
 }

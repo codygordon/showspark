@@ -6,7 +6,7 @@ const http = require('http')
 const jwt = require('express-jwt')
 const jwksRsa = require('jwks-rsa')
 
-const mongo = require('./mongo-connection')
+const mongo = require('./utils/mongo-connection')
 
 const app = express()
 const port = process.env.PORT || 3001

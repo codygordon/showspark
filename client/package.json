@@ -2,7 +2,7 @@
   "name": "showspark-client",
   "author": "Cody Gordon",
   "license": "UNLICENSED",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "private": true,
   "proxy": "http://localhost:3001/",
   "devDependencies": {

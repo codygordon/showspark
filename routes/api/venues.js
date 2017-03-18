@@ -1,8 +1,8 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 
-const mongo = require('../../mongo-connection')
-const stateNameAbbrev = require('../../helpers')
+const mongo = require('../../utils/mongo-connection')
+const stateNameAbbrev = require('../../utils/state-name-abbrev')
 
 const router = express.Router()
 const db = mongo.getDb()
@@ -14,18 +14,17 @@ router.use(bodyParser.urlencoded({ extended: true }))
 router.get('/', (req, res) => {
   let query = {}
   if (req.query && req.query.city && req.query.state) {
-    let city = req.query.city.replace(/%20/g, ' ').trim()
-    let state = req.query.state.trim()
-    if (state.length() > 2) {
+    const city = req.query.city.replace(/%20/g, ' ').trim()
+    let state = req.query.state.replace(/%20/g, ' ').trim()
+    if (state.length > 2) {
       state = stateNameAbbrev(state)
     }
     query = {
       'address.city': city,
-      'address.state': req.query.state.trim()
+      'address.state': state
       // TODO: add address.country field to dataset
     }
   }
-  console.log(query)
   venues.find(query).toArray((err, result) => {
     if (err) throw err
     if (result) {
