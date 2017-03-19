@@ -27,10 +27,6 @@ html, body {
   width: 100%;
 }
 
-h1, h2, h3, h4, h5 {
-  text-shadow: 1.5px 1.5px 0 rgba(0, 0, 0, 0.2);
-}
-
 .app {
   height: 100%;
   display: flex;
@@ -113,37 +109,56 @@ img.powered-by-google {
   height: calc(100% - 60px) !important;
 }
 
+.dimmer-error {
+  font-family: 'Roboto';
+  font-weight: 500;
+  color: #fefefe;
+  border: 3px solid #c93e3b;
+  background-color: #c93e3b;
+  border-radius: 5px;
+  margin: 0 100px;
+  padding: 20px;
+}
+
 .map-container {
-  flex: 1 1 100%;
+  flex: 1 1 50%;
   order: 1;
-  width: 100%;
   height: calc(100% - 60.5px);
 }
 
 .mapboxgl-map {
   width: 100%;
   height: 100%;
+  cursor: grab;
 }
 
-.list {
-  margin: 0;
-  position: relative;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  z-index: 0;
-  transition: all 0.2s ease;
+.mapboxgl-popup-content {
+  font-family: 'Roboto';
+  background-color: #222 !important;
+  border: 1px solid #555;
+  color: #fefefe;
+  padding: 5px !important;
+  cursor: pointer;
+}
+
+.mapboxgl-popup-tip {
+  border-top-color: #222 !important;
+}
+
+.venue-popup-title {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.list-container {
+  flex: 1 1 50%;
+  order: 2;
+  height: calc(100% - 60.5px);
+  border-left: 1px solid #ccc;
 }
 
 .list-item {
-  text-align: center;
-  align-items: center;
-  padding: 10px;
-  padding-top: 20px;
-  flex: 1 1 250px;
-  list-style: none;
-  border-bottom: 1px solid #fefefe;
-  border-right: 1px solid #fefefe;
+
 }
 
 .list-item:hover {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl'
+import ReactMapboxGl, { Marker, Popup, ZoomControl } from 'react-mapbox-gl'
 
 let mapboxToken;
 
@@ -15,26 +15,52 @@ export default class Map extends Component {
 
   }
 
-  componentWillMount() {
+  componentWillReceiveProps(nextProps) {
 
   }
 
+
   render() {
+    const { venues } = this.props
+
+    let markers = null
     return (
       <div className="map-container">
         <ReactMapboxGl
+          accessToken={mapboxToken}
           style="mapbox://styles/mapbox/streets-v10" // eslint-disable-line
           center={this.props.selectedLocation.coords || this.props.map.center}
           zoom={this.props.map.zoom}
           movingMethod="easeTo"
-          attributionPosition="bottom-rght"
+          attributionPosition="bottom-left"
+          dragRotate={false}
+          // onZoom={(map) => { const zoom = map.getZoom(); console.log(zoom) }}
           // fitBounds={fitBounds}
           // minZoom={8}
           // maxZoom={15}
           // maxBounds={maxBounds} // TODO: add bounds for U.S.
-          accessToken={mapboxToken}
           // onDrag={this._onDrag}
-        />
+        >
+          {venues.data.length > 0 &&
+            venues.data.map((venue, i) => { // eslint-disable-line
+              if (i < 20 && venue.address && venue.address.lng && venue.address.lat) {
+                return (
+                  <Popup
+                    key={venue._id}
+                    index={i}
+                    coordinates={[venue.address.lng, venue.address.lat]}
+                    anchor="bottom"
+                    properties={venue}
+                  >
+                    <span className="venue-popup-title">{venue.title}</span>
+                  </Popup>
+                )
+              }
+            })
+          }
+
+          <ZoomControl zoomDiff={1} />
+        </ReactMapboxGl>
       </div>
     )
   }

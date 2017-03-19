@@ -9,7 +9,13 @@ function venues(state = initialState.venues, action) {
     case 'RECEIVE_VENUES':
       return { ...state,
         isFetching: false,
-        data: action.venues
+        data: action.venues,
+        errorMessage: null
+      }
+    case 'VENUES_ERROR':
+      return { ...state,
+        isFetching: false,
+        errorMessage: action.message
       }
     default:
       return state

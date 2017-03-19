@@ -15,26 +15,40 @@ export default class App extends Component {
 
   }
 
+  componentWillReceiveProps(nextProps) {
+  }
+
+  paginateVenues = (venues) => {
+
+  }
+
   render() {
     let loading;
-    const { venues } = this.props
+    const { venues, selectedLocation } = this.props
+    const errorMessage = selectedLocation.errorMessage ? selectedLocation.errorMessage : venues.errorMessage
 
     return (
       <div className="app">
         <Header
           locationSelectedAndRequestVenues={this.props.locationSelectedAndRequestVenues}
           locationSelected={this.props.locationSelected}
-          selectedLocation={this.props.selectedLocation}
+          selectedLocation={selectedLocation}
         />
         <Dimmer active={venues.isFetching}>
           <Loader size="large" content="Loading map...">&nbsp;</Loader>
         </Dimmer>
 
         <Map
-          venues={this.props.venues}
+          venues={venues}
           map={this.props.map}
-          selectedLocation={this.props.selectedLocation}
+          selectedLocation={selectedLocation}
         />
+
+        <div className="list-container" />
+
+        <Dimmer active={errorMessage}>
+          <h2 className="dimmer-error">{errorMessage}</h2>
+        </Dimmer>
 
         {/* TODO: display venue cards matching Search */}
       </div>

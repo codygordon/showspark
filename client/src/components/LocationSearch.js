@@ -35,7 +35,7 @@ export default class LocationSearch extends Component {
           hideLabel
           typeAhead
           inputName="location-search-input"
-          options={{ types: ['(cities)'] }}
+          options={{ types: ['(regions)'] }}
         />
       </div>
     )

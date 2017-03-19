@@ -9,6 +9,13 @@ export function locationSelected(locationText, locationCoords) {
   }
 }
 
+export function locationError() {
+  return {
+    type: 'LOCATION_ERROR',
+    message: 'That\'s not a real location, try again!'
+  }
+}
+
 // action to change state to isFetching
 export function requestVenues() {
   return {
@@ -24,6 +31,13 @@ export function receiveVenues(venues) {
   }
 }
 
+export function venuesError(city, state, country) {
+  return {
+    type: 'VENUES_ERROR',
+    message: `Sorry, there aren't any venues in ${city}, ${state}. Try a different city!`
+  }
+}
+
 /* ASYNC FUNCTIONS GO BELOW OTHERS HERE */
 
 // use thunk to aync fetch venues and trigger both venues actions above
@@ -32,7 +46,8 @@ export function fetchVenues(city, state, country) {
     dispatch(requestVenues())
 
     API.get('venues', { city, state, country }, (res) => {
-      dispatch(receiveVenues(res))
+      if (res.length > 0) return dispatch(receiveVenues(res))
+      return dispatch(venuesError(city, state, country))
     })
   }
 }
@@ -51,7 +66,7 @@ export function locationSelectedAndRequestVenues(locationText) {
 
     // then async geocode and send text and coords
     geocodeByAddress(locationText, (err, res) => { // eslint-disable-line
-      if (err) throw err // TODO: handle error in browser
+      if (err) return dispatch(locationError()) // TODO: handle error in browser
       const locationCoords = [res.lng, res.lat]
       dispatch(locationSelected(locationText, locationCoords))
     })

@@ -34,6 +34,7 @@
     "jwks-rsa": "^1.1.1",
     "mongodb": "latest",
     "morgan": "^1.8.1",
+    "node-geocoder": "^3.16.0",
     "nodemon": "^1.11.0",
     "performance-now": "^0.2.0",
     "request": "^2.79.0",

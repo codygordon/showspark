@@ -5,7 +5,12 @@ function selectedLocation(state = initialState.selectedLocation, action) {
     case 'LOCATION_SELECTED':
       return { ...state,
         text: action.locationText,
-        coords: action.locationCoords
+        coords: action.locationCoords,
+        errorMessage: null
+      }
+    case 'LOCATION_ERROR':
+      return { ...state,
+        errorMessage: action.message
       }
     default:
       return state

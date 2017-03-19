@@ -38,7 +38,8 @@ if (process.env.NODE_ENV === 'production') {
 mongo.connectToServer((err) => {
   if (err) throw err
 
-  console.log(`Server connected at http://localhost:${port}/`) // eslint-disable-line no-console
+  // eslint-disable-next-line
+  console.log(`Server connected at http://localhost:${port}/`)
 
   /* start server only if MongoDB is connected */
   http.createServer(app).listen(port, (err) => {
