@@ -7,7 +7,8 @@ const initialState = {
   venues: {
     isFetching: false,
     data: [],
-    errorMessage: null
+    errorMessage: null,
+    hoveredVenueId: null
   },
   map: {
     center: [-74, 40.7],

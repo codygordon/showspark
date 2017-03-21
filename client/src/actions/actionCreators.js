@@ -38,6 +38,13 @@ export function venuesError(city, state, country) {
   }
 }
 
+export function venueListCardHover(venueId) {
+  return {
+    type: 'VENUE_LIST_CARD_HOVER',
+    venueId
+  }
+}
+
 /* ASYNC FUNCTIONS GO BELOW OTHERS HERE */
 
 // use thunk to aync fetch venues and trigger both venues actions above
@@ -57,9 +64,9 @@ export function fetchVenues(city, state, country) {
 export function locationSelectedAndRequestVenues(locationText) {
   return (dispatch) => {
     const locationArray = locationText.split(',')
-    const city = locationArray[0]
-    const state = locationArray[1]
-    const country = locationArray[2]
+    const city = locationArray[0].trim()
+    const state = locationArray[1].trim()
+    const country = locationArray[2].trim()
 
     // just send the text to state first
     dispatch(locationSelected(locationText, null))

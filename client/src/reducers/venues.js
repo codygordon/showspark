@@ -4,7 +4,8 @@ function venues(state = initialState.venues, action) {
   switch (action.type) {
     case 'REQUEST_VENUES':
       return { ...state,
-        isFetching: true
+        isFetching: true,
+        errorMessage: null
       }
     case 'RECEIVE_VENUES':
       return { ...state,
@@ -16,6 +17,10 @@ function venues(state = initialState.venues, action) {
       return { ...state,
         isFetching: false,
         errorMessage: action.message
+      }
+    case 'VENUE_LIST_CARD_HOVER':
+      return { ...state,
+        hoveredVenueId: action.venueId
       }
     default:
       return state

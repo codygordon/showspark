@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { Dimmer, Loader } from 'semantic-ui-react'
 import PlacesAutocomplete from 'react-places-autocomplete'
+import queryString from 'query-string'
 
 import Header from '../components/Header'
-// import Venues from './Venues'
-import Map from '../components/Map'
+import VenueList from '../components/VenueList'
+import VenueMap from '../components/VenueMap'
 
 export default class App extends Component {
   static propTypes = {
@@ -12,14 +13,12 @@ export default class App extends Component {
   }
 
   componentWillMount() {
-
-  }
-
-  componentWillReceiveProps(nextProps) {
-  }
-
-  paginateVenues = (venues) => {
-
+    if (location.search) {
+      const query = queryString.parse(location.search)
+      if (query.location) {
+        this.props.locationSelectedAndRequestVenues(query.location)
+      }
+    }
   }
 
   render() {
@@ -33,18 +32,24 @@ export default class App extends Component {
           locationSelectedAndRequestVenues={this.props.locationSelectedAndRequestVenues}
           locationSelected={this.props.locationSelected}
           selectedLocation={selectedLocation}
+          history={this.props.history}
         />
         <Dimmer active={venues.isFetching}>
-          <Loader size="large" content="Loading map...">&nbsp;</Loader>
+          <Loader size="large">
+            Loading Venues...
+          </Loader>
         </Dimmer>
 
-        <Map
+        <VenueMap
           venues={venues}
           map={this.props.map}
           selectedLocation={selectedLocation}
         />
 
-        <div className="list-container" />
+        <VenueList
+          venues={venues}
+          venueListCardHover={this.props.venueListCardHover}
+        />
 
         <Dimmer active={errorMessage}>
           <h2 className="dimmer-error">{errorMessage}</h2>

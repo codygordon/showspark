@@ -55,7 +55,7 @@ const API = {
     })
   },
 
-  getToken(cb) {
+  getToken(cb) { // eslint-disable-line consistent-return
     if (localStorage.apiToken) {
       const token = localStorage.apiToken
       const decoded = jwtDecode(token)

@@ -20,8 +20,8 @@ router.use(bodyParser.urlencoded({ extended: true }))
 router.get('/', (req, res) => {
   let query = {}
   if (req.query && req.query.city && req.query.state) {
-    const city = req.query.city.replace(/%20/g, ' ').trim()
-    let state = req.query.state.replace(/%20/g, ' ').trim()
+    const city = req.query.city.replace(/%20/g, ' ')
+    let state = req.query.state.replace(/%20/g, ' ')
     if (state.length > 2) {
       state = stateNameAbbrev(state)
     }
