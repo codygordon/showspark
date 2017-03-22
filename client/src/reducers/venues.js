@@ -10,7 +10,8 @@ function venues(state = initialState.venues, action) {
     case 'RECEIVE_VENUES':
       return { ...state,
         isFetching: false,
-        data: action.venues,
+        data: action.data,
+        pageCount: action.pages,
         errorMessage: null
       }
     case 'VENUES_ERROR':
@@ -21,6 +22,10 @@ function venues(state = initialState.venues, action) {
     case 'VENUE_LIST_CARD_HOVER':
       return { ...state,
         hoveredVenueId: action.venueId
+      }
+    case 'VENUE_PAGE_SELECTED':
+      return { ...state,
+        currentPage: action.currentPage
       }
     default:
       return state

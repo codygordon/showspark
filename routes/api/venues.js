@@ -19,7 +19,8 @@ router.use(bodyParser.urlencoded({ extended: true }))
 
 router.get('/', (req, res) => {
   let query = {}
-  if (req.query && req.query.city && req.query.state) {
+  if (req.query && req.query.city && req.query.state && req.query.country) {
+    const country = req.query.country.replace(/%20/g, ' ')
     const city = req.query.city.replace(/%20/g, ' ')
     let state = req.query.state.replace(/%20/g, ' ')
     if (state.length > 2) {
@@ -27,14 +28,29 @@ router.get('/', (req, res) => {
     }
     query = {
       'address.city': city,
-      'address.state': state
-      // TODO: add address.country field to dataset
+      'address.state': state,
+      'address.country': country
     }
   }
+
   venues.find(query).toArray((err, result) => {
     if (err) throw err
     if (result) {
-      return res.json(result)
+      let data = result
+      let pages = 1
+
+      if (req.query.limit && req.query.offset) {
+        const offset = parseInt(req.query.offset)
+        const limit = parseInt(req.query.limit)
+
+        data = result.filter((item, i) => { // eslint-disable-line
+          if (i >= offset && i < (limit + offset)) return true
+          return false
+        })
+        pages = Math.ceil(result.length / limit)
+        return res.json({ data, pages })
+      }
+      return res.json({ data, pages })
     }
     return res.json({ error: 'Zero results. Try refining your query.' })
   })

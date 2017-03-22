@@ -196,6 +196,11 @@ img.powered-by-google {
   object-fit: cover;
   width: 100%;
   height: 150px;
+  cursor: pointer;
+}
+
+.venue-card-info {
+  cursor: pointer;
 }
 
 .venue-card-title {
@@ -207,6 +212,7 @@ img.powered-by-google {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  cursor: pointer;
 }
 
 .venue-card-address {
@@ -215,7 +221,6 @@ img.powered-by-google {
   line-height: 13px;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .venue-card-capacity {

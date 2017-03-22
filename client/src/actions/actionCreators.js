@@ -24,10 +24,11 @@ export function requestVenues() {
 }
 
 // action to load venues to state
-export function receiveVenues(venues) {
+export function receiveVenues(data, pages) {
   return {
     type: 'RECEIVE_VENUES',
-    venues
+    data,
+    pages
   }
 }
 
@@ -45,15 +46,27 @@ export function venueListCardHover(venueId) {
   }
 }
 
+export function venuePageSelected(pageNum) {
+  return {
+    type: 'VENUE_PAGE_SELECTED',
+    currentPage: pageNum
+  }
+}
+
 /* ASYNC FUNCTIONS GO BELOW OTHERS HERE */
 
 // use thunk to aync fetch venues and trigger both venues actions above
-export function fetchVenues(city, state, country) {
+export function fetchVenues(locationText, limit, offset) {
   return (dispatch) => {
+    const locationArray = locationText.split(',')
+    const city = locationArray[0].trim()
+    const state = locationArray[1].trim()
+    const country = locationArray[2].trim()
+
     dispatch(requestVenues())
 
-    API.get('venues', { city, state, country }, (res) => {
-      if (res.length > 0) return dispatch(receiveVenues(res))
+    API.get('venues', { city, state, country, limit, offset }, (res) => {
+      if (res.data.length > 0) return dispatch(receiveVenues(res.data, res.pages))
       return dispatch(venuesError(city, state, country))
     })
   }
@@ -61,15 +74,13 @@ export function fetchVenues(city, state, country) {
 
 // set location state and start fetching venues
 // called from this.props.locationSelected function in child component
-export function locationSelectedAndRequestVenues(locationText) {
+export function locationSelectedAndRequestVenues(locationText, limit) {
   return (dispatch) => {
-    const locationArray = locationText.split(',')
-    const city = locationArray[0].trim()
-    const state = locationArray[1].trim()
-    const country = locationArray[2].trim()
-
     // just send the text to state first
     dispatch(locationSelected(locationText, null))
+
+    // async fetch venues
+    dispatch(fetchVenues(locationText, limit, 0))
 
     // then async geocode and send text and coords
     geocodeByAddress(locationText, (err, res) => { // eslint-disable-line
@@ -77,8 +88,22 @@ export function locationSelectedAndRequestVenues(locationText) {
       const locationCoords = [res.lng, res.lat]
       dispatch(locationSelected(locationText, locationCoords))
     })
+  }
+}
+
+export function pageSelectedAndRequestVenues(locationText, limit, offset, pageNum) {
+  return (dispatch) => {
+    // set the page number state
+    dispatch(venuePageSelected(parseInt(pageNum)));
 
     // then async fetch venues
-    dispatch(fetchVenues(city, state, country))
+    dispatch(fetchVenues(locationText, limit, offset))
+
+    // set the location coords
+    geocodeByAddress(locationText, (err, res) => { // eslint-disable-line
+      if (err) return dispatch(locationError()) // TODO: handle error in browser
+      const locationCoords = [res.lng, res.lat]
+      dispatch(locationSelected(locationText, locationCoords))
+    })
   }
 }

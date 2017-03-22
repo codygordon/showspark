@@ -7,6 +7,9 @@ const initialState = {
   venues: {
     isFetching: false,
     data: [],
+    perPage: 16,
+    pageCount: 0,
+    currentPage: 0,
     errorMessage: null,
     hoveredVenueId: null
   },

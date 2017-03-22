@@ -89,6 +89,7 @@
       "no-underscore-dangle": "off",
       "comma-dangle": "off",
       "semi": "off",
+      "radix": "off",
       "prefer-const": "warn",
       "consistent-return": "warn",
       "max-len": [

@@ -11,6 +11,7 @@ const Header = props => (
       locationSelected={props.locationSelected}
       selectedLocation={props.selectedLocation}
       history={props.history}
+      venues={props.venues}
     />
   </div>
 )

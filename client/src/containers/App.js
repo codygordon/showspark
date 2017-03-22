@@ -15,8 +15,13 @@ export default class App extends Component {
   componentWillMount() {
     if (location.search) {
       const query = queryString.parse(location.search)
-      if (query.location) {
-        this.props.locationSelectedAndRequestVenues(query.location)
+      if (query['location-text'] && query.page) {
+        const locationText = query['location-text']
+        const offset = query.page - 1
+        const limit = this.props.venues.perPage
+        const pageNum = query.page
+        this.props.locationSelected(locationText)
+        this.props.pageSelectedAndRequestVenues(locationText, limit, offset, pageNum)
       }
     }
   }
@@ -33,6 +38,7 @@ export default class App extends Component {
           locationSelected={this.props.locationSelected}
           selectedLocation={selectedLocation}
           history={this.props.history}
+          venues={venues}
         />
         <Dimmer active={venues.isFetching}>
           <Loader size="large">
@@ -49,6 +55,9 @@ export default class App extends Component {
         <VenueList
           venues={venues}
           venueListCardHover={this.props.venueListCardHover}
+          selectedLocation={selectedLocation}
+          pageSelectedAndRequestVenues={this.props.pageSelectedAndRequestVenues}
+          history={this.props.history}
         />
 
         <Dimmer active={errorMessage}>
