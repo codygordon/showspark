@@ -1,26 +1,15 @@
 import React, { Component } from 'react'
-import ReactMapboxGl, { Marker, Popup, ZoomControl } from 'react-mapbox-gl'
+import ReactMapboxGl, { Popup, ZoomControl } from 'react-mapbox-gl'
 
-let mapboxToken;
-
-if (process.env.NODE_ENV === 'production') {
-  mapboxToken = process.env.MAPBOX_API_TOKEN
-} else {
-  // eslint-disable-next-line
-  mapboxToken = require('../utils/devConfig').MAPBOX_API_TOKEN
-}
+const mapboxToken = process.env.REACT_APP_MAPBOX_API_TOKEN
 
 export default class VenueMap extends Component {
   static propTypes = {
 
   }
 
-  componentWillReceiveProps(nextProps) {
-
-  }
-
-  onVenuePopupClick(e) {
-    console.log(e)
+  onVenuePopupClick(venueId) { // eslint-disable-line
+    console.log(venueId)
   }
 
 
@@ -55,7 +44,7 @@ export default class VenueMap extends Component {
                     coordinates={[venue.address.lng, venue.address.lat]}
                     anchor="bottom"
                     properties={venue}
-                    onClick={this.onVenuePopupClick}
+                    onClick={() => this.onVenuePopupClick(venue._id)}
                     className={venues.hoveredVenueId === venue._id ? 'hovered' : ''}
                   >
                     {/* <i className="fa fa-circle-o" aria-hidden="true" /> */}

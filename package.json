@@ -43,6 +43,7 @@
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "server": "nodemon server.js --exec babel-node --presets es2015,stage-0",
-    "client": "babel-node start-client.js"
+    "client": "babel-node start-client.js",
+    "build-client": "babel-node build-client.js"
   }
 }
