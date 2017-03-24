@@ -237,6 +237,11 @@ img.powered-by-google {
   flex: 0 1 100%;
   margin-left: 10px;
   margin-top: 5px;
+  min-height: 34px;
+  align-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: left;
 }
 
 .paginate-text {
