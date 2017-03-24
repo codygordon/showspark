@@ -12,6 +12,7 @@ function venues(state = initialState.venues, action) {
         isFetching: false,
         data: action.data,
         pageCount: action.pages,
+        total: action.total,
         errorMessage: null
       }
     case 'VENUES_ERROR':

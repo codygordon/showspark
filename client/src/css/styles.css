@@ -1,7 +1,7 @@
 /* Main css
    ========================================================================= */
 html {
-  box-sizing: border-box;
+  box-sizing: border-box !important;
 }
 
 *, *:before, *:after {
@@ -14,7 +14,7 @@ html, body {
   height: 100%;
   width: 100%;
   background-color: #222 !important;
-  color: #fefefe;
+  color: #fefefe !important;
   -webkit-font-smoothing: antialiased !important;
 }
 
@@ -113,11 +113,12 @@ img.powered-by-google {
 .dimmer-error {
   font-family: 'Roboto';
   font-weight: 500;
+  font-size: 1.5em;
   color: #fefefe;
   background-color: #c93e3b;
   background-image: linear-gradient(110deg, #c93e3b 0, #810705; 100%);
   border-radius: 5px;
-  margin: 0 100px;
+  margin: 0 8%;
   padding: 20px;
 }
 
@@ -136,7 +137,7 @@ img.powered-by-google {
 .mapboxgl-popup-content {
   border-radius: 6px !important;
   font-family: 'Roboto';
-  background-image: linear-gradient(30deg, #ffdf40 0, #ffed77 110%) !important;
+  background-color: #fbe058 !important;
   border-bottom: 3px solid #ffcf40;
   color: #333;
   padding: 2px 8px !important;
@@ -150,13 +151,13 @@ img.powered-by-google {
 }
 
 .hovered .mapboxgl-popup-content {
-  background-image: linear-gradient(30deg, #dd3c71 0, #ec4b81 110%) !important;
-  border-bottom: 3px solid #d13468;
+  background-color: #e72352 !important;
+  border-bottom: 3px solid #d00649;
   color: #fff;
 }
 
 .hovered .mapboxgl-popup-tip {
-  border-top-color: #d13468 !important;
+  border-top-color: #d00649 !important;
 }
 
 .hovered.mapboxgl-popup.mapboxgl-popup-anchor-bottom {
@@ -173,6 +174,7 @@ img.powered-by-google {
 }
 
 .venue-list-container {
+  font-family: 'Roboto' !important;
   flex: 0 1 60%;
   order: 2;
   height: calc(100% - 60.5px);
@@ -231,38 +233,34 @@ img.powered-by-google {
   text-overflow: ellipsis;
 }
 
-.list-item:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  cursor: pointer;
+.paginate-container {
+  flex: 0 1 100%;
+  margin-left: 10px;
+  margin-top: 5px;
 }
 
-.list-item:active {
-  background-color: #3065b1;
+.paginate-text {
+  padding-right: 10px;
 }
 
-.list-item h3 {
-  font-size: 110%;
-  line-height: 110%;
-  margin-top: 0;
-  margin-bottom: 0;
+.paginate-button {
+  width: 32px;
+  height: 34px;
+  border: 1px solid #666;
+  border-radius: 2px;
+  background-color: inherit;
+  margin: 0 2px;
 }
 
-.list-item.selected {
-  background-color: #477ecd;
-  min-height: 110px;
-  padding-top: 10px;
-  padding-bottom: 15px;
-  min-width: 100%;
+.paginate-button.active {
+  border: 1.5px solid #ccc;
+  background-color: #ffcf40;
+  color: #111;
+  font-weight: 800;
 }
 
-.list-item.selected h2 {
-  margin-top: 0;
-  text-shadow: 1.5px 1.5px 0 #112541;
-}
-
-.list-item.selected:hover {
-  background-color: #3f78cb;
-  cursor: default;
+.paginate-button:hover {
+  border: 1.5px solid #aaa;
 }
 
 /* Desktop-specific Styles */

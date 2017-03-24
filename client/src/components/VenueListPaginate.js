@@ -3,14 +3,13 @@ import React from 'react'
 const VenueListPaginate = (props) => {
   const { venues, selectedLocation, history, pageSelected } = props
   const buttons = []
-  const offset = (venues.currentPage - 1) * (venues.perPage + 1)
+  const offset = (venues.currentPage - 1) * venues.perPage
   for (let i = 0; i < venues.pageCount; i += 1) {
     const page = i + 1
     buttons.push(<button
       key={`page-button-${i}`}
-      className={venues.currentPage === i ? 'paginate-button active' : 'paginate-button'}
+      className={venues.currentPage === i + 1 ? 'paginate-button active' : 'paginate-button'}
       onClick={() => {
-        pageSelected(selectedLocation.text, venues.perPage, offset, page)
         history.push(`?location-text=${selectedLocation.text}&page=${page}`)
       }}
     >{i + 1}</button>)
@@ -18,9 +17,10 @@ const VenueListPaginate = (props) => {
 
   return (
     <div className="paginate-container">
-      <span className="paginate-text">
-        {offset} - {offset + venues.perPage} of {venues.data.length} Venues
-      </span>
+      {props.venues.data.length > 0 &&
+        <span className="paginate-text">
+          {offset + 1} - {offset + venues.perPage > venues.total ? venues.total : offset + venues.perPage} of {venues.total} Venues
+        </span>}
       {buttons}
     </div>
   )

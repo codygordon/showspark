@@ -9,7 +9,8 @@ const initialState = {
     data: [],
     perPage: 16,
     pageCount: 0,
-    currentPage: 0,
+    currentPage: 1,
+    total: 0,
     errorMessage: null,
     hoveredVenueId: null
   },

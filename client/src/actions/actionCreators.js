@@ -24,11 +24,12 @@ export function requestVenues() {
 }
 
 // action to load venues to state
-export function receiveVenues(data, pages) {
+export function receiveVenues(data, pages, total) {
   return {
     type: 'RECEIVE_VENUES',
     data,
-    pages
+    pages,
+    total
   }
 }
 
@@ -66,7 +67,9 @@ export function fetchVenues(locationText, limit, offset) {
     dispatch(requestVenues())
 
     API.get('venues', { city, state, country, limit, offset }, (res) => {
-      if (res.data.length > 0) return dispatch(receiveVenues(res.data, res.pages))
+      if (res.data.length > 0) {
+        return dispatch(receiveVenues(res.data, res.pages, res.total))
+      }
       return dispatch(venuesError(city, state, country))
     })
   }

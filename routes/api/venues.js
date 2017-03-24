@@ -38,6 +38,7 @@ router.get('/', (req, res) => {
     if (result) {
       let data = result
       let pages = 1
+      const total = result.length
 
       if (req.query.limit && req.query.offset) {
         const offset = parseInt(req.query.offset)
@@ -48,9 +49,9 @@ router.get('/', (req, res) => {
           return false
         })
         pages = Math.ceil(result.length / limit)
-        return res.json({ data, pages })
+        return res.json({ data, pages, total })
       }
-      return res.json({ data, pages })
+      return res.json({ data, pages, total })
     }
     return res.json({ error: 'Zero results. Try refining your query.' })
   })

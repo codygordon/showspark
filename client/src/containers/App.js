@@ -13,18 +13,32 @@ export default class App extends Component {
   }
 
   componentWillMount() {
-    if (location.search) {
-      const query = queryString.parse(location.search)
+    if (this.props.location.search) {
+      const query = queryString.parse(this.props.location.search)
       if (query['location-text'] && query.page) {
         const locationText = query['location-text']
-        const offset = query.page - 1
-        const limit = this.props.venues.perPage
         const pageNum = query.page
+        const limit = this.props.venues.perPage
+        const offset = (pageNum - 1) * limit
         this.props.locationSelected(locationText)
         this.props.pageSelectedAndRequestVenues(locationText, limit, offset, pageNum)
       }
     }
   }
+
+  componentWillReceiveProps(nextProps) {
+    // TODO: this is pretty redundant, need to DRY it
+    const thisQuery = queryString.parse(this.props.location.search)
+    const nextQuery = queryString.parse(nextProps.location.search)
+    if (nextQuery.page && nextQuery.page !== thisQuery.page) {
+      const locationText = nextQuery['location-text']
+      const pageNum = nextQuery.page
+      const limit = this.props.venues.perPage
+      const offset = (pageNum - 1) * limit
+      this.props.pageSelectedAndRequestVenues(locationText, limit, offset, pageNum)
+    }
+  }
+
 
   render() {
     let loading;
