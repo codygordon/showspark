@@ -7,29 +7,29 @@ const router = express.Router()
 router.use(bodyParser.urlencoded({ extended: true }))
 
 router.get('/', (req, res, next) => {
-  res.send({ message: 'Use POST to send Client ID and Secret.' })
-})
-
-router.post('/', (req, res, next) => {
-  if (!req.body.client_id || !req.body.client_secret) {
+  if (req.host !== ('localhost' || 'showspark' || 'herokuapp')) {
     res.status(400)
-    res.send({ message: 'Client ID or Client Secret missing' })
+    res.send({ message: `${req.host} is not an approved host!` })
   } else {
     const options = {
       method: 'POST',
       url: `${process.env.AUTH0_ISSUER}oauth/token`,
       headers: { 'content-type': 'application/json' },
-      body: `{"client_id":"${req.body.client_id}",\
-      "client_secret":"${req.body.client_secret}",\
+      body: `{"client_id":"${process.env.AUTH0_CLIENT_ID}",\
+      "client_secret":"${process.env.AUTH0_CLIENT_SECRET}",\
       "audience":"${process.env.AUTH0_AUDIENCE}",\
       "grant_type":"client_credentials"}`
     }
 
     request(options, (error, response, body) => {
-      if (error) console.log(error) // eslint-disable-line
-      res.send(JSON.parse(body));
+      if (error) res.send(JSON.parse(error))
+      else res.send(JSON.parse(body))
     })
   }
+})
+
+router.post('/', (req, res, next) => {
+  res.send({ message: 'Use GET to request token.' })
 })
 
 module.exports = router

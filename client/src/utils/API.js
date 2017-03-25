@@ -1,8 +1,6 @@
 import fetch from 'isomorphic-fetch'
 import jwtDecode from 'jwt-decode'
 
-import { auth0Id, auth0Secret } from './config'
-
 require('es6-promise').polyfill()
 
 const API = {
@@ -70,13 +68,8 @@ const API = {
   },
 
   requestToken(cb) {
-    const body = `client_id=${auth0Id}&client_secret=${auth0Secret}`
     return fetch('/api/token', {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body
+      method: 'get'
     }).then(this.checkStatus)
       .then(this.parseJSON)
       .then(cb)
