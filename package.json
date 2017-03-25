@@ -8,6 +8,9 @@
   "homepage": "https://github.com/codygordon/showspark",
   "author": "Cody Gordon",
   "license": "UNLICENSED",
+  "engines": {
+    "node": "v7.7.0"
+  },
   "babel": {
     "presets": [
       "es2015",
