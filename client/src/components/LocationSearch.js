@@ -5,7 +5,6 @@ import googleLogo from '../img/powered_by_google_on_white_hdpi.png'
 
 export default class LocationSearch extends Component {
   handleSelect = (location) => {
-    this.props.locationSelectedAndRequestVenues(location, this.props.venues.perPage, 0)
     this.props.history.push(`?location-text=${location}&page=1`)
   }
 

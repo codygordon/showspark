@@ -30,7 +30,8 @@ export default class App extends Component {
     // TODO: this is pretty redundant, need to DRY it
     const thisQuery = queryString.parse(this.props.location.search)
     const nextQuery = queryString.parse(nextProps.location.search)
-    if (nextQuery.page && nextQuery.page !== thisQuery.page) {
+    if ((nextQuery.page && nextQuery.page !== thisQuery.page) ||
+    (nextQuery['location-text'] && nextQuery['location-text'] !== thisQuery['location-text'])) {
       const locationText = nextQuery['location-text']
       const pageNum = nextQuery.page
       const limit = this.props.venues.perPage
