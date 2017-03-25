@@ -68,9 +68,7 @@ const API = {
   },
 
   requestToken(cb) {
-    return fetch('/api/token', {
-      method: 'get'
-    }).then(this.checkStatus)
+    return fetch('/api/token', { method: 'get' }).then(this.checkStatus)
       .then(this.parseJSON)
       .then(cb)
   },

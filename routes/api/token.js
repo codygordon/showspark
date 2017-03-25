@@ -7,10 +7,9 @@ const router = express.Router()
 router.use(bodyParser.urlencoded({ extended: true }))
 
 router.get('/', (req, res, next) => {
-  if (req.host !== ('localhost' || 'showspark.herokuapp.com')) {
-    res.status(400)
-    res.send({ message: `${req.host} is not an approved host!` })
-  } else {
+  const prodEnv = process.env.NODE_ENV === 'production'
+  if ((!prodEnv && req.hostname === 'localhost') ||
+  (!!prodEnv && req.hostname === 'showspark.herokuapp.com')) {
     const options = {
       method: 'POST',
       url: `${process.env.AUTH0_ISSUER}oauth/token`,
@@ -22,9 +21,14 @@ router.get('/', (req, res, next) => {
     }
 
     request(options, (error, response, body) => {
-      if (error) res.send(JSON.parse(error))
-      else res.send(JSON.parse(body))
+      if (error) {
+        res.status(400)
+        res.send(JSON.parse(error))
+      } else res.send(JSON.parse(body))
     })
+  } else {
+    res.status(400)
+    res.send({ message: `${req.hostname} is not an approved host!` })
   }
 })
 
