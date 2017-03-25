@@ -1,7 +1,7 @@
 const dotenv = require('dotenv')
 const MongoClient = require('mongodb').MongoClient
 
-dotenv.load()
+if (process.env.NODE_ENV !== 'production') dotenv.load()
 
 const dbUrl = process.env.MLAB_DB_URL
 const dbUser = process.env.MLAB_DB_USER
