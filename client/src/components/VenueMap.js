@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import ReactMapboxGl, { Popup, ZoomControl } from 'react-mapbox-gl'
 
+const mapboxToken = 'pk.eyJ1Ijoic2hvd3NwYXJrIiwiYSI6ImNqMGZiYXVsYTAxcXEycXF5c2p3dGl5OTQifQ.PjrdwcOoqtzC1plmlnlnrQ'
+
 export default class VenueMap extends Component {
   static propTypes = {
 
@@ -18,7 +20,7 @@ export default class VenueMap extends Component {
     return (
       <div className="map-container">
         <ReactMapboxGl
-          accessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+          accessToken={mapboxToken}
           style="mapbox://styles/mapbox/streets-v10" // eslint-disable-line
           center={this.props.selectedLocation.coords || this.props.map.center}
           zoom={this.props.map.zoom}
