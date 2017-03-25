@@ -7,7 +7,7 @@ const router = express.Router()
 router.use(bodyParser.urlencoded({ extended: true }))
 
 router.get('/', (req, res, next) => {
-  if (req.host !== ('localhost' || 'showspark' || 'herokuapp')) {
+  if (req.host !== ('localhost' || 'showspark.herokuapp.com')) {
     res.status(400)
     res.send({ message: `${req.host} is not an approved host!` })
   } else {
