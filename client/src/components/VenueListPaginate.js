@@ -5,15 +5,15 @@ const VenueListPaginate = (props) => {
   const buttons = []
   const offset = (venues.currentPage - 1) * venues.perPage
   if (venues.pageCount > 1) {
-    for (let i = 0; i < venues.pageCount; i += 1) {
-      const page = i + 1
+    for (let pg = 1; pg <= venues.pageCount; pg += 1) {
       buttons.push(<button
-        key={`page-button-${i}`}
-        className={venues.currentPage === i + 1 ? 'paginate-button active' : 'paginate-button'}
+        key={`page-button-${pg}`}
+        className={venues.currentPage === pg ? 'paginate-button active' : 'paginate-button'}
         onClick={() => {
-          history.push(`?location-text=${selectedLocation.text}&page=${page}`)
+          pageSelected(selectedLocation.text, venues.perPage, offset, pg)
+          history.push(`?location-text=${selectedLocation.text}&page=${pg}`)
         }}
-      >{i + 1}</button>)
+      >{pg}</button>)
     }
   }
 

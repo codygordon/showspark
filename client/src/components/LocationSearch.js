@@ -4,8 +4,10 @@ import PlacesAutocomplete from 'react-places-autocomplete'
 import googleLogo from '../img/powered_by_google_on_white_hdpi.png'
 
 export default class LocationSearch extends Component {
-  handleSelect = (location) => {
-    this.props.history.push(`?location-text=${location}&page=1`)
+  handleSelect = (locationText) => {
+    const limit = this.props.venues.perPage
+    this.props.locationSelectedAndRequestVenues(locationText, limit, 0, 1)
+    this.props.history.push(`?location-text=${locationText}&page=1`)
   }
 
   handleChange = (location) => {

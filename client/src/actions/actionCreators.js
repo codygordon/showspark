@@ -92,10 +92,10 @@ export function locationSelectedAndRequestVenues(locationText, limit, offset, pa
     dispatch(fetchVenues(locationText, limit, offset))
 
     // async geocode and send text and coords
-    geocodeByAddress(locationText, (err, res) => { // eslint-disable-line
-      if (err) return dispatch(locationError()) // TODO: handle error in browser
+    geocodeByAddress(locationText, (err, res) => {
+      if (err) return dispatch(locationError())
       const locationCoords = [res.lng, res.lat]
-      dispatch(locationSelected(locationText, locationCoords))
+      return dispatch(locationSelected(locationText, locationCoords))
     })
   }
 }
