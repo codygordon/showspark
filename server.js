@@ -1,5 +1,4 @@
 const express = require('express')
-const favicon = require('serve-favicon')
 const logger = require('morgan')
 const cors = require('cors')
 const http = require('http')
@@ -28,7 +27,6 @@ const jwtCheck = jwt({
 }).unless({ path: ['/api/token'] })
 
 app.use(cors())
-app.use(favicon(`${__dirname}/public/favicon.ico`))
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'))
