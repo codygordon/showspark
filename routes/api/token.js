@@ -10,7 +10,7 @@ router.get('/', (req, res, next) => {
   const prodEnv = process.env.NODE_ENV === 'production'
   const prodHost = 'showspark.herokuapp.com'
   if ((!prodEnv && req.hostname === 'localhost') ||
-  (!!prodEnv && req.hostname === prodHost)) {
+  (prodEnv && req.hostname === prodHost)) {
     const options = {
       method: 'POST',
       url: `${process.env.AUTH0_ISSUER}oauth/token`,
