@@ -33,7 +33,7 @@ export function receiveVenues(data, pages, total) {
   }
 }
 
-export function venuesError(city, state, country) {
+export function venuesError(city, state) {
   return {
     type: 'VENUES_ERROR',
     message: `Sorry, there aren't any venues in ${city}, ${state}. Try a different city!`
@@ -60,53 +60,46 @@ export function venuePageSelected(pageNum) {
 export function fetchVenues(locationText, limit, offset) {
   return (dispatch) => {
     const locationArray = locationText.split(',')
-    const city = locationArray[0].trim()
-    const state = locationArray[1].trim()
-    const country = locationArray[2].trim()
 
-    dispatch(requestVenues())
+    if (locationArray.length === 3) {
+      const city = locationArray[0].trim()
+      const state = locationArray[1].trim()
+      const country = locationArray[2].trim()
 
-    API.get('venues', { city, state, country, limit, offset }, (res) => {
-      if (res.data.length > 0) {
-        return dispatch(receiveVenues(res.data, res.pages, res.total))
-      }
-      return dispatch(venuesError(city, state, country))
-    })
+      dispatch(requestVenues())
+
+      API.get('venues', { city, state, country, limit, offset }, (res) => {
+        if (res.data.length > 0) {
+          return dispatch(receiveVenues(res.data, res.pages, res.total))
+        }
+        return dispatch(venuesError(city, state, country))
+      })
+    } else {
+      return dispatch(venuesError())
+    }
   }
 }
 
-// set location state and start fetching venues
-// called from this.props.locationSelected function in child component
-export function locationSelectedAndRequestVenues(locationText, limit) {
+export function locationSelectedAndRequestVenues(locationText, limit, offset, pageNum) {
   return (dispatch) => {
-    // just send the text to state first
+    // just send the text to state first for input
+    console.log('location text to state')
     dispatch(locationSelected(locationText, null))
 
     // async fetch venues
+    console.log('fetch venues')
     dispatch(fetchVenues(locationText, limit, 0))
 
-    // then async geocode and send text and coords
+    // async geocode and send text and coords
+    console.log('geocode location')
     geocodeByAddress(locationText, (err, res) => { // eslint-disable-line
       if (err) return dispatch(locationError()) // TODO: handle error in browser
       const locationCoords = [res.lng, res.lat]
       dispatch(locationSelected(locationText, locationCoords))
     })
-  }
-}
 
-export function pageSelectedAndRequestVenues(locationText, limit, offset, pageNum) {
-  return (dispatch) => {
-    // set the page number state
-    dispatch(venuePageSelected(parseInt(pageNum)));
-
-    // then async fetch venues
-    dispatch(fetchVenues(locationText, limit, offset))
-
-    // set the location coords
-    geocodeByAddress(locationText, (err, res) => { // eslint-disable-line
-      if (err) return dispatch(locationError()) // TODO: handle error in browser
-      const locationCoords = [res.lng, res.lat]
-      dispatch(locationSelected(locationText, locationCoords))
-    })
+    // then set the page number state
+    console.log('pagenum state')
+    dispatch(venuePageSelected(parseInt(pageNum)))
   }
 }

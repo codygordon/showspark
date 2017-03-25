@@ -20,14 +20,12 @@ export default class App extends Component {
         const pageNum = query.page
         const limit = this.props.venues.perPage
         const offset = (pageNum - 1) * limit
-        this.props.locationSelected(locationText)
-        this.props.pageSelectedAndRequestVenues(locationText, limit, offset, pageNum)
+        this.props.locationSelectedAndRequestVenues(locationText, limit, offset, pageNum)
       }
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    // TODO: this is pretty redundant, need to DRY it
     const thisQuery = queryString.parse(this.props.location.search)
     const nextQuery = queryString.parse(nextProps.location.search)
     if ((nextQuery.page && nextQuery.page !== thisQuery.page) ||
@@ -36,10 +34,9 @@ export default class App extends Component {
       const pageNum = nextQuery.page
       const limit = this.props.venues.perPage
       const offset = (pageNum - 1) * limit
-      this.props.pageSelectedAndRequestVenues(locationText, limit, offset, pageNum)
+      this.props.locationSelectedAndRequestVenues(locationText, limit, offset, pageNum)
     }
   }
-
 
   render() {
     let loading;
@@ -75,7 +72,7 @@ export default class App extends Component {
           history={this.props.history}
         />
 
-        <Dimmer active={errorMessage}>
+        <Dimmer active={!!errorMessage}>
           <h2 className="dimmer-error">{errorMessage}</h2>
         </Dimmer>
 

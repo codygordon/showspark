@@ -20,7 +20,7 @@ router.use(bodyParser.urlencoded({ extended: true }))
 router.get('/', (req, res) => {
   let query = {}
   if (req.query && req.query.city && req.query.state && req.query.country) {
-    const country = req.query.country.replace(/%20/g, ' ')
+    // const country = req.query.country.replace(/%20/g, ' ')
     const city = req.query.city.replace(/%20/g, ' ')
     let state = req.query.state.replace(/%20/g, ' ')
     if (state.length > 2) {
@@ -28,8 +28,7 @@ router.get('/', (req, res) => {
     }
     query = {
       'address.city': city,
-      'address.state': state,
-      'address.country': country
+      'address.state': state
     }
   }
 
