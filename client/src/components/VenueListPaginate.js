@@ -2,18 +2,19 @@ import React from 'react'
 
 const VenueListPaginate = (props) => {
   const { venues, selectedLocation, history, pageSelected } = props
-  const buttons = []
   const offset = (venues.currentPage - 1) * venues.perPage
+  const buttons = []
   if (venues.pageCount > 1) {
-    for (let pg = 1; pg <= venues.pageCount; pg += 1) {
+    for (let page = 1; page <= venues.pageCount; page += 1) {
       buttons.push(<button
-        key={`page-button-${pg}`}
-        className={venues.currentPage === pg ? 'paginate-button active' : 'paginate-button'}
+        key={`page-button-${page}`}
+        className={venues.currentPage === page ? 'paginate-button active' : 'paginate-button'}
         onClick={() => {
-          pageSelected(selectedLocation.text, venues.perPage, offset, pg)
-          history.push(`?location-text=${selectedLocation.text}&page=${pg}`)
+          const newOffset = (page - 1) * venues.perPage
+          pageSelected(selectedLocation.text, venues.perPage, newOffset, page)
+          history.push(`?location-text=${selectedLocation.text}&page=${page}`)
         }}
-      >{pg}</button>)
+      >{page}</button>)
     }
   }
 
