@@ -1,8 +1,6 @@
 import fetch from 'isomorphic-fetch'
 import jwtDecode from 'jwt-decode'
 
-require('es6-promise').polyfill()
-
 const API = {
   get(dataType, query, cb) {
     this.getToken((token) => {

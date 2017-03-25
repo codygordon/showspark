@@ -88,7 +88,7 @@ export function locationSelectedAndRequestVenues(locationText, limit, offset, pa
 
     // async fetch venues
     console.log('fetch venues')
-    dispatch(fetchVenues(locationText, limit, 0))
+    dispatch(fetchVenues(locationText, limit, offset))
 
     // async geocode and send text and coords
     console.log('geocode location')
