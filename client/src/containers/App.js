@@ -33,11 +33,13 @@ export default class App extends Component {
       const thisPage = thisQuery.page
       const nextText = nextQuery['location-text']
       const nextPage = nextQuery.page
-      if (thisText !== nextText || thisPage !== nextPage) {
-        const pageNum = nextPage
-        const limit = this.props.venues.perPage
-        const offset = (nextPage - 1) * limit
-        this.props.locationSelectedAndRequestVenues(nextText, limit, offset, pageNum)
+      const limit = this.props.venues.perPage
+      const offset = (nextPage - 1) * limit
+      if (thisText !== nextText) {
+        this.props.locationSelectedAndRequestVenues(nextText, limit, offset, thisPage)
+      }
+      if (thisPage !== nextPage) {
+        this.props.pageSelectedAndRequestVenues(thisText, limit, offset, nextPage)
       }
     }
   }

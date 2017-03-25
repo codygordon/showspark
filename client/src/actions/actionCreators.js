@@ -99,3 +99,13 @@ export function locationSelectedAndRequestVenues(locationText, limit, offset, pa
     })
   }
 }
+
+export function pageSelectedAndRequestVenues(locationText, limit, offset, pageNum) {
+  return (dispatch) => {
+    // set the page number state
+    dispatch(venuePageSelected(parseInt(pageNum)))
+
+    // async fetch venues
+    dispatch(fetchVenues(locationText, limit, offset))
+  }
+}
