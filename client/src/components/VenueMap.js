@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactMapboxGl, { Popup, ZoomControl } from 'react-mapbox-gl'
 
-const mapboxToken = 'pk.eyJ1Ijoic2hvd3NwYXJrIiwiYSI6ImNqMGZiYXVsYTAxcXEycXF5c2p3dGl5OTQifQ.PjrdwcOoqtzC1plmlnlnrQ'
+const mapboxToken = require('../utils/config').mapboxToken
 
 export default class VenueMap extends Component {
   static propTypes = {

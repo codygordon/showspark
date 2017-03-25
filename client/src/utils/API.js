@@ -1,6 +1,8 @@
 import fetch from 'isomorphic-fetch'
 import jwtDecode from 'jwt-decode'
 
+import { auth0Id, auth0Secret } from './config'
+
 require('es6-promise').polyfill()
 
 const API = {
@@ -68,18 +70,7 @@ const API = {
   },
 
   requestToken(cb) {
-    let clientId;
-    let clientSecret;
-    if (process.env.NODE_ENV === 'production') {
-      clientId = process.env.AUTH0_CLIENT_ID
-      clientSecret = process.env.AUTH0_CLIENT_SECRET
-    } else {
-      /* eslint-disable global-require */
-      clientId = require('./devConfig').AUTH0_CLIENT_ID
-      clientSecret = require('./devConfig').AUTH0_CLIENT_SECRET
-      /* eslint-enable global-require */
-    }
-    const body = `client_id=${clientId}&client_secret=${clientSecret}`
+    const body = `client_id=${auth0Id}&client_secret=${auth0Secret}`
     return fetch('/api/token', {
       method: 'post',
       headers: {

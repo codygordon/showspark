@@ -25,6 +25,9 @@ export default class LocationSearch extends Component {
 
     return (
       <div className="location-search-container">
+        <span className="location-search-icon">
+          <i className="fa fa-search fa-2" aria-hidden="true" />
+        </span>
         <PlacesAutocomplete
           value={this.props.selectedLocation.text}
           onChange={this.handleChange}
@@ -36,7 +39,10 @@ export default class LocationSearch extends Component {
           hideLabel
           typeAhead
           inputName="location-search-input"
-          options={{ types: ['(regions)'] }}
+          options={{
+            types: ['(regions)'],
+            componentRestrictions: { country: 'us' }
+          }}
         />
       </div>
     )

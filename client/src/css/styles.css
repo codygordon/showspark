@@ -9,6 +9,7 @@ html {
 }
 
 html, body {
+  font-family: 'Roboto', 'sans-serif' !important;
   margin: 0;
   padding: 0;
   height: 100%;
@@ -16,6 +17,10 @@ html, body {
   background-color: #222 !important;
   color: #fefefe !important;
   -webkit-font-smoothing: antialiased !important;
+}
+
+:focus {
+
 }
 
 #root {
@@ -66,17 +71,29 @@ html, body {
 
 .location-search-container {
   flex: 1 1 70%;
+  display: flex;
 }
 
 .location-search-container div {
   width: 100%;
 }
 
+.location-search-icon {
+  flex: 0 0 28px;
+  height: 100%;
+  padding-left: 8px;
+  margin-top: -1.5px;
+}
+
+.location-search-icon i {
+  color: #777;
+  transform: scale(1.2);
+}
+
 .location-search-input {
-  font-family: 'Roboto';
+  flex: 1 1 98%;
   font-weight: 500;
-  padding-left: 1em;
-  width: 100%;
+  width: 90%;
   height: 58px;
   font-size: 18px;
   background-color: #222;
@@ -111,7 +128,6 @@ img.powered-by-google {
 }
 
 .dimmer-error {
-  font-family: 'Roboto';
   font-weight: 500;
   font-size: 1.5em;
   color: #fefefe;
@@ -136,7 +152,6 @@ img.powered-by-google {
 
 .mapboxgl-popup-content {
   border-radius: 6px !important;
-  font-family: 'Roboto';
   background-color: #fbe058 !important;
   border-bottom: 3px solid #ffcf40;
   color: #333;
@@ -174,7 +189,6 @@ img.powered-by-google {
 }
 
 .venue-list-container {
-  font-family: 'Roboto' !important;
   flex: 0 1 60%;
   order: 2;
   height: calc(100% - 60.5px);
@@ -245,7 +259,10 @@ img.powered-by-google {
 }
 
 .paginate-text {
-  padding-right: 10px;
+  line-height: 1.3em;
+  font-size: .85em;
+  font-weight: bold;
+  padding-right: 8px;
 }
 
 .paginate-button {

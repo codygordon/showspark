@@ -28,11 +28,12 @@ const jwtCheck = jwt({
 }).unless({ path: ['/api/token'] })
 
 app.use(cors())
-app.use(favicon(`${__dirname}/public/favicon.ico`))
-app.use(logger('dev'))
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'))
+  app.use(favicon(`${__dirname}/client/build/favicon.ico`))
+} else {
+  app.use(logger('dev'))
 }
 
 mongo.connectToServer((err) => {

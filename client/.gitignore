@@ -10,4 +10,5 @@ coverage
 .DS_Store
 .env
 npm-debug.log
-src/utils/devConfig.js
+src/utils/config.js
+build
