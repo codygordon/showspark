@@ -83,23 +83,19 @@ export function fetchVenues(locationText, limit, offset) {
 export function locationSelectedAndRequestVenues(locationText, limit, offset, pageNum) {
   return (dispatch) => {
     // just send the text to state first for input
-    console.log('location text to state')
     dispatch(locationSelected(locationText, null))
 
+    // then set the page number state
+    dispatch(venuePageSelected(parseInt(pageNum)))
+
     // async fetch venues
-    console.log('fetch venues')
     dispatch(fetchVenues(locationText, limit, offset))
 
     // async geocode and send text and coords
-    console.log('geocode location')
     geocodeByAddress(locationText, (err, res) => { // eslint-disable-line
       if (err) return dispatch(locationError()) // TODO: handle error in browser
       const locationCoords = [res.lng, res.lat]
       dispatch(locationSelected(locationText, locationCoords))
     })
-
-    // then set the page number state
-    console.log('pagenum state')
-    dispatch(venuePageSelected(parseInt(pageNum)))
   }
 }

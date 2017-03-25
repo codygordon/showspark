@@ -259,10 +259,11 @@ img.powered-by-google {
 }
 
 .paginate-text {
+  width: 140px;
   line-height: 1.3em;
   font-size: .85em;
   font-weight: bold;
-  padding-right: 8px;
+  padding-right: 2px;
 }
 
 .paginate-button {

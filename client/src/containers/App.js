@@ -28,13 +28,17 @@ export default class App extends Component {
   componentWillReceiveProps(nextProps) {
     const thisQuery = queryString.parse(this.props.location.search)
     const nextQuery = queryString.parse(nextProps.location.search)
-    if ((nextQuery.page && nextQuery.page !== thisQuery.page) ||
-    (nextQuery['location-text'] && nextQuery['location-text'] !== thisQuery['location-text'])) {
-      const locationText = nextQuery['location-text']
-      const pageNum = nextQuery.page
-      const limit = this.props.venues.perPage
-      const offset = (pageNum - 1) * limit
-      this.props.locationSelectedAndRequestVenues(locationText, limit, offset, pageNum)
+    if (nextQuery['location-text'] && nextQuery.page) {
+      const thisText = thisQuery['location-text']
+      const thisPage = thisQuery.page
+      const nextText = nextQuery['location-text']
+      const nextPage = nextQuery.page
+      if (thisText !== nextText || thisPage !== nextPage) {
+        const pageNum = nextPage
+        const limit = this.props.venues.perPage
+        const offset = (nextPage - 1) * limit
+        this.props.locationSelectedAndRequestVenues(nextText, limit, offset, pageNum)
+      }
     }
   }
 
