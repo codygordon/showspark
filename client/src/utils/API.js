@@ -1,4 +1,3 @@
-import fetch from 'isomorphic-fetch'
 import jwtDecode from 'jwt-decode'
 
 const API = {
@@ -7,7 +6,6 @@ const API = {
       let path = `/api/${dataType}`
       if (query) {
         const queryItems = Object.entries(query)
-
         queryItems.forEach((queryItem, i) => {
           if (i === 0) path += `?${queryItem[0]}=${queryItem[1]}`
           else path += `&${queryItem[0]}=${queryItem[1]}`
@@ -66,7 +64,7 @@ const API = {
   },
 
   requestToken(cb) {
-    return fetch('/api/token', { method: 'get' }).then(this.checkStatus)
+    return fetch('/api/token', { method: 'put' }).then(this.checkStatus)
       .then(this.parseJSON)
       .then(cb)
   },

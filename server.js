@@ -1,7 +1,7 @@
 const express = require('express')
-const logger = require('morgan')
-const cors = require('cors')
 const http = require('http')
+const RateLimit = require('express-rate-limit')
+const logger = require('morgan')
 const jwt = require('express-jwt')
 const jwksRsa = require('jwks-rsa')
 
@@ -9,6 +9,12 @@ const mongo = require('./utils/mongo-connection')
 
 const app = express()
 const port = process.env.PORT || 3001
+
+const limiter = new RateLimit({
+  windowMs: 1000,
+  max: 5,
+  delayMs: 0
+})
 
 const jwtCheck = jwt({
   /* dynamically provide a signing key based on the kid in the header
@@ -25,8 +31,6 @@ const jwtCheck = jwt({
   issuer: process.env.AUTH0_ISSUER,
   algorithms: ['RS256'],
 }).unless({ path: ['/api/token'] })
-
-app.use(cors())
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'))
@@ -46,6 +50,8 @@ mongo.connectToServer((err) => {
       res.send({ message: 'Server online!' })
     })
 
+    app.use('/api', limiter)
+
     /* token authentication */
     app.use('/api', jwtCheck,
       (err, req, res, next) => {
@@ -59,8 +65,7 @@ mongo.connectToServer((err) => {
     app.use('/api/venues', require('./routes/api/venues'))
 
     app.use((req, res) => {
-      res.status(400)
-      res.send({ message: 'Bad request...' })
+      res.status(400).send({ message: 'Bad request...' })
     })
   })
 })
