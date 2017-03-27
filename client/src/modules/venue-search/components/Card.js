@@ -1,13 +1,12 @@
 import React from 'react'
-import { throttle } from 'lodash'
 
-import placeholderImg from '../img/default-placeholder.png'
+import placeholderImg from '../../../img/default-placeholder.png'
 
-const VenueCard = ({ venue, venueListCardHover }) => (
+const Card = ({ venue, listCardHover }) => (
   <div
     className="venue-card"
-    onMouseEnter={() => { venueListCardHover(venue._id) }}
-    onMouseLeave={() => { venueListCardHover(null) }}
+    onMouseEnter={() => { listCardHover(venue._id) }}
+    onMouseLeave={() => { listCardHover(null) }}
   >
     <img
       className="venue-card-img"
@@ -29,4 +28,4 @@ const VenueCard = ({ venue, venueListCardHover }) => (
   </div>
 )
 
-export default VenueCard
+export default Card

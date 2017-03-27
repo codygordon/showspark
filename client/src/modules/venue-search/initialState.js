@@ -1,4 +1,4 @@
-const initialState = {
+const venueSearchInitState = {
   selectedLocation: {
     text: '',
     coords: null,
@@ -12,7 +12,7 @@ const initialState = {
     currentPage: 1,
     total: 0,
     errorMessage: null,
-    hoveredVenueId: null
+    hoveredId: null
   },
   map: {
     center: [-74, 40.7],
@@ -21,4 +21,4 @@ const initialState = {
   }
 }
 
-export default initialState
+export default venueSearchInitState

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PlacesAutocomplete from 'react-places-autocomplete'
 
-import googleLogo from '../img/powered_by_google_on_white_hdpi.png'
+import googleLogo from '../../../img/powered_by_google_on_white_hdpi.png'
 
 export default class LocationSearch extends Component {
   handleSelect = (locationText) => {

@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import { Dimmer, Loader } from 'semantic-ui-react'
-import PlacesAutocomplete from 'react-places-autocomplete'
 import queryString from 'query-string'
 
 import Header from '../components/Header'
-import VenueList from '../components/VenueList'
-import VenueMap from '../components/VenueMap'
+import List from '../components/List'
+import Map from '../components/Map'
 
-export default class App extends Component {
+export default class VenueSearch extends Component {
   static propTypes = {
 
   }
@@ -31,7 +30,7 @@ export default class App extends Component {
     const errorMessage = selectedLocation.errorMessage ? selectedLocation.errorMessage : venues.errorMessage
 
     return (
-      <div className="app">
+      <div className="venue-search">
         <Header
           locationSelectedAndRequestVenues={this.props.locationSelectedAndRequestVenues}
           locationSelected={this.props.locationSelected}
@@ -45,15 +44,15 @@ export default class App extends Component {
           </Loader>
         </Dimmer>
 
-        <VenueMap
+        <Map
           venues={venues}
           map={this.props.map}
           selectedLocation={selectedLocation}
         />
 
-        <VenueList
+        <List
           venues={venues}
-          venueListCardHover={this.props.venueListCardHover}
+          listCardHover={this.props.listCardHover}
           selectedLocation={selectedLocation}
           pageSelectedAndRequestVenues={this.props.pageSelectedAndRequestVenues}
           history={this.props.history}
@@ -62,8 +61,6 @@ export default class App extends Component {
         <Dimmer active={!!errorMessage}>
           <h2 className="dimmer-error">{errorMessage}</h2>
         </Dimmer>
-
-        {/* TODO: display venue cards matching Search */}
       </div>
     )
   }

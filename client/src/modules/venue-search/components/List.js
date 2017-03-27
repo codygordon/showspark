@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 
-import VenueCard from './VenueCard'
-import VenueListPaginate from './VenueListPaginate'
+import Card from './Card'
+import ListPaginate from './ListPaginate'
 
-export default class VenueList extends Component {
+export default class List extends Component {
   static PropTypes = {
 
   }
@@ -19,24 +19,24 @@ export default class VenueList extends Component {
   }
 
   render() {
-    const venueCards = this.props.venues.data.map((venue, i) => (
-      <VenueCard
+    const cards = this.props.venues.data.map((venue, i) => (
+      <Card
         key={venue._id}
         index={i}
         venue={venue}
-        venueListCardHover={this.props.venueListCardHover}
+        listCardHover={this.props.listCardHover}
       />
     ))
 
     return (
       <div className="venue-list-container">
-        <VenueListPaginate
+        <ListPaginate
           venues={this.props.venues}
           selectedLocation={this.props.selectedLocation}
           history={this.props.history}
           pageSelected={this.props.pageSelectedAndRequestVenues}
         />
-        {venueCards}
+        {cards}
       </div>
     )
   }

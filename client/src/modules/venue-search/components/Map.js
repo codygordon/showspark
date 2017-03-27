@@ -3,20 +3,17 @@ import ReactMapboxGl, { Popup, ZoomControl } from 'react-mapbox-gl'
 
 const mapboxToken = 'pk.eyJ1Ijoic2hvd3NwYXJrIiwiYSI6ImNqMGZiYXVsYTAxcXEycXF5c2p3dGl5OTQifQ.PjrdwcOoqtzC1plmlnlnrQ'
 
-export default class VenueMap extends Component {
+export default class Map extends Component {
   static propTypes = {
 
   }
 
-  onVenuePopupClick(venueId) { // eslint-disable-line
+  onPopupClick(venueId) { // eslint-disable-line
     console.log(venueId)
   }
 
-
   render() {
     const { venues } = this.props
-
-    let markers = null
     return (
       <div className="map-container">
         <ReactMapboxGl
@@ -44,8 +41,8 @@ export default class VenueMap extends Component {
                     coordinates={[venue.address.lng, venue.address.lat]}
                     anchor="bottom"
                     properties={venue}
-                    onClick={() => this.onVenuePopupClick(venue._id)}
-                    className={venues.hoveredVenueId === venue._id ? 'hovered' : ''}
+                    onClick={() => this.onPopupClick(venue._id)}
+                    className={venues.hoveredId === venue._id ? 'hovered' : ''}
                   >
                     {/* <i className="fa fa-circle-o" aria-hidden="true" /> */}
                     <span className="venue-popup-title">{venue.title}</span>

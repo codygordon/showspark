@@ -1,43 +1,39 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Switch, Route } from 'react-router'
 
 import { bindActionCreators } from 'redux'
 import { Provider, connect } from 'react-redux'
-import { ConnectedRouter } from 'react-router-redux'
 
-import { history, store } from './store'
-import * as actionCreators from './actions/actionCreators'
+import { store } from './store'
 
+import App from './App'
+
+/* import styles */
 import './css/normalize.css'
 import './css/styles.css'
+// TODO: pull out only what is needed from semantic-ui
 import '../node_modules/semantic-ui-css/semantic.css'
 
-import App from './containers/App'
-import NotFound from './components/NotFound'
+/* import action creators from modules */
+import * as venueSearchActions from './modules/venue-search/venueSearch'
 
 function mapStateToProps(state) {
   return {
-    selectedLocation: state.selectedLocation,
-    venues: state.venues,
-    map: state.map
+    venueSearch: state.venueSearch
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(actionCreators, dispatch)
+  return bindActionCreators({
+    ...venueSearchActions
+  }, dispatch)
 }
 
 const Root = connect(mapStateToProps, mapDispatchToProps)(App)
 
 render(
   <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <Switch>
-        <Route exact path="/" component={Root} />
-        <Route component={NotFound} />
-      </Switch>
-    </ConnectedRouter>
+    <Root />
   </Provider>,
   document.querySelector('#root')
 )

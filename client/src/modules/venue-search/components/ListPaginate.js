@@ -1,6 +1,6 @@
 import React from 'react'
 
-const VenueListPaginate = (props) => {
+const ListPaginate = (props) => {
   const { venues, selectedLocation, history, pageSelected } = props
   const offset = (venues.currentPage - 1) * venues.perPage
   const buttons = []
@@ -29,4 +29,4 @@ const VenueListPaginate = (props) => {
   )
 }
 
-export default VenueListPaginate
+export default ListPaginate
