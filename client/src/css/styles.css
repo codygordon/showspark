@@ -8,6 +8,20 @@ html {
   box-sizing: inherit;
 }
 
+:focus {
+  outline-color: #fbe058;
+}
+
+::selection {
+  background: #ffee00;
+  color: #222;
+}
+
+::-moz-selection {
+  background: #ffee00;
+  color: #222;
+}
+
 html, body {
   font-family: 'Roboto', 'sans-serif';
   margin: 0;
@@ -19,8 +33,18 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
-:focus {
+button {
+  color: #222;
+  background-color: #fff;
+  border: 2px solid #fff;
+  border-bottom: 4px solid #aaa;
+  border-radius: 2px;
+  padding: 5px 20px;
+  cursor: pointer;
+}
 
+button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 #root {
@@ -33,12 +57,12 @@ html, body {
   width: 100%;
 }
 
-/* shared styles */
-
 .app {
   height: 100%;
   width: 100%;
 }
+
+/* shared classes */
 
 .header-logo {
   flex: 0 0 170px;
@@ -373,19 +397,18 @@ img.powered-by-google {
   border-radius: 2px;
   background-color: inherit;
   margin: 0 2px;
+  padding: 0;
   cursor: pointer;
 }
 
-.paginate-button.active {
-  background-color: #fff;
-  color: #222;
-  -webkit-text-stroke: .5px #222;
-  font-weight: 700;
-
+.paginate-button:hover {
+  background-color: #222;
+  border: 1.5px solid #aaa;
 }
 
-.paginate-button:hover {
-  border: 1.5px solid #aaa;
+.paginate-button.active {
+  background-color: rgba(255, 255, 255, 0.25);
+  border: 1px solid #ccc;
 }
 
 /* Desktop-specific Styles */
