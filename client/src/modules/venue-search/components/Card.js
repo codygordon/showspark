@@ -5,6 +5,7 @@ import placeholderImg from '../../../img/default-placeholder.png'
 const Card = ({ venue, listCardHover }) => (
   <div
     className="venue-card"
+    tabIndex={0}
     onMouseEnter={() => { listCardHover(venue._id) }}
     onMouseLeave={() => { listCardHover(null) }}
   >

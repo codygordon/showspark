@@ -29,16 +29,20 @@ export default class VenueSearch extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // TODO: add location change without incurring loop
     if (nextProps.location.search && this.props.location.search) {
       const lastQuery = queryString.parse(this.props.location.search)
       const nextQuery = queryString.parse(nextProps.location.search)
-      if (lastQuery.page !== nextQuery.page) {
-        const locationText = this.props.selectedLocation.text
+      if (nextQuery['location-text'] && lastQuery['location-text']
+      && nextQuery.page && lastQuery.page) {
+        const locationText = nextQuery['location-text']
         const pageNum = nextQuery.page
         const limit = this.props.venues.perPage
         const offset = (pageNum - 1) * limit
-        this.props.pageSelectedAndRequestVenues(locationText, limit, offset, pageNum)
+        if (lastQuery['location-text'] !== nextQuery['location-text']) {
+          this.props.locationSelectedAndRequestVenues(locationText, limit, offset, pageNum)
+        } else if (lastQuery.page !== nextQuery.page) {
+          this.props.pageSelectedAndRequestVenues(locationText, limit, offset, pageNum)
+        }
       }
     }
   }
@@ -57,6 +61,7 @@ export default class VenueSearch extends Component {
           history={this.props.history}
           venues={venues}
         />
+
         <Dimmer active={venues.isFetching}>
           <Loader size="large">
             Loading Venues...

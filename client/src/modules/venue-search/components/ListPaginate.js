@@ -11,7 +11,6 @@ const ListPaginate = (props) => {
         className={venues.currentPage === page ? 'paginate-button active' : 'paginate-button'}
         onClick={() => {
           const newOffset = (page - 1) * venues.perPage
-          pageSelected(selectedLocation.text, venues.perPage, newOffset, page)
           history.push(`?location-text=${selectedLocation.text}&page=${page}`)
         }}
       >{page}</button>)

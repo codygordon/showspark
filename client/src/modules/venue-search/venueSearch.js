@@ -42,17 +42,20 @@ export default function reducer(state = initialState.venueSearch, action) {
       return { ...state,
         venues: { ...state.venues,
           isFetching: false,
-          errorMessage: action.message
+          errorMessage: action.message,
+          data: [],
+          pageCount: 0,
+          total: 0
         }
       }
     case RECEIVE_VENUES:
       return { ...state,
         venues: { ...state.venues,
-          isFetching: false,
           data: action.data,
           pageCount: action.pages,
           total: action.total,
-          errorMessage: null
+          errorMessage: null,
+          isFetching: false
         }
       }
     case LIST_CARD_HOVER:
@@ -144,7 +147,7 @@ export function fetchVenues(locationText, limit, offset) {
         if (res.data.length > 0) {
           return dispatch(receiveVenues(res.data, res.pages, res.total))
         }
-        return dispatch(requestVenuesError(city, state, country))
+        return dispatch(requestVenuesError())
       })
     } else {
       return dispatch(requestVenuesError())
