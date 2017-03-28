@@ -22,6 +22,10 @@ export default class App extends Component {
     <Home
       history={history}
       location={location}
+      venues={this.props.venueSearch.venues}
+      selectedLocation={this.props.venueSearch.selectedLocation}
+      locationSelectedAndRequestVenues={this.props.locationSelectedAndRequestVenues}
+      locationSelected={this.props.locationSelected}
     />
   )
 

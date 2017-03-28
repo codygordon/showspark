@@ -1,10 +1,21 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+
+import Header from '../components/Header'
+import Jumbotron from '../components/Jumbotron'
+import Footer from '../components/Footer'
 
 const Home = props => (
   <div className="home">
-    <h1>HOME!</h1>
-    <Link to="/venue-search">search venues</Link>
+    <Header />
+    <Jumbotron
+      history={props.history}
+      location={props.location}
+      venues={props.venues}
+      selectedLocation={props.selectedLocation}
+      locationSelectedAndRequestVenues={props.locationSelectedAndRequestVenues}
+      locationSelected={props.locationSelected}
+    />
+    <Footer />
   </div>
 )
 

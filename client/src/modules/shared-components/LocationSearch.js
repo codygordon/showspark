@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import PlacesAutocomplete from 'react-places-autocomplete'
 
-import googleLogo from '../../../img/powered_by_google_on_white_hdpi.png'
+import googleLogo from '../../img/powered_by_google_on_white_hdpi.png'
 
 export default class LocationSearch extends Component {
   handleSelect = (locationText) => {
     const limit = this.props.venues.perPage
     this.props.locationSelectedAndRequestVenues(locationText, limit, 0, 1)
-    this.props.history.push(`?location-text=${locationText}&page=1`)
+    this.props.history.push(`/venue-search?location-text=${locationText}&page=1`)
   }
 
   handleChange = (location) => {
@@ -36,7 +36,7 @@ export default class LocationSearch extends Component {
           onEnterKeyDown={this.handleSelect}
           classNames={{ input: 'location-search-input' }}
           autocompleteItem={AutocompleteItem}
-          placeholder="Search by city"
+          placeholder="Search venues by city"
           hideLabel
           typeAhead
           inputName="location-search-input"

@@ -20,6 +20,26 @@ export default class VenueSearch extends Component {
         const limit = this.props.venues.perPage
         const offset = (pageNum - 1) * limit
         this.props.locationSelectedAndRequestVenues(locationText, limit, offset, pageNum)
+      } else if (query['location-text'] && !query.page) {
+        this.props.history.push(`?location-text=${query['location-text']}&page=1`)
+        // reload hack since pushing the page # doesn't force remount the component
+        location.reload()
+      }
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // if browser back-forward used to change page query param
+    // TODO: add location change without incurring loop
+    if (nextProps.location.search && this.props.location.search) {
+      const lastQuery = queryString.parse(this.props.location.search)
+      const nextQuery = queryString.parse(nextProps.location.search)
+      if (lastQuery.page !== nextQuery.page) {
+        const locationText = this.props.selectedLocation.text
+        const pageNum = nextQuery.page
+        const limit = this.props.venues.perPage
+        const offset = (pageNum - 1) * limit
+        this.props.pageSelectedAndRequestVenues(locationText, limit, offset, pageNum)
       }
     }
   }

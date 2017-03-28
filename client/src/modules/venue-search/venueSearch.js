@@ -1,21 +1,21 @@
 import { geocodeByAddress } from 'react-places-autocomplete'
 
 import API from '../../utils/API'
-import venueSearchInitState from './initialState'
+import { initialState } from '../../store'
 
 /* ACTION TYPES */
 
-const LOCATION_SELECTED = 'venue-search/LOCATION_SELECTED'
-const LOCATION_ERROR = 'venue-search/LOCATION_ERROR'
-const REQUEST_VENUES = 'venue-search/REQUEST_VENUES'
-const RECIEVE_VENUES = 'venue-search/RECEIVE_VENUES'
-const REQUEST_VENUES_ERROR = 'venue-search/REQUEST_VENUES_ERROR'
-const LIST_CARD_HOVER = 'venue-search/LIST_CARD_HOVER'
-const LIST_PAGE_SELECTED = 'venue-search/LIST_PAGE_SELECTED'
+export const LOCATION_SELECTED = 'venue-search/LOCATION_SELECTED'
+export const LOCATION_ERROR = 'venue-search/LOCATION_ERROR'
+export const REQUEST_VENUES = 'venue-search/REQUEST_VENUES'
+export const RECEIVE_VENUES = 'venue-search/RECEIVE_VENUES'
+export const REQUEST_VENUES_ERROR = 'venue-search/REQUEST_VENUES_ERROR'
+export const LIST_CARD_HOVER = 'venue-search/LIST_CARD_HOVER'
+export const LIST_PAGE_SELECTED = 'venue-search/LIST_PAGE_SELECTED'
 
 /* REDUCERS */
 
-export default function reducer(state = venueSearchInitState, action) {
+export default function reducer(state = initialState.venueSearch, action) {
   switch (action.type) {
     case LOCATION_SELECTED:
       return { ...state,
@@ -45,7 +45,7 @@ export default function reducer(state = venueSearchInitState, action) {
           errorMessage: action.message
         }
       }
-    case RECIEVE_VENUES:
+    case RECEIVE_VENUES:
       return { ...state,
         venues: { ...state.venues,
           isFetching: false,
@@ -106,7 +106,7 @@ export function requestVenuesError() {
 // action to load venues to state
 export function receiveVenues(data, pages, total) {
   return {
-    type: RECIEVE_VENUES,
+    type: RECEIVE_VENUES,
     data,
     pages,
     total

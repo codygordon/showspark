@@ -29,7 +29,7 @@ export default class List extends Component {
     ))
 
     return (
-      <div className="venue-list-container">
+      <section className="venue-list-container">
         <ListPaginate
           venues={this.props.venues}
           selectedLocation={this.props.selectedLocation}
@@ -37,7 +37,7 @@ export default class List extends Component {
           pageSelected={this.props.pageSelectedAndRequestVenues}
         />
         {cards}
-      </div>
+      </section>
     )
   }
 }
