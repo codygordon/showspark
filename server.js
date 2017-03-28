@@ -64,8 +64,8 @@ mongo.connectToServer((err) => {
     app.use('/api/token', require('./routes/api/token'))
     app.use('/api/venues', require('./routes/api/venues'))
 
-    app.use((req, res) => {
-      res.status(400).send({ message: 'Bad request...' })
-    })
+    // app.use((req, res) => {
+    //   res.status(400).send({ message: 'Bad request...' })
+    // })
   })
 })

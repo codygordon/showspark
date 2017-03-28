@@ -15,7 +15,7 @@ export default class Map extends Component {
   render() {
     const { venues } = this.props
     return (
-      <div className="map-container">
+      <section className="map-container">
         <ReactMapboxGl
           accessToken={mapboxToken}
           style="mapbox://styles/mapbox/streets-v10" // eslint-disable-line
@@ -54,7 +54,7 @@ export default class Map extends Component {
 
           <ZoomControl zoomDiff={1} />
         </ReactMapboxGl>
-      </div>
+      </section>
     )
   }
 }
