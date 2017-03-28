@@ -1,5 +1,6 @@
 const express = require('express')
 const http = require('http')
+const path = require('path')
 const RateLimit = require('express-rate-limit')
 const logger = require('morgan')
 const jwt = require('express-jwt')
@@ -32,11 +33,7 @@ const jwtCheck = jwt({
   algorithms: ['RS256'],
 }).unless({ path: ['/api/token'] })
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'))
-} else {
-  app.use(logger('dev'))
-}
+app.use(express.static('client/build'))
 
 mongo.connectToServer((err) => {
   if (err) throw err
@@ -46,26 +43,25 @@ mongo.connectToServer((err) => {
 
   /* start server only if MongoDB is connected */
   http.createServer(app).listen(port, (err) => {
-    app.get('/', (req, res) => {
-      res.send({ message: 'Server online!' })
-    })
-
     app.use('/api', limiter)
-
     /* token authentication */
     app.use('/api', jwtCheck,
       (err, req, res, next) => {
         if (err) res.status(err.status).send({ message: err.message })
       })
-
     // routes imported
     /* eslint-disable global-require */
     app.use('/api', require('./routes/api/index'))
     app.use('/api/token', require('./routes/api/token'))
     app.use('/api/venues', require('./routes/api/venues'))
 
-    // app.use((req, res) => {
-    //   res.status(400).send({ message: 'Bad request...' })
-    // })
+    /* serve all routes via react build if prod */
+    if (process.env.NODE_ENV === 'production') {
+      app.get('*', (req, res) => {
+        res.sendFile(path.resolve(`${__dirname}/client/build/index.html`))
+      })
+    } else {
+      app.use(logger('dev'))
+    }
   })
 })

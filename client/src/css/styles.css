@@ -33,19 +33,19 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
-button {
+/*button {
   color: #222;
   background-color: #fff;
   border: 2px solid #fff;
   border-bottom: 4px solid #aaa;
   border-radius: 2px;
-  padding: 5px 20px;
+  padding: 10px;
   cursor: pointer;
 }
 
 button:hover {
   background-color: rgba(255, 255, 255, 0.2);
-}
+}*/
 
 #root {
   height: 100%;
