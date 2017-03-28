@@ -36,6 +36,7 @@ export default class LocationSearch extends Component {
           onEnterKeyDown={this.handleSelect}
           classNames={{ input: 'location-search-input' }}
           autocompleteItem={AutocompleteItem}
+          autofocus
           placeholder="Search venues by city"
           hideLabel
           typeAhead
