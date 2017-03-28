@@ -9,10 +9,9 @@ import { store } from './store'
 import App from './App'
 
 /* import styles */
+import './css/semantic-truncated.css'
 import './css/normalize.css'
 import './css/styles.css'
-// TODO: pull out only what is needed from semantic-ui
-import '../node_modules/semantic-ui-css/semantic.css'
 
 /* import action creators from modules */
 import * as venueSearchActions from './modules/venue-search/venueSearch'

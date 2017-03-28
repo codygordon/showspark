@@ -29,7 +29,6 @@ export default class VenueSearch extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // if browser back-forward used to change page query param
     // TODO: add location change without incurring loop
     if (nextProps.location.search && this.props.location.search) {
       const lastQuery = queryString.parse(this.props.location.search)

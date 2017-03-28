@@ -5,7 +5,9 @@ import LocationSearch from '../../shared-components/LocationSearch'
 
 const Header = props => (
   <header className="venue-search-header">
-    <Link to="/" className="header-logo" />
+    <Link to="/" className="header-logo">
+      <span className="header-logo-beta">BETA</span>
+    </Link>
     <div className="venue-search-location-search">
       <LocationSearch
         locationSelectedAndRequestVenues={props.locationSelectedAndRequestVenues}

@@ -15,7 +15,6 @@ export default class List extends Component {
     const pageNum = page.selected + 1
 
     this.props.history.push(`?location-text=${locationText}&page=${pageNum}`)
-    this.props.pageSelectedAndRequestVenues(locationText, limit, offset, pageNum)
   }
 
   render() {
@@ -37,6 +36,12 @@ export default class List extends Component {
           pageSelected={this.props.pageSelectedAndRequestVenues}
         />
         {cards}
+        <ListPaginate
+          venues={this.props.venues}
+          selectedLocation={this.props.selectedLocation}
+          history={this.props.history}
+          pageSelected={this.props.pageSelectedAndRequestVenues}
+        />
       </section>
     )
   }
