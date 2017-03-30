@@ -19,29 +19,37 @@ export const VENUE_SELECTED = 'venue-search/VENUE_SELECTED'
 export default function reducer(state = initialState.venueSearch, action) {
   switch (action.type) {
     case REGION_SET:
-      return { ...state,
-        region: { ...state.region,
+      return {
+        ...state,
+        region: {
+          ...state.region,
           text: action.regionText,
           coords: action.regionCoords,
           errorMessage: null
         }
       }
     case REGION_ERROR:
-      return { ...state,
-        region: { ...state.region,
+      return {
+        ...state,
+        region: {
+          ...state.region,
           errorMessage: action.message
         }
       }
     case REQUEST_VENUES:
-      return { ...state,
-        venues: { ...state.venues,
+      return {
+        ...state,
+        venues: {
+          ...state.venues,
           isFetching: true,
           errorMessage: null
         }
       }
     case REQUEST_VENUES_ERROR:
-      return { ...state,
-        venues: { ...state.venues,
+      return {
+        ...state,
+        venues: {
+          ...state.venues,
           isFetching: false,
           errorMessage: action.message,
           data: [],
@@ -50,8 +58,10 @@ export default function reducer(state = initialState.venueSearch, action) {
         }
       }
     case RECEIVE_VENUES:
-      return { ...state,
-        venues: { ...state.venues,
+      return {
+        ...state,
+        venues: {
+          ...state.venues,
           data: action.data,
           pageCount: action.pages,
           total: action.total,
@@ -60,20 +70,28 @@ export default function reducer(state = initialState.venueSearch, action) {
         }
       }
     case LIST_CARD_HOVER:
-      return { ...state,
-        venues: { ...state.venues,
+      return {
+        ...state,
+        venues: {
+          ...state.venues,
           hoveredId: action.venueId
         }
       }
     case LIST_PAGE_SELECTED:
-      return { ...state,
-        venues: { ...state.venues,
+      return {
+        ...state,
+        venues: {
+          ...state.venues,
           currentPage: action.currentPage
         }
       }
     case VENUE_SELECTED:
-      return { ...state,
-        venues: initialState.venueSearch.venues
+      return {
+        ...state,
+        venue: {
+          ...initialState.venue,
+          ...action.venue
+        }
       }
     default:
       return state
@@ -135,9 +153,10 @@ export function listPageSelected(pageNum) {
   }
 }
 
-export function venueSelected() {
+export function venueSelected(venue) {
   return {
-    type: VENUE_SELECTED
+    type: VENUE_SELECTED,
+    venue
   }
 }
 

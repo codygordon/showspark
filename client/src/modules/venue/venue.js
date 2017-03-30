@@ -12,23 +12,29 @@ export const REQUEST_VENUE_ERROR = 'venue/REQUEST_VENUE_ERROR'
 export default function reducer(state = initialState.venue, action) {
   switch (action.type) {
     case REQUEST_VENUE:
-      return { ...state,
-        venue: { ...state.venue,
+      return {
+        ...state,
+        venue: {
+          ...state.venue,
           isFetching: true,
           errorMessage: null
         }
       }
     case REQUEST_VENUE_ERROR:
-      return { ...state,
-        venue: { ...state.venues,
+      return {
+        ...state,
+        venue: {
+          ...state.venues,
           isFetching: false,
           errorMessage: action.message,
           data: []
         }
       }
     case RECEIVE_VENUE:
-      return { ...state,
-        venues: { ...state.venue,
+      return {
+        ...state,
+        venues: {
+          ...state.venue,
           data: action.data
         }
       }

@@ -89,10 +89,10 @@ button:hover {
   border: 1px solid #fff;
   padding: 0;
   position: absolute;
-  right: 22px;
-  bottom: 5px;
+  right: 24px;
+  bottom: 6px;
   padding: 0 1px;
-  letter-spacing: .7px;
+  letter-spacing: .3px;
 }
 
 .region-search-container {

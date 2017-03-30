@@ -15,13 +15,11 @@ export default class VenueSearch extends Component {
     if (this.props.location.search) {
       const query = queryString.parse(this.props.location.search)
       if (query['region-text'] && query.page) {
-        const regionText = query['region-text']
-        const pageNum = query.page
         const limit = this.props.venues.perPage
-        const offset = (pageNum - 1) * limit
-        this.props.regionSelected(regionText)
-        this.props.listPageSelected(pageNum)
-        this.props.fetchVenues(regionText, limit, offset)
+        const offset = (query.page - 1) * limit
+        this.props.regionSelected(query['region-text'])
+        this.props.listPageSelected(query.page)
+        this.props.fetchVenues(query['region-text'], limit, offset)
       } else if (query['region-text'] && !query.page) {
         this.props.history.push(`/venue-search?region-text=${query['region-text']}&page=1`)
         // // reload hack since pushing the page # doesn't force remount the component
@@ -32,20 +30,19 @@ export default class VenueSearch extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.location.search && this.props.location.search) {
-      const lastQuery = queryString.parse(this.props.location.search)
+      const thisQuery = queryString.parse(this.props.location.search)
       const nextQuery = queryString.parse(nextProps.location.search)
-      if (nextQuery['region-text'] && lastQuery['region-text']
-      && nextQuery.page && lastQuery.page) {
-        const regionText = nextQuery['region-text']
-        const pageNum = nextQuery.page
+      if (nextQuery['region-text'] && thisQuery['region-text']
+      && nextQuery.page && thisQuery.page) {
         const limit = this.props.venues.perPage
-        const offset = (pageNum - 1) * limit
-        if (lastQuery['region-text'] !== nextQuery['region-text']) {
-          this.props.regionSelected(regionText)
-          this.props.fetchVenues(regionText, limit, offset)
-        } else if (lastQuery.page !== nextQuery.page) {
+        const offset = (nextQuery.page - 1) * limit
+        if (thisQuery['region-text'] !== nextQuery['region-text']) {
+          this.props.regionSelected(nextQuery['region-text'])
           this.props.listPageSelected(nextQuery.page)
-          this.props.fetchVenues(regionText, limit, offset)
+          this.props.fetchVenues(nextQuery['region-text'], limit, offset)
+        } else if (thisQuery.page !== nextQuery.page) {
+          this.props.listPageSelected(nextQuery.page)
+          this.props.fetchVenues(nextQuery['region-text'], limit, offset)
         }
       }
     }
