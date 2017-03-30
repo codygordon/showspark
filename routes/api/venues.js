@@ -32,6 +32,14 @@ router.get('/', (req, res) => {
     }
   }
 
+  if (req.query && req.query.venueId) {
+    db.findOne({ _id: req.query.venueId }, (err, result) => {
+      if (err) throw err
+      if (result) return res.json(result)
+      return res.json({ error: `No venues matching ${req.query.venueId}...` })
+    })
+  }
+
   venues.find(query).toArray((err, result) => {
     if (err) throw err
     if (result) {

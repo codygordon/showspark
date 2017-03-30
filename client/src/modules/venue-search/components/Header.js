@@ -1,20 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import LocationSearch from '../../shared-components/LocationSearch'
+import RegionSearch from '../../shared-components/RegionSearch'
 
 const Header = props => (
   <header className="venue-search-header">
     <Link to="/" className="header-logo">
       SHOWSPARK <span className="header-logo-beta">BETA</span>
     </Link>
-    <div className="venue-search-location-search">
-      <LocationSearch
-        locationSelectedAndRequestVenues={props.locationSelectedAndRequestVenues}
-        locationSelected={props.locationSelected}
-        selectedLocation={props.selectedLocation}
+    <div className="venue-search-region-search">
+      <RegionSearch
         history={props.history}
-        venues={props.venues}
+        region={props.region}
+        regionSet={props.regionSet}
       />
     </div>
   </header>

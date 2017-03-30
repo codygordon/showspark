@@ -23,7 +23,7 @@ html {
 }
 
 html, body {
-  font-family: 'Roboto', 'sans-serif';
+  font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
   height: 100%;
@@ -95,29 +95,29 @@ button:hover {
   letter-spacing: .7px;
 }
 
-.location-search-container {
+.region-search-container {
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
 }
 
-.location-search-container div {
+.region-search-container div {
   width: 100%;
 }
 
-.location-search-icon {
+.region-search-icon {
   flex: 0 0 28px;
   padding: 0 8px;
   margin-top: -2px;
 }
 
-.location-search-icon i {
+.region-search-icon i {
   color: #777;
   transform: scale(1.1);
 }
 
-.location-search-input {
+.region-search-input {
   flex: 1 1 100%;
   height: 100%;
   width: 100%;
@@ -129,7 +129,7 @@ button:hover {
   border: none;
 }
 
-.location-search-input::placeholder {
+.region-search-input::placeholder {
   font-weight: 400;
   color: #777;
 }
@@ -208,7 +208,7 @@ img.powered-by-google {
   font-weight: 700;
 }
 
-.home-jumbotron-location-search {
+.home-jumbotron-region-search {
   flex: 0 0 100%;
   height: 70px;
   border: 1.5px solid #888;
@@ -216,11 +216,11 @@ img.powered-by-google {
   padding: 5px 10px;
 }
 
-.home-jumbotron-location-search i {
+.home-jumbotron-region-search i {
   transform: scale(1.4);
 }
 
-.home-jumbotron-location-search input {
+.home-jumbotron-region-search input {
   padding-left: 5px;
   font-size: 1.5em;
 }
@@ -253,7 +253,7 @@ img.powered-by-google {
   border-bottom: 1px solid #666;
 }
 
-.venue-search-location-search {
+.venue-search-region-search {
   flex: 0 1 100%;
   border-left: 1px solid #666;
 }
@@ -422,16 +422,16 @@ img.powered-by-google {
     font-size: 1.8em;
   }
 
-  .home-jumbotron-location-search {
+  .home-jumbotron-region-search {
     font-size: 12px;
     height: 60px;
   }
 
-  .home-jumbotron-location-search i {
+  .home-jumbotron-region-search i {
     transform: scale(1.3);
   }
 
-  .home-jumbotron-location-search .location-search-icon {
+  .home-jumbotron-region-search .region-search-icon {
     padding: 0;
     flex: 0 0 14px;
   }

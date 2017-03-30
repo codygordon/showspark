@@ -1,48 +1,39 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import Card from './Card'
 import ListPaginate from './ListPaginate'
 
-export default class List extends Component {
-  static PropTypes = {
-
+const List = (props) => {
+  const handleCardClick = (venueId) => {
+    props.venueSelected()
+    props.history.push(`/venue&id=${venueId}`)
   }
 
-  handlePageClick = (page) => {
-    const locationText = this.props.selectedLocation.text
-    const limit = this.props.venues.perPage
-    const offset = Math.ceil(page.selected * this.props.venues.perPage)
-    const pageNum = page.selected + 1
+  const cards = props.venues.data.map((venue, i) => (
+    <Card
+      key={venue._id}
+      index={i}
+      venue={venue}
+      listCardHover={props.listCardHover}
+      onClick={() => handleCardClick(venue._id)}
+    />
+  ))
 
-    this.props.history.push(`?location-text=${locationText}&page=${pageNum}`)
-  }
-
-  render() {
-    const cards = this.props.venues.data.map((venue, i) => (
-      <Card
-        key={venue._id}
-        index={i}
-        venue={venue}
-        listCardHover={this.props.listCardHover}
+  return (
+    <section className="venue-list-container">
+      <ListPaginate
+        history={props.history}
+        venues={props.venues}
+        region={props.region}
       />
-    ))
-
-    return (
-      <section className="venue-list-container">
-        <ListPaginate
-          venues={this.props.venues}
-          selectedLocation={this.props.selectedLocation}
-          history={this.props.history}
-          pageSelected={this.props.pageSelectedAndRequestVenues}
-        />
-        {cards}
-        <ListPaginate
-          venues={this.props.venues}
-          selectedLocation={this.props.selectedLocation}
-          history={this.props.history}
-          pageSelected={this.props.pageSelectedAndRequestVenues}
-        />
-      </section>
-    )
-  }
+      {cards}
+      <ListPaginate
+        history={props.history}
+        venues={props.venues}
+        region={props.region}
+      />
+    </section>
+  )
 }
+
+export default List

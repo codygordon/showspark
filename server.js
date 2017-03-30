@@ -18,44 +18,37 @@ const limiter = new RateLimit({
 })
 
 const jwtCheck = jwt({
-  /* dynamically provide a signing key based on the kid in the header
-  and the singing keys provided by the Auth0 JWKS endpoint */
   secret: jwksRsa.expressJwtSecret({
     cache: true,
     rateLimit: true,
     jwksRequestsPerMinute: 5,
     jwksUri: process.env.AUTH0_JWKS_URI,
   }),
-
-  // validate the Auth0 audience and the issuer
   audience: process.env.AUTH0_AUDIENCE,
   issuer: process.env.AUTH0_ISSUER,
   algorithms: ['RS256'],
 }).unless({ path: ['/api/token'] })
 
-app.use(express.static('client/build'))
-
-mongo.connectToServer((err) => {
-  if (err) throw err
-
-  // eslint-disable-next-line
-  console.log(`Server connected at http://localhost:${port}/`)
-
-  /* start server only if MongoDB is connected */
+/* start server only if MongoDB is connected */
+mongo.connectToServer(() => {
   http.createServer(app).listen(port, (err) => {
+    // eslint-disable-next-line
+    console.log(`Server connected at http://localhost:${port}/`)
+
+    /* api limiter and token authentication */
     app.use('/api', limiter)
-    /* token authentication */
     app.use('/api', jwtCheck,
       (err, req, res, next) => {
         if (err) res.status(err.status).send({ message: err.message })
       })
-    // routes imported
+
+    /* routes to be imported */
     /* eslint-disable global-require */
     app.use('/api', require('./routes/api/index'))
     app.use('/api/token', require('./routes/api/token'))
     app.use('/api/venues', require('./routes/api/venues'))
 
-    /* serve all routes via react build if prod */
+    /* serve all routes via react build if in prod */
     if (process.env.NODE_ENV === 'production') {
       app.get('*', (req, res) => {
         res.sendFile(path.resolve(`${__dirname}/client/build/index.html`))

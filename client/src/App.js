@@ -4,14 +4,10 @@ import { ConnectedRouter } from 'react-router-redux'
 
 import { history } from './store'
 
+import NotFound from './modules/shared-components/NotFound'
 import Home from './modules/home/container/Home'
 import VenueSearch from './modules/venue-search/container/VenueSearch'
-
-const NotFound = () => (
-  <div className="not-found">
-    <h2>404 — Sorry, didn&#39;t find anything here...</h2>
-  </div>
-)
+import Venue from './modules/venue/container/Venue'
 
 export default class App extends Component {
   static PropTypes = {
@@ -22,10 +18,8 @@ export default class App extends Component {
     <Home
       history={history}
       location={location}
-      venues={this.props.venueSearch.venues}
-      selectedLocation={this.props.venueSearch.selectedLocation}
-      locationSelectedAndRequestVenues={this.props.locationSelectedAndRequestVenues}
-      locationSelected={this.props.locationSelected}
+      region={this.props.venueSearch.region}
+      regionSet={this.props.regionSet}
     />
   )
 
@@ -34,12 +28,23 @@ export default class App extends Component {
       history={history}
       location={location}
       map={this.props.venueSearch.map}
-      selectedLocation={this.props.venueSearch.selectedLocation}
+      region={this.props.venueSearch.region}
       venues={this.props.venueSearch.venues}
-      locationSelected={this.props.locationSelected}
-      locationSelectedAndRequestVenues={this.props.locationSelectedAndRequestVenues}
-      pageSelectedAndRequestVenues={this.props.pageSelectedAndRequestVenues}
+      regionSet={this.props.regionSet}
+      regionSelected={this.props.regionSelected}
+      pageSelected={this.props.pageSelected}
+      fetchVenues={this.props.fetchVenues}
       listCardHover={this.props.listCardHover}
+      venueSelected={this.props.venueSelected}
+    />
+  )
+
+  VenuePlusProps = ({ location }) => (
+    <Venue
+      history={history}
+      location={location}
+      venue={this.props.venue}
+      fetchVenue={this.props.fetchVenue}
     />
   )
 
@@ -49,6 +54,7 @@ export default class App extends Component {
         <Switch>
           <Route exact path="/" render={this.HomePlusProps} />
           <Route path="/venue-search" render={this.VenueSearchPlusProps} />
+          <Route path="/venue" render={this.VenuePlusProps} />
           <Route component={NotFound} />
         </Switch>
       </ConnectedRouter>

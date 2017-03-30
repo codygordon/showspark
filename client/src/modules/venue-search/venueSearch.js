@@ -5,29 +5,30 @@ import { initialState } from '../../store'
 
 /* ACTION TYPES */
 
-export const LOCATION_SELECTED = 'venue-search/LOCATION_SELECTED'
-export const LOCATION_ERROR = 'venue-search/LOCATION_ERROR'
+export const REGION_SET = 'venue-search/REGION_SET'
+export const REGION_ERROR = 'venue-search/REGION_ERROR'
 export const REQUEST_VENUES = 'venue-search/REQUEST_VENUES'
 export const RECEIVE_VENUES = 'venue-search/RECEIVE_VENUES'
 export const REQUEST_VENUES_ERROR = 'venue-search/REQUEST_VENUES_ERROR'
 export const LIST_CARD_HOVER = 'venue-search/LIST_CARD_HOVER'
 export const LIST_PAGE_SELECTED = 'venue-search/LIST_PAGE_SELECTED'
+export const VENUE_SELECTED = 'venue-search/VENUE_SELECTED'
 
 /* REDUCERS */
 
 export default function reducer(state = initialState.venueSearch, action) {
   switch (action.type) {
-    case LOCATION_SELECTED:
+    case REGION_SET:
       return { ...state,
-        selectedLocation: { ...state.selectedLocation,
-          text: action.locationText,
-          coords: action.locationCoords,
+        region: { ...state.region,
+          text: action.regionText,
+          coords: action.regionCoords,
           errorMessage: null
         }
       }
-    case LOCATION_ERROR:
+    case REGION_ERROR:
       return { ...state,
-        selectedLocation: { ...state.selectedLocation,
+        region: { ...state.region,
           errorMessage: action.message
         }
       }
@@ -70,6 +71,10 @@ export default function reducer(state = initialState.venueSearch, action) {
           currentPage: action.currentPage
         }
       }
+    case VENUE_SELECTED:
+      return { ...state,
+        venues: initialState.venueSearch.venues
+      }
     default:
       return state
   }
@@ -77,18 +82,18 @@ export default function reducer(state = initialState.venueSearch, action) {
 
 /* ACTION CREATORS */
 
-export function locationSelected(locationText, locationCoords) {
+export function regionSet(regionText, regionCoords) {
   return {
-    type: LOCATION_SELECTED,
-    locationText,
-    locationCoords
+    type: REGION_SET,
+    regionText,
+    regionCoords
   }
 }
 
-export function locationError() {
+export function regionError() {
   return {
-    type: LOCATION_ERROR,
-    message: 'That\'s not a real location, try again!'
+    type: REGION_ERROR,
+    message: 'That\'s not a real region, try again!'
   }
 }
 
@@ -130,16 +135,22 @@ export function listPageSelected(pageNum) {
   }
 }
 
+export function venueSelected() {
+  return {
+    type: VENUE_SELECTED
+  }
+}
+
 /* ASYNC ACTION CREATORS */
 
-export function fetchVenues(locationText, limit, offset) {
+export function fetchVenues(regionText, limit, offset) {
   return (dispatch) => { // eslint-disable-line consistent-return
-    const locationArray = locationText.split(',')
+    const regionArray = regionText.split(',')
 
-    if (locationArray.length === 3) {
-      const city = locationArray[0].trim()
-      const state = locationArray[1].trim()
-      const country = locationArray[2].trim()
+    if (regionArray.length === 3) {
+      const city = regionArray[0].trim()
+      const state = regionArray[1].trim()
+      const country = regionArray[2].trim()
 
       dispatch(requestVenues())
 
@@ -155,32 +166,16 @@ export function fetchVenues(locationText, limit, offset) {
   }
 }
 
-export function locationSelectedAndRequestVenues(locationText, limit, offset, pageNum) {
+export function regionSelected(regionText) {
   return (dispatch) => {
     // just send the text to state first for input
-    dispatch(locationSelected(locationText, null))
-
-    // then set the page number state
-    dispatch(listPageSelected(parseInt(pageNum)))
-
-    // async fetch venues
-    dispatch(fetchVenues(locationText, limit, offset))
+    dispatch(regionSet(regionText, null))
 
     // async geocode and send text and coords
-    geocodeByAddress(locationText, (err, res) => {
-      if (err) return dispatch(locationError())
-      const locationCoords = [res.lng, res.lat]
-      return dispatch(locationSelected(locationText, locationCoords))
+    geocodeByAddress(regionText, (err, res) => {
+      if (err) return dispatch(regionError())
+      const regionCoords = [res.lng, res.lat]
+      return dispatch(regionSet(regionText, regionCoords))
     })
-  }
-}
-
-export function pageSelectedAndRequestVenues(locationText, limit, offset, pageNum) {
-  return (dispatch) => {
-    // set the page number state
-    dispatch(listPageSelected(parseInt(pageNum)))
-
-    // async fetch venues
-    dispatch(fetchVenues(locationText, limit, offset))
   }
 }

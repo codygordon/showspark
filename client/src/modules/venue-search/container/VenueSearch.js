@@ -14,16 +14,18 @@ export default class VenueSearch extends Component {
   componentWillMount() {
     if (this.props.location.search) {
       const query = queryString.parse(this.props.location.search)
-      if (query['location-text'] && query.page) {
-        const locationText = query['location-text']
+      if (query['region-text'] && query.page) {
+        const regionText = query['region-text']
         const pageNum = query.page
         const limit = this.props.venues.perPage
         const offset = (pageNum - 1) * limit
-        this.props.locationSelectedAndRequestVenues(locationText, limit, offset, pageNum)
-      } else if (query['location-text'] && !query.page) {
-        this.props.history.push(`?location-text=${query['location-text']}&page=1`)
-        // reload hack since pushing the page # doesn't force remount the component
-        location.reload()
+        this.props.regionSelected(regionText)
+        this.props.listPageSelected(pageNum)
+        this.props.fetchVenues(regionText, limit, offset)
+      } else if (query['region-text'] && !query.page) {
+        this.props.history.push(`/venue-search?region-text=${query['region-text']}&page=1`)
+        // // reload hack since pushing the page # doesn't force remount the component
+        // location.reload()
       }
     }
   }
@@ -32,34 +34,33 @@ export default class VenueSearch extends Component {
     if (nextProps.location.search && this.props.location.search) {
       const lastQuery = queryString.parse(this.props.location.search)
       const nextQuery = queryString.parse(nextProps.location.search)
-      if (nextQuery['location-text'] && lastQuery['location-text']
+      if (nextQuery['region-text'] && lastQuery['region-text']
       && nextQuery.page && lastQuery.page) {
-        const locationText = nextQuery['location-text']
+        const regionText = nextQuery['region-text']
         const pageNum = nextQuery.page
         const limit = this.props.venues.perPage
         const offset = (pageNum - 1) * limit
-        if (lastQuery['location-text'] !== nextQuery['location-text']) {
-          this.props.locationSelectedAndRequestVenues(locationText, limit, offset, pageNum)
+        if (lastQuery['region-text'] !== nextQuery['region-text']) {
+          this.props.regionSelected(regionText)
+          this.props.fetchVenues(regionText, limit, offset)
         } else if (lastQuery.page !== nextQuery.page) {
-          this.props.pageSelectedAndRequestVenues(locationText, limit, offset, pageNum)
+          this.props.listPageSelected(nextQuery.page)
+          this.props.fetchVenues(regionText, limit, offset)
         }
       }
     }
   }
 
   render() {
-    let loading;
-    const { venues, selectedLocation } = this.props
-    const errorMessage = selectedLocation.errorMessage ? selectedLocation.errorMessage : venues.errorMessage
+    const { history, map, region, venues } = this.props
+    const errorMessage = region.errorMessage ? region.errorMessage : venues.errorMessage
 
     return (
       <div className="venue-search">
         <Header
-          locationSelectedAndRequestVenues={this.props.locationSelectedAndRequestVenues}
-          locationSelected={this.props.locationSelected}
-          selectedLocation={selectedLocation}
-          history={this.props.history}
-          venues={venues}
+          history={history}
+          region={region}
+          regionSet={this.props.regionSet}
         />
 
         <Dimmer active={venues.isFetching}>
@@ -69,17 +70,17 @@ export default class VenueSearch extends Component {
         </Dimmer>
 
         <Map
+          map={map}
+          region={region}
           venues={venues}
-          map={this.props.map}
-          selectedLocation={selectedLocation}
         />
 
         <List
+          history={history}
+          region={region}
           venues={venues}
           listCardHover={this.props.listCardHover}
-          selectedLocation={selectedLocation}
-          pageSelectedAndRequestVenues={this.props.pageSelectedAndRequestVenues}
-          history={this.props.history}
+          venueSelected={this.props.venueSelected}
         />
 
         <Dimmer active={!!errorMessage}>

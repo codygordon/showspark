@@ -15,16 +15,20 @@ import './css/styles.css'
 
 /* import action creators from modules */
 import * as venueSearchActions from './modules/venue-search/venueSearch'
+import * as venueActions from './modules/venue/venue'
 
 function mapStateToProps(state) {
   return {
-    venueSearch: state.venueSearch
+    venueSearch: state.venueSearch,
+    venue: state.venue,
+    artist: state.artist
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    ...venueSearchActions
+    ...venueSearchActions,
+    ...venueActions
   }, dispatch)
 }
 

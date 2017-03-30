@@ -19,7 +19,7 @@ export default class Map extends Component {
         <ReactMapboxGl
           accessToken={mapboxToken}
           style="mapbox://styles/mapbox/streets-v10" // eslint-disable-line
-          center={this.props.selectedLocation.coords || this.props.map.center}
+          center={this.props.region.coords || this.props.map.center}
           zoom={this.props.map.zoom}
           movingMethod="easeTo"
           attributionPosition="bottom-left"

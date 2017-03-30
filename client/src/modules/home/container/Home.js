@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import Header from '../components/Header'
 import Jumbotron from '../components/Jumbotron'
@@ -9,11 +9,8 @@ const Home = props => (
     <Header />
     <Jumbotron
       history={props.history}
-      location={props.location}
-      venues={props.venues}
-      selectedLocation={props.selectedLocation}
-      locationSelectedAndRequestVenues={props.locationSelectedAndRequestVenues}
-      locationSelected={props.locationSelected}
+      region={props.region}
+      regionSet={props.regionSet}
     />
     <Footer />
   </div>

@@ -5,12 +5,18 @@ import { createBrowserHistory } from 'history'
 
 /* import reducers from modules */
 import venueSearch from './modules/venue-search/venueSearch'
+import venue from './modules/venue/venue'
 
 export const history = createBrowserHistory()
 
 export const initialState = {
   venueSearch: {
-    selectedLocation: {
+    map: {
+      center: [-74, 40.7],
+      zoom: [11.5],
+      errorMessage: null
+    },
+    region: {
       text: '',
       coords: null,
       errorMessage: null
@@ -24,17 +30,22 @@ export const initialState = {
       total: 0,
       errorMessage: null,
       hoveredId: null
-    },
-    map: {
-      center: [-74, 40.7],
-      zoom: [11.5],
-      errorMessage: null
     }
+  },
+  venue: {
+    isFetching: false,
+    errorMessage: null
+  },
+  artist: {
+    isFetching: false,
+    data: [],
+    errorMessage: null
   }
 }
 
 const rootReducer = combineReducers({
   venueSearch,
+  venue,
   router: routerReducer
 })
 
