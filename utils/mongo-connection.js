@@ -8,10 +8,10 @@ const dbUser = process.env.MLAB_DB_USER
 const dbPass = process.env.MLAB_DB_PASS
 let mongoPath = `mongodb://${dbUser}:${dbPass}@${dbUrl}`
 
-if (process.env.NODE_ENV !== 'production') {
-  // use local mongodb i instance if not in prod
-  mongoPath = 'mongodb://127.0.0.1:27017/showspark'
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   // use local mongodb i instance if not in prod
+//   mongoPath = 'mongodb://127.0.0.1:27017/showspark'
+// }
 
 let db = null
 

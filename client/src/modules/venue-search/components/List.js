@@ -1,12 +1,12 @@
 import React from 'react'
 
 import Card from './Card'
-import ListPaginate from '../../shared-components/ListPaginate'
+import ListPaginate from './ListPaginate'
 
 const List = (props) => {
   const handleCardClick = (venue) => {
     props.venueSelected(venue)
-    props.history.push(`/venue&id=${venue._id}`)
+    props.history.push(`/venue?id=${venue._id}`)
   }
 
   const cards = props.venues.data.map((venue, i) => (
@@ -15,7 +15,7 @@ const List = (props) => {
       index={i}
       venue={venue}
       listCardHover={props.listCardHover}
-      onClick={() => handleCardClick(venue)}
+      handleCardClick={handleCardClick}
     />
   ))
 

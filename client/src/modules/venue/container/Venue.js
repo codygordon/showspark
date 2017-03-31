@@ -13,9 +13,13 @@ export default class Venue extends Component {
 
   componentWillMount() {
     const query = queryString.parse(this.props.location.search)
-    if (query.id && !this.props.venue._id) {
-      this.props.fetchVenue(query.id)
-    } else if (!query.id) {
+    if (!query.id) this.props.history.push('/')
+    if (query.id !== this.props.venue._id) this.props.fetchVenue(query.id)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const venue = nextProps.venue
+    if (venue.errorMessage && venue.errorMessage === 'no match') {
       this.props.history.push('/')
     }
   }
@@ -32,6 +36,10 @@ export default class Venue extends Component {
         </Dimmer>
 
         <h1>{this.props.venue.title}</h1>
+
+        <Dimmer active={!!this.props.venue.errorMessage}>
+          <h2 className="dimmer-error">{this.props.venue.errorMessage}</h2>
+        </Dimmer>
       </div>
     )
   }

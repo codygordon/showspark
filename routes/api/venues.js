@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const NodeGeocoder = require('node-geocoder')
+const ObjectId = require('mongodb').ObjectId
 
 const mongo = require('../../utils/mongo-connection')
 const stateNameAbbrev = require('../../utils/state-name-abbrev')
@@ -18,50 +19,52 @@ router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({ extended: true }))
 
 router.get('/', (req, res) => {
-  let query = {}
-  if (req.query && req.query.city && req.query.state && req.query.country) {
+  if (req.query && req.query.city && req.query.state) {
     // const country = req.query.country.replace(/%20/g, ' ')
     const city = req.query.city.replace(/%20/g, ' ')
     let state = req.query.state.replace(/%20/g, ' ')
     if (state.length > 2) {
       state = stateNameAbbrev(state)
     }
-    query = {
+    const query = {
       'address.city': city,
       'address.state': state
     }
-  }
 
-  if (req.query && req.query.venueId) {
-    db.findOne({ _id: req.query.venueId }, (err, result) => {
+    venues.find(query).toArray((err, result) => {
       if (err) throw err
-      if (result) return res.json(result)
-      return res.json({ error: `No venues matching ${req.query.venueId}...` })
-    })
-  }
+      if (result) {
+        let data = result
+        let pages = 1
+        const total = result.length
 
-  venues.find(query).toArray((err, result) => {
-    if (err) throw err
-    if (result) {
-      let data = result
-      let pages = 1
-      const total = result.length
-
-      if (req.query.limit && req.query.offset) {
-        const offset = parseInt(req.query.offset)
-        const limit = parseInt(req.query.limit)
+        if (req.query.limit && req.query.offset) {
+          const offset = parseInt(req.query.offset)
+          const limit = parseInt(req.query.limit)
 
         data = result.filter((item, i) => { // eslint-disable-line
           if (i >= offset && i < (limit + offset)) return true
           return false
         })
-        pages = Math.ceil(result.length / limit)
+          pages = Math.ceil(result.length / limit)
+          return res.json({ data, pages, total })
+        }
         return res.json({ data, pages, total })
       }
-      return res.json({ data, pages, total })
-    }
-    return res.json({ error: 'Zero results. Try refining your query.' })
-  })
+      return res.json({ error: 'Zero results. Try refining your query.' })
+    })
+  }
+
+  if (req.query && req.query.venueId) {
+    venues.findOne({ _id: ObjectId(req.query.venueId) }, (err, result) => {
+      if (err) throw err
+      if (!result) {
+        return res.json({ errorMessage: 'no match' })
+      } else { // eslint-disable-line
+        return res.json(result)
+      }
+    })
+  }
 })
 
 router.post('/', (req, res) => {

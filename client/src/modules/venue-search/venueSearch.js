@@ -12,7 +12,6 @@ export const RECEIVE_VENUES = 'venue-search/RECEIVE_VENUES'
 export const REQUEST_VENUES_ERROR = 'venue-search/REQUEST_VENUES_ERROR'
 export const LIST_CARD_HOVER = 'venue-search/LIST_CARD_HOVER'
 export const LIST_PAGE_SELECTED = 'venue-search/LIST_PAGE_SELECTED'
-export const VENUE_SELECTED = 'venue-search/VENUE_SELECTED'
 
 /* REDUCERS */
 
@@ -85,14 +84,6 @@ export default function reducer(state = initialState.venueSearch, action) {
           currentPage: action.currentPage
         }
       }
-    case VENUE_SELECTED:
-      return {
-        ...state,
-        venue: {
-          ...initialState.venue,
-          ...action.venue
-        }
-      }
     default:
       return state
   }
@@ -149,14 +140,7 @@ export function listCardHover(venueId) {
 export function listPageSelected(pageNum) {
   return {
     type: LIST_PAGE_SELECTED,
-    currentPage: pageNum
-  }
-}
-
-export function venueSelected(venue) {
-  return {
-    type: VENUE_SELECTED,
-    venue
+    currentPage: parseInt(pageNum)
   }
 }
 

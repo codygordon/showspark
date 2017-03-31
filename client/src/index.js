@@ -9,9 +9,9 @@ import { store } from './store'
 import App from './App'
 
 /* import styles */
-import './css/semantic-truncated.css'
-import './css/normalize.css'
-import './css/styles.css'
+import './shared-css/semantic-truncated.css'
+import './shared-css/normalize.css'
+import './shared-css/styles.css'
 
 /* import action creators from modules */
 import * as venueSearchActions from './modules/venue-search/venueSearch'

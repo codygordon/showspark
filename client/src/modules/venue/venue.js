@@ -3,6 +3,7 @@ import { initialState } from '../../store'
 
 /* ACTION TYPES */
 
+export const VENUE_SELECTED = 'venue/VENUE_SELECTED'
 export const REQUEST_VENUE = 'venue/REQUEST_VENUE'
 export const RECEIVE_VENUE = 'venue/RECEIVE_VENUE'
 export const REQUEST_VENUE_ERROR = 'venue/REQUEST_VENUE_ERROR'
@@ -11,32 +12,30 @@ export const REQUEST_VENUE_ERROR = 'venue/REQUEST_VENUE_ERROR'
 
 export default function reducer(state = initialState.venue, action) {
   switch (action.type) {
+    case VENUE_SELECTED:
+      return {
+        ...state,
+        isFetching: false,
+        errorMessage: null,
+        ...action.venue
+      }
     case REQUEST_VENUE:
       return {
         ...state,
-        venue: {
-          ...state.venue,
-          isFetching: true,
-          errorMessage: null
-        }
+        isFetching: true,
+        errorMessage: null
       }
     case REQUEST_VENUE_ERROR:
       return {
-        ...state,
-        venue: {
-          ...state.venues,
-          isFetching: false,
-          errorMessage: action.message,
-          data: []
-        }
+        ...initialState.venue,
+        isFetching: false,
+        errorMessage: action.message,
       }
     case RECEIVE_VENUE:
       return {
         ...state,
-        venues: {
-          ...state.venue,
-          data: action.data
-        }
+        isFetching: false,
+        ...action.venue
       }
     default:
       return state
@@ -44,6 +43,13 @@ export default function reducer(state = initialState.venue, action) {
 }
 
 /* ACTION CREATORS */
+
+export function venueSelected(venue) {
+  return {
+    type: VENUE_SELECTED,
+    venue
+  }
+}
 
 export function requestVenue() {
   return {
@@ -59,10 +65,10 @@ export function requestVenueError() {
 }
 
 // action to load venues to state
-export function receiveVenue(data) {
+export function receiveVenue(venue) {
   return {
     type: RECEIVE_VENUE,
-    data
+    venue
   }
 }
 
