@@ -32,7 +32,7 @@ export default class App extends Component {
       venues={this.props.venueSearch.venues}
       regionSet={this.props.regionSet}
       regionSelected={this.props.regionSelected}
-      pageSelected={this.props.pageSelected}
+      listPageSelected={this.props.listPageSelected}
       fetchVenues={this.props.fetchVenues}
       listCardHover={this.props.listCardHover}
       venueSelected={this.props.venueSelected}

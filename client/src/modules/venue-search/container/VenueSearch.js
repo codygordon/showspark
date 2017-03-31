@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Dimmer, Loader } from 'semantic-ui-react'
 import queryString from 'query-string'
 
+import '../venue-search.css'
+
 import Header from '../components/Header'
 import List from '../components/List'
 import Map from '../components/Map'

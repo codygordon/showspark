@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Card from './Card'
-import ListPaginate from './ListPaginate'
+import ListPaginate from '../../shared-components/ListPaginate'
 
 const List = (props) => {
   const handleCardClick = (venue) => {

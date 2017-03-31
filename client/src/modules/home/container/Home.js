@@ -1,5 +1,7 @@
 import React from 'react'
 
+import '../home.css'
+
 import Header from '../components/Header'
 import Jumbotron from '../components/Jumbotron'
 import Footer from '../components/Footer'

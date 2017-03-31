@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Dimmer, Loader } from 'semantic-ui-react'
 import queryString from 'query-string'
 
+import '../venue.css'
+
 import Header from '../components/Header'
 
 export default class Venue extends Component {

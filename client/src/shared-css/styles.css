@@ -1,0 +1,231 @@
+/* Main css
+   ========================================================================= */
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+html, body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #222;
+  color: #fefefe;
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus {
+  outline-color: #a28600;
+}
+
+::selection {
+  background: #ffdd00;
+  color: #222;
+}
+
+::-moz-selection {
+  background: #ffcf40;
+  color: #222;
+}
+
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 0.8em;
+  height: 0.8em;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #fefefe;
+  border-radius: 2px;
+  border: 1px solid #222;
+}
+
+::-webkit-scrollbar-track {
+  background: #555;
+}
+
+body {
+  scrollbar-face-color: #555;
+  scrollbar-track-color: #fefefe;
+}
+
+/*button {
+  color: #222;
+  background-color: #fff;
+  border: 2px solid #fff;
+  border-bottom: 4px solid #aaa;
+  border-radius: 2px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}*/
+
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+#root > div {
+  height: 100%;
+  width: 100%;
+}
+
+.app {
+  height: 100%;
+  width: 100%;
+}
+
+/* shared classes */
+
+.ui.dimmer {
+  margin-top: 60px;
+  height: calc(100% - 60px) !important;
+  font-weight: 900;
+}
+
+.dimmer-error {
+  font-weight: 500;
+  font-size: 1.5em;
+  color: #fefefe;
+  background-color: #c93e3b;
+  background-image: linear-gradient(110deg, #c93e3b 0, #810705; 100%);
+  border-radius: 5px;
+  margin: 0 8%;
+  padding: 20px;
+}
+
+.header-logo {
+  flex: 0 0 170px;
+  padding-top: .7em;
+  background: url('../img/showspark-logo.png') no-repeat;
+  background-size: 140px;
+  background-position: center 10px;
+  transition: all 0.5s ease;
+  position: relative;
+  color: transparent;
+}
+
+.header-logo:hover {
+ background: url('../img/showspark-logo.png') no-repeat, url('../img/showspark-logo-bg-hover.png') no-repeat;
+ background-size: 140px;
+ background-position: center 10px;
+}
+
+.header-logo-beta {
+  color: #fff;
+  text-decoration: none;
+  font-size: 9px;
+  font-weight: 900;
+  border: 1px solid #fff;
+  padding: 0;
+  position: absolute;
+  right: 24px;
+  bottom: 6px;
+  padding: 0 1px;
+  letter-spacing: .3px;
+}
+
+.region-search-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.region-search-container div {
+  width: 100%;
+}
+
+.region-search-icon {
+  flex: 0 0 28px;
+  padding: 0 8px;
+  margin-top: -2px;
+}
+
+.region-search-icon i {
+  color: #777;
+  transform: scale(1.1);
+}
+
+.region-search-input {
+  flex: 1 1 100%;
+  height: 100%;
+  width: 100%;
+  font-weight: 700;
+  font-size: 16px;
+  background-color: #222;
+  color: #fefefe;
+  outline: none;
+  border: none;
+}
+
+.region-search-input::placeholder {
+  font-weight: 400;
+  color: #777;
+}
+
+.suggestion-item {
+  height: 40px;
+  padding-top: 10px;
+}
+
+.suggestion-item i {
+  padding-right: 10px;
+  padding-left: 5px;
+}
+
+img.powered-by-google {
+  width: 120px;
+  float: right;
+  padding-top: 30px;
+}
+
+.paginate-container {
+  flex: 0 0 100%;
+  padding-left: 10px;
+  margin-top: 5px;
+  height: 34px;
+  align-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.paginate-text {
+  width: 130px;
+  line-height: 1.1em;
+  font-size: .8em;
+  font-weight: 700;
+}
+
+.paginate-button {
+  color: inherit;
+  font-size: .9em;
+  height: 34px;
+  width: 7%;
+  max-width: 34px;
+  border: 1px solid #666;
+  border-radius: 2px;
+  background-color: inherit;
+  margin: 0 2px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.paginate-button:hover {
+  background-color: #222;
+  border: 1.5px solid #aaa;
+}
+
+.paginate-button.active {
+  background-color: rgba(255, 255, 255, 0.25);
+  border: 1px solid #ccc;
+}
