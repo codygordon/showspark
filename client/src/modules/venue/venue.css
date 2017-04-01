@@ -1,0 +1,168 @@
+.venue-container {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #222;
+}
+
+.venue-header {
+  flex: 0 0 auto;
+  width: 100%;
+  height: 60px;
+  align-self: flex-start;
+  display: flex;
+  flex-direction: row;
+  background-color: #222;
+  border-bottom: 1px solid #777;
+  z-index: 999;
+}
+
+.venue-content {
+  flex: 0 0 auto;
+  width: 100%;
+  height: calc(100% - 60px);
+  background: transparent;
+  overflow-y: scroll;
+  display: flex;
+  flex-wrap: wrap;
+  z-index: 1;
+}
+
+.venue-featured-img {
+  flex: 0 0 auto;
+  width: 100%;
+  height: 60%;
+  top: 20px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: inset 0 -100px 100px #222;
+  align-self: flex-start;
+  display: flex;
+  z-index: 0;
+}
+
+.venue-title {
+  flex: 0 0 100%;
+  width: 100%;
+  text-align: center;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.6);
+  font-weight: 900;
+  font-size: 2.5em;
+  margin-bottom: 15px;
+  align-self: flex-end;
+  z-index: 4;
+}
+
+.venue-info {
+  flex: 0 0 auto;
+  width: 100%;
+  min-height: 600px;
+  align-self: flex-start;
+  padding: 0 3%;
+}
+
+.venue-genres-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 5px 0;
+  border-top: 1px solid #555;
+  border-bottom: 1px solid #555;
+}
+
+.venue-genres-text {
+  flex: 0 0 auto;
+  order: 0;
+  width: 100%;
+  text-align: center;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  margin-top: -13px;
+  z-index: 99;
+  color: #ddd;
+  text-shadow: 2px 0 0 #111, -2px 0 0 #111, 1px 0 0 #222, -1px 0 0 #222;
+}
+
+.venue-genre {
+  flex: 1 1 auto;
+  order: 1;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.genre-icon {
+  flex: 0 0 auto;
+  order: 0;
+  width: 100%;
+  height: 50px;
+  background-position: center;
+  background-size: 50px;
+  background-repeat: no-repeat;
+}
+
+.venue-genre-text {
+  flex: 0 0 auto;
+  width: 100%;
+  order: 1;
+  padding-top: 5px;
+  font-weight: 900;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  color: #aaa;
+}
+
+/* smallest size */
+@media screen and (max-width: 480px) {
+  .venue-title {
+    font-size: 1.7em;
+    padding: 0 0.1em;
+  }
+
+  .venue-featured-img {
+    height: 35%;
+  }
+
+  .venue-genres-container {
+    padding: 0;
+  }
+
+  .venue-genres-text {
+    font-size: 10px;
+    margin-top: -6px;
+    margin-bottom: 0;
+  }
+
+  .venue-genre {
+    transform: scale(.75);
+    margin-top: -7px;
+  }
+}
+
+/* desktop size */
+@media screen and (min-width: 800px) {
+
+}
+
+/*.skew {
+  flex: 1 1 auto;
+  width: 100%;
+  height: 500px;
+  background: #fefefe;
+  left: 0;
+  transform: skewY(6deg);
+  z-index: 2;
+}*/
+
+/*
+.skew-end {
+  flex: 0 0 auto;
+  position: fixed;
+  width: 100%;
+  height: 200px;
+  align-self: flex-end;
+  background-color: #000;
+  z-index: 3;
+}*/

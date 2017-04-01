@@ -44,6 +44,8 @@ export default class App extends Component {
       history={history}
       location={location}
       venue={this.props.venue}
+      region={this.props.venueSearch.region}
+      regionSet={this.props.regionSet}
       fetchVenue={this.props.fetchVenue}
     />
   )

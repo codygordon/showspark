@@ -9,7 +9,8 @@ html {
 }
 
 html, body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
+  letter-spacing: -0.4px;
   margin: 0;
   padding: 0;
   height: 100%;
@@ -130,7 +131,24 @@ button:hover {
   right: 24px;
   bottom: 6px;
   padding: 0 1px;
-  letter-spacing: .3px;
+  letter-spacing: 0.1px;
+}
+
+.venues-header {
+  flex: 0 0 100%;
+  display: flex;
+  flex-direction: row;
+  order: 0;
+  height: 60px;
+  background-color: #222;
+  box-shadow: 0 0 5px #333;
+  color: #333;
+  border-bottom: 1px solid #666;
+}
+
+.venues-region-search {
+  flex: 0 1 100%;
+  border-left: 1px solid #666;
 }
 
 .region-search-container {
@@ -159,8 +177,9 @@ button:hover {
   flex: 1 1 100%;
   height: 100%;
   width: 100%;
+  font-family: inherit !important;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 18px;
   background-color: #222;
   color: #fefefe;
   outline: none;
@@ -226,6 +245,7 @@ img.powered-by-google {
 }
 
 .paginate-button.active {
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(255, 255, 255, 0.1);
+  -webkit-text-stroke: 0.5px #fff;
   border: 1px solid #ccc;
 }

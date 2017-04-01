@@ -4,7 +4,7 @@ import queryString from 'query-string'
 
 import '../venue-search.css'
 
-import Header from '../components/Header'
+import VenuesHeader from '../../shared-components/VenuesHeader'
 import List from '../components/List'
 import Map from '../components/Map'
 
@@ -56,7 +56,7 @@ export default class VenueSearch extends Component {
 
     return (
       <div className="venue-search">
-        <Header
+        <VenuesHeader
           history={history}
           region={region}
           regionSet={this.props.regionSet}

@@ -4,7 +4,12 @@ import queryString from 'query-string'
 
 import '../venue.css'
 
-import Header from '../components/Header'
+import placeholderImg from '../../../img/venue-placeholder.jpeg'
+
+import VenuesHeader from '../../shared-components/VenuesHeader'
+import Title from '../components/Title'
+import Info from '../components/Info'
+import Reviews from '../components/Reviews'
 
 export default class Venue extends Component {
   static PropTypes = {
@@ -25,20 +30,35 @@ export default class Venue extends Component {
   }
 
   render() {
+    const { history, venue, region } = this.props
+    let featImg = placeholderImg
+    if (venue.featImg) featImg = venue.featImg
     return (
-      <div className="venue">
-        <Header />
+      <div className="venue-container">
+        <VenuesHeader
+          history={history}
+          region={region}
+          regionSet={this.props.regionSet}
+        />
 
-        <Dimmer active={this.props.venue.isFetching}>
+        <Dimmer active={venue.isFetching}>
           <Loader size="large">
             Loading Venue...
           </Loader>
         </Dimmer>
 
-        <h1>{this.props.venue.title}</h1>
+        <section className="venue-content">
+          <Title title={venue.title} featImg={featImg} />
+          <Info
+            address={venue.address}
+            capacity={venue.capacity}
+            genres={venue.genres}
+          />
+          {venue.reviews && <Reviews reviews={venue.reviews} />}
+        </section>
 
-        <Dimmer active={!!this.props.venue.errorMessage}>
-          <h2 className="dimmer-error">{this.props.venue.errorMessage}</h2>
+        <Dimmer active={!!venue.errorMessage}>
+          <h2 className="dimmer-error">{venue.errorMessage}</h2>
         </Dimmer>
       </div>
     )
