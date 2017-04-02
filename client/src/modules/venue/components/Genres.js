@@ -29,7 +29,9 @@ const Genre = ({ genre }) => {
 
 const Genres = ({ genres }) => (
   <div className="venue-genres-container">
-    <div className="venue-genres-text">Show types</div>
+    <div className="venue-genres-text">
+      <span>Show types</span>
+    </div>
     {genres.map(genre => <Genre genre={genre} key={`${genre}`} />)}
   </div>
 )

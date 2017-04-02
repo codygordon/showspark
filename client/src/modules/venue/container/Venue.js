@@ -49,11 +49,7 @@ export default class Venue extends Component {
 
         <section className="venue-content">
           <Title title={venue.title} featImg={featImg} />
-          <Info
-            address={venue.address}
-            capacity={venue.capacity}
-            genres={venue.genres}
-          />
+          <Info venue={venue} />
           {venue.reviews && <Reviews reviews={venue.reviews} />}
         </section>
 
