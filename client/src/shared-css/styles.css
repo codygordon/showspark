@@ -27,7 +27,7 @@ a {
 }
 
 a:hover {
-  color: #f3ff0d;
+  color: #b4922d;
 }
 
 :focus {
@@ -103,14 +103,11 @@ button:hover {
 }
 
 .dimmer-error {
-  font-weight: 500;
-  font-size: 1.5em;
-  color: #fefefe;
-  background-color: #c93e3b;
-  background-image: linear-gradient(110deg, #c93e3b 0, #810705; 100%);
-  border-radius: 5px;
-  margin: 0 8%;
-  padding: 20px;
+  font-weight: 700;
+  font-size: 2.2em;
+  color: #fe3f3a;
+  margin: 0;
+  padding: 0 15%;
 }
 
 .header-logo {

@@ -7,7 +7,6 @@ import '../venue.css'
 import placeholderImg from '../../../img/venue-placeholder.jpeg'
 
 import VenuesHeader from '../../shared-components/VenuesHeader'
-import Title from '../components/Title'
 import Info from '../components/Info'
 import Reviews from '../components/Reviews'
 
@@ -48,9 +47,13 @@ export default class Venue extends Component {
         </Dimmer>
 
         <section className="venue-content">
-          <Title title={venue.title} featImg={featImg} />
+          <div
+            className="venue-featured-img"
+            style={{ backgroundImage: `url(${featImg})` }}
+          />
+          <h1 className="venue-title">{venue.title}</h1>
           <Info venue={venue} />
-          {venue.reviews && <Reviews reviews={venue.reviews} />}
+          <Reviews venue={venue} />
         </section>
 
         <Dimmer active={!!venue.errorMessage}>

@@ -12,9 +12,10 @@ Not a good fit: (in red text) */
 const Genre = ({ genre }) => {
   let icon = null
   if (genre === 'Band') icon = bandIcon
-  if (genre === 'Acoustic') icon = acousticIcon
-  if (genre === 'Electronic') icon = electronicIcon
-  if (genre === 'Hip-Hop') icon = hipHopIcon
+  else if (genre === 'Acoustic') icon = acousticIcon
+  else if (genre === 'Electronic') icon = electronicIcon
+  else if (genre === 'Hip-Hop') icon = hipHopIcon
+  else return null
 
   return (
     <div className="venue-genre">

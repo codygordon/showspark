@@ -11,10 +11,10 @@ const ReviewButton = () => (
   <button className="venue-review-button">Leave a Review</button>
 )
 
-const Reviews = ({ reviews }) => (
-  <div className="venue-reviews-container">
+const Reviews = ({ venue }) => (
+  <div className="venue-reviews">
     <ReviewButton />
-    {reviews.map(review => (
+    {venue.reviews && venue.reviews.map(review => (
       <Review review={review} key={`review-${review._id}`} />
     ))}
   </div>
