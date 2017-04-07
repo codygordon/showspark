@@ -31,17 +31,19 @@ a:hover {
 }
 
 :focus {
-  outline-color: #a28600;
+  outline: 0;
 }
 
 ::selection {
-  background: #ffdd00;
+  background: rgba(255, 255, 255, 0.98);
   color: #222;
+  text-shadow: none !important;
 }
 
 ::-moz-selection {
-  background: #ffcf40;
+  background: rgba(255, 255, 255, 0.98);
   color: #222;
+  text-shadow: none !important;
 }
 
 /* Scrollbar Styles */
@@ -65,20 +67,6 @@ body {
   scrollbar-track-color: #fefefe;
 }
 
-/*button {
-  color: #222;
-  background-color: #fff;
-  border: 2px solid #fff;
-  border-bottom: 4px solid #aaa;
-  border-radius: 2px;
-  padding: 10px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}*/
-
 #root {
   height: 100%;
   width: 100%;
@@ -87,6 +75,28 @@ button:hover {
 #root > div {
   height: 100%;
   width: 100%;
+}
+
+.button {
+  font-family: inherit;
+  letter-spacing: -0.2px;
+  border-radius: 4px;
+  border: 0;
+  border-bottom: 3px solid rgba(0, 0, 0, 0.4);
+  font-weight: 700;
+  font-size: 1.1em;
+  padding: 12px 12px 9px 12px;
+  cursor: pointer;
+  transition: ease all 0.15s;
+}
+
+.button:hover {
+  background-color: #222;
+  color: #fff;
+}
+
+.button:active {
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
 }
 
 .app {
