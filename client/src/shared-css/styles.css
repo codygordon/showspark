@@ -270,3 +270,25 @@ img.powered-by-google {
   -webkit-text-stroke: 0.5px #fff;
   border: 1px solid #ccc;
 }
+
+/* Colors for reviews etc */
+
+.good {
+  color: #2db33e;
+}
+
+.good-okay {
+  color: #90b32d;
+}
+
+.okay {
+  color: #fad054;
+}
+
+.okay-bad {
+  color: #ff7a25;
+}
+
+.bad {
+  color: #e72352;
+}

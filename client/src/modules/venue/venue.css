@@ -206,26 +206,6 @@
   align-self: center;
 }
 
-.venue-review-stats.good {
-  color: #2db33e;
-}
-
-.venue-review-stats.good-okay {
-  color: #90b32d;
-}
-
-.venue-review-stats.okay {
-  color: #fad054;
-}
-
-.venue-review-stats.okay-bad {
-  color: #ff7a25;
-}
-
-.venue-review-stats.bad {
-  color: #e72352;
-}
-
 .venue-review-stats i {
   flex: 0 0 auto;
   font-size: 1.5em;
@@ -247,7 +227,7 @@
   font-family: inherit;
   font-weight: 400;
   font-size: 1.2em;
-  padding: 10px 0;
+  padding: 6px 0 14px 0;
   color: #bbb;
 }
 
@@ -255,6 +235,7 @@
   flex: 0 0 160px;
   background-color: #077bdb;
   color: #fff;
+  margin-bottom: 10px;
 }
 
 .venue-review-button:hover {
@@ -271,6 +252,44 @@
 .venue-review {
   flex: 0 0 100%;
   padding: 10px 2px;
+  border-top: 1px solid #777;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.venue-reviewer-avatar {
+  flex: 0 0 50px;
+  height: 50px;
+  width: 50px;
+  border-radius: 30px;
+  margin-right: 15px;
+  background-color: #ddd;
+}
+
+.venue-review-info {
+  flex: 1 0 50%;
+  font-size: 0.9em;
+  font-weight: 300;
+  padding-top: 7px;
+}
+
+.venue-review-info strong {
+  font-weight: 700;
+  font-size: 1em;
+}
+
+.venue-review-play-again {
+  font-weight: 900;
+  padding-top: 4px;
+}
+
+.venue-review-play-again i {
+  padding-left: 5px;
+}
+
+.venue-review-qualitative {
+  font-weight: 300;
+  padding-top: 10px;
 }
 
 /* largest size only */
@@ -286,6 +305,10 @@
 
 /* below medium size */
 @media screen and (max-width: 768px) {
+  .venue-featured-img {
+    height: 55%;
+  }
+
   .venue-title {
     text-align: center;
     font-size: 2em;
@@ -318,11 +341,11 @@
 /* below small-medium size */
 @media screen and (max-width: 600px) {
   .venue-info {
-    margin: 0 5%;
+    margin: 0 3%;
   }
 
   .venue-reviews {
-    margin: 0 5% 3% 5%;
+    margin: 0 3% 3% 3%;
   }
 }
 

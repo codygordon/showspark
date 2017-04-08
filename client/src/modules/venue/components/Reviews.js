@@ -1,23 +1,33 @@
 import React from 'react'
 
-const Review = ({ review }) => (
-  <div className="venue-review">
-    <span>Review by {review.name} on {review.datePlayed}</span>
-    {review.playAgain &&
-      <div>
+const Review = ({ review }) => {
+  let playAgain = null
+  if (review.playAgain) {
+    playAgain = (
+      <div className="venue-review-play-again good">
         <i className="fa fa-flip-horizontal fa-thumbs-o-up" aria-hidden="true" />
         <span>would play here again</span>
       </div>
-    }
-    {!review.playAgain &&
-      <div>
+    )
+  } else {
+    playAgain = (
+      <div className="venue-review-play-again bad">
         <i className="fa fa-flip-horizontal fa-thumbs-o-down" aria-hidden="true" />
         <span>would <u>not</u> play here again</span>
       </div>
-    }
-    <div>{review.qualitative}</div>
-  </div>
-)
+    )
+  }
+  return (
+    <div className="venue-review">
+      <div className="venue-reviewer-avatar" />
+      <div className="venue-review-info">
+        <strong>{review.name}</strong> played here on <strong>{review.datePlayed}</strong>
+        {playAgain}
+      </div>
+      <div className="venue-review-qualitative">{review.qualitative}</div>
+    </div>
+  )
+}
 
 const reviewComps = []
 
