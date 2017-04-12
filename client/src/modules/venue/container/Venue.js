@@ -7,6 +7,8 @@ import '../venue.css'
 import placeholderImg from '../../../img/venue-placeholder.jpeg'
 
 import VenuesHeader from '../../shared-components/VenuesHeader'
+import LogIn from '../../auth/components/LogIn'
+import SignUp from '../../auth/components/SignUp'
 import Info from '../components/Info'
 import Reviews from '../components/Reviews'
 
@@ -29,14 +31,17 @@ export default class Venue extends Component {
   }
 
   render() {
-    const { history, venue, region } = this.props
+    const { history, auth, venue, region } = this.props
     let featImg = placeholderImg
     if (venue.featImg) featImg = venue.featImg
     return (
       <div className="venue-container">
         <VenuesHeader
           history={history}
+          auth={auth}
           region={region}
+          showLogIn={this.props.showLogIn}
+          showSignUp={this.props.showSignUp}
           regionSet={this.props.regionSet}
         />
 
@@ -45,6 +50,17 @@ export default class Venue extends Component {
             Loading Venue...
           </Loader>
         </Dimmer>
+
+        <Dimmer
+          className="login-dimmer"
+          active={auth.showingLogIn || auth.showingSignUp}
+        >
+          {auth.showingLogIn &&
+            <LogIn closeLogIn={this.props.closeLogIn} />}
+          {auth.showingSignUp &&
+            <SignUp closeSignUp={this.props.closeSignUp} />}
+        </Dimmer>
+
 
         <section className="venue-content">
           <div

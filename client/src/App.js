@@ -14,10 +14,22 @@ export default class App extends Component {
 
   }
 
+  authActions = {
+    showLogIn: this.props.showLogIn,
+    closeLogIn: this.props.closeLogIn,
+    showSignUp: this.props.showSignUp,
+    closeSignUp: this.props.closeSignUp,
+    logInUser: this.props.logInUser,
+    logInUserGoogle: this.props.logInUserGoogle,
+    logInUserFacebook: this.props.logInUserFacebook
+  }
+
   HomePlusProps = ({ location }) => (
     <Home
       history={history}
       location={location}
+      auth={this.props.auth}
+      authActions={this.authActions}
       region={this.props.venueSearch.region}
       regionSet={this.props.regionSet}
     />
@@ -27,6 +39,8 @@ export default class App extends Component {
     <VenueSearch
       history={history}
       location={location}
+      auth={this.props.auth}
+      authActions={this.authActions}
       map={this.props.venueSearch.map}
       region={this.props.venueSearch.region}
       venues={this.props.venueSearch.venues}
@@ -43,6 +57,8 @@ export default class App extends Component {
     <Venue
       history={history}
       location={location}
+      auth={this.props.auth}
+      authActions={this.authActions}
       venue={this.props.venue}
       region={this.props.venueSearch.region}
       regionSet={this.props.regionSet}

@@ -3,13 +3,26 @@ import { routerMiddleware, routerReducer } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import { createBrowserHistory } from 'history'
 
+import AuthService from './utils/AuthService'
+
 /* import reducers from modules */
+import auth from './modules/auth/auth'
 import venueSearch from './modules/venue-search/venueSearch'
 import venue from './modules/venue/venue'
 
 export const history = createBrowserHistory()
 
+export const auth0 = new AuthService()
+
 export const initialState = {
+  auth: {
+    showingLogIn: false,
+    showingSignUp: false,
+    isFetching: false,
+    isAuthenticated: false, // auth.loggedIn(),
+    user: localStorage.getItem('user_profile') ? JSON.parse(localStorage.getItem('user_profile')) : null,
+    errorMessage: null
+  },
   venueSearch: {
     map: {
       center: [-74, 40.7],
@@ -43,6 +56,7 @@ export const initialState = {
 }
 
 const rootReducer = combineReducers({
+  auth,
   venueSearch,
   venue,
   router: routerReducer

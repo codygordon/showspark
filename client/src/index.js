@@ -14,11 +14,13 @@ import './shared-css/normalize.css'
 import './shared-css/styles.css'
 
 /* import action creators from modules */
+import * as authActions from './modules/auth/auth'
 import * as venueSearchActions from './modules/venue-search/venueSearch'
 import * as venueActions from './modules/venue/venue'
 
 function mapStateToProps(state) {
   return {
+    auth: state.auth,
     venueSearch: state.venueSearch,
     venue: state.venue,
     artist: state.artist
@@ -27,6 +29,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
+    ...authActions,
     ...venueSearchActions,
     ...venueActions
   }, dispatch)

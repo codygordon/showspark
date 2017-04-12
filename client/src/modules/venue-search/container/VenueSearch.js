@@ -5,6 +5,7 @@ import queryString from 'query-string'
 import '../venue-search.css'
 
 import VenuesHeader from '../../shared-components/VenuesHeader'
+import Auth from '../../auth/container/Auth'
 import List from '../components/List'
 import Map from '../components/Map'
 
@@ -51,14 +52,17 @@ export default class VenueSearch extends Component {
   }
 
   render() {
-    const { history, map, region, venues } = this.props
+    const { history, auth, map, region, venues } = this.props
     const errorMessage = region.errorMessage ? region.errorMessage : venues.errorMessage
 
     return (
       <div className="venue-search">
         <VenuesHeader
           history={history}
+          auth={auth}
           region={region}
+          showLogIn={this.props.authActions.showLogIn}
+          showSignUp={this.props.authActions.showSignUp}
           regionSet={this.props.regionSet}
         />
 
@@ -66,6 +70,19 @@ export default class VenueSearch extends Component {
           <Loader size="large">
             Loading Venues...
           </Loader>
+        </Dimmer>
+
+        <Dimmer
+          className="login-dimmer"
+          active={auth.showingLogIn || auth.showingSignUp}
+          onClickOutside={() => {
+            auth.showingLogIn ? this.props.authActions.closeLogIn() : this.props.authActions.closeSignUp()
+          }}
+        >
+          <Auth
+            auth={auth}
+            authActions={this.props.authActions}
+          />
         </Dimmer>
 
         <Map

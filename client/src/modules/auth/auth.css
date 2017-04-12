@@ -1,0 +1,78 @@
+.auth-container {
+  width: 55%;
+  margin: auto;
+  border-radius: 4px;
+  background-color: #222;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  padding: 5px 10px;
+  display: flex;
+}
+
+.auth-close {
+  text-align: right;
+  padding-bottom: 2.5px;
+}
+
+.auth-close button {
+  font-weight: 700;
+  font-size: 0.75em;
+  background-color: #222;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.auth-close button:hover {
+  text-decoration: underline;
+}
+
+.auth-error, .login-signup, .login-input, .facebook-login, .google-login, .auth-container .login-button {
+  width: 100%;
+  margin: 5px 0;
+}
+
+.login-input {
+  height: 50px;
+  padding: 12px;
+  border-radius: 3px;
+  background-color: #eee;
+  color: #222;
+}
+
+.login-input:focus {
+  border: 2px solid #999;
+  padding: 12px 10px;
+}
+
+.auth-container .login-button {
+  background-color: #ffcf40;
+  color: #222;
+}
+
+.auth-container .login-button:hover {
+  background-color: #ffdd29;
+}
+
+.login-signup {
+  display: inline-block;
+  font-size: 0.8em;
+  text-align: center;
+}
+
+.login-signup span {
+  padding: 10px;
+}
+
+.login-signup .signup-button {
+  padding: 5px 8px;
+}
+
+.auth-error {
+  color: #rgb(222, 30, 105);
+}
+
+@media screen and (max-width: 600px) {
+  .auth-container {
+    width: 100%;
+  }
+}

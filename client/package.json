@@ -9,6 +9,7 @@
     "react-scripts": "0.9.5"
   },
   "dependencies": {
+    "auth0-js": "^8.5.0",
     "auth0-lock": "^10.7.2",
     "es6-promise": "^4.0.5",
     "history": "^4.2.0",
