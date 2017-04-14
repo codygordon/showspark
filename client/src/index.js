@@ -1,7 +1,5 @@
 import React from 'react'
 import { render } from 'react-dom'
-
-import { bindActionCreators } from 'redux'
 import { Provider, connect } from 'react-redux'
 
 import { store } from './store'
@@ -13,29 +11,16 @@ import './shared-css/semantic-truncated.css'
 import './shared-css/normalize.css'
 import './shared-css/styles.css'
 
-/* import action creators from modules */
-import * as authActions from './modules/auth/auth'
-import * as venueSearchActions from './modules/venue-search/venueSearch'
-import * as venueActions from './modules/venue/venue'
-
 function mapStateToProps(state) {
   return {
     auth: state.auth,
     venueSearch: state.venueSearch,
     venue: state.venue,
-    artist: state.artist
+    // artist: state.artist
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    ...authActions,
-    ...venueSearchActions,
-    ...venueActions
-  }, dispatch)
-}
-
-const Root = connect(mapStateToProps, mapDispatchToProps)(App)
+const Root = connect(mapStateToProps)(App)
 
 render(
   <Provider store={store}>

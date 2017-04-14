@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 
+import { logInUser, logInUserGoogle, logInUserFacebook, closeLogIn, showSignUp } from '../auth'
+
 export default class LogIn extends Component {
   static PropTypes = {
 
   }
 
   componentWillUnmount() {
-    if (this.props.auth.showingLogIn) this.props.authActions.closeLogIn()
+    const { auth, dispatch } = this.props
+    if (auth.showingLogIn) dispatch(closeLogIn())
   }
 
   handleEmailSignin = (e) => {
@@ -15,27 +18,21 @@ export default class LogIn extends Component {
       email: this.emailInput.value,
       password: this.passwordInput.value,
     }
-    this.props.authActions.logInUser(creds)
+    this.props.dispatch(logInUser(creds))
   }
 
   render() {
-    const errorMsg = this.props.auth.errorMessage
+    const { dispatch, auth } = this.props
     return (
       <div className="login">
         <form className="login-form" onSubmit={this.handleEmailSignin}>
-          <div className="auth-close">
-            <button
-              className="close-auth-button"
-              onClick={() => this.props.authActions.closeLogIn()}
-            >CLOSE X</button>
-          </div>
           <button
             className="button google-login"
-            onClick={() => this.props.authActions.logInUserGoogle()}
+            onClick={() => dispatch(logInUserGoogle())}
           >Log in with Google</button>
           <button
             className="button facebook-login"
-            onClick={() => this.props.authActions.logInUserFacebook()}
+            onClick={() => dispatch(logInUserFacebook())}
           >Log in with Facebook</button>
           <input
             className="input login-input"
@@ -52,22 +49,25 @@ export default class LogIn extends Component {
             ref={(ref) => { this.passwordInput = ref }}
           />
           <button className="button login-button">
-            {this.props.auth.isFetching ? 'Logging in...' : 'Log In'}
+            {auth.isFetching ? 'Logging in...' : 'Log In'}
           </button>
           <div className="login-signup">
             <span>Don&#39;t have an account?</span>
             <button
               className="button signup-button"
-              onClick={() => this.props.authActions.showSignUp()}
+              onClick={() => {
+                dispatch(closeLogIn())
+                dispatch(showSignUp())
+              }}
             >Sign Up</button>
           </div>
         </form>
         <span
           className="login-error"
           style={{
-            display: !errorMsg || errorMsg.length === 0 ? 'none' : 'block'
+            display: !auth.errorMessage || auth.errorMessage.length === 0 ? 'none' : 'block'
           }}
-        >{errorMsg}</span>
+        >{auth.errorMessage}</span>
       </div>
     )
   }

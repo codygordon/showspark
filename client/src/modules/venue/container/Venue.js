@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Dimmer, Loader } from 'semantic-ui-react'
 import queryString from 'query-string'
 
@@ -6,21 +7,22 @@ import '../venue.css'
 
 import placeholderImg from '../../../img/venue-placeholder.jpeg'
 
+import { fetchVenue } from '../venue'
+
 import VenuesHeader from '../../shared-components/VenuesHeader'
-import LogIn from '../../auth/components/LogIn'
-import SignUp from '../../auth/components/SignUp'
 import Info from '../components/Info'
 import Reviews from '../components/Reviews'
 
-export default class Venue extends Component {
+class VenueContainer extends Component {
   static PropTypes = {
 
   }
 
   componentWillMount() {
-    const query = queryString.parse(this.props.location.search)
-    if (!query.id) this.props.history.push('/')
-    if (query.id !== this.props.venue._id) this.props.fetchVenue(query.id)
+    const { dispatch, location, history, venue } = this.props
+    const query = queryString.parse(location.search)
+    if (!query.id) history.push('/')
+    if (query.id !== venue._id) dispatch(fetchVenue(query.id))
   }
 
   componentWillReceiveProps(nextProps) {
@@ -31,18 +33,16 @@ export default class Venue extends Component {
   }
 
   render() {
-    const { history, auth, venue, region } = this.props
+    const { dispatch, history, auth, venue, region } = this.props
     let featImg = placeholderImg
     if (venue.featImg) featImg = venue.featImg
     return (
       <div className="venue-container">
         <VenuesHeader
+          dispatch={dispatch}
           history={history}
           auth={auth}
           region={region}
-          showLogIn={this.props.showLogIn}
-          showSignUp={this.props.showSignUp}
-          regionSet={this.props.regionSet}
         />
 
         <Dimmer active={venue.isFetching}>
@@ -51,17 +51,6 @@ export default class Venue extends Component {
           </Loader>
         </Dimmer>
 
-        <Dimmer
-          className="login-dimmer"
-          active={auth.showingLogIn || auth.showingSignUp}
-        >
-          {auth.showingLogIn &&
-            <LogIn closeLogIn={this.props.closeLogIn} />}
-          {auth.showingSignUp &&
-            <SignUp closeSignUp={this.props.closeSignUp} />}
-        </Dimmer>
-
-
         <section className="venue-content">
           <div
             className="venue-featured-img"
@@ -69,7 +58,7 @@ export default class Venue extends Component {
           />
           <h1 className="venue-title">{venue.title}</h1>
           <Info venue={venue} />
-          <Reviews venue={venue} />
+          <Reviews dispatch={dispatch} venue={venue} />
         </section>
 
         <Dimmer active={!!venue.errorMessage}>
@@ -79,3 +68,7 @@ export default class Venue extends Component {
     )
   }
 }
+
+const Venue = connect()(VenueContainer)
+
+export default Venue

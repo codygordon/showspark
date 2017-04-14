@@ -29,12 +29,6 @@ const Review = ({ review }) => {
   )
 }
 
-const reviewComps = []
-
-for (let i = 0; i < 10; i += 1) {
-  reviewComps.push(<Review key={i} review={i} />)
-}
-
 const ReviewStats = ({ againPct, reviewsNum }) => {
   let statsClass = 'venue-review-stats'
   if (againPct > 75) statsClass += ' good'

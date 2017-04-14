@@ -11,7 +11,7 @@ const Jumbotron = props => (
       <RegionSearch
         history={props.history}
         region={props.region}
-        regionSet={props.regionSet}
+        dispatch={props.dispatch}
       />
     </div>
   </section>

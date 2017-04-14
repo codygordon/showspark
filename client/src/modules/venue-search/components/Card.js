@@ -2,14 +2,16 @@ import React from 'react'
 
 import placeholderImg from '../../../img/default-placeholder.png'
 
-const Card = ({ venue, listCardHover, handleCardClick }) => (
+import { listCardHover } from '../venueSearch'
+
+const Card = ({ dispatch, venue, handleCardClick }) => (
   // why doesn't cick work on the component element itself?
   // eslint-disable-next-line
   <div
     className="venue-card"
     tabIndex={0}
-    onMouseEnter={() => { listCardHover(venue._id) }}
-    onMouseLeave={() => { listCardHover(null) }}
+    onMouseEnter={() => { dispatch(listCardHover(venue._id)) }}
+    onMouseLeave={() => { dispatch(listCardHover(null)) }}
     onClick={() => handleCardClick(venue)}
   >
     <img

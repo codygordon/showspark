@@ -1,30 +1,33 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Dimmer, Loader } from 'semantic-ui-react'
 import queryString from 'query-string'
 
 import '../venue-search.css'
 
+import { regionSelected, listPageSelected, fetchVenues } from '../venueSearch'
+
 import VenuesHeader from '../../shared-components/VenuesHeader'
-import Auth from '../../auth/container/Auth'
 import List from '../components/List'
 import Map from '../components/Map'
 
-export default class VenueSearch extends Component {
+class VenueSearchContainer extends Component {
   static propTypes = {
 
   }
 
   componentWillMount() {
-    if (this.props.location.search) {
-      const query = queryString.parse(this.props.location.search)
+    const { dispatch, location, history, venues } = this.props
+    if (location.search) {
+      const query = queryString.parse(location.search)
       if (query['region-text'] && query.page) {
-        const limit = this.props.venues.perPage
+        const limit = venues.perPage
         const offset = (query.page - 1) * limit
-        this.props.regionSelected(query['region-text'])
-        this.props.listPageSelected(query.page)
-        this.props.fetchVenues(query['region-text'], limit, offset)
+        dispatch(regionSelected(query['region-text']))
+        dispatch(listPageSelected(query.page))
+        dispatch(fetchVenues(query['region-text'], limit, offset))
       } else if (query['region-text'] && !query.page) {
-        this.props.history.push(`/venue-search?region-text=${query['region-text']}&page=1`)
+        history.push(`/venue-search?region-text=${query['region-text']}&page=1`)
         // // reload hack since pushing the page # doesn't force remount the component
         // location.reload()
       }
@@ -32,38 +35,37 @@ export default class VenueSearch extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.location.search && this.props.location.search) {
+    const { dispatch, location, history, venues } = this.props
+    if (nextProps.location.search && location.search) {
       const thisQuery = queryString.parse(this.props.location.search)
       const nextQuery = queryString.parse(nextProps.location.search)
       if (nextQuery['region-text'] && thisQuery['region-text']
       && nextQuery.page && thisQuery.page) {
-        const limit = this.props.venues.perPage
+        const limit = venues.perPage
         const offset = (nextQuery.page - 1) * limit
         if (thisQuery['region-text'] !== nextQuery['region-text']) {
-          this.props.regionSelected(nextQuery['region-text'])
-          this.props.listPageSelected(nextQuery.page)
-          this.props.fetchVenues(nextQuery['region-text'], limit, offset)
+          dispatch(regionSelected(nextQuery['region-text']))
+          dispatch(listPageSelected(nextQuery.page))
+          dispatch(fetchVenues(nextQuery['region-text'], limit, offset))
         } else if (thisQuery.page !== nextQuery.page) {
-          this.props.listPageSelected(nextQuery.page)
-          this.props.fetchVenues(nextQuery['region-text'], limit, offset)
+          dispatch(listPageSelected(nextQuery.page))
+          dispatch(fetchVenues(nextQuery['region-text'], limit, offset))
         }
       }
     }
   }
 
   render() {
-    const { history, auth, map, region, venues } = this.props
+    const { dispatch, history, auth, map, region, venues } = this.props
     const errorMessage = region.errorMessage ? region.errorMessage : venues.errorMessage
 
     return (
       <div className="venue-search">
         <VenuesHeader
+          dispatch={dispatch}
           history={history}
           auth={auth}
           region={region}
-          showLogIn={this.props.authActions.showLogIn}
-          showSignUp={this.props.authActions.showSignUp}
-          regionSet={this.props.regionSet}
         />
 
         <Dimmer active={venues.isFetching}>
@@ -72,31 +74,18 @@ export default class VenueSearch extends Component {
           </Loader>
         </Dimmer>
 
-        <Dimmer
-          className="login-dimmer"
-          active={auth.showingLogIn || auth.showingSignUp}
-          onClickOutside={() => {
-            auth.showingLogIn ? this.props.authActions.closeLogIn() : this.props.authActions.closeSignUp()
-          }}
-        >
-          <Auth
-            auth={auth}
-            authActions={this.props.authActions}
-          />
-        </Dimmer>
-
         <Map
+          dispatch={dispatch}
           map={map}
           region={region}
           venues={venues}
         />
 
         <List
+          dispatch={dispatch}
           history={history}
           region={region}
           venues={venues}
-          listCardHover={this.props.listCardHover}
-          venueSelected={this.props.venueSelected}
         />
 
         <Dimmer active={!!errorMessage}>
@@ -106,3 +95,7 @@ export default class VenueSearch extends Component {
     )
   }
 }
+
+const VenueSearch = connect()(VenueSearchContainer)
+
+export default VenueSearch

@@ -1,24 +1,23 @@
 import React from 'react'
 import PlacesAutocomplete from 'react-places-autocomplete'
 
-import googleLogo from '../../img/powered_by_google_on_white_hdpi.png'
+import { regionSet } from '../venue-search/venueSearch'
 
-const RegionSearch = (props) => {
+const RegionSearch = ({ dispatch, history, region }) => {
   const AutocompleteItem = ({ formattedSuggestion }) => (
     <div className="suggestion-item">
       <i className="fa fa-map-marker suggestion-icon" />
       <strong>{formattedSuggestion.mainText}</strong>{' '}
       <small className="text-muted">{formattedSuggestion.secondaryText}</small>
-      <img style={{ visibility: 'hidden' }} className="powered-by-google" src={googleLogo} alt="powered by google" />
     </div>
   )
 
   const handleSelect = (regionText) => {
-    props.history.push(`/venue-search?region-text=${regionText}&page=1`)
+    history.push(`/venue-search?region-text=${regionText}&page=1`)
   }
 
   const handleChange = (regionText) => {
-    props.regionSet(regionText, null)
+    dispatch(regionSet(regionText, null))
   }
 
   return (
@@ -27,7 +26,7 @@ const RegionSearch = (props) => {
         <i className="fa fa-search fa-2" aria-hidden="true" />
       </span>
       <PlacesAutocomplete
-        value={props.region.text}
+        value={region.text}
         onChange={handleChange}
         onSelect={handleSelect}
         onEnterKeyDown={handleSelect}

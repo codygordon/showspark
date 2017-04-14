@@ -9,7 +9,7 @@ html {
 }
 
 html, body {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Nunito Sans', sans-serif !important;
   letter-spacing: -0.4px;
   margin: 0;
   padding: 0;
@@ -157,6 +157,7 @@ body {
 }
 
 .header-logo-beta {
+
   color: #fff;
   text-decoration: none;
   font-size: 9px;
