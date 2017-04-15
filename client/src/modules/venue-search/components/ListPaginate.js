@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const ListPaginate = ({ history, venues, region }) => {
   const offset = (venues.currentPage - 1) * venues.perPage
@@ -22,6 +23,12 @@ const ListPaginate = ({ history, venues, region }) => {
       {buttons}
     </div>
   )
+}
+
+ListPaginate.propTypes = {
+  history: PropTypes.object.isRequired,
+  venues: PropTypes.object.isRequired,
+  region: PropTypes.object.isRequired
 }
 
 export default ListPaginate

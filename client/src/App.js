@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Switch, Route } from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux'
 
@@ -10,8 +11,10 @@ import VenueSearch from './modules/venue-search/container/VenueSearch'
 import Venue from './modules/venue/container/Venue'
 
 export default class App extends Component {
-  static PropTypes = {
-
+  static propTypes = {
+    auth: PropTypes.object.isRequired,
+    venueSearch: PropTypes.object.isRequired,
+    venue: PropTypes.object.isRequired
   }
 
   HomePlusProps = ({ location }) => (

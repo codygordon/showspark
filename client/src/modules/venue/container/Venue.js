@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Dimmer, Loader } from 'semantic-ui-react'
 import queryString from 'query-string'
@@ -14,8 +15,13 @@ import Info from '../components/Info'
 import Reviews from '../components/Reviews'
 
 class VenueContainer extends Component {
-  static PropTypes = {
-
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    location: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired,
+    region: PropTypes.object.isRequired,
+    venue: PropTypes.object.isRequired
   }
 
   componentWillMount() {

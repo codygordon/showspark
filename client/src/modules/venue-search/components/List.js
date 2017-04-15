@@ -1,13 +1,12 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import { venueSelected } from '../../venue/venue'
 
 import Card from './Card'
 import ListPaginate from './ListPaginate'
 
-const List = (props) => {
-  const { dispatch, history, region, venues } = props
-
+const List = ({ dispatch, history, region, venues }) => {
   const handleCardClick = (venue) => {
     dispatch(venueSelected(venue))
     history.push(`/venue?id=${venue._id}`)
@@ -37,6 +36,13 @@ const List = (props) => {
       {pagination}
     </section>
   )
+}
+
+List.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  venues: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  region: PropTypes.object.isRequired
 }
 
 export default List

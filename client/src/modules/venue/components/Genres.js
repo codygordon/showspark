@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import bandIcon from '../../../img/band-genre-icon.svg'
 import acousticIcon from '../../../img/acoustic-genre-icon.svg'
@@ -36,5 +37,13 @@ const Genres = ({ genres }) => (
     {genres.map(genre => <Genre genre={genre} key={`${genre}`} />)}
   </div>
 )
+
+Genres.propTypes = {
+  genres: PropTypes.array.isRequired
+}
+
+Genre.propTypes = {
+  genre: PropTypes.string.isRequired
+}
 
 export default Genres

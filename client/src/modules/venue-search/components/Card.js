@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import placeholderImg from '../../../img/default-placeholder.png'
 
@@ -33,5 +34,11 @@ const Card = ({ dispatch, venue, handleCardClick }) => (
     </div>
   </div>
 )
+
+Card.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  handleCardClick: PropTypes.func.isRequired,
+  venue: PropTypes.object.isRequired
+}
 
 export default Card

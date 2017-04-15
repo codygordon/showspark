@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import PlacesAutocomplete from 'react-places-autocomplete'
 
 import { regionSet } from '../venue-search/venueSearch'
@@ -11,6 +12,10 @@ const RegionSearch = ({ dispatch, history, region }) => {
       <small className="text-muted">{formattedSuggestion.secondaryText}</small>
     </div>
   )
+
+  AutocompleteItem.propTypes = {
+    formattedSuggestion: PropTypes.string.isRequired
+  }
 
   const handleSelect = (regionText) => {
     history.push(`/venue-search?region-text=${regionText}&page=1`)
@@ -44,6 +49,12 @@ const RegionSearch = ({ dispatch, history, region }) => {
       />
     </div>
   )
+}
+
+RegionSearch.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+  region: PropTypes.object.isRequired
 }
 
 export default RegionSearch

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 import { showSignUp, showLogIn } from '../auth/auth'
@@ -6,7 +7,7 @@ import { showSignUp, showLogIn } from '../auth/auth'
 import Auth from '../auth/container/Auth'
 import RegionSearch from './RegionSearch'
 
-const VenuesHeader = ({ dispatch, history, region, auth }) => (
+const VenuesHeader = ({ dispatch, history, auth, region }) => (
   <header className="venues-header">
     <Link to="/" className="header-logo">
       SHOWSPARK <span className="header-logo-beta">BETA</span>
@@ -15,9 +16,9 @@ const VenuesHeader = ({ dispatch, history, region, auth }) => (
 
     <div className="venues-region-search">
       <RegionSearch
+        dispatch={dispatch}
         history={history}
         region={region}
-        dispatch={dispatch}
       />
     </div>
 
@@ -40,5 +41,12 @@ const VenuesHeader = ({ dispatch, history, region, auth }) => (
     )}
   </header>
 )
+
+VenuesHeader.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
+  region: PropTypes.object.isRequired
+}
 
 export default VenuesHeader

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Dimmer, Loader } from 'semantic-ui-react'
 import queryString from 'query-string'
@@ -13,7 +14,13 @@ import Map from '../components/Map'
 
 class VenueSearchContainer extends Component {
   static propTypes = {
-
+    dispatch: PropTypes.func.isRequired,
+    location: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired,
+    map: PropTypes.object.isRequired,
+    region: PropTypes.object.isRequired,
+    venues: PropTypes.object.isRequired
   }
 
   componentWillMount() {
@@ -28,16 +35,14 @@ class VenueSearchContainer extends Component {
         dispatch(fetchVenues(query['region-text'], limit, offset))
       } else if (query['region-text'] && !query.page) {
         history.push(`/venue-search?region-text=${query['region-text']}&page=1`)
-        // // reload hack since pushing the page # doesn't force remount the component
-        // location.reload()
       }
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    const { dispatch, location, history, venues } = this.props
+    const { dispatch, location, venues } = this.props
     if (nextProps.location.search && location.search) {
-      const thisQuery = queryString.parse(this.props.location.search)
+      const thisQuery = queryString.parse(location.search)
       const nextQuery = queryString.parse(nextProps.location.search)
       if (nextQuery['region-text'] && thisQuery['region-text']
       && nextQuery.page && thisQuery.page) {

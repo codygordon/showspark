@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Modal } from 'semantic-ui-react'
 
@@ -18,7 +19,6 @@ const AuthContainer = ({ dispatch, auth }) => {
     <Modal
       basic
       open={auth.showingLogIn || auth.showingSignUp}
-      closeIcon="close"
       onClose={authClose}
     >
       <div className="auth-container">
@@ -37,6 +37,11 @@ const AuthContainer = ({ dispatch, auth }) => {
       </div>
     </Modal>
   )
+}
+
+AuthContainer.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
 }
 
 const Auth = connect()(AuthContainer)

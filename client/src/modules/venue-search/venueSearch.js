@@ -22,9 +22,9 @@ export default function reducer(state = initialState.venueSearch, action) {
         ...state,
         region: {
           ...state.region,
+          errorMessage: null,
           text: action.regionText,
-          coords: action.regionCoords,
-          errorMessage: null
+          coords: action.regionCoords
         }
       }
     case REGION_ERROR:
@@ -61,11 +61,11 @@ export default function reducer(state = initialState.venueSearch, action) {
         ...state,
         venues: {
           ...state.venues,
+          isFetching: false,
+          errorMessage: null,
           data: action.data,
           pageCount: action.pages,
-          total: action.total,
-          errorMessage: null,
-          isFetching: false
+          total: action.total
         }
       }
     case LIST_CARD_HOVER:
@@ -102,7 +102,7 @@ export function regionSet(regionText, regionCoords) {
 export function regionError() {
   return {
     type: REGION_ERROR,
-    message: 'That\'s not a real region, try again!'
+    message: 'That\'s not a real place, try again!'
   }
 }
 
@@ -140,7 +140,7 @@ export function listCardHover(venueId) {
 export function listPageSelected(pageNum) {
   return {
     type: LIST_PAGE_SELECTED,
-    currentPage: parseInt(pageNum)
+    currentPage: parseInt(pageNum, 10)
   }
 }
 

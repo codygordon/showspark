@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 import { logInUser, logInUserGoogle, logInUserFacebook, closeLogIn, showSignUp } from '../auth'
 
 export default class LogIn extends Component {
-  static PropTypes = {
-
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
   }
 
   componentWillUnmount() {
@@ -55,10 +57,7 @@ export default class LogIn extends Component {
             <span>Don&#39;t have an account?</span>
             <button
               className="button signup-button"
-              onClick={() => {
-                dispatch(closeLogIn())
-                dispatch(showSignUp())
-              }}
+              onClick={() => dispatch(showSignUp())}
             >Sign Up</button>
           </div>
         </form>

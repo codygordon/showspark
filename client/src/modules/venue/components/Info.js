@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import Genres from './Genres'
 // import Map from './Map'
@@ -40,5 +41,9 @@ const Info = ({ venue }) => (
     {/* TODO: add a map component */}
   </div>
 )
+
+Info.propTypes = {
+  venue: PropTypes.object.isRequired
+}
 
 export default Info

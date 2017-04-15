@@ -1,13 +1,18 @@
 import React from 'react'
-import { Link } from 'react-router'
+import PropTypes from 'prop-types'
+
+import { signUpUser, logInUserGoogle, logInUserFacebook, closeSignUp, showLogIn } from '../auth'
+
 
 export default class SignUp extends React.Component {
-  static PropTypes = {
-
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
   }
 
   componentWillUnmount() {
-    this.props.closeSignUp()
+    const { auth, dispatch } = this.props
+    if (auth.showingSignUp) dispatch(closeSignUp())
   }
 
   handleEmailSignup = (e) => {
@@ -16,15 +21,21 @@ export default class SignUp extends React.Component {
       email: this.emailInput.value,
       password: this.passwordInput.value,
     }
-    this.props.signUpUser(user)
+    this.props.dispatch(signUpUser(user))
   }
 
   render() {
+    const { dispatch, auth } = this.props
     return (
       <div className="signup">
-        <button className="google-signup" onClick={this.props.logInUserGoogle}>
-          Sign up with Google
-        </button>
+        <button
+          className="google-signup"
+          onClick={() => dispatch(logInUserGoogle())}
+        >Sign up with Google</button>
+        <button
+          className="facebook-signup"
+          onClick={() => dispatch(logInUserFacebook())}
+        >Sign up with Facebook</button>
         <form className="email-signup" onSubmit={this.handleEmailSignup}>
           <input
             placeholder="you@domain.com"
@@ -39,9 +50,15 @@ export default class SignUp extends React.Component {
             ref={(ref) => { this.passwordInput = ref }}
           />
           <button>
-            {this.props.auth.isFetching ? 'Signing up...' : 'Sign up!'}
+            {auth.isFetching ? 'Signing up...' : 'Sign up!'}
           </button>
-          <Link to={'/login'}>Already have an account? Log in!</Link>
+          <div className="login-signup">
+            <span>Already have an account?</span>
+            <button
+              className="button signup-button"
+              onClick={() => dispatch(showLogIn())}
+            >Log In</button>
+          </div>
         </form>
       </div>
     )

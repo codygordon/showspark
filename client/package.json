@@ -17,6 +17,7 @@
     "lodash": "^4.17.4",
     "mongodb": "^2.2.11",
     "normalizr": "^2.3.0",
+    "prop-types": "^15.5.8",
     "query-string": "^4.3.2",
     "re-base": "^2.2.0",
     "react": "latest",
@@ -108,7 +109,8 @@
         }
       ],
       "react/prefer-stateless-function": "warn",
-      "react/prop-types": "warn"
+      "react/prop-types": "warn",
+      "react/forbid-prop-types": "off"
     }
   }
 }

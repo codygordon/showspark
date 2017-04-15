@@ -25,7 +25,8 @@ export default function reducer(state = initialState.auth, action) {
     case SHOW_LOG_IN:
       return {
         ...state,
-        showingLogIn: true
+        showingLogIn: true,
+        showingSignUp: false
       }
     case CLOSE_LOG_IN:
       return {
@@ -35,7 +36,8 @@ export default function reducer(state = initialState.auth, action) {
     case SHOW_SIGN_UP:
       return {
         ...state,
-        showingSignUp: true
+        showingSignUp: true,
+        showingLogIn: false
       }
     case CLOSE_SIGN_UP:
       return {
@@ -53,7 +55,7 @@ export default function reducer(state = initialState.auth, action) {
         ...state,
         isFetching: false,
         isAuthenticated: true,
-        errorMessage: ''
+        errorMessage: null
       }
     case SIGNUP_FAILURE:
       return {
@@ -123,109 +125,87 @@ export default function reducer(state = initialState.auth, action) {
 
 export function showLogIn() {
   return {
-    type: SHOW_LOG_IN,
-    showingLogIn: true
+    type: SHOW_LOG_IN
   }
 }
 
 export function closeLogIn() {
   return {
-    type: CLOSE_LOG_IN,
-    showingLogIn: false
+    type: CLOSE_LOG_IN
   }
 }
 
 export function showSignUp() {
   return {
-    type: SHOW_SIGN_UP,
-    showingSignUp: true
+    type: SHOW_SIGN_UP
   }
 }
 
 export function closeSignUp() {
   return {
-    type: CLOSE_SIGN_UP,
-    showingSignUp: false
+    type: CLOSE_SIGN_UP
   }
 }
 
 export function requestSignup() {
   return {
-    type: SIGNUP_REQUEST,
-    isFetching: true,
-    isAuthenticated: false
+    type: SIGNUP_REQUEST
   }
 }
 
 export function receiveSignup() {
   return {
-    type: SIGNUP_SUCCESS,
-    isFetching: false,
-    isAuthenticated: false
+    type: SIGNUP_SUCCESS
   }
 }
 
 export function signupError(message) {
   return {
     type: SIGNUP_FAILURE,
-    isFetching: false,
-    isAuthenticated: false,
-    message,
+    message
   }
 }
 
 export function requestLogin() {
   return {
-    type: LOGIN_REQUEST,
-    isFetching: true,
-    isAuthenticated: false
+    type: LOGIN_REQUEST
   }
 }
 
 export function receiveLogin() {
   return {
-    type: LOGIN_SUCCESS,
-    isFetching: false,
-    isAuthenticated: true
+    type: LOGIN_SUCCESS
   }
 }
 
 export function loginError(message) {
   return {
     type: LOGIN_FAILURE,
-    isFetching: false,
-    isAuthenticated: false,
     message
   }
 }
 
 export function requestLogout() {
   return {
-    type: LOGOUT_REQUEST,
-    isFetching: true,
-    isAuthenticated: true
+    type: LOGOUT_REQUEST
   }
 }
 
 export function receiveLogout() {
   return {
-    type: LOGOUT_SUCCESS,
-    isFetching: false,
-    isAuthenticated: false
+    type: LOGOUT_SUCCESS
   }
 }
 
 export function requestUser() {
   return {
-    type: USER_REQUEST,
-    isFetching: true
+    type: USER_REQUEST
   }
 }
 
 export function receiveUser(user) {
   return {
     type: USER_SUCCESS,
-    isFetching: false,
     user
   }
 }
@@ -233,7 +213,6 @@ export function receiveUser(user) {
 export function userError(message) {
   return {
     type: USER_FAILURE,
-    isFetching: false,
     message
   }
 }
@@ -295,12 +274,14 @@ export function logInUserFacebook() {
     connection: 'facebook-oauth2'
   }, (err) => {
     if (err) dispatch(loginError(err.message))
+    else dispatch(receiveLogin())
   })
 }
 
 
 export function handleLoginHash(hash) {
   return (dispatch) => {
+    dispatch(requestUser())
     auth0.parseHash(hash, (err, user) => {
       if (err) {
         dispatch(userError(err.message))
@@ -308,7 +289,6 @@ export function handleLoginHash(hash) {
         dispatch(receiveUser(user))
       }
     })
-    dispatch(requestUser())
     dispatch(receiveLogin())
   }
 }

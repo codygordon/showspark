@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const Review = ({ review }) => {
   let playAgain = null
@@ -87,6 +88,19 @@ const Reviews = ({ venue }) => {
     )
   }
   return null
+}
+
+Review.propTypes = {
+  review: PropTypes.object.isRequired
+}
+
+ReviewStats.propTypes = {
+  againPct: PropTypes.number.isRequired,
+  reviewsNum: PropTypes.number.isRequired
+}
+
+Reviews.propTypes = {
+  venue: PropTypes.object.isRequired
 }
 
 export default Reviews
