@@ -6,7 +6,6 @@ import { store } from './store'
 
 import App from './App'
 
-/* import styles */
 import './shared-css/semantic-truncated.css'
 import './shared-css/normalize.css'
 import './shared-css/styles.css'

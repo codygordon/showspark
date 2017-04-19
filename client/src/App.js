@@ -6,9 +6,9 @@ import { ConnectedRouter } from 'react-router-redux'
 import { history } from './store'
 
 import NotFound from './modules/shared-components/NotFound'
-import Home from './modules/home/container/Home'
-import VenueSearch from './modules/venue-search/container/VenueSearch'
-import Venue from './modules/venue/container/Venue'
+import HomeContainer from './modules/home/HomeContainer'
+import VenueSearchContainer from './modules/venue-search/VenueSearchContainer'
+import VenueContainer from './modules/venue/VenueContainer'
 
 export default class App extends Component {
   static propTypes = {
@@ -18,7 +18,7 @@ export default class App extends Component {
   }
 
   HomePlusProps = ({ location }) => (
-    <Home
+    <HomeContainer
       history={history}
       location={location}
       auth={this.props.auth}
@@ -27,7 +27,7 @@ export default class App extends Component {
   )
 
   VenueSearchPlusProps = ({ location }) => (
-    <VenueSearch
+    <VenueSearchContainer
       history={history}
       location={location}
       auth={this.props.auth}
@@ -38,7 +38,7 @@ export default class App extends Component {
   )
 
   VenuePlusProps = ({ location }) => (
-    <Venue
+    <VenueContainer
       history={history}
       location={location}
       auth={this.props.auth}

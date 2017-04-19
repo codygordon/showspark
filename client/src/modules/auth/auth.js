@@ -1,4 +1,7 @@
-import { auth0, initialState } from '../../store'
+import { initialState } from '../../store'
+import AuthService from '../../utils/AuthService'
+
+const auth0 = new AuthService()
 
 /* ACTION TYPES */
 
@@ -219,41 +222,22 @@ export function userError(message) {
 
 /* ASYNC actions using thunk below */
 
-let callbackURL = 'http://localhost:3000/'
-if (process.env.NODE_ENV === 'production') {
-  callbackURL = 'https://showspark.herokuapp.com'
-}
-
-export function signUpUser(user) {
+export function signUpUser(username, password) {
   return (dispatch) => {
     dispatch(requestSignup())
 
-    auth0.signup({
-      connection: 'Username-Password-Authentication',
-      responseType: 'token',
-      sso: false,
-      callbackURL,
-      email: user.email,
-      password: user.password
-    }, (err) => {
+    auth0.signup(username, password, (err) => {
       if (err) dispatch(signupError(err.message))
       else dispatch(receiveSignup())
     })
   }
 }
 
-export function logInUser(creds) {
+export function logInUser(username, password) {
   return (dispatch) => {
     dispatch(requestLogin())
 
-    auth0.login({
-      connection: 'Username-Password-Authentication',
-      responseType: 'token',
-      sso: false,
-      callbackURL,
-      email: creds.email,
-      password: creds.password
-    }, (err) => {
+    auth0.login(username, password, (err) => {
       if (err) dispatch(loginError(err.message))
       else dispatch(receiveLogin())
     })
@@ -261,18 +245,14 @@ export function logInUser(creds) {
 }
 
 export function logInUserGoogle() {
-  return dispatch => auth0.login({
-    connection: 'google-oauth2'
-  }, (err) => {
+  return dispatch => auth0.loginWithGoogle((err) => {
     if (err) dispatch(loginError(err.message))
     else dispatch(receiveLogin())
   })
 }
 
 export function logInUserFacebook() {
-  return dispatch => auth0.login({
-    connection: 'facebook-oauth2'
-  }, (err) => {
+  return dispatch => auth0.loginWithFacebook((err) => {
     if (err) dispatch(loginError(err.message))
     else dispatch(receiveLogin())
   })

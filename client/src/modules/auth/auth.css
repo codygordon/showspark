@@ -1,9 +1,6 @@
 .auth-container {
-  width: 55%;
+  width: 400px;
   margin: auto;
-  border-radius: 4px;
-  background-color: #222;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   padding: 5px 10px;
   display: flex;
 }
@@ -34,14 +31,14 @@
 .login-input {
   height: 50px;
   padding: 12px;
+  color: #fefefe;
+  background: transparent;
+  border: 2px solid #fefefe !important;
   border-radius: 3px;
-  background-color: #eee;
-  color: #222;
 }
 
 .login-input:focus {
-  border: 2px solid #999;
-  padding: 12px 10px;
+  border: 2px solid #ffcf40;
 }
 
 .auth-container .login-button {

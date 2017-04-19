@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import { showSignUp, showLogIn } from '../auth/auth'
 
-import Auth from '../auth/container/Auth'
+import AuthContainer from '../auth/AuthContainer'
 import RegionSearch from './RegionSearch'
 
 const VenuesHeader = ({ dispatch, history, auth, region }) => (
@@ -36,7 +36,7 @@ const VenuesHeader = ({ dispatch, history, auth, region }) => (
           onClick={() => dispatch(showLogIn())}
         >Log In</button>
 
-        <Auth auth={auth} />
+        <AuthContainer auth={auth} />
       </div>
     )}
   </header>

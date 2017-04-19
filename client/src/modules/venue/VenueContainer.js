@@ -4,17 +4,17 @@ import { connect } from 'react-redux'
 import { Dimmer, Loader } from 'semantic-ui-react'
 import queryString from 'query-string'
 
-import '../venue.css'
+import './venue.css'
 
-import placeholderImg from '../../../img/venue-placeholder.jpeg'
+import placeholderImg from '../../img/venue-placeholder.jpeg'
 
-import { fetchVenue } from '../venue'
+import { fetchVenue } from './venue'
 
-import VenuesHeader from '../../shared-components/VenuesHeader'
-import Info from '../components/Info'
-import Reviews from '../components/Reviews'
+import VenuesHeader from '../shared-components/VenuesHeader'
+import Info from './components/Info'
+import Reviews from './components/Reviews'
 
-class VenueContainer extends Component {
+class Venue extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
@@ -75,6 +75,6 @@ class VenueContainer extends Component {
   }
 }
 
-const Venue = connect()(VenueContainer)
+const VenueContainer = connect()(Venue)
 
-export default Venue
+export default VenueContainer

@@ -8,39 +8,82 @@ export default class AuthService {
     this.auth0 = new auth0.WebAuth({
       clientID: 'gFHlpDzCR3GFtvT1QPRpKXKLb9mRftih',
       domain: 'showspark.auth0.com',
-      responseType: 'token id_token',
-      redirectUri: 'http://localhost:3000'
+      responseType: 'token id_token'
     })
 
     this.login = this.login.bind(this)
+    this.loginWithGoogle = this.loginWithGoogle.bind(this)
+    this.loginWithFacebook = this.loginWithFacebook.bind(this)
     this.signup = this.signup.bind(this)
   }
 
-  login(params, onError) {
+  login(username, password, uri, cb) {
     // redirects the call to auth0 instance
-    this.auth0.login(params, onError)
+    this.auth0.redirect.loginWithCredentials({
+      connection: 'Username-Password-Authentication',
+      username,
+      password,
+      redirect_uri: uri
+    }, err => cb(err))
   }
 
-  signup(params, onError) {
-    // redirects the call to auth0 instance
-    this.auth0.signup(params, onError)
+  loginWithGoogle(uri, cb) {
+    this.auth0.authorize({
+      connection: 'google-oauth2',
+      redirect_uri: uri
+    }, err => cb(err))
   }
 
-  parseHash(hash, cbUser) {
-    // uses auth0 parseHash method to extract data from url hash
-    // then saves user profile and returns it for callback
-    const authResult = this.auth0.parseHash(hash)
-    if (authResult.idToken) {
-      this.setToken(authResult.idToken)
+  loginWithFacebook(uri, cb) {
+    this.auth0.authorize({
+      connection: 'facebook-oauth2',
+      redirect_uri: uri
+    }, err => cb(err))
+  }
 
-      this.auth0.getProfile(authResult.idToken, (err, profile) => {
-        if (!err) {
-          localStorage.setItem('user_profile', JSON.stringify(profile))
+  signup(username, password, cb) {
+    // redirects the call to auth0 instance
+    this.auth0.redirect.signupAndLogin({
+      connection: 'Username-Password-Authentication',
+      username,
+      password
+    }, err => cb(err))
+  }
+
+  logout() {
+    // Clear user token and profile data from local storage
+    localStorage.removeItem('id_token')
+    localStorage.removeItem('user_profile')
+  }
+
+  parseHash(hash) {
+    this.auth0.parseHash({ hash, _idTokenVerification: false },
+      (err, authResult) => {
+        if (err) throw err
+        if (authResult && authResult.accessToken && authResult.idToken) {
+          this.setToken(authResult.accessToken, authResult.idToken)
+          this.auth0.client.userInfo(authResult.accessToken,
+            (err, profile) => {
+              if (err) console.log('Error loading the Profile', err)
+              else this.setProfile(profile)
+            })
         }
-        cbUser(err, profile)
       })
-    }
   }
+
+  setProfile(profile) {
+    // Saves profile data to localStorage
+    localStorage.setItem('user_profile', JSON.stringify(profile))
+    // Triggers profile_updated event to update the UI
+    this.emit('profile_updated', profile)
+  }
+
+  getProfile() {
+    // Retrieves the profile data from localStorage
+    const profile = localStorage.getItem('user_profile')
+    return profile ? JSON.parse(localStorage.profile) : {}
+  }
+
 
   loggedIn() {
     // Checks if there is a saved token and it's still valid, returns bool
@@ -48,8 +91,9 @@ export default class AuthService {
     return !!token && !this.isTokenExpired(token)
   }
 
-  setToken(idToken) {
+  setToken(accessToken, idToken) {
     // Saves user token to local storage
+    localStorage.setItem('access_token', accessToken)
     localStorage.setItem('id_token', idToken)
   }
 
@@ -76,11 +120,5 @@ export default class AuthService {
       return false
     }
     return !(date.valueOf() > (new Date().valueOf() + (offsetSeconds * 1000)))
-  }
-
-  logout() {
-    // Clear user token and profile data from local storage
-    localStorage.removeItem('id_token')
-    localStorage.removeItem('user_profile')
   }
 }

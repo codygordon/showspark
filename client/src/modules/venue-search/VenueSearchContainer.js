@@ -4,15 +4,15 @@ import { connect } from 'react-redux'
 import { Dimmer, Loader } from 'semantic-ui-react'
 import queryString from 'query-string'
 
-import '../venue-search.css'
+import './venue-search.css'
 
-import { regionSelected, listPageSelected, fetchVenues } from '../venueSearch'
+import { regionSelected, listPageSelected, fetchVenues } from './venueSearch'
 
-import VenuesHeader from '../../shared-components/VenuesHeader'
-import List from '../components/List'
-import Map from '../components/Map'
+import VenuesHeader from '../shared-components/VenuesHeader'
+import List from './components/List'
+import Map from './components/Map'
 
-class VenueSearchContainer extends Component {
+class VenueSearch extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
@@ -101,6 +101,6 @@ class VenueSearchContainer extends Component {
   }
 }
 
-const VenueSearch = connect()(VenueSearchContainer)
+const VenueSearchContainer = connect()(VenueSearch)
 
-export default VenueSearch
+export default VenueSearchContainer

@@ -10,16 +10,16 @@ import auth from './modules/auth/auth'
 import venueSearch from './modules/venue-search/venueSearch'
 import venue from './modules/venue/venue'
 
-export const history = createBrowserHistory()
+const auth0 = new AuthService()
 
-export const auth0 = new AuthService()
+export const history = createBrowserHistory()
 
 export const initialState = {
   auth: {
     showingLogIn: false,
     showingSignUp: false,
     isFetching: false,
-    isAuthenticated: false, // auth.loggedIn(),
+    isAuthenticated: auth0.loggedIn(),
     user: localStorage.getItem('user_profile') ? JSON.parse(localStorage.getItem('user_profile')) : null,
     errorMessage: null
   },
