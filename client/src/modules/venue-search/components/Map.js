@@ -18,19 +18,19 @@ const Map = ({ map, region, venues }) => {
         zoom={map.zoom}
         movingMethod="easeTo"
         attributionPosition="bottom-left"
-        dragRotate={false}
-      >
+        dragRotate={false}>
         {venues.data.length > 0 &&
             venues.data.map((venue) => {
               if (venue.address && venue.address.lng && venue.address.lat) {
                 return (
-                  <span className={venues.hoveredId === venue._id ? 'hovered' : ''}>
+                  <span
+                    key={venue._id}
+                    className={venues.hoveredId === venue._id ? 'hovered' : ''}>
+
                     <Popup
-                      key={venue._id}
                       coordinates={[venue.address.lng, venue.address.lat]}
                       anchor="bottom"
-                      onClick={() => onPopupClick(venue._id)}
-                    >
+                      onClick={() => onPopupClick(venue._id)}>
                       {venue.title}
                     </Popup>
                   </span>

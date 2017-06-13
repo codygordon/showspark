@@ -19,16 +19,12 @@ class Auth extends Component {
   }
 
   componentWillUnmount() {
-    const { location, history } = this.props
-    const newSearch =
-      location.search.replace('&showAuth=true', '')
-    history.push(`${location.pathname}${newSearch}`)
+    const { location } = this.props
   }
 
   authClose = () => {
     const { location, history } = this.props
-    const newSearch = location.search.replace('&showAuth=true', '')
-    history.push(`${location.pathname}${newSearch}`)
+    // TODO: revisit query param and routing
   }
 
   render() {
@@ -37,8 +33,7 @@ class Auth extends Component {
       <Modal
         basic
         open={auth.showingAuth}
-        onClose={this.authClose}
-      >
+        onClose={this.authClose}>
         {!auth.showingEmailAuthForm ? (
           <div className="auth-container">
             <GoogleAuthButton dispatch={dispatch} />
@@ -50,8 +45,7 @@ class Auth extends Component {
             <EmailAuthForm
               dispatch={dispatch}
               location={location}
-              auth={auth}
-            />
+              auth={auth} />
           </div>
         )}
       </Modal>

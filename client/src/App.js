@@ -22,8 +22,7 @@ export default class App extends Component {
       history={history}
       location={location}
       auth={this.props.auth}
-      region={this.props.venueSearch.region}
-    />
+      region={this.props.venueSearch.region} />
   )
 
   VenueSearchPlusProps = ({ location }) => (
@@ -33,8 +32,7 @@ export default class App extends Component {
       auth={this.props.auth}
       map={this.props.venueSearch.map}
       region={this.props.venueSearch.region}
-      venues={this.props.venueSearch.venues}
-    />
+      venues={this.props.venueSearch.venues} />
   )
 
   VenuePlusProps = ({ location }) => (
@@ -43,8 +41,7 @@ export default class App extends Component {
       location={location}
       auth={this.props.auth}
       region={this.props.venueSearch.region}
-      venue={this.props.venue}
-    />
+      venue={this.props.venue} />
   )
 
   render() {

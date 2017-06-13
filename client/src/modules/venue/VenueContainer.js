@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Dimmer, Loader } from 'semantic-ui-react'
-import queryString from 'query-string'
+import qs from 'qs'
 
 import './venue.css'
 
@@ -26,7 +26,7 @@ class Venue extends Component {
 
   componentWillMount() {
     const { dispatch, location, history, venue } = this.props
-    const query = queryString.parse(location.search)
+    const query = qs.parse(location.search.replace('?', ''))
     if (!query.id) history.push('/')
     if (query.id !== venue._id) dispatch(fetchVenue(query.id))
   }
@@ -49,8 +49,7 @@ class Venue extends Component {
           history={history}
           location={location}
           auth={auth}
-          region={region}
-        />
+          region={region} />
 
         <Dimmer active={venue.isFetching}>
           <Loader size="large">
@@ -61,8 +60,7 @@ class Venue extends Component {
         <section className="venue-content">
           <div
             className="venue-featured-img"
-            style={{ backgroundImage: `url(${featImg})` }}
-          />
+            style={{ backgroundImage: `url(${featImg})` }} />
           <h1 className="venue-title">{venue.title}</h1>
           <Info venue={venue} />
           <Reviews dispatch={dispatch} venue={venue} />

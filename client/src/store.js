@@ -73,6 +73,6 @@ const enhancers = compose(
 export const store = createStore(rootReducer, {
   auth: initialState.auth,
   venueSearch: initialState.venueSearch,
-  venue: initialState.venue,
+  venue: initialState.venue
   // artist: initialState.artist
 }, enhancers)

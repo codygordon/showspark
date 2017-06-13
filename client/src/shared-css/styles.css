@@ -23,7 +23,7 @@ html, body {
 a {
   font-weight: 700;
   color: #ffcf40;
-  transition: ease 0.35s;
+  transition: ease 0.15s;
 }
 
 a:hover {
@@ -206,11 +206,11 @@ body {
 .signup-button, .login-button {
   background: transparent;
   border: none;
-  color: #fefefe;
+  color: #ffcf40;
 }
 
 .signup-button:hover, .login-button:hover {
-  color: #ffcf40;
+  color: #e72352;
 }
 
 .region-search-container {
@@ -256,6 +256,7 @@ body {
 .suggestion-item {
   height: 40px;
   padding-top: 10px;
+  z-index: 9999 !important;
 }
 
 .suggestion-item i {

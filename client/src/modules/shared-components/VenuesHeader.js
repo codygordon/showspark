@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import queryString from 'query-string'
+import qs from 'qs'
 
 import { showAuth, closeAuth } from '../auth/auth'
 
@@ -19,7 +19,7 @@ export default class VenuesHeader extends Component {
 
   componentWillMount() {
     const { dispatch, location } = this.props
-    const query = queryString.parse(location.search)
+    const query = qs.parse(location.search)
     if (query.showAuth) {
       dispatch(showAuth())
     }
@@ -27,8 +27,8 @@ export default class VenuesHeader extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { dispatch, location, auth } = this.props
-    const query = queryString.parse(location.search)
-    const nextQuery = queryString.parse(nextProps.location.search)
+    const query = qs.parse(location.search.replace('?', ''))
+    const nextQuery = qs.parse(nextProps.location.search.replace('?', ''))
     if (!auth.showingAuth && (query.showAuth || nextQuery.showAuth)) {
       dispatch(showAuth())
     } else if (auth.showingAuth && !nextQuery.showAuth) {
@@ -53,18 +53,16 @@ export default class VenuesHeader extends Component {
           <RegionSearch
             dispatch={dispatch}
             history={history}
-            region={region}
-          />
+            region={region} />
         </div>
 
         {auth.isAuthenticated ? (
-          <div className="venues-header-logged-in">Logged IN!</div>
+          <div className="venues-header-logged-in">Logged in!</div>
         ) : (
           <div className="venues-header-auth">
             <button
               className="button login-button"
-              onClick={this.handleLogInClick}
-            >Log In</button>
+              onClick={this.handleLogInClick}>Log In</button>
             <AuthContainer location={location} history={history} auth={auth} />
           </div>
         )}

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Dimmer, Loader } from 'semantic-ui-react'
-import queryString from 'query-string'
+import qs from 'qs'
 
 import './venue-search.css'
 
@@ -26,7 +26,7 @@ class VenueSearch extends Component {
   componentWillMount() {
     const { dispatch, location, history, venues } = this.props
     if (location.search) {
-      const query = queryString.parse(location.search)
+      const query = qs.parse(location.search.replace('?', ''))
       if (query['region-text'] && query.page) {
         const limit = venues.perPage
         const offset = (query.page - 1) * limit
@@ -42,8 +42,8 @@ class VenueSearch extends Component {
   componentWillReceiveProps(nextProps) {
     const { dispatch, location, venues } = this.props
     if (nextProps.location.search && location.search) {
-      const thisQuery = queryString.parse(location.search)
-      const nextQuery = queryString.parse(nextProps.location.search)
+      const thisQuery = qs.parse(location.search.replace('?', ''))
+      const nextQuery = qs.parse(nextProps.location.search.replace('?', ''))
       if (nextQuery['region-text'] && thisQuery['region-text']
       && nextQuery.page && thisQuery.page) {
         const limit = venues.perPage
@@ -71,8 +71,7 @@ class VenueSearch extends Component {
           history={history}
           location={location}
           auth={auth}
-          region={region}
-        />
+          region={region} />
 
         <Dimmer active={venues.isFetching}>
           <Loader size="large">
@@ -84,15 +83,13 @@ class VenueSearch extends Component {
           dispatch={dispatch}
           map={map}
           region={region}
-          venues={venues}
-        />
+          venues={venues} />
 
         <List
           dispatch={dispatch}
           history={history}
           region={region}
-          venues={venues}
-        />
+          venues={venues} />
 
         <Dimmer active={!!errorMessage}>
           <h2 className="dimmer-error">{errorMessage}</h2>

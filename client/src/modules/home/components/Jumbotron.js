@@ -12,8 +12,7 @@ const Jumbotron = ({ dispatch, history, region }) => (
       <RegionSearch
         dispatch={dispatch}
         history={history}
-        region={region}
-      />
+        region={region} />
     </div>
   </section>
 )

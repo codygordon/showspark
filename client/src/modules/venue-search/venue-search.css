@@ -8,12 +8,14 @@
   flex: 1 1 40%;
   order: 1;
   height: calc(100% - 60.5px);
+  z-index: 50 !important;
 }
 
 .mapboxgl-map {
   width: 100%;
   height: 100%;
   cursor: grab;
+  z-index: 50 !important;
 }
 
 .mapboxgl-popup-content {
@@ -72,23 +74,31 @@
   flex: 0 0 50%;
   max-width: calc(50% - 10px);
   height: 220px;
-  padding: 5px;
+  padding: 10px;
   margin: 5px 5px;
-  color: #fefefe;
+  background-color: #2f313c;
+  color: #ddd;
+  border: .5px solid #666;
+  border-radius: 1px;
+  transition: ease .1s;
+}
+
+.venue-card:hover .venue-card-title {
+  color: #e72352;
+}
+
+.venue-card:focus {
+  transform: scale(.96);
 }
 
 .venue-card-img {
   object-fit: cover;
   width: 100%;
   height: 150px;
-  cursor: pointer;
-}
-
-.venue-card-info {
-  cursor: pointer;
 }
 
 .venue-card-title {
+  color: #ffcf40;
   font-size: 15px;
   font-weight: bold;
   padding-bottom: 2px;
@@ -97,7 +107,6 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  cursor: pointer;
 }
 
 .venue-card-address {

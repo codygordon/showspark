@@ -17,16 +17,14 @@ const List = ({ dispatch, history, region, venues }) => {
       key={venue._id}
       dispatch={dispatch}
       venue={venue}
-      handleCardClick={handleCardClick}
-    />
+      handleCardClick={handleCardClick} />
   ))
 
   const pagination = (
     <ListPaginate
       history={history}
       venues={venues}
-      region={region}
-    />
+      region={region} />
   )
 
   return (

@@ -6,21 +6,17 @@ import placeholderImg from '../../../img/default-placeholder.png'
 import { listCardHover } from '../venueSearch'
 
 const Card = ({ dispatch, venue, handleCardClick }) => (
-  // why doesn't cick work on the component element itself?
-  // eslint-disable-next-line
-  <div
+  <button
     className="venue-card"
     tabIndex={0}
     onMouseEnter={() => { dispatch(listCardHover(venue._id)) }}
     onMouseLeave={() => { dispatch(listCardHover(null)) }}
-    onClick={() => handleCardClick(venue)}
-  >
+    onClick={() => handleCardClick(venue)}>
     <img
       className="venue-card-img"
       src={venue.img || placeholderImg}
       // TODO: use Bing image search API to pull images in
-      alt={`${venue.title}`}
-    />
+      alt={`${venue.title}`} />
     <div className="venue-card-info">
       <h3 className="venue-card-title">{venue.title}</h3>
       <div className="venue-card-address-box">
@@ -32,7 +28,7 @@ const Card = ({ dispatch, venue, handleCardClick }) => (
         </div>
       </div>
     </div>
-  </div>
+  </button>
 )
 
 Card.propTypes = {

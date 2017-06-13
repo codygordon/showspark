@@ -9,8 +9,8 @@ const ListPaginate = ({ history, venues, region }) => {
       buttons.push(<button
         key={`page-button-${page}`}
         className={venues.currentPage === page ? 'paginate-button active' : 'paginate-button'}
-        onClick={() => history.push(`?region-text=${region.text}&page=${page}`)}
-      >{page}</button>)
+        onClick={() => history.push(`?region-text=${region.text}&page=${page}`)}>
+        {page}</button>)
     }
   }
 

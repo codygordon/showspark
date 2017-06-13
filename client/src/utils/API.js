@@ -18,11 +18,11 @@ const API = {
           Accept: 'application/json',
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`
-        },
+        }
       }).then(this.checkStatus)
         .then(this.parseJSON)
         .then(cb)
-    });
+    })
   },
 
   post(dataType, data, query, cb) {

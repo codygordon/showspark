@@ -14,7 +14,7 @@ function mapStateToProps(state) {
   return {
     auth: state.auth,
     venueSearch: state.venueSearch,
-    venue: state.venue,
+    venue: state.venue
     // artist: state.artist
   }
 }

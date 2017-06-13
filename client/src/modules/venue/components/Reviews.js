@@ -70,7 +70,8 @@ const Reviews = ({ venue }) => {
         <div className="venue-no-reviews-text">
           <em>There aren&#39;t any reviews of this venue yet...</em>
         </div>
-        <FirstReviewButton />
+        {/*  TODO: add review functionality */}
+        {/* <FirstReviewButton /> */}
       </div>
     )
   } else if (venue.reviews && venue.reviews.length > 0) {
@@ -78,8 +79,7 @@ const Reviews = ({ venue }) => {
       <div className="venue-reviews">
         <ReviewStats
           againPct={venue.reviewsAgainPct}
-          reviewsNum={venue.reviews.length}
-        />
+          reviewsNum={venue.reviews.length} />
         <ReviewButton />
         {venue.reviews.map(review => (
           <Review review={review} key={`review-${review.date}`} />

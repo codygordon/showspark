@@ -25,28 +25,30 @@ const RegionSearch = ({ dispatch, history, region }) => {
     dispatch(regionSet(regionText, null))
   }
 
+  const inputProps = {
+    value: region.text,
+    onChange: handleChange,
+    placeholder: 'Search venues by city',
+    autoFocus: true
+  }
+
   return (
     <div className="region-search-container">
       <span className="region-search-icon">
         <i className="fa fa-search fa-2" aria-hidden="true" />
       </span>
       <PlacesAutocomplete
+        inputProps={inputProps}
         value={region.text}
-        onChange={handleChange}
         onSelect={handleSelect}
         onEnterKeyDown={handleSelect}
         classNames={{ input: 'region-search-input' }}
         autocompleteItem={AutocompleteItem}
-        autofocus
-        placeholder="Search venues by city"
-        hideLabel
-        typeAhead
         inputName="region-search-input"
         options={{
           types: ['(regions)'],
           componentRestrictions: { country: 'us' }
-        }}
-      />
+        }} />
     </div>
   )
 }
