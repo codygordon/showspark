@@ -5,10 +5,10 @@ import { logInUserFacebook } from '../auth'
 
 const FacebookAuthButton = ({ dispatch }) => (
   <button
-    className="button facebook-auth"
+    className="button facebook-auth-button"
     onClick={() => dispatch(logInUserFacebook())}
   >
-    <i className="fa fa-facebook-official" aria-hidden="true" />&nbsp;
+    <i className="fa fa-facebook-official" aria-hidden="true" />
     Log in with Facebook
   </button>
 )

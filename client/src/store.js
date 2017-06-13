@@ -16,7 +16,8 @@ export const history = createBrowserHistory()
 
 export const initialState = {
   auth: {
-    showingLogIn: false,
+    showingAuth: false,
+    showingEmailAuthForm: false,
     showingSignUp: false,
     isFetching: false,
     isAuthenticated: auth0.loggedIn(),

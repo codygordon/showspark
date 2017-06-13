@@ -5,10 +5,10 @@ const auth0 = new AuthService()
 
 /* ACTION TYPES */
 
-export const SHOW_LOG_IN = 'auth/SHOW_LOG_IN'
-export const CLOSE_LOG_IN = 'auth/CLOSE_LOG_IN'
+export const SHOW_AUTH = 'auth/SHOW_LOG_IN'
+export const CLOSE_AUTH = 'auth/CLOSE_LOG_IN'
 export const SHOW_SIGN_UP = 'auth/SHOW_SIGN_UP'
-export const CLOSE_SIGN_UP = 'auth/CLOSE_SIGN_UP'
+export const SHOW_EMAIL_AUTH_FORM = 'auth/SHOW_EMAIL_AUTH_FORM'
 export const SIGNUP_REQUEST = 'auth/SIGNUP_REQUEST'
 export const SIGNUP_SUCCESS = 'auth/SIGNUP_SUCCESS'
 export const SIGNUP_FAILURE = 'auth/SIGNUP_FAILURE'
@@ -25,27 +25,29 @@ export const USER_FAILURE = 'auth/USER_FAILURE'
 
 export default function reducer(state = initialState.auth, action) {
   switch (action.type) {
-    case SHOW_LOG_IN:
+    case SHOW_AUTH:
       return {
         ...state,
-        showingLogIn: true,
+        showingAuth: true,
+        showingEmailAuthForm: false,
         showingSignUp: false
       }
-    case CLOSE_LOG_IN:
+    case CLOSE_AUTH:
       return {
         ...state,
-        showingLogIn: false
+        showingAuth: false,
+        showingEmailAuthForm: false,
+        showingSignUp: false
       }
     case SHOW_SIGN_UP:
       return {
         ...state,
-        showingSignUp: true,
-        showingLogIn: false
+        showingSignUp: true
       }
-    case CLOSE_SIGN_UP:
+    case SHOW_EMAIL_AUTH_FORM:
       return {
         ...state,
-        showingSignUp: false
+        showingEmailAuthForm: true
       }
     case SIGNUP_REQUEST:
       return {
@@ -126,15 +128,15 @@ export default function reducer(state = initialState.auth, action) {
 
 /* Normal Actions */
 
-export function showLogIn() {
+export function showAuth() {
   return {
-    type: SHOW_LOG_IN
+    type: SHOW_AUTH
   }
 }
 
-export function closeLogIn() {
+export function closeAuth() {
   return {
-    type: CLOSE_LOG_IN
+    type: CLOSE_AUTH
   }
 }
 
@@ -144,9 +146,9 @@ export function showSignUp() {
   }
 }
 
-export function closeSignUp() {
+export function showEmailAuthForm() {
   return {
-    type: CLOSE_SIGN_UP
+    type: SHOW_EMAIL_AUTH_FORM
   }
 }
 
@@ -222,22 +224,22 @@ export function userError(message) {
 
 /* ASYNC actions using thunk below */
 
-export function signUpUser(username, password) {
+export function signUpUser(user) {
   return (dispatch) => {
     dispatch(requestSignup())
 
-    auth0.signup(username, password, (err) => {
+    auth0.signup(user.email, user.password, (err) => {
       if (err) dispatch(signupError(err.message))
       else dispatch(receiveSignup())
     })
   }
 }
 
-export function logInUser(username, password) {
+export function logInUser(user, uri) {
   return (dispatch) => {
     dispatch(requestLogin())
 
-    auth0.login(username, password, (err) => {
+    auth0.login(user.email, user.password, uri, (err) => {
       if (err) dispatch(loginError(err.message))
       else dispatch(receiveLogin())
     })

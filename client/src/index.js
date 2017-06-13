@@ -6,7 +6,7 @@ import { store } from './store'
 
 import App from './App'
 
-import './shared-css/semantic-truncated.css'
+import '../node_modules/semantic-ui-css/semantic.min.css'
 import './shared-css/normalize.css'
 import './shared-css/styles.css'
 

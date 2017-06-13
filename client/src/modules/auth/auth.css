@@ -1,75 +1,110 @@
 .auth-container {
-  width: 400px;
+  width: 340px;
   margin: auto;
-  padding: 5px 10px;
   display: flex;
+  flex-wrap: wrap;
 }
 
-.auth-close {
-  text-align: right;
-  padding-bottom: 2.5px;
+.google-auth-button, .facebook-auth-button, .email-auth-button {
+  flex: 0 0 100%;
+  margin: 0.25em 0;
+  height: 50px;
+  padding-left: 25% !important;
+  text-align: left;
+  color: #fefefe;
 }
 
-.auth-close button {
-  font-weight: 700;
-  font-size: 0.75em;
-  background-color: #222;
-  color: #fff;
+.google-auth-button {
+  background: #dd4b39;
+}
+
+.google-auth-button:hover {
+  background: #ac4a3e !important;
+}
+
+.facebook-auth-button {
+  background: #3b5998;
+}
+
+.facebook-auth-button:hover {
+  background: #374d7a !important;
+}
+
+.email-auth-button {
+  background: #7c2678;
+}
+
+.email-auth-button:hover {
+  background: #62205f !important;
+}
+
+.google-auth-button i, .facebook-auth-button i {
+  font-size: 1.1em;
+  padding-right: 0.5em;
+}
+
+.email-auth-button i {
+  padding-right: 0.5em;
+}
+
+.login-signup-switch {
+  flex: 0 0 100%;
+  text-align: center;
+  font-weight: 300;
+}
+
+.login-signup-switch button {
   border: none;
+  background: transparent;
+  font-weight: 700;
+  color: #fefefe;
   cursor: pointer;
 }
 
-.auth-close button:hover {
-  text-decoration: underline;
+.login-signup-switch button:hover {
+  color: #ffcf40;
 }
 
-.auth-error, .login-signup, .login-input, .facebook-login, .google-login, .auth-container .login-button {
+.email-auth-form {
   width: 100%;
-  margin: 5px 0;
 }
 
-.login-input {
+.email-auth-form label {
+  position: relative;
+  display: block;
+  margin-bottom: -16px;
+  text-shadow: 0 0 1px #000, 0 0 2px #000, 0 0 3px #000, 0 0 4px #000, 0 0 4px #000, 0 0 4px #000, 0 0 3px #000;
+  padding-left: 5px;
+  font-weight: 700;
+  z-index: 99;
+}
+
+.email-auth-input {
+  flex: 0 0 100%;
+  width: 100%;
   height: 50px;
+  margin: 8px 0;
   padding: 12px;
   color: #fefefe;
   background: transparent;
-  border: 2px solid #fefefe !important;
+  border: 2px solid #fefefe;
   border-radius: 3px;
+  z-index: 0;
 }
 
-.login-input:focus {
+.email-auth-input:focus {
   border: 2px solid #ffcf40;
 }
 
-.auth-container .login-button {
-  background-color: #ffcf40;
-  color: #222;
-}
-
-.auth-container .login-button:hover {
-  background-color: #ffdd29;
-}
-
-.login-signup {
-  display: inline-block;
-  font-size: 0.8em;
+.email-auth-form-button {
+  width: 100%;
   text-align: center;
-}
-
-.login-signup span {
-  padding: 10px;
-}
-
-.login-signup .signup-button {
-  padding: 5px 8px;
+  margin: 4px 0;
+  height: 50px;
+  background: #e3b01a;
+  font-weight: 900;
 }
 
 .auth-error {
-  color: #rgb(222, 30, 105);
-}
-
-@media screen and (max-width: 600px) {
-  .auth-container {
-    width: 100%;
-  }
+  color: #f44f54;
 }

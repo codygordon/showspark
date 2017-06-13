@@ -157,7 +157,7 @@ body {
 }
 
 .header-logo-beta {
-
+  display: none;
   color: #fff;
   text-decoration: none;
   font-size: 9px;
@@ -204,14 +204,13 @@ body {
 }
 
 .signup-button, .login-button {
-  background-color: #222;
+  background: transparent;
+  border: none;
   color: #fefefe;
 }
 
 .signup-button:hover, .login-button:hover {
-  background-color: #ffcf40;
-  color: #222;
-  text-shadow: .5px .5px 0 #e6d935;
+  color: #ffcf40;
 }
 
 .region-search-container {

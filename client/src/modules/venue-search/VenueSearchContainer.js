@@ -69,6 +69,7 @@ class VenueSearch extends Component {
         <VenuesHeader
           dispatch={dispatch}
           history={history}
+          location={location}
           auth={auth}
           region={region}
         />
