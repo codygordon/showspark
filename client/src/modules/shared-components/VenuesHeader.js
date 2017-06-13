@@ -37,7 +37,7 @@ export default class VenuesHeader extends Component {
   }
 
   handleLogInClick = () => {
-    const { history, auth } = this.props
+    const { location, history, auth } = this.props
     if (!auth.showingAuth) {
       history.push(`${location.pathname}${location.search}&showAuth=true`)
     }

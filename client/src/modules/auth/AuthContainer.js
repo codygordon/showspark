@@ -32,7 +32,7 @@ class Auth extends Component {
   }
 
   render() {
-    const { dispatch, auth } = this.props
+    const { location, dispatch, auth } = this.props
     return (
       <Modal
         basic

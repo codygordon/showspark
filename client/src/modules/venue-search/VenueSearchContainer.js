@@ -61,7 +61,7 @@ class VenueSearch extends Component {
   }
 
   render() {
-    const { dispatch, history, auth, map, region, venues } = this.props
+    const { dispatch, location, history, auth, map, region, venues } = this.props
     const errorMessage = region.errorMessage ? region.errorMessage : venues.errorMessage
 
     return (

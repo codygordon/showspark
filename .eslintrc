@@ -1,29 +1,47 @@
 {
+  "extends": [
+    "react-app",
+    "airbnb"
+  ],
   "env": {
     "node": true,
     "browser": true
   },
-  "extends": "airbnb/base",
   "rules": {
     "import/extensions": "off",
     "import/no-extraneous-dependencies": [
       "error", {
-        "devDependencies": false,
+        "devDependencies": true,
         "optionalDependencies": false,
         "peerDependencies": false
       }
     ],
     "import/prefer-default-export": "warn",
+    "global-require": "off",
     "no-unused-vars": ["warn", { "argsIgnorePattern": "res|req|next|^err" }],
     "no-shadow": ["error", { "allow": ["res", "req", "err"] }],
     "no-unused-expressions": ["error", { "allowTernary": true }],
     "no-console": "warn",
     "no-underscore-dangle": "off",
-    "comma-dangle": "off",
-    "semi": "off",
-    "radix": "off",
-    "prefer-const": "warn",
+    "no-param-reassign": "off",
+    "comma-dangle": ["error", "never"],
+    "semi": ["error", "never"],
+    "space-before-function-paren": ["error", "never"],
+    "func-names": "off",
+    "radix": "warn",
     "consistent-return": "warn",
-    "max-len": [1, 180, 4]
+    "max-len": [1, 180, 4],
+    "react/jsx-filename-extension": [
+      "error",
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
+    "react/prefer-stateless-function": "warn",
+    "react/prop-types": "warn",
+    "react/forbid-prop-types": "warn"
   }
 }

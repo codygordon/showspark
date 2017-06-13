@@ -6,7 +6,7 @@
   "private": true,
   "proxy": "http://localhost:3001/",
   "devDependencies": {
-    "react-scripts": "0.9.5"
+    "react-scripts": "^1.0.7"
   },
   "dependencies": {
     "auth0-js": "^8.5.0",
@@ -37,72 +37,5 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "airbnb"
-    ],
-    "env": {
-      "browser": true
-    },
-    "rules": {
-      "import/extensions": "off",
-      "import/no-extraneous-dependencies": [
-        "error",
-        {
-          "devDependencies": false,
-          "optionalDependencies": false,
-          "peerDependencies": false
-        }
-      ],
-      "import/prefer-default-export": "warn",
-      "no-unused-vars": [
-        "warn",
-        {
-          "argsIgnorePattern": "res|req|next|^err"
-        }
-      ],
-      "no-shadow": [
-        "error",
-        {
-          "allow": [
-            "res",
-            "req",
-            "err"
-          ]
-        }
-      ],
-      "no-unused-expressions": [
-        "error",
-        {
-          "allowTernary": true
-        }
-      ],
-      "no-console": "warn",
-      "no-underscore-dangle": "off",
-      "comma-dangle": "off",
-      "semi": "off",
-      "radix": "off",
-      "prefer-const": "warn",
-      "consistent-return": "warn",
-      "max-len": [
-        1,
-        180,
-        4
-      ],
-      "react/jsx-filename-extension": [
-        "error",
-        {
-          "extensions": [
-            ".js",
-            ".jsx"
-          ]
-        }
-      ],
-      "react/prefer-stateless-function": "warn",
-      "react/prop-types": "warn",
-      "react/forbid-prop-types": "off"
-    }
   }
 }

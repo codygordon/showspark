@@ -39,7 +39,7 @@ class Venue extends Component {
   }
 
   render() {
-    const { dispatch, history, auth, venue, region } = this.props
+    const { dispatch, location, history, auth, venue, region } = this.props
     let featImg = placeholderImg
     if (venue.featImg) featImg = venue.featImg
     return (

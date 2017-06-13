@@ -21,6 +21,7 @@
   background-color: #fbe058 !important;
   border-bottom: 3px solid #ffcf40;
   color: #333;
+  font-weight: 700;
   padding: 2px 8px !important;
   margin-bottom: -2px;
   cursor: pointer;
@@ -41,7 +42,7 @@
   border-top-color: #d00649 !important;
 }
 
-.hovered.mapboxgl-popup.mapboxgl-popup-anchor-bottom {
+.hovered .mapboxgl-popup.mapboxgl-popup-anchor-bottom {
   z-index: 99 !important;
 }
 

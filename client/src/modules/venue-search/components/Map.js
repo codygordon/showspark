@@ -21,22 +21,22 @@ const Map = ({ map, region, venues }) => {
         dragRotate={false}
       >
         {venues.data.length > 0 &&
-            venues.data.map((venue) => { // eslint-disable-line
+            venues.data.map((venue) => {
               if (venue.address && venue.address.lng && venue.address.lat) {
                 return (
-                  <Popup
-                    key={venue._id}
-                    coordinates={[venue.address.lng, venue.address.lat]}
-                    anchor="bottom"
-                    properties={venue}
-                    onClick={() => onPopupClick(venue._id)}
-                    className={venues.hoveredId === venue._id ? 'hovered' : ''}
-                  >
-                    {/* <i className="fa fa-circle-o" aria-hidden="true" /> */}
-                    <span className="venue-popup-title">{venue.title}</span>
-                  </Popup>
+                  <span className={venues.hoveredId === venue._id ? 'hovered' : ''}>
+                    <Popup
+                      key={venue._id}
+                      coordinates={[venue.address.lng, venue.address.lat]}
+                      anchor="bottom"
+                      onClick={() => onPopupClick(venue._id)}
+                    >
+                      {venue.title}
+                    </Popup>
+                  </span>
                 )
               }
+              return null
             })
           }
 
