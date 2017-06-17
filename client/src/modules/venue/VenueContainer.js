@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Dimmer, Loader } from 'semantic-ui-react'
-import qs from 'qs'
+import qs from 'query-string'
 
 import './venue.css'
 
-import placeholderImg from '../../img/venue-placeholder.jpeg'
+import placeholderImg from '../../img/venue-placeholder.jpg'
 
-import { fetchVenue } from './venue'
+import * as actions from './actions'
 
 import VenuesHeader from '../shared-components/VenuesHeader'
 import Info from './components/Info'
@@ -26,9 +26,9 @@ class Venue extends Component {
 
   componentWillMount() {
     const { dispatch, location, history, venue } = this.props
-    const query = qs.parse(location.search.replace('?', ''))
+    const query = qs.parse(location.search)
     if (!query.id) history.push('/')
-    if (query.id !== venue._id) dispatch(fetchVenue(query.id))
+    if (query.id !== venue._id) dispatch(actions.fetchVenue(query.id))
   }
 
   componentWillReceiveProps(nextProps) {

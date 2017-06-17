@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Test Venue Test",
+    "address": "57454 Snowman Rd",
+    "city": "Christmas Valley",
+    "state": "OR",
+    "zip": "97638",
+    "capacity": 53,
+    "showTypes": ["Band", "Electronic", "Acoustic", "Hip-Hop"],
+    "preferredGenres": ["Indie Rock", "Dubstep", "Southern Rap"]
+  },
+  {
+    "name": "Test Venue Test Two",
+    "address": "1334 Croes Ave",
+    "city": "Bronx",
+    "state": "NY",
+    "zip": "10472",
+    "capacity": 150,
+    "showTypes": ["Band", "Electronic", "Hip-Hop"],
+    "preferredGenres": ["Hard Rock", "Deep House", "R&B"]
+  }
+]

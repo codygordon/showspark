@@ -1,0 +1,35 @@
+.facebook-auth-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: ease .15s;
+  border: 0;
+  border-radius: 3px;
+  box-shadow: $button-shadow;
+  background: $white;
+  width: 100%;
+  height: 50px;
+  color: lighten($black, 15%);
+  font-size: 1.2em;
+  font-weight: 700;
+
+
+  img {
+    flex: 0 0 20px;
+    padding-right: 10px;
+  }
+
+  span {
+    flex: 0 0 auto;
+  }
+
+  &:hover {
+    box-shadow: $button-shadow-hovered;
+    background: darken($white, 1%);
+  }
+
+  &:active {
+    box-shadow: $button-shadow-active;
+    background: darken($white, 15%);
+  }
+}

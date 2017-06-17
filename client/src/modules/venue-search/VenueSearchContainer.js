@@ -2,14 +2,13 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Dimmer, Loader } from 'semantic-ui-react'
-import qs from 'qs'
+import qs from 'query-string'
 
 import './venue-search.css'
 
-import { regionSelected, listPageSelected, fetchVenues } from './venueSearch'
+import * as actions from './actions'
 
-import VenuesHeader from '../shared-components/VenuesHeader'
-import List from './components/List'
+import VenuesList from './components/VenuesList'
 import Map from './components/Map'
 
 class VenueSearch extends Component {
@@ -26,7 +25,7 @@ class VenueSearch extends Component {
   componentWillMount() {
     const { dispatch, location, history, venues } = this.props
     if (location.search) {
-      const query = qs.parse(location.search.replace('?', ''))
+      const query = qs.parse(location.search)
       if (query['region-text'] && query.page) {
         const limit = venues.perPage
         const offset = (query.page - 1) * limit
@@ -42,8 +41,8 @@ class VenueSearch extends Component {
   componentWillReceiveProps(nextProps) {
     const { dispatch, location, venues } = this.props
     if (nextProps.location.search && location.search) {
-      const thisQuery = qs.parse(location.search.replace('?', ''))
-      const nextQuery = qs.parse(nextProps.location.search.replace('?', ''))
+      const thisQuery = qs.parse(location.search)
+      const nextQuery = qs.parse(nextProps.location.search)
       if (nextQuery['region-text'] && thisQuery['region-text']
       && nextQuery.page && thisQuery.page) {
         const limit = venues.perPage
@@ -65,14 +64,7 @@ class VenueSearch extends Component {
     const errorMessage = region.errorMessage ? region.errorMessage : venues.errorMessage
 
     return (
-      <div className="venue-search">
-        <VenuesHeader
-          dispatch={dispatch}
-          history={history}
-          location={location}
-          auth={auth}
-          region={region} />
-
+      <section className="venue-search-container">
         <Dimmer active={venues.isFetching}>
           <Loader size="large">
             Loading Venues...
@@ -85,7 +77,7 @@ class VenueSearch extends Component {
           region={region}
           venues={venues} />
 
-        <List
+        <VenuesList
           dispatch={dispatch}
           history={history}
           region={region}
@@ -94,7 +86,7 @@ class VenueSearch extends Component {
         <Dimmer active={!!errorMessage}>
           <h2 className="dimmer-error">{errorMessage}</h2>
         </Dimmer>
-      </div>
+      </section>
     )
   }
 }

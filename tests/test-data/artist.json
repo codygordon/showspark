@@ -1,0 +1,13 @@
+{
+  "name": "Jangula",
+  "artistType": "Band",
+  "homeCity": "Brooklyn, NY",
+  "genres": ["Gutter Rock", "Indie"],
+  "memberCount": 2,
+  "instruments": ["Vocals", "Q-Chord", "Electric Guitar", "Live Drums", "Electric Bass Guitar"],
+  "profiles": [{
+    "provider": "facebook",
+    "url": "https://www.facebook.com/jangulanyc",
+    "handle": "jangulanyc"
+  }]
+}

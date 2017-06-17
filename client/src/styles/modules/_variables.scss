@@ -1,0 +1,26 @@
+$font-stack: 'Roboto', sans-serif;
+
+// shadows
+$header-shadow: 0 0 5px rgba(0, 0, 0, .5);
+$user-img-shadow: 0 0 2px rgba(0, 0, 0, .6);
+$container-shadow: 0 0 4px rgba(0, 0, 0, .15);
+$button-shadow: .5px 1px 4px rgba(0, 0, 0, .4);
+$button-shadow-hovered: 0 2px 8px rgba(0, 0, 0, .4);
+$button-shadow-active:  0 0 2px rgba(0, 0, 0, .4);
+
+// colors
+$white: #fff;
+$black: #000;
+$gray: #666;
+$error-red: #fe3f3a;
+$good-green: #81cf19;
+$warning-yellow: #f2e319;
+$blue: #188ff1;
+$blue-gradient: linear-gradient(135deg, lighten($blue, 20%) 0%, lighten($blue, 10%) 33%, $blue 71%);
+
+// sizes
+$header-height: 48px;
+
+// misc
+$votivate-logo-img: url('../img/showspark-logo.png');
+$votivate-logo-hover-img: url('../img/showspark-logo-bg-hover.png');

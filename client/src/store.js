@@ -3,12 +3,12 @@ import { routerMiddleware, routerReducer } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import { createBrowserHistory } from 'history'
 
-import AuthService from './utils/AuthService'
+import AuthService from './utils/auth-service'
 
 /* import reducers from modules */
-import auth from './modules/auth/auth'
-import venueSearch from './modules/venue-search/venueSearch'
-import venue from './modules/venue/venue'
+import auth from './modules/auth/actions'
+import venueSearch from './modules/venue-search/actions'
+import venue from './modules/venue/actions'
 
 const auth0 = new AuthService()
 
@@ -25,13 +25,9 @@ export const initialState = {
     errorMessage: null
   },
   venueSearch: {
-    map: {
-      center: [-74, 40.7],
-      zoom: [11.5],
-      errorMessage: null
-    },
-    region: {
+    city: {
       text: '',
+      radius: 25,
       coords: null,
       errorMessage: null
     },

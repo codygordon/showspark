@@ -1,12 +1,14 @@
 {
   "extends": [
-    "react-app",
     "airbnb"
   ],
   "env": {
     "node": true,
-    "browser": true
+    "browser": true,
+    "es6": true,
+    "jest": true
   },
+  "parser": "babel-eslint",
   "rules": {
     "import/extensions": "off",
     "import/no-extraneous-dependencies": [
@@ -24,6 +26,7 @@
     "no-console": "warn",
     "no-underscore-dangle": "off",
     "no-param-reassign": "off",
+    "no-nested-ternary": "off",
     "comma-dangle": ["error", "never"],
     "semi": ["error", "never"],
     "space-before-function-paren": ["error", "never"],

@@ -1,20 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { logInUserGoogle } from '../auth'
+import googleIcon from '../../../img/google-oauth-icon.svg'
 
-const GoogleAuth = ({ dispatch }) => (
+const GoogleAuth = ({ handleClick }) => (
   <button
-    className="button google-auth-button"
-    onClick={() => dispatch(logInUserGoogle())}
-  >
-    <i className="fa fa-google" aria-hidden="true" />
-    Log in with Google
+    className="google-auth-button"
+    onClick={handleClick}>
+    <img src={googleIcon} alt="google" />
+    <span>Log in with Google</span>
   </button>
 )
 
 GoogleAuth.propTypes = {
-  dispatch: PropTypes.func.isRequired
+  handleClick: PropTypes.func.isRequired
 }
 
 export default GoogleAuth

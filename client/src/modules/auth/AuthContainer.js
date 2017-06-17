@@ -3,11 +3,10 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Modal } from 'semantic-ui-react'
 
-import './auth.css'
+import * as actions from './actions'
 
 import GoogleAuthButton from './components/GoogleAuthButton'
 import FacebookAuthButton from './components/FacebookAuthButton'
-import EmailAuthButton from './components/EmailAuthButton'
 import EmailAuthForm from './components/EmailAuthForm'
 
 class Auth extends Component {
@@ -18,36 +17,53 @@ class Auth extends Component {
     auth: PropTypes.object.isRequired
   }
 
-  componentWillUnmount() {
-    const { location } = this.props
+  authClose = () => {
+    const { dispatch, location, history } = this.props
+    dispatch(actions.showAuthToggle())
+    history.push(`${location.pathname}?${location.search}`.replace('&showAuth=true', ''))
   }
 
-  authClose = () => {
-    const { location, history } = this.props
-    // TODO: revisit query param and routing
+  handleGoogleAuthClick = () => {
+    const { dispatch } = this.props
+    // dispatch(actions.)
+  }
+
+  handleFacebookAuthClick = () => {
+    const { dispatch } = this.props
+    // dispatch(actions.)
+  }
+
+  handleSignUpToggleClick = () => {
+    const { dispatch } = this.props
+    dispatch(actions.showSignUpToggle())
+  }
+
+  handleEmailAuthLogInSubmit = (e) => {
+    e.preventDefault()
+    const { auth, dispatch, location } = this.props
+    const email = this.emailInput.value
+    const password = this.passwordInput.value
+    const uri = location.href
+
+    auth.showingSignUp
+      ? dispatch(actions.logInUser(email, password, uri))
+      : dispatch(actions.signUpUser(email, password, uri))
   }
 
   render() {
-    const { location, dispatch, auth } = this.props
+    const { dispatch, auth } = this.props
     return (
       <Modal
         basic
         open={auth.showingAuth}
         onClose={this.authClose}>
-        {!auth.showingEmailAuthForm ? (
-          <div className="auth-container">
-            <GoogleAuthButton dispatch={dispatch} />
-            <FacebookAuthButton dispatch={dispatch} />
-            <EmailAuthButton dispatch={dispatch} auth={auth} />
-          </div>
-        ) : (
-          <div className="auth-container">
-            <EmailAuthForm
-              dispatch={dispatch}
-              location={location}
-              auth={auth} />
-          </div>
-        )}
+        <div className="auth-container">
+          <GoogleAuthButton handleClick={this.handleGoogleAuthClick} />
+          <FacebookAuthButton handleClick={this.handleFacebookAuthClick} />
+          <EmailAuthForm
+            handleSignUpToggle={this.handleSignUpToggleClick}
+            handleSubmit={this.handleEmailAuthSubmit} />
+        </div>
       </Modal>
     )
   }
