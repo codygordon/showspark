@@ -21,7 +21,14 @@ exports.saveExisting = async (req, res) => {
     ...req.body,
     modifiedDate: Date.now()
   } }, { new: true })
+  if (!saved) throw new Error('invalid venue id')
   res.send(saved)
+}
+
+exports.findById = async (req, res) => {
+  const venue = await Venue.findOne({ _id: req.params.id })
+  if (!venue) throw new Error('invalid venue id')
+  res.send(venue)
 }
 
 exports.findByProximity = async (req, res) => {
@@ -36,10 +43,4 @@ exports.findByProximity = async (req, res) => {
   const lookup = sphere(venues.map(venue => venue._doc))
   const filtered = lookup(searchLat, searchLng, maxResults, proximity)
   res.send(filtered)
-}
-
-exports.findById = async (req, res) => {
-  const venue = await Venue.findOne({ _id: req.params.id })
-  if (!venue) throw new Error('venue doesn\'t exist')
-  res.send(venue)
 }

@@ -8,11 +8,11 @@ const venues = require('../../../controllers/venues')
 
 const router = express.Router()
 
-router.get('/', catchErrors(entryPoint))
-router.post('/', catchErrors(entryPoint))
-router.put('/', catchErrors(entryPoint))
+router.get('/', entryPoint)
+router.post('/', entryPoint)
+router.put('/', entryPoint)
 
-router.get('/token', catchErrors(token))
+router.get('/token', token)
 
 router.post('/users', catchErrors(users.upsert))
 

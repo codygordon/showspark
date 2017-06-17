@@ -7,7 +7,7 @@ exports.upsert = async (req, res) => {
   const user = await User.findOneAndUpdate({
     'auth0.user_id': req.body.auth0.user_id
   }, {
-    $set: { ...req.body }
+    $set: { ...req.body, modifiedDate: Date.now() }
   }, {
     upsert: true, new: true
   })
@@ -16,12 +16,12 @@ exports.upsert = async (req, res) => {
 
 exports.getUserId = async (auth0Id) => {
   const user = await User.findOne({ 'auth0.user_id': auth0Id })
-  if (!user) throw new Error('user doesn\'t exist')
+  if (!user) throw new Error('invalid user')
   return user._id
 }
 
 exports.checkAdminUser = async (auth0Id) => {
   const user = await User.findOne({ 'auth0.user_id': auth0Id, admin: true })
-  if (!user) throw new Error('admin user doesn\'t exist')
+  if (!user) throw new Error('invalid user')
   return user._id
 }

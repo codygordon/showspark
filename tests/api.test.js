@@ -1,8 +1,6 @@
 const request = require('supertest')
 const jwtSign = require('jsonwebtoken').sign
 
-const App = require('../app')
-
 const testUsersData = require('./test-data/users.json')
 const testArtistData = require('./test-data/artist.json')
 const testVenuesData = require('./test-data/venues.json')
@@ -10,6 +8,8 @@ const testVenuesData = require('./test-data/venues.json')
 const User = require('../models/User')
 const Artist = require('../models/Artist')
 const Venue = require('../models/Venue')
+
+const App = require('../app')
 
 const app = new App()
 
@@ -127,17 +127,35 @@ describe('POST call to api/v1/artists', () => {
 
 // 4. GET an existing artist record
 describe('GET call to api/v1/artists', () => {
-  test('with no token in headers returns 401', async () => {
-    const res = await request(app.express)
-      .get('/api/v1/artists/')
-    expect(res.status).toEqual(401)
-  })
-
   test('with no id in params returns 403', async () => {
     const res = await request(app.express)
       .get('/api/v1/artists/')
       .set('Authorization', `Bearer ${testUserToken}`)
     expect(res.status).toEqual(403)
+  })
+
+  test('with id in params and non-user token in headers returns error', async () => {
+    const res = await request(app.express)
+      .get(`/api/v1/artists/${testArtistId}`)
+      .set('Authorization', `Bearer ${testApiToken}`)
+    expect(res.status).toEqual(500)
+    expect(res.text.toLowerCase()).toContain('error: invalid user')
+  })
+
+  test('with invalid id in params and user token in headers returns error', async () => {
+    const res = await request(app.express)
+      .get('/api/v1/artists/INVALID_ID')
+      .set('Authorization', `Bearer ${testUserToken}`)
+    expect(res.status).toEqual(500)
+    expect(res.text.toLowerCase()).toContain('mongooseerror: cast to objectid failed')
+  })
+
+  test('with valid but non-matching id in params and user token in headers returns error', async () => {
+    const res = await request(app.express)
+      .get('/api/v1/artists/59454ca828a0270e4c67c871')
+      .set('Authorization', `Bearer ${testUserToken}`)
+    expect(res.status).toEqual(500)
+    expect(res.text.toLowerCase()).toContain('error: invalid artist id')
   })
 
   test('with token and id in params returns success', async () => {
@@ -164,6 +182,26 @@ describe('PUT call to api/v1/artists', () => {
     expect(res.status).toEqual(401)
   })
 
+  test('with data in body, invalid id in params, and user token in headers returns error', async () => {
+    const res = await request(app.express)
+      .put('/api/v1/artists/INVALID_ID')
+      .set('Authorization', `Bearer ${testUserToken}`)
+      .set('Content-Type', 'application/json')
+      .send({ ...testArtistData, name: 'new name' })
+    expect(res.status).toEqual(500)
+    expect(res.text.toLowerCase()).toContain('mongooseerror: cast to objectid failed')
+  })
+
+  test('with data in body, valid but non-matching id in params, and user token in headers returns error', async () => {
+    const res = await request(app.express)
+      .put('/api/v1/artists/59454ca828a0270e4c67c871')
+      .set('Authorization', `Bearer ${testUserToken}`)
+      .set('Content-Type', 'application/json')
+      .send({ ...testArtistData, name: 'new name' })
+    expect(res.status).toEqual(500)
+    expect(res.text.toLowerCase()).toContain('error: invalid artist id')
+  })
+
   test('with user token in headers, id in params, and no data in body returns server error', async () => {
     const res = await request(app.express)
       .put(`/api/v1/artists/${testArtistId}`)
@@ -185,23 +223,34 @@ describe('PUT call to api/v1/artists', () => {
 
 // 6. POST new venue records
 describe('POST call to api/v1/venues', () => {
-  test('with non-admin user token in headers returns server error', async () => {
-    const res = await request(app.express)
-      .post('/api/v1/venues/')
-      .set('Authorization', `Bearer ${testUserToken}`)
-    expect(res.status).toEqual(500)
-    expect(res.text).toContain('Error:')
-  })
-
   test('with no data in body returns server error', async () => {
     const res = await request(app.express)
       .post('/api/v1/venues/')
       .set('Authorization', `Bearer ${testAdminUserToken}`)
     expect(res.status).toEqual(500)
-    expect(res.text).toContain('Error:')
+    expect(res.text.toLowerCase()).toContain('error: valid data required in body')
   })
 
-  test('with admin token in headers and data in body returns success (1)', async () => {
+  test('with non-admin user token in headers and data in body returns server error', async () => {
+    const res = await request(app.express)
+      .post('/api/v1/venues/')
+      .set('Authorization', `Bearer ${testUserToken}`)
+      .send(testVenuesData[0])
+    expect(res.status).toEqual(500)
+    expect(res.text.toLowerCase()).toContain('error: invalid user')
+  })
+
+  // test('with admin user token in headers and data in body containing invalid address returns geocoding error', async () => {
+  //   const res = await request(app.express)
+  //     .post('/api/v1/venues/')
+  //     .set('Authorization', `Bearer ${testAdminUserToken}`)
+  //     .set('Content-Type', 'application/json')
+  //     .send({ ...testVenuesData[0], address: 'hsdfihf783', city: 'none', state: '998', zip: 'nasdgpi' })
+  //   expect(res.status).toEqual(500)
+  //   expect(res.text.toLowerCase()).toContain('error: invalid user')
+  // })
+
+  test('with admin user token in headers and data in body returns success (1)', async () => {
     const res = await request(app.express)
       .post('/api/v1/venues/')
       .set('Authorization', `Bearer ${testAdminUserToken}`)
@@ -212,7 +261,7 @@ describe('POST call to api/v1/venues', () => {
     testVenueIds.push(res.body._id)
   })
 
-  test('with admin token in headers and data in body returns success (2)', async () => {
+  test('with admin user token in headers and data in body returns success (2)', async () => {
     const res = await request(app.express)
       .post('/api/v1/venues/')
       .set('Authorization', `Bearer ${testAdminUserToken}`)
@@ -246,7 +295,27 @@ describe('PUT call to api/v1/venues', () => {
       .put(`/api/v1/venues/${testVenueIds[0]}`)
       .set('Authorization', `Bearer ${testAdminUserToken}`)
     expect(res.status).toEqual(500)
-    expect(res.text).toContain('Error:')
+    expect(res.text.toLowerCase()).toContain('error: valid data required')
+  })
+
+  test('with data in body, invalid id in params, and admin user token in headers returns error', async () => {
+    const res = await request(app.express)
+      .put('/api/v1/venues/INVALID_ID')
+      .set('Authorization', `Bearer ${testAdminUserToken}`)
+      .set('Content-Type', 'application/json')
+      .send({ ...testVenuesData[0], name: 'new name' })
+    expect(res.status).toEqual(500)
+    expect(res.text.toLowerCase()).toContain('mongooseerror: cast to objectid failed')
+  })
+
+  test('with data in body, valid but non-matching id in params, and admin user token in headers returns error', async () => {
+    const res = await request(app.express)
+      .put('/api/v1/venues/59454ca828a0270e4c67c871')
+      .set('Authorization', `Bearer ${testAdminUserToken}`)
+      .set('Content-Type', 'application/json')
+      .send({ ...testVenuesData[0], name: 'new name' })
+    expect(res.status).toEqual(500)
+    expect(res.text.toLowerCase()).toContain('error: invalid venue id')
   })
 
   test('with admin user token in headers, id in params, and valid data in body returns success', async () => {
@@ -267,6 +336,22 @@ describe('GET call to api/v1/venues', () => {
       .put('/api/v1/venues/')
       .set('Authorization', `Bearer ${testApiToken}`)
     expect(res.status).toEqual(403)
+  })
+
+  test('with data in body, invalid id in params, and admin user token in headers returns error', async () => {
+    const res = await request(app.express)
+      .get('/api/v1/venues/INVALID_ID')
+      .set('Authorization', `Bearer ${testAdminUserToken}`)
+    expect(res.status).toEqual(500)
+    expect(res.text.toLowerCase()).toContain('mongooseerror: cast to objectid failed')
+  })
+
+  test('with data in body, valid but non-matching id in params, and admin user token in headers returns error', async () => {
+    const res = await request(app.express)
+      .get('/api/v1/venues/59454ca828a0270e4c67c871')
+      .set('Authorization', `Bearer ${testAdminUserToken}`)
+    expect(res.status).toEqual(500)
+    expect(res.text.toLowerCase()).toContain('error: invalid venue id')
   })
 
   test('with id in params returns success', async () => {

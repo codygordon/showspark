@@ -21,12 +21,13 @@ exports.saveExisting = async (req, res) => {
     ...req.body,
     modifiedDate: Date.now()
   } }, { new: true })
+  if (!saved) throw new Error('invalid artist id')
   res.send(saved)
 }
 
 exports.findById = async (req, res) => {
   const userId = await getUserId(req.user.sub)
   const artist = await Artist.findOne({ _id: req.params.id, owners: userId })
-  if (!artist) throw new Error('artist doesn\'t exist')
+  if (!artist) throw new Error('invalid artist id')
   res.send(artist)
 }
