@@ -156,11 +156,12 @@ export function fetchVenues(cityCoords) {
   }
 }
 
-export function citySelected(cityText) {
+export function citySelected(citySlug) {
   return async (dispatch) => {
-    // just send the text to state first for input
-    dispatch(receiveCity(cityText, null))
-    // then geocode and send coords
+    const cityText = citySlug.replace('--', ', ').replace('-', ' ')
+    // // just send the text to state first for input
+    // dispatch(receiveCity(cityText, null))
+    // // then geocode and send coords
     try {
       const coords = getLatLng(geocodeByAddress(cityText))
       dispatch(receiveCity(cityText, coords))

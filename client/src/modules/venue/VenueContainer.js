@@ -1,18 +1,16 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Dimmer, Loader } from 'semantic-ui-react'
 import qs from 'query-string'
 
-import './venue.css'
-
-import placeholderImg from '../../img/venue-placeholder.jpg'
-
-import * as actions from './actions'
-
+import { Dimmer, Loader } from 'semantic-ui-react'
 import VenuesHeader from '../shared-components/VenuesHeader'
 import Info from './components/Info'
 import Reviews from './components/Reviews'
+
+import * as actions from './actions'
+
+import placeholderImg from '../../img/venue-placeholder.jpg'
 
 class Venue extends Component {
   static propTypes = {

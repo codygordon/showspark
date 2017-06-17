@@ -45,3 +45,5 @@ EmailAuthForm.propTypes = {
   handleSignUpToggle: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired
 }
+
+export default EmailAuthForm

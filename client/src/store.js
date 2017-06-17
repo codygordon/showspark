@@ -27,15 +27,14 @@ export const initialState = {
   venueSearch: {
     city: {
       text: '',
-      radius: 25,
       coords: null,
       errorMessage: null
     },
     venues: {
       isFetching: false,
       data: [],
-      perPage: 16,
-      pageCount: 0,
+      perPage: 20,
+      pageCount: 1,
       currentPage: 1,
       total: 0,
       errorMessage: null,

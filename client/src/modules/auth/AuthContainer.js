@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Modal } from 'semantic-ui-react'
-
-import * as actions from './actions'
 
 import GoogleAuthButton from './components/GoogleAuthButton'
 import FacebookAuthButton from './components/FacebookAuthButton'
 import EmailAuthForm from './components/EmailAuthForm'
+
+import * as actions from './actions'
 
 class Auth extends Component {
   static propTypes = {
@@ -51,20 +50,14 @@ class Auth extends Component {
   }
 
   render() {
-    const { dispatch, auth } = this.props
     return (
-      <Modal
-        basic
-        open={auth.showingAuth}
-        onClose={this.authClose}>
-        <div className="auth-container">
-          <GoogleAuthButton handleClick={this.handleGoogleAuthClick} />
-          <FacebookAuthButton handleClick={this.handleFacebookAuthClick} />
-          <EmailAuthForm
-            handleSignUpToggle={this.handleSignUpToggleClick}
-            handleSubmit={this.handleEmailAuthSubmit} />
-        </div>
-      </Modal>
+      <div className="auth-container">
+        <GoogleAuthButton handleClick={this.handleGoogleAuthClick} />
+        <FacebookAuthButton handleClick={this.handleFacebookAuthClick} />
+        <EmailAuthForm
+          handleSignUpToggle={this.handleSignUpToggleClick}
+          handleSubmit={this.handleEmailAuthSubmit} />
+      </div>
     )
   }
 }

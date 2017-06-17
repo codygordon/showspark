@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import qs from 'query-string'
-
-import * as venueSearchActions from '../venue-search/actions'
+import slug from 'slug'
 
 import HomeHeading from './components/HomeHeading'
 import CityInput from './components/CityInput'
+
+import * as venueSearchActions from '../venue-search/actions'
 
 class Home extends Component {
   handleCityInputChange = (cityText) => {
@@ -16,8 +17,8 @@ class Home extends Component {
 
   handleCityInputSelect = (cityText) => {
     const { dispatch, history } = this.props
-    dispatch(venueSearchActions.citySelected(cityText))
-    history.push(`/venue-search?${qs.stringify({ city: cityText })}`)
+    dispatch(venueSearchActions.citySelected(slug(cityText)))
+    history.push(`/venue-search?${qs.stringify({ city: slug(cityText) })}`)
   }
 
   render() {
@@ -25,10 +26,10 @@ class Home extends Component {
     return (
       <section className="home-container">
         <HomeHeading />
-        <CityInput
-          city={city}
+        {/* <CityInput
+          cityText={city.text}
           handleChange={this.handleCityInputChange}
-          handleSelect={this.handleCityInputSelect} />
+          handleSelect={this.handleCityInputSelect} /> */}
       </section>
     )
   }

@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Dimmer } from 'semantic-ui-react'
 import { connect } from 'react-redux'
+import qs from 'query-string'
 
-import * as authActions from '../auth/actions'
-
+import { Dimmer, Modal } from 'semantic-ui-react'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import AuthContainer from '../auth/AuthContainer'
+
+
+import * as authActions from '../auth/actions'
 
 class App extends Component {
   static defaultProps = {
@@ -29,21 +31,22 @@ class App extends Component {
 
   componentWillMount() {
     const { dispatch, location } = this.props
-    const query = qs.parse(location.search.replace('?', ''))
+    const query = qs.parse(location.search)
     if (query.showAuth) dispatch(authActions.showAuthToggle())
   }
 
   componentWillReceiveProps(nextProps) {
     const { dispatch, location } = this.props
-    const query = qs.parse(location.search.replace('?', ''))
-    const nextQuery = qs.parse(location.search.replace('?', ''))
+    const query = qs.parse(location.search)
+    const nextQuery = qs.parse(location.search)
     if (query.showAuth !== !nextQuery.showAuth) dispatch(authActions.showAuthToggle())
   }
 
-  handleLoginButtonClick = () => {
+  handleLogInButtonClick = () => {
     const { location, history, dispatch } = this.props
     dispatch(authActions.showAuthToggle())
-    history.push(`${location.pathname}${location.search}&showAuth=true`)
+    const authParam = location.search ? '&showAuth=true' : '?showAuth=true'
+    history.push(`${location.pathname}${location.search}${authParam}`)
   }
 
   handleLogOutClick = () => {
@@ -62,7 +65,12 @@ class App extends Component {
             handleLogOutClick={this.handleLogOutClick} />
         }
         <Dimmer className="error" active={!!errorMessage}>{errorMessage}</Dimmer>
-        <AuthContainer location={location} history={history} auth={auth} />
+        <Modal
+          basic
+          open={auth.showingAuth}
+          onClose={this.authClose}>
+          <AuthContainer location={location} history={history} auth={auth} />
+        </Modal>
         {children}
         {showFooter &&
           <Footer />

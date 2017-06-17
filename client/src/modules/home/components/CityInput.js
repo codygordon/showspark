@@ -1,35 +1,24 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+
 import PlacesAutocomplete from 'react-places-autocomplete'
+import AutocompleteItem from './AutocompleteItem'
 
-const AutocompleteItem = ({ formattedSuggestion }) => (
-  <div className="suggestion-item">
-    <i className="fa fa-map-marker suggestion-icon" />
-    <strong>{formattedSuggestion.mainText}</strong>{' '}
-    <small className="text-muted">{formattedSuggestion.secondaryText}</small>
-  </div>
-)
-
-AutocompleteItem.propTypes = {
-  formattedSuggestion: PropTypes.string.isRequired
-}
-
-const CityInput = ({ venueSearch, handleSelect, handleChange }) => (
-  <div className="city-search">
+const CityInput = ({ cityText, handleSelect, handleChange }) => (
+  <div className="city-input-container">
     <i className="fa fa-search fa-2" aria-hidden="true" />
     <PlacesAutocomplete
       inputProps={{
-        value: venueSearch.city,
+        value: cityText,
         onChange: handleChange,
         placeholder: 'Search venues by city',
         autoFocus: true
       }}
-      value={venueSearch.city}
       onSelect={handleSelect}
       onEnterKeyDown={handleSelect}
-      classNames={{ input: 'region-search-input' }}
+      classNames={{ input: 'city-input' }}
       autocompleteItem={AutocompleteItem}
-      inputName="region-search-input"
+      highlightFirstSuggestion
       options={{
         types: ['(regions)'],
         componentRestrictions: { country: 'us' }
@@ -37,8 +26,12 @@ const CityInput = ({ venueSearch, handleSelect, handleChange }) => (
   </div>
 )
 
+CityInput.defaultProps = {
+  cityText: ''
+}
+
 CityInput.propTypes = {
-  venueSearch: PropTypes.object.isRequired,
+  cityText: PropTypes.string,
   handleChange: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired
 }

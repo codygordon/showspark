@@ -1,4 +1,4 @@
-import API from '../../utils/API'
+import apiCall from '../../utils/api-call'
 import { initialState } from '../../store'
 
 /* ACTION TYPES */
@@ -29,7 +29,7 @@ export default function reducer(state = initialState.venue, action) {
       return {
         ...initialState.venue,
         isFetching: false,
-        errorMessage: action.message,
+        errorMessage: action.message
       }
     case RECEIVE_VENUE:
       return {
@@ -74,11 +74,11 @@ export function receiveVenue(venue) {
 
 /* ASYNC ACTION CREATORS */
 
-export function fetchVenue(venueId) {
+export function fetchVenue(id) {
   return (dispatch) => {
     dispatch(requestVenue())
 
-    API.get('venues', { venueId }, (res) => {
+    apiCall({ dataType: 'venues', id }, (res) => {
       if (res) {
         return dispatch(receiveVenue(res))
       }

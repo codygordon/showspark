@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+
 import { Switch, Route } from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux'
-
-import { history } from './store'
-
 import AppContainer from './modules/app/AppContainer'
 import HomeContainer from './modules/home/HomeContainer'
 import ArtistContainer from './modules/artist/ArtistContainer'
 import VenueSearchContainer from './modules/venue-search/VenueSearchContainer'
 import NotFound from './modules/app/components/NotFound'
+
+import { history } from './store'
 
 export default class Routes extends Component {
   static propTypes = {
@@ -20,24 +20,28 @@ export default class Routes extends Component {
 
   HomePlusProps = ({ location }) => (
     <AppContainer
+      location={location}
+      history={history}
       auth={this.props.auth}
       showHeader
       showFooter>
       <HomeContainer
-        history={history}
         location={location}
+        history={history}
         venueSearch={this.props.venueSearch} />
     </AppContainer>
   )
 
   ArtistPlusProps = ({ location }) => (
     <AppContainer
+      location={location}
+      history={history}
       auth={this.props.auth}
       errorMessage={this.props.artist.errorMessage}
       showHeader>
       <ArtistContainer
-        history={history}
         location={location}
+        history={history}
         isAuthenticated={this.props.auth.isAuthenticated}
         artist={this.props.artist} />
     </AppContainer>
@@ -45,12 +49,14 @@ export default class Routes extends Component {
 
   VenueSearchPlusProps = ({ location }) => (
     <AppContainer
+      location={location}
+      history={history}
       auth={this.props.auth}
       errorMessage={this.props.venueSearch.errorMessage}
       showHeader>
       <VenueSearchContainer
-        history={history}
         location={location}
+        history={history}
         isAuthenticated={this.props.auth.isAuthenticated}
         venueSearch={this.props.venueSearch}
         artist={this.props.artist} />
