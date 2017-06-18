@@ -27,13 +27,12 @@ export default function reducer(state = initialState.auth, action) {
       return {
         ...state,
         showingAuth: !state.showingAuth,
-        showingEmailAuthForm: false,
         showingSignUp: false
       }
     case SHOW_SIGN_UP_TOGGLE:
       return {
         ...state,
-        showingSignUp: state.showingSignUp
+        showingSignUp: !state.showingSignUp
       }
     case SIGNUP_REQUEST:
       return {

@@ -1,11 +1,12 @@
-import { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
+import { geocodeByAddress } from 'react-places-autocomplete'
 
 import apiCall from '../../utils/api-call'
 import { initialState } from '../../store'
 
 /* ACTION TYPES */
 
-export const RECEIVE_CITY = 'venue-search/RECEIVE_CITY'
+export const RECEIVE_CITY_TEXT = 'venue-search/RECEIVE_CITY_TEXT'
+export const RECEIVE_CITY_COORDS = 'venue-search/RECEIVE_CITY_COORDS'
 export const CITY_ERROR = 'venue-search/CITY_ERROR'
 export const REQUEST_VENUES = 'venue-search/REQUEST_VENUES'
 export const RECEIVE_VENUES = 'venue-search/RECEIVE_VENUES'
@@ -17,13 +18,21 @@ export const LIST_PAGE_SELECTED = 'venue-search/LIST_PAGE_SELECTED'
 
 export default function reducer(state = initialState.venueSearch, action) {
   switch (action.type) {
-    case RECEIVE_CITY:
+    case RECEIVE_CITY_TEXT:
       return {
         ...state,
         city: {
           ...state.city,
           errorMessage: null,
-          text: action.cityText,
+          text: action.cityText
+        }
+      }
+    case RECEIVE_CITY_COORDS:
+      return {
+        ...state,
+        city: {
+          ...state.city,
+          errorMessage: null,
           coords: action.cityCoords
         }
       }
@@ -91,10 +100,16 @@ export default function reducer(state = initialState.venueSearch, action) {
 
 /* ACTION CREATORS */
 
-export function receiveCity(cityText, cityCoords) {
+export function receiveCityText(cityText) {
   return {
-    type: RECEIVE_CITY,
-    cityText,
+    type: RECEIVE_CITY_TEXT,
+    cityText
+  }
+}
+
+export function receiveCityCoords(cityCoords) {
+  return {
+    type: RECEIVE_CITY_COORDS,
     cityCoords
   }
 }
@@ -149,7 +164,11 @@ export function listPageSelected(pageNum) {
 export function fetchVenues(cityCoords) {
   return (dispatch) => {
     dispatch(requestVenues())
-    apiCall('venues-proximity', { cityCoords }, (res, err) => {
+    apiCall({
+      dataType: 'venues-proximity',
+      latitude: cityCoords.lat,
+      longitude: cityCoords.lng
+    }, (res, err) => {
       if (res.data.length > 0) return dispatch(receiveVenues(res.data))
       return dispatch(requestVenuesError(err))
     })
@@ -158,13 +177,14 @@ export function fetchVenues(cityCoords) {
 
 export function citySelected(citySlug) {
   return async (dispatch) => {
-    const cityText = citySlug.replace('--', ', ').replace('-', ' ')
-    // // just send the text to state first for input
-    // dispatch(receiveCity(cityText, null))
-    // // then geocode and send coords
+    const cityText = citySlug.replace(/-/g, ' ')
     try {
-      const coords = getLatLng(geocodeByAddress(cityText))
-      dispatch(receiveCity(cityText, coords))
+      const geocoded = await geocodeByAddress(cityText)
+      const coords = {
+        latitude: geocoded[0].geometry.location.lat(),
+        longitude: geocoded[0].geometry.location.lng()
+      }
+      dispatch(receiveCityCoords(coords))
     } catch (err) { dispatch(cityError(err)) }
   }
 }

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import qs from 'query-string'
 import slug from 'slug'
 
-import HomeHeading from './components/HomeHeading'
+import Jumbotron from './components/Jumbotron'
 import CityInput from './components/CityInput'
 
 import * as venueSearchActions from '../venue-search/actions'
@@ -12,11 +12,13 @@ import * as venueSearchActions from '../venue-search/actions'
 class Home extends Component {
   handleCityInputChange = (cityText) => {
     const { dispatch } = this.props
-    dispatch(venueSearchActions.receiveCity(cityText, null))
+    dispatch(venueSearchActions.receiveCityText(cityText))
   }
 
-  handleCityInputSelect = (cityText) => {
+  handleCityInputSelect = (fullText) => {
     const { dispatch, history } = this.props
+    const cityText = fullText.replace(', United States', '').trim()
+    dispatch(venueSearchActions.receiveCityText(cityText))
     dispatch(venueSearchActions.citySelected(slug(cityText)))
     history.push(`/venue-search?${qs.stringify({ city: slug(cityText) })}`)
   }
@@ -25,11 +27,11 @@ class Home extends Component {
     const { city } = this.props.venueSearch
     return (
       <section className="home-container">
-        <HomeHeading />
-        {/* <CityInput
+        <Jumbotron />
+        <CityInput
           cityText={city.text}
           handleChange={this.handleCityInputChange}
-          handleSelect={this.handleCityInputSelect} /> */}
+          handleSelect={this.handleCityInputSelect} />
       </section>
     )
   }

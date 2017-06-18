@@ -24,11 +24,11 @@ class VenueSearch extends Component {
     if (location.search) {
       const query = qs.parse(location.search)
       if (query.city && query.page) {
-        dispatch(actions.citySelected(query.city))
-        dispatch(actions.fetchVenues(query.city))
-        dispatch(actions.listPageSelected(query.page))
+        const city = query.city.replace('-', ' ')
+        dispatch(actions.receiveCityText(city))
+        dispatch(actions.citySelected(city))
       } else if (query.city && !query.page) {
-        history.replace(`${location.pathnname}${location.search}&page=1`)
+        history.replace(`${location.pathname}${location.search}&page=1`)
       }
     }
   }
@@ -41,7 +41,7 @@ class VenueSearch extends Component {
       if (nextQuery.city && thisQuery.city
       && nextQuery.page && thisQuery.page) {
         if (thisQuery.city !== nextQuery.city) {
-          dispatch(actions.citySelected(nextQuery.city))
+          dispatch(actions.citySelected(nextQuery.city.replace('-', ' ')))
           dispatch(actions.listPageSelected(nextQuery.page))
         } else if (thisQuery.page !== nextQuery.page) {
           dispatch(actions.listPageSelected(nextQuery.page))

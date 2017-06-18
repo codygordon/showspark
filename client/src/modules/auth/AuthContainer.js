@@ -19,7 +19,7 @@ class Auth extends Component {
   authClose = () => {
     const { dispatch, location, history } = this.props
     dispatch(actions.showAuthToggle())
-    history.push(`${location.pathname}?${location.search}`.replace('&showAuth=true', ''))
+    history.push(`${location.pathname}${location.search}`.replace('&showAuth=true', ''))
   }
 
   handleGoogleAuthClick = () => {
@@ -37,7 +37,7 @@ class Auth extends Component {
     dispatch(actions.showSignUpToggle())
   }
 
-  handleEmailAuthLogInSubmit = (e) => {
+  handleEmailAuthFormSubmit = (e) => {
     e.preventDefault()
     const { auth, dispatch, location } = this.props
     const email = this.emailInput.value
@@ -54,9 +54,9 @@ class Auth extends Component {
       <div className="auth-container">
         <GoogleAuthButton handleClick={this.handleGoogleAuthClick} />
         <FacebookAuthButton handleClick={this.handleFacebookAuthClick} />
-        <EmailAuthForm
+        {/* <EmailAuthForm
           handleSignUpToggle={this.handleSignUpToggleClick}
-          handleSubmit={this.handleEmailAuthSubmit} />
+          handleSubmit={this.handleEmailAuthSubmit} /> */}
       </div>
     )
   }

@@ -3,11 +3,10 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import qs from 'query-string'
 
-import { Dimmer, Modal } from 'semantic-ui-react'
+import { Dimmer } from 'semantic-ui-react'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import AuthContainer from '../auth/AuthContainer'
-
 
 import * as authActions from '../auth/actions'
 
@@ -38,20 +37,22 @@ class App extends Component {
   componentWillReceiveProps(nextProps) {
     const { dispatch, location } = this.props
     const query = qs.parse(location.search)
-    const nextQuery = qs.parse(location.search)
-    if (query.showAuth !== !nextQuery.showAuth) dispatch(authActions.showAuthToggle())
-  }
-
-  handleLogInButtonClick = () => {
-    const { location, history, dispatch } = this.props
-    dispatch(authActions.showAuthToggle())
-    const authParam = location.search ? '&showAuth=true' : '?showAuth=true'
-    history.push(`${location.pathname}${location.search}${authParam}`)
+    const nextQuery = qs.parse(nextProps.location.search)
+    if (query && nextQuery) {
+      if ((query.showAuth && !nextQuery.showAuth)
+      || (!query.showAuth && nextQuery.showAuth)) dispatch(authActions.showAuthToggle())
+    }
   }
 
   handleLogOutClick = () => {
     const { dispatch } = this.props
     dispatch(authActions.logOutUser())
+  }
+
+  authClose = () => {
+    const { location, history } = this.props
+    // const newSearch = location.search.replace('&showAuth=true', '').replace('?showAuth=true', '')
+    history.push('/')
   }
 
   render() {
@@ -60,17 +61,17 @@ class App extends Component {
       <main className="app-container">
         {showHeader &&
           <Header
+            location={location}
             auth={auth}
             handleLogInButtonClick={this.handleLogInButtonClick}
             handleLogOutClick={this.handleLogOutClick} />
         }
         <Dimmer className="error" active={!!errorMessage}>{errorMessage}</Dimmer>
-        <Modal
-          basic
-          open={auth.showingAuth}
-          onClose={this.authClose}>
+        <Dimmer
+          active={auth.showingAuth}
+          onClickOutside={this.authClose}>
           <AuthContainer location={location} history={history} auth={auth} />
-        </Modal>
+        </Dimmer>
         {children}
         {showFooter &&
           <Footer />

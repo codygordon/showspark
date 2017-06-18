@@ -3,15 +3,19 @@ import PropTypes from 'prop-types'
 
 import { Link } from 'react-router-dom'
 import { Popup } from 'semantic-ui-react'
-import LogInButton from './LogInButton'
 import UserButton from './UserButton'
 import UserMenu from './UserMenu'
 
-const Header = ({ auth, handleLogOutClick, handleLogInButtonClick }) => (
+const Header = ({ location, auth, handleLogOutClick }) => (
   <header>
     <Link to="/" className="logo" />
     {!auth.isAuthenticated ? (
-      <LogInButton handleClick={handleLogInButtonClick} />
+      <Link to={{
+        pathname: location.pathname,
+        search: location.search ? `${location.search}&showAuth=true` : '?showAuth=true'
+      }}>
+        Log In
+      </Link>
     ) : (
       <Popup
         className="user-menu"
@@ -29,9 +33,9 @@ const Header = ({ auth, handleLogOutClick, handleLogInButtonClick }) => (
 )
 
 Header.propTypes = {
+  location: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
-  handleLogOutClick: PropTypes.func.isRequired,
-  handleLogInButtonClick: PropTypes.func.isRequired
+  handleLogOutClick: PropTypes.func.isRequired
 }
 
 export default Header

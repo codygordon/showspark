@@ -6,7 +6,8 @@ import { store } from './store'
 
 import Routes from './Routes'
 
-import '../node_modules/semantic-ui-css/semantic.min.css'
+import '../node_modules/semantic-ui-dimmer/dimmer.min.css'
+import '../node_modules/semantic-ui-loader/loader.min.css'
 import './shared-css/normalize.css'
 import './shared-css/styles.css'
 

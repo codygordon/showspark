@@ -9,8 +9,8 @@ html {
 }
 
 html, body {
-  font-family: 'Nunito Sans', sans-serif !important;
-  letter-spacing: -0.4px;
+  font-family: 'Assistant', 'Montserrat', 'Helvetica', 'Arial', sans-serif !important;
+  letter-spacing: 0;
   margin: 0;
   padding: 0;
   height: 100%;
@@ -21,13 +21,41 @@ html, body {
 }
 
 a {
-  font-weight: 700;
-  color: #ffcf40;
-  transition: ease 0.15s;
+  position: relative;
+  font-weight: 600;
+  font-size: 1.1em;
+  color: #eee;
+  transition: ease 0.1s;
+  text-decoration: none;
+  z-index: 1;
+  text-shadow: 0 1px #222, 1px 1px #222,  2px 0 #222, -2px 0 #222,-1px 1px #222, 2px 1px #222, -2px 1px #222;
 }
 
 a:hover {
-  color: #b4922d;
+  color: #ffcf40;
+}
+
+a:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1.5px;
+  border-radius: .25px;
+  bottom: 1.25px;
+  left: 0;
+  background-color: #ffcf40;
+  visibility: hidden;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transition: all 0.2s ease-in-out 0s;
+  transition: all 0.2s ease-in-out 0s;
+  z-index: -1;
+}
+
+a:hover:before {
+  visibility: visible;
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
 }
 
 :focus {
@@ -35,14 +63,14 @@ a:hover {
 }
 
 ::selection {
-  background-color: rgba(60, 156, 255, 0.7);
-  color: #fefefe;
+  background-color: #ffcf40;
+  color: #333;
   text-shadow: none !important;
 }
 
 ::-moz-selection {
-  background-color: rgba(60, 156, 255, 0.7);
-  color: #fefefe;
+  background-color: #ffcf40;
+  color: #333;
   text-shadow: none !important;
 }
 
@@ -77,25 +105,24 @@ body {
   width: 100%;
 }
 
-.button {
+button {
   font-family: inherit;
   letter-spacing: -0.2px;
   border-radius: 4px;
   border: 0;
-  border-bottom: 3px solid rgba(0, 0, 0, 0.4);
   font-weight: 700;
   font-size: 1.1em;
-  padding: 12px 12px 9px 12px;
+  padding: 12px;
   cursor: pointer;
-  transition: ease all 0.15s;
+  transition: ease all 0.1s;
 }
 
-.button:hover {
-  background-color: #222;
+button:hover {
+  background-color: #999;
   color: #fff;
 }
 
-.button:active {
+button:active {
   box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
 }
 
@@ -115,10 +142,10 @@ body {
 
 /* shared classes */
 
-.ui.dimmer {
+.ui.dimmer.error {
   margin-top: 60px;
   height: calc(100% - 60px) !important;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .ui.dimmer.login-dimmer {
@@ -161,7 +188,7 @@ body {
   color: #fff;
   text-decoration: none;
   font-size: 9px;
-  font-weight: 900;
+  font-weight: 600;
   border: 1px solid #fff;
   padding: 0;
   position: absolute;
@@ -169,6 +196,17 @@ body {
   bottom: 6px;
   padding: 0 1px;
   letter-spacing: 0.1px;
+}
+
+.jumbotron h1 {
+  font-size: 2.5em;
+  font-weight: 700;
+}
+
+.jumbotron h1 .standout {
+  font-weight: 800;
+
+  color: #ffcf40;
 }
 
 .venues-header {
