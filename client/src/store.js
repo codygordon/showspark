@@ -33,7 +33,7 @@ export const initialState = {
     venues: {
       isFetching: false,
       data: [],
-      perPage: 20,
+      perPage: 18,
       pageCount: 1,
       currentPage: 1,
       total: 0,

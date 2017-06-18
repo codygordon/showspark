@@ -1,0 +1,15 @@
+.autocomplete-item {
+  margin: 0;
+  border: 0;
+  font-size: .9em;
+
+  &:hover {
+    &::before {
+      visibility: hidden;
+    }
+  }
+
+  i {
+    margin-right: 5px;
+  }
+}

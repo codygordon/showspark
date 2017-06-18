@@ -8,8 +8,7 @@ import Routes from './Routes'
 
 import '../node_modules/semantic-ui-dimmer/dimmer.min.css'
 import '../node_modules/semantic-ui-loader/loader.min.css'
-import './shared-css/normalize.css'
-import './shared-css/styles.css'
+import './styles/main.css'
 
 function mapStateToProps(state) {
   return {

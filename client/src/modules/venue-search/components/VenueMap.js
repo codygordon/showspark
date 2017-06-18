@@ -4,28 +4,28 @@ import ReactMapboxGl, { Popup, ZoomControl } from 'react-mapbox-gl'
 
 const mapboxToken = 'pk.eyJ1Ijoic2hvd3NwYXJrIiwiYSI6ImNqMGZiYXVsYTAxcXEycXF5c2p3dGl5OTQifQ.PjrdwcOoqtzC1plmlnlnrQ'
 
-const VenueMap = ({ map, region, venues, handlePopupClick }) => (
-  <section className="venue-div">
+const VenueMap = ({ map, city, venues, handlePopupClick }) => (
+  <section className="venue-map">
     <ReactMapboxGl
       accessToken={mapboxToken}
       style="mapbox://styles/mapbox/streets-v10" // eslint-disable-line
-      center={region.coords || map.center}
-      zoom={map.zoom}
+      center={city.coords ? [city.coords.longitude, city.coords.latitude] : [40, 40]}
+      zoom={[11]}
       movingMethod="easeTo"
       attributionPosition="bottom-left"
       dragRotate={false}>
       {venues.data.length > 0 &&
         venues.data.map((venue) => {
-          if (venue.address && venue.location.latitude && venue.location.longitude) {
+          if (venue.latitude && venue.longitude) {
             return (
               <span
                 key={venue._id}
                 className={venues.hoveredId === venue._id ? 'hovered' : ''}>
                 <Popup
-                  coordinates={[venue.location.latitude, venue.location.longitude]}
+                  coordinates={[venue.longitude, venue.latitude]}
                   anchor="bottom"
                   onClick={() => handlePopupClick(venue._id)}>
-                  {venue.title}
+                  {venue.name}
                 </Popup>
               </span>
             )
@@ -40,7 +40,7 @@ const VenueMap = ({ map, region, venues, handlePopupClick }) => (
 
 VenueMap.propTypes = {
   map: PropTypes.object.isRequired,
-  region: PropTypes.object.isRequired,
+  city: PropTypes.object.isRequired,
   venues: PropTypes.object.isRequired,
   handlePopupClick: PropTypes.func.isRequired
 }

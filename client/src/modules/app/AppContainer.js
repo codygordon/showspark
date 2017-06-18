@@ -51,8 +51,8 @@ class App extends Component {
 
   authClose = () => {
     const { location, history } = this.props
-    // const newSearch = location.search.replace('&showAuth=true', '').replace('?showAuth=true', '')
-    history.push('/')
+    const newSearch = location.search.replace('&showAuth=true', '').replace('?showAuth=true', '')
+    history.push(`${location.pathname}${newSearch}`)
   }
 
   render() {

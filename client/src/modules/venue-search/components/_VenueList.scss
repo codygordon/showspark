@@ -1,0 +1,19 @@
+.venue-list {
+  display: flex;
+  flex-wrap: wrap;
+  border-left: 1px solid $gray;
+  padding: 5px;
+  min-width: 0;
+  overflow-y: auto;
+
+  .pagination-menu {
+    flex: 0 0 100%;
+    width: 100%;
+  }
+
+  .venue-card {
+    flex: 1 0 auto;
+    margin: 10px;
+    width: 220px;
+  }
+}

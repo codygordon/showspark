@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import VenueCard from './VenueCard'
 import PaginationMenu from './PaginationMenu'
 
-const VenuesList = ({ location, history, venues, handleCardClick }) => {
+const VenueList = ({ location, history, venues, ...props }) => {
   const paginationMenu = (
     <PaginationMenu
       location={location}
@@ -13,24 +13,26 @@ const VenuesList = ({ location, history, venues, handleCardClick }) => {
   )
 
   return (
-    <section className="venues-list">
+    <section className="venue-list">
       {paginationMenu}
       {venues.data.map(venue => (
         <VenueCard
           key={venue._id}
           venue={venue}
-          handleClick={handleCardClick} />
+          handleHover={props.handleCardHover}
+          handleClick={props.handleCardClick} />
       ))}
       {paginationMenu}
     </section>
   )
 }
 
-VenuesList.propTypes = {
+VenueList.propTypes = {
   location: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   venues: PropTypes.object.isRequired,
+  handleCardHover: PropTypes.func.isRequired,
   handleCardClick: PropTypes.func.isRequired
 }
 
-export default VenuesList
+export default VenueList

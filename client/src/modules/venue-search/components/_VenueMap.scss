@@ -1,0 +1,50 @@
+.venue-map {
+  .mapboxgl-map {
+    width: 100%;
+    height: 100%;
+    cursor: grab;
+
+    button {
+      box-shadow: none;
+
+      &:hover {
+        box-shadow: none;
+      }
+    }
+  }
+  
+  .mapboxgl-popup-content {
+    border-radius: 6px !important;
+    background-color: #fbe058 !important;
+    border-bottom: 3px solid #ffcf40;
+    color: #333;
+    font-weight: 700;
+    padding: 2px 8px !important;
+    margin-bottom: -2px;
+    cursor: pointer;
+  }
+  
+  .mapboxgl-popup-tip {
+    border-top-color: #ffcf40 !important;
+    border-top-width: 12px !important;
+  }
+  
+  .hovered .mapboxgl-popup-content {
+    background-color: #e72352 !important;
+    border-bottom: 3px solid #d00649;
+    color: #fff;
+  }
+  
+  .hovered .mapboxgl-popup-tip {
+    border-top-color: #d00649 !important;
+  }
+  
+  .hovered .mapboxgl-popup.mapboxgl-popup-anchor-bottom {
+    z-index: 99 !important;
+  }
+  
+  .venue-popup-title {
+    font-size: 11px;
+    font-weight: bold;
+  }
+}

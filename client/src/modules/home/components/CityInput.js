@@ -5,18 +5,17 @@ import PlacesAutocomplete from 'react-places-autocomplete'
 import AutocompleteItem from './AutocompleteItem'
 
 const CityInput = ({ cityText, handleSelect, handleChange }) => (
-  <div className="city-input-container">
+  <div className="city-input">
     <i className="fa fa-search fa-2" aria-hidden="true" />
     <PlacesAutocomplete
       inputProps={{
         value: cityText,
         onChange: handleChange,
-        placeholder: 'Search venues by city',
+        placeholder: 'Where do you want to play?',
         autoFocus: true
       }}
       onSelect={handleSelect}
       onEnterKeyDown={handleSelect}
-      classNames={{ input: 'city-input' }}
       autocompleteItem={AutocompleteItem}
       highlightFirstSuggestion
       options={{

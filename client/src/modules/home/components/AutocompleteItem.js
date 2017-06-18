@@ -2,11 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const AutocompleteItem = ({ formattedSuggestion }) => (
-  <div className="suggestion-item">
+  <a className="autocomplete-item">
     <i className="fa fa-map-marker suggestion-icon" />
     <strong>{formattedSuggestion.mainText}</strong>{' '}
     <small className="text-muted">{formattedSuggestion.secondaryText}</small>
-  </div>
+  </a>
 )
 
 AutocompleteItem.propTypes = {

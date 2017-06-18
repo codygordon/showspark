@@ -1,7 +1,8 @@
 import { geocodeByAddress } from 'react-places-autocomplete'
 
-import apiCall from '../../utils/api-call'
 import { initialState } from '../../store'
+import apiCall from '../../utils/api-call'
+import { formatCitySlug } from '../../utils/helpers'
 
 /* ACTION TYPES */
 
@@ -162,22 +163,25 @@ export function listPageSelected(pageNum) {
 /* ASYNC ACTION CREATORS */
 
 export function fetchVenues(cityCoords) {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(requestVenues())
-    apiCall({
-      dataType: 'venues-proximity',
-      latitude: cityCoords.lat,
-      longitude: cityCoords.lng
-    }, (res, err) => {
-      if (res.data.length > 0) return dispatch(receiveVenues(res.data))
-      return dispatch(requestVenuesError(err))
-    })
+    try {
+      const data = await apiCall({
+        dataType: 'venues-proximity',
+        query: {
+          latitude: cityCoords.latitude,
+          longitude: cityCoords.longitude
+        }
+      })
+      dispatch(receiveVenues(data))
+    } catch (err) { dispatch(requestVenuesError(err)) }
   }
 }
 
 export function citySelected(citySlug) {
   return async (dispatch) => {
-    const cityText = citySlug.replace(/-/g, ' ')
+    const cityText = formatCitySlug(citySlug)
+    dispatch(receiveCityText(cityText))
     try {
       const geocoded = await geocodeByAddress(cityText)
       const coords = {
@@ -185,6 +189,7 @@ export function citySelected(citySlug) {
         longitude: geocoded[0].geometry.location.lng()
       }
       dispatch(receiveCityCoords(coords))
+      dispatch(fetchVenues(coords))
     } catch (err) { dispatch(cityError(err)) }
   }
 }

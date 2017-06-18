@@ -1,0 +1,29 @@
+.venue-search-container {
+  display: flex;
+  margin-top: $header-height;
+  border-top: 1px solid $gray;
+
+  .venue-map {
+    width: 45%;
+  }
+
+  .venue-list {
+    width: 55%;
+  }
+
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+
+    .venue-map {
+      border-bottom: 1px solid $white;
+      width: 100%;
+      height: 35%;
+    }
+
+    .venue-list {
+      border: 0;
+      width: 100%;
+      height: 65%;
+    }
+  }
+}

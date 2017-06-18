@@ -18,13 +18,13 @@ class Home extends Component {
   handleCityInputSelect = (fullText) => {
     const { dispatch, history } = this.props
     const cityText = fullText.replace(', United States', '').trim()
-    dispatch(venueSearchActions.receiveCityText(cityText))
-    dispatch(venueSearchActions.citySelected(slug(cityText)))
-    history.push(`/venue-search?${qs.stringify({ city: slug(cityText) })}`)
+    const citySlug = slug(cityText)
+    dispatch(venueSearchActions.citySelected(citySlug))
+    history.push(`/venue-search?${qs.stringify({ city: citySlug })}`)
   }
 
   render() {
-    const { city } = this.props.venueSearch
+    const { city } = this.props
     return (
       <section className="home-container">
         <Jumbotron />
@@ -40,7 +40,7 @@ class Home extends Component {
 Home.propTypes = {
   dispatch: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
-  venueSearch: PropTypes.object.isRequired
+  city: PropTypes.object.isRequired
 }
 
 const HomeContainer = connect()(Home)

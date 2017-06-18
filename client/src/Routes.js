@@ -28,7 +28,7 @@ export default class Routes extends Component {
       <HomeContainer
         location={location}
         history={history}
-        venueSearch={this.props.venueSearch} />
+        city={this.props.venueSearch.city} />
     </AppContainer>
   )
 
@@ -52,13 +52,14 @@ export default class Routes extends Component {
       location={location}
       history={history}
       auth={this.props.auth}
-      errorMessage={this.props.venueSearch.errorMessage}
+      errorMessage={this.props.venueSearch.city.errorMessage || this.props.venueSearch.venues.errorMessage}
       showHeader>
       <VenueSearchContainer
         location={location}
         history={history}
         isAuthenticated={this.props.auth.isAuthenticated}
-        venueSearch={this.props.venueSearch}
+        city={this.props.venueSearch.city}
+        venues={this.props.venueSearch.venues}
         artist={this.props.artist} />
     </AppContainer>
   )

@@ -1,0 +1,40 @@
+.venue-card {
+  border-radius: 1px;
+  cursor: pointer;
+  padding: 0;
+
+  h3 {
+    margin: auto;
+    background: transparentize($black, .5);
+    padding: 40px;
+    max-width: 100%;
+    overflow: hidden;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &:hover h3 {
+    color: $spark-yellow;
+  }
+
+  .details {
+    background: transparentize($black, .5);
+
+    .address {
+      max-width: 100%;
+      overflow: hidden;
+      line-height: 13px;
+      white-space: nowrap;
+      font-size: 12px;
+    }
+
+    .capacity {
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 12px;
+    }
+  }
+}

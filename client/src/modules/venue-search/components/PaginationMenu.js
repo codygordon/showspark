@@ -1,28 +1,29 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import qs from 'qs'
+import qs from 'query-string'
 
 const PaginationMenu = ({ location, history, venues }) => {
+  const pages = Math.ceil(venues.data.length / venues.perPage)
   const offset = (venues.currentPage - 1) * venues.perPage
-  const newPageSearch = page => qs.stringify({ ...qs.parse(location.search.replace('?', '')), page })
-  const buttons = Array(venues.pageCount).map((x, i) => (
+  const newPageSearch = page => qs.stringify({ page, ...qs.parse(location.search) })
+  const buttons = Array.from(Array(pages)).map((x, i) => (
     <button
       key={`page-button-${i}`} // eslint-disable-line
       className={venues.currentPage === i
         ? 'page-button active' : 'page-button'}
       onClick={() => history.push(`${location.pathname}?${newPageSearch(i)}`)}>
-      {i}
+      {i + 1}
     </button>
   ))
 
   return (
     <nav className="pagination-menu">
       {venues.data.length > 0 &&
-        <span className="paginate-text">
+        <span className="text">
           {offset + 1} -&nbsp;
-          {offset + venues.perPage > venues.total
-            ? venues.total : offset + venues.perPage}&nbsp;
-          of {venues.total} venues
+          {offset + venues.perPage > venues.data.length
+            ? venues.data.length : offset + venues.perPage}
+          &nbsp;of {venues.data.length} venues
         </span>}
       {buttons}
     </nav>

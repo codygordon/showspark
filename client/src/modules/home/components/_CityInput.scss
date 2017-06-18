@@ -1,0 +1,25 @@
+.city-input {
+  display: flex;
+  align-items: center;
+  transition: ease .1s;
+  margin: 0 auto;
+  border: .5px solid $white;
+  border-radius: 3px;
+  padding: 5px 0 5px 20px;
+  font-size: 1.1em;
+
+  input {
+    border: 0;
+    padding: 10px;
+    width: 100%;
+
+    &:focus {
+      border: 0;
+      padding: 10px;
+    }
+  }
+
+  * {
+    background-color: lighten($black, 10%) !important;
+  }
+}

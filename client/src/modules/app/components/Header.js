@@ -10,10 +10,12 @@ const Header = ({ location, auth, handleLogOutClick }) => (
   <header>
     <Link to="/" className="logo" />
     {!auth.isAuthenticated ? (
-      <Link to={{
-        pathname: location.pathname,
-        search: location.search ? `${location.search}&showAuth=true` : '?showAuth=true'
-      }}>
+      <Link
+        className="log-in"
+        to={{
+          pathname: location.pathname,
+          search: location.search ? `${location.search}&showAuth=true` : '?showAuth=true'
+        }}>
         Log In
       </Link>
     ) : (

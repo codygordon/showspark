@@ -4,25 +4,44 @@ header {
   flex-direction: row;
   order: 0;
   z-index: 2;
-  box-shadow: $header-shadow;
-  background-color: $white;
   width: 100%;
   height: $header-height;
   line-height: $header-height;
-  color: lighten($black, 15%);
 
   .logo {
-    background: $votivate-logo-img no-repeat;
-    background-position: right;
-    background-size: 140px;
-    padding-left: 10px;
-    width: 150px;
+    margin-top: 3px;
+    background: $logo-img no-repeat right;
+    background-size: 120px;
+    width: 130px;
+
+    &:hover {
+      background-image:  $logo-img, $logo-hover-img;
+      background-repeat: no-repeat, no-repeat;
+      background-position: right, right;
+      background-size: 120px;
+
+      &::before {
+        visibility: hidden;
+      }
+    }
 
     &::after {
-      margin-left: 140px;
-      color: lighten($black, 25%);
-      font-size: 1.2em;
-      content: 'BETA';
+      margin-left: 128px;
+      vertical-align: -1%;
+      text-shadow: none;
+      color: $white;
+      font-size: .9em;
+      font-weight: 200;
+      content: 'beta';
+    }
+  }
+
+  .log-in {
+    align-self: flex-end;
+    margin: 0 30px 0 auto;
+
+    &::before {
+      bottom: 15px;
     }
   }
 
@@ -67,29 +86,28 @@ header {
       }
     }
   }
-}
 
-.user-menu {
-  top: 38px !important;
-  padding: 0 !important;
+  .user-menu {
+    top: 38px !important;
+    padding: 0 !important;
 
+    button {
+      transition: ease .2s;
+      margin: 6px 0;
+      border: 0;
+      background: transparent;
+      padding: 10px;
+      width: 150px;
+      font-size: 1.1em;
+      font-weight: 700;
 
-  button {
-    transition: ease .2s;
-    margin: 6px 0;
-    border: 0;
-    background: transparent;
-    padding: 10px;
-    width: 150px;
-    font-size: 1.1em;
-    font-weight: 700;
+      &:hover {
+        color: $blue;
+      }
 
-    &:hover {
-      color: $blue;
-    }
-
-    @media only screen and (max-width: 768px) {
-      padding: .75em;
+      @media only screen and (max-width: 768px) {
+        padding: .75em;
+      }
     }
   }
 }
