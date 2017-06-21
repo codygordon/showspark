@@ -38,14 +38,14 @@ VenueSchema.pre('save', async function(next) {
     if (found) next(new Error('venue already exists'))
   } catch (err) { throw err }
 
-  // if (!this.latitude || !this.longitude) {
-  //   // geocode if it doesn't already have lat / lng
-  //   try {
-  //     const geocoded = await geocoder.geocode(`${this.address}, ${this.city}, ${this.state} ${this.zip}`)
-  //     this.latitude = geocoded[0].latitude
-  //     this.longitude = geocoded[0].longitude
-  //   } catch (err) { throw err }
-  // }
+  if (!this.latitude || !this.longitude) {
+    // geocode if it doesn't already have lat / lng
+    try {
+      const geocoded = await geocoder.geocode(`${this.address}, ${this.city}, ${this.state} ${this.zip}`)
+      this.latitude = geocoded[0].latitude
+      this.longitude = geocoded[0].longitude
+    } catch (err) { throw err }
+  }
   this.modifiedDate = Date.now()
   next()
 })

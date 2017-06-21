@@ -1,21 +1,14 @@
 .google-auth-button {
   background: $white;
-  color: lighten($black, 15%);
-  font-size: 1.2em;
+  color: $background;
 
   img {
     padding-right: 10px;
+    width: 30px;
   }
 
   &:hover {
-    box-shadow: $button-shadow-hovered;
-    background: darken($white, 5%);
-    color: lighten($black, 15%);
-  }
-
-  &:active {
-    transform: scale(.99);
-    box-shadow: $button-shadow-active;
-    background: darken($white, 15%);
+    background: darken($white, 10%);
+    color: $black;
   }
 }

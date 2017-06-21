@@ -8,7 +8,7 @@ import EmailAuthForm from './components/EmailAuthForm'
 
 import * as actions from './actions'
 
-class Auth extends Component {
+class AuthContainer extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
@@ -62,6 +62,6 @@ class Auth extends Component {
   }
 }
 
-const AuthContainer = connect()(Auth)
+const Auth = connect()(AuthContainer)
 
-export default AuthContainer
+export default Auth

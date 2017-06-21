@@ -1,20 +1,12 @@
 .facebook-auth-button {
   background: $facebook-blue;
   color: $white;
-  font-size: 1.2em;
 
   i {
     padding-right: 10px;
   }
 
   &:hover {
-    box-shadow: $button-shadow-hovered;
     background: darken($facebook-blue, 5%);
-  }
-
-  &:active {
-    transform: scale(.99);
-    box-shadow: $button-shadow-active;
-    background: darken($facebook-blue, 15%);
   }
 }

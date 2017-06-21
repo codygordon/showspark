@@ -1,7 +1,10 @@
 .autocomplete-item {
   margin: 0;
   border: 0;
-  font-size: .9em;
+
+  &:active {
+    background-color: lighten($black, 30%) !important;
+  }
 
   &:hover {
     &::before {

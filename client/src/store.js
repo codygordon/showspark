@@ -9,6 +9,7 @@ import AuthService from './utils/auth-service'
 import auth from './modules/auth/actions'
 import venueSearch from './modules/venue-search/actions'
 import venue from './modules/venue/actions'
+import artist from './modules/artist/actions'
 
 const auth0 = new AuthService()
 
@@ -34,11 +35,12 @@ export const initialState = {
       isFetching: false,
       data: [],
       perPage: 18,
-      pageCount: 1,
       currentPage: 1,
       total: 0,
       errorMessage: null,
       hoveredId: null
+    },
+    map: {
     }
   },
   venue: {
@@ -47,7 +49,9 @@ export const initialState = {
   },
   artist: {
     isFetching: false,
-    errorMessage: null
+    errorMessage: null,
+    fetchingFbToken: false,
+    fbToken: null
   }
 }
 
@@ -55,6 +59,7 @@ const rootReducer = combineReducers({
   auth,
   venueSearch,
   venue,
+  artist,
   router: routerReducer
 })
 
@@ -68,6 +73,6 @@ const enhancers = compose(
 export const store = createStore(rootReducer, {
   auth: initialState.auth,
   venueSearch: initialState.venueSearch,
-  venue: initialState.venue
-  // artist: initialState.artist
+  venue: initialState.venue,
+  artist: initialState.artist
 }, enhancers)

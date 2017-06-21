@@ -9,7 +9,7 @@ import VenueMap from './components/VenueMap'
 
 import * as actions from './actions'
 
-class VenueSearch extends Component {
+class VenueSearchContainer extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
@@ -20,11 +20,12 @@ class VenueSearch extends Component {
   }
 
   componentWillMount() {
-    const { dispatch, location, history, city } = this.props
+    const { dispatch, location, history, city, venues } = this.props
     if (location.search) {
       const query = qs.parse(location.search)
       if (query.city && !query.page) history.replace(`${location.pathname}${location.search}&page=1`)
       if (!city.text && query.city) dispatch(actions.citySelected(query.city))
+      if (query.page && venues.currentPage !== query.page) dispatch(actions.listPageSelected(query.page))
     } else history.push('/')
   }
 
@@ -53,8 +54,21 @@ class VenueSearch extends Component {
     // TODO: set card to active
   }
 
+  handlePageButtonClick = (page) => {
+    const { location, history } = this.props
+    const newSearch = qs.stringify({ ...qs.parse(location.search), page })
+    history.push(`${location.pathname}?${newSearch}`)
+  }
+
+  handleMapLoading = (e, data) => {
+    console.log(e, data)
+  }
+
   render() {
-    const { location, history, auth, city, venues } = this.props
+    const { auth, city, venues, map } = this.props
+    const offset = (venues.currentPage - 1) * venues.perPage
+    const end = venues.currentPage * venues.perPage
+    const currentVenues = { ...venues, data: venues.data.slice(offset, end) }
 
     return (
       <section className="venue-search-container">
@@ -64,23 +78,27 @@ class VenueSearch extends Component {
 
         <VenueMap
           // isAuthenticated={auth.isAuthenticated}
+          map={map}
           city={city}
-          venues={venues}
-          handlePopupClick={this.handleMapPopupClick} />
+          venues={currentVenues}
+          handlePopupClick={this.handleMapPopupClick}
+          handleMapLoading={this.handleMapLoading} />
 
         <VenueList
           // isAuthenticated={auth.isAuthenticated}
-          location={location}
-          history={history}
           city={city}
-          venues={venues}
+          perPage={venues.perPage}
+          currentPage={venues.currentPage}
+          totalVenues={venues.data.length}
+          venues={currentVenues}
           handleCardHover={this.handleVenueCardHover}
-          handleCardClick={this.handleVenueCardClick} />
+          handleCardClick={this.handleVenueCardClick}
+          handlePageButtonClick={this.handlePageButtonClick} />
       </section>
     )
   }
 }
 
-const VenueSearchContainer = connect()(VenueSearch)
+const VenueSearch = connect()(VenueSearchContainer)
 
-export default VenueSearchContainer
+export default VenueSearch

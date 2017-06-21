@@ -1,10 +1,7 @@
 header {
   display: flex;
-  position: fixed;
   flex-direction: row;
-  order: 0;
-  z-index: 2;
-  width: 100%;
+  box-shadow: $header-shadow;
   height: $header-height;
   line-height: $header-height;
 

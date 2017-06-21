@@ -5,6 +5,7 @@
 
   .text {
     margin-right: 5px;
+    min-width: 140px;
     line-height: 1.1em;
     font-size: .9em;
     font-weight: 700;
@@ -33,17 +34,18 @@
       border: 1.5px solid lighten($gray, 20%);
     }
 
-    .active {
+    &.active {
       transform: scale(1.05);
-      border: 1px solid darken($white, 15%);
-      background-color: darken($gray, 10%);
+      border: 1px solid $white;
+      background-color: darken($gray, 30%);
       color: $white;
     }
   }
 
   @media screen and (max-width: 500px) {
     .text {
-      font-size: .6em;
+      min-width: 70px;
+      font-size: .75em;
     }
 
     .page-button {

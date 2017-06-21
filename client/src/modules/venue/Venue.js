@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import qs from 'query-string'
 
 import { Dimmer, Loader } from 'semantic-ui-react'
-import VenuesHeader from '../shared-components/VenuesHeader'
 import Info from './components/Info'
 import Reviews from './components/Reviews'
 
@@ -12,7 +11,7 @@ import * as actions from './actions'
 
 import placeholderImg from '../../img/venue-placeholder.jpg'
 
-class Venue extends Component {
+class VenueContainer extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
@@ -37,18 +36,11 @@ class Venue extends Component {
   }
 
   render() {
-    const { dispatch, location, history, auth, venue, region } = this.props
+    const { venue, city } = this.props
     let featImg = placeholderImg
     if (venue.featImg) featImg = venue.featImg
     return (
       <div className="venue-container">
-        <VenuesHeader
-          dispatch={dispatch}
-          history={history}
-          location={location}
-          auth={auth}
-          region={region} />
-
         <Dimmer active={venue.isFetching}>
           <Loader size="large">
             Loading Venue...
@@ -61,7 +53,7 @@ class Venue extends Component {
             style={{ backgroundImage: `url(${featImg})` }} />
           <h1 className="venue-title">{venue.title}</h1>
           <Info venue={venue} />
-          <Reviews dispatch={dispatch} venue={venue} />
+          <Reviews venue={venue} />
         </section>
 
         <Dimmer active={!!venue.errorMessage}>
@@ -72,6 +64,6 @@ class Venue extends Component {
   }
 }
 
-const VenueContainer = connect()(Venue)
+const Venue = connect()(VenueContainer)
 
-export default VenueContainer
+export default Venue

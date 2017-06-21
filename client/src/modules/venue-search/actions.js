@@ -115,10 +115,10 @@ export function receiveCityCoords(cityCoords) {
   }
 }
 
-export function cityError() {
+export function cityError(err) {
   return {
     type: CITY_ERROR,
-    message: 'That\'s not a real place, try again!'
+    message: `Sorry, there was an error: ${err}`
   }
 }
 
@@ -129,10 +129,10 @@ export function requestVenues() {
   }
 }
 
-export function requestVenuesError() {
+export function requestVenuesError(err) {
   return {
     type: REQUEST_VENUES_ERROR,
-    message: 'Sorry, didn\'t find any venues there. Try a different search!'
+    message: `Sorry, there was an error...\n\n${err}`
   }
 }
 

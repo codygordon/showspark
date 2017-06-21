@@ -6,11 +6,11 @@ import qs from 'query-string'
 import { Dimmer } from 'semantic-ui-react'
 import Header from './components/Header'
 import Footer from './components/Footer'
-import AuthContainer from '../auth/AuthContainer'
+import Auth from '../auth/Auth'
 
 import * as authActions from '../auth/actions'
 
-class App extends Component {
+class AppContainer extends Component {
   static defaultProps = {
     errorMessage: '',
     showHeader: false,
@@ -70,7 +70,7 @@ class App extends Component {
         <Dimmer
           active={auth.showingAuth}
           onClickOutside={this.authClose}>
-          <AuthContainer location={location} history={history} auth={auth} />
+          <Auth location={location} history={history} auth={auth} />
         </Dimmer>
         {children}
         {showFooter &&
@@ -81,6 +81,6 @@ class App extends Component {
   }
 }
 
-const AppContainer = connect()(App)
+const App = connect()(AppContainer)
 
-export default AppContainer
+export default App

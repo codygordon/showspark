@@ -1,29 +1,27 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import qs from 'query-string'
 
-const PaginationMenu = ({ location, history, venues }) => {
-  const pages = Math.ceil(venues.data.length / venues.perPage)
-  const offset = (venues.currentPage - 1) * venues.perPage
-  const newPageSearch = page => qs.stringify({ page, ...qs.parse(location.search) })
+const PaginationMenu = ({ perPage, currentPage, total, handlePageButtonClick }) => {
+  const pages = Math.ceil(total / perPage)
+  const offset = (currentPage - 1) * perPage
   const buttons = Array.from(Array(pages)).map((x, i) => (
     <button
       key={`page-button-${i}`} // eslint-disable-line
-      className={venues.currentPage === i
+      className={currentPage === i + 1
         ? 'page-button active' : 'page-button'}
-      onClick={() => history.push(`${location.pathname}?${newPageSearch(i)}`)}>
+      onClick={() => handlePageButtonClick(i + 1)}>
       {i + 1}
     </button>
   ))
 
   return (
     <nav className="pagination-menu">
-      {venues.data.length > 0 &&
+      {total > 0 &&
         <span className="text">
           {offset + 1} -&nbsp;
-          {offset + venues.perPage > venues.data.length
-            ? venues.data.length : offset + venues.perPage}
-          &nbsp;of {venues.data.length} venues
+          {offset + perPage > total
+            ? total : offset + perPage}
+          &nbsp;of {total} venues
         </span>}
       {buttons}
     </nav>
@@ -31,9 +29,10 @@ const PaginationMenu = ({ location, history, venues }) => {
 }
 
 PaginationMenu.propTypes = {
-  location: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
-  venues: PropTypes.object.isRequired
+  perPage: PropTypes.number.isRequired,
+  currentPage: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  handlePageButtonClick: PropTypes.func.isRequired
 }
 
 export default PaginationMenu

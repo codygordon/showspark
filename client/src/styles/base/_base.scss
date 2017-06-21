@@ -21,7 +21,7 @@ header, footer {
   color: inherit;
 }
 
-section {
+section, div {
   width: 100%;
   font-family: inherit;
 }
@@ -59,7 +59,7 @@ section {
 //   border-radius: 2px;
 //   background: $white;
 // }
-// 
+//
 // ::-webkit-scrollbar-track {
 //   background: darken($gray, 10%);
 // }

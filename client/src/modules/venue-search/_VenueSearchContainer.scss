@@ -1,7 +1,6 @@
 .venue-search-container {
   display: flex;
-  margin-top: $header-height;
-  border-top: 1px solid $gray;
+  border-top: .5px solid lighten($black, 30%);
 
   .venue-map {
     width: 45%;

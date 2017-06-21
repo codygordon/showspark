@@ -9,6 +9,7 @@ const apiCall = async (params) => {
     try {
       const res = await fetch('/api/v1/token')
       const apiToken = await res.text()
+      if (apiToken.includes('error')) return new Error(apiToken)
       localStorage.setItem('api_token', apiToken)
       token = apiToken
     } catch (err) { return err }

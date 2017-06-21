@@ -1,0 +1,27 @@
+.fb-page-search {
+  .loading {
+    padding: 20px 10px;
+    font-size: 1.1em;
+
+    .loader {
+      margin-right: 10px;
+    }
+  }
+
+  input {
+
+    &:focus {
+      border-color: $white;
+    }
+  }
+
+  .items-container {
+    z-index: 1;
+    margin-top: -2px;
+    border: 1px solid $white;
+    border-top: 0;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    padding-top: 2px;
+  }
+}

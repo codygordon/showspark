@@ -5,13 +5,14 @@
   margin: 0 auto;
   border: .5px solid $white;
   border-radius: 3px;
-  padding: 5px 0 5px 20px;
+  padding: 5px 34px 5px 20px;
   font-size: 1.1em;
 
   input {
     border: 0;
     padding: 10px;
     width: 100%;
+    text-align: center;
 
     &:focus {
       border: 0;
@@ -19,7 +20,17 @@
     }
   }
 
-  * {
-    background-color: lighten($black, 10%) !important;
+  .autocomplete-container {
+    position: absolute;
+    top: 100%;
+    z-index: 1;
+    border: 1px solid $gray;
+    width: 370px;
+  }
+
+  div {
+    div {
+      background-color: lighten($black, 10%) !important;
+    }
   }
 }

@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 
 import { Switch, Route } from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux'
-import AppContainer from './modules/app/AppContainer'
-import HomeContainer from './modules/home/HomeContainer'
-import ArtistContainer from './modules/artist/ArtistContainer'
-import VenueSearchContainer from './modules/venue-search/VenueSearchContainer'
+import App from './modules/app/App'
+import Home from './modules/home/Home'
+import Artist from './modules/artist/Artist'
+import VenueSearch from './modules/venue-search/VenueSearch'
 import NotFound from './modules/app/components/NotFound'
 
 import { history } from './store'
@@ -19,49 +19,48 @@ export default class Routes extends Component {
   }
 
   HomePlusProps = ({ location }) => (
-    <AppContainer
+    <App
       location={location}
       history={history}
       auth={this.props.auth}
       showHeader
       showFooter>
-      <HomeContainer
+      <Home
         location={location}
         history={history}
         city={this.props.venueSearch.city} />
-    </AppContainer>
+    </App>
   )
 
   ArtistPlusProps = ({ location }) => (
-    <AppContainer
+    <App
       location={location}
       history={history}
       auth={this.props.auth}
-      errorMessage={this.props.artist.errorMessage}
       showHeader>
-      <ArtistContainer
+      <Artist
         location={location}
         history={history}
         isAuthenticated={this.props.auth.isAuthenticated}
         artist={this.props.artist} />
-    </AppContainer>
+    </App>
   )
 
   VenueSearchPlusProps = ({ location }) => (
-    <AppContainer
+    <App
       location={location}
       history={history}
       auth={this.props.auth}
       errorMessage={this.props.venueSearch.city.errorMessage || this.props.venueSearch.venues.errorMessage}
       showHeader>
-      <VenueSearchContainer
+      <VenueSearch
         location={location}
         history={history}
         isAuthenticated={this.props.auth.isAuthenticated}
         city={this.props.venueSearch.city}
         venues={this.props.venueSearch.venues}
         artist={this.props.artist} />
-    </AppContainer>
+    </App>
   )
 
   render() {
@@ -70,7 +69,7 @@ export default class Routes extends Component {
         <Switch>
           <Route exact match path="/" render={this.HomePlusProps} />
           <Route path="/artist" render={this.ArtistPlusProps} />
-          <Route path="/venue-search" render={this.VenueSearchPlusProps} />
+          {/* <Route path="/venue-search" render={this.VenueSearchPlusProps} /> */}
           <Route component={NotFound} />
         </Switch>
       </ConnectedRouter>

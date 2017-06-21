@@ -2,17 +2,27 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  margin-top: $header-height;
+  height: calc(100% - (#{$header-height} + #{$footer-height})) !important;
 
   .jumbotron {
-    
-  }
+    background: linear-gradient($background 10%, transparentize(darken($spark-yellow, 60%), .4) 90%, $background 100%), $home-bg-img no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100%;
 
-  .city-input {
-    width: 380px;
-
-    @media screen and (max-width: 600px) {
-      width: 90%;
+    button {
+      margin: auto;
+      letter-spacing: -.5px;
+      font-size: 1.2em;
+      font-weight: 800;
     }
   }
+  //
+  // .city-input {
+  //   width: 440px;
+  //
+  //   @media screen and (max-width: 600px) {
+  //     width: 90%;
+  //   }
+  // }
 }

@@ -12,7 +12,7 @@ $facebook-blue: #3b5998;
 $blue: #188ff1;
 $blue-gradient: linear-gradient(135deg, lighten($blue, 20%) 0%, lighten($blue, 10%) 33%, $blue 71%);
 $spark-yellow: #ffcf40;
-$spark-gradient: linear-gradient(135deg, lighten($spark-yellow, 20%) 0%, lighten($spark-yellow, 10%) 33%, $spark-yellow 71%);
+$spark-gradient: linear-gradient(135deg, darken($spark-yellow, 15%) 0%, darken($spark-yellow, 5%) 60%);
 
 // shadows
 $header-shadow: 0 0 5px rgba(0, 0, 0, .5);
@@ -25,7 +25,9 @@ $text-black-stroke-shadow: -3px 0 $background, 3px 0 $background, -2px 0 $backgr
 
 // sizes
 $header-height: 50px;
+$footer-height: 60px;
 
-// misc
+// images
 $logo-img: url('../img/showspark-logo.png');
 $logo-hover-img: url('../img/showspark-logo-bg-hover.png');
+$home-bg-img: url('../img/home-bg.jpg')

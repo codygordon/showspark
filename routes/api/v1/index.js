@@ -2,6 +2,7 @@ const express = require('express')
 const { catchErrors } = require('../../../handlers')
 const entryPoint = require('../../../controllers/entry-point')
 const token = require('../../../controllers/token')
+const fbToken = require('../../../controllers/fb-token')
 const users = require('../../../controllers/users')
 const artists = require('../../../controllers/artists')
 const venues = require('../../../controllers/venues')
@@ -13,6 +14,8 @@ router.post('/', entryPoint)
 router.put('/', entryPoint)
 
 router.get('/token', token)
+
+router.get('/fb-token', catchErrors(fbToken))
 
 router.post('/users', catchErrors(users.upsert))
 
