@@ -21,7 +21,7 @@
     "import/prefer-default-export": "warn",
     "global-require": "off",
     "no-unused-vars": ["warn", { "argsIgnorePattern": "res|req|next|^err" }],
-    "no-shadow": ["error", { "allow": ["res", "req", "err"] }],
+    "no-shadow": ["error", { "allow": ["res", "req", "err", "db"] }],
     "no-unused-expressions": ["error", { "allowTernary": true }],
     "no-console": "warn",
     "no-underscore-dangle": "off",

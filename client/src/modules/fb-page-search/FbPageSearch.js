@@ -12,11 +12,13 @@ export default class FbPageSearch extends Component {
     maxLikes: null,
     minLikes: 0,
     limit: 25,
-    placeholder: ''
+    placeholder: '',
+    pageFields: ['id', 'name', 'category', 'fan_count', 'picture']
   }
 
   static propTypes = {
     fbToken: PropTypes.string.isRequired,
+    pageFields: PropTypes.array,
     limit: PropTypes.number,
     category: PropTypes.string,
     maxLikes: PropTypes.number,
@@ -34,9 +36,6 @@ export default class FbPageSearch extends Component {
   handleInputChange = debounce(async () => {
     if (!this.searchInput.value) return this.setState({ isFetching: false })
     const { fbToken, limit, minLikes, maxLikes, category } = this.props
-    const pageFields = ['id', 'username', 'name', 'category', 'fan_count', 'picture',
-      'about', 'emails', 'artists_we_like', 'band_interests', 'band_members',
-      'booking_agent', 'bio', 'hometown', 'influences', 'press_contact', 'record_label']
     try {
       const url = 'https://graph.facebook.com/v2.9/search'
       const params = {

@@ -8,6 +8,11 @@ import FbPageSearch from '../fb-page-search/FbPageSearch'
 
 import * as actions from './actions'
 
+const fbPageFields = ['id', 'username', 'name', 'category', 'fan_count',
+  'picture', 'events', 'about', 'emails', 'artists_we_like', 'website',
+  'band_interests', 'band_members', 'general_manager', 'booking_agent',
+  'press_contact', 'bio', 'hometown', 'influences', 'record_label']
+
 class ArtistContainer extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
@@ -38,8 +43,9 @@ class ArtistContainer extends Component {
           fbToken={artist.fbToken}
           category="Musician/Band"
           maxLikes={10000}
-          limit={300}
+          limit={50}
           placeholder="Enter your band/project name"
+          pageFields={fbPageFields}
           onPageSelect={this.handleFbPageSelect} />
       </section>
     )

@@ -41,6 +41,7 @@ mongoose.connection.on('error', (err) => { if (err) throw err })
 require('./models/User')
 require('./models/Artist')
 require('./models/Venue')
+require('./models/Show')
 
 module.exports = class App {
   constructor() {
