@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 const FacebookAuthButton = ({ handleClick }) => (
   <button
-    className="button facebook-auth-button"
+    className="facebook-auth-button"
     onClick={handleClick}>
     <i className="fa fa-facebook-official" aria-hidden="true" />
     Log in with Facebook

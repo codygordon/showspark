@@ -1,4 +1,4 @@
-const express = require('express')
+const router = require('express').Router()
 const { catchErrors } = require('../../../handlers')
 const entryPoint = require('../../../controllers/entry-point')
 const token = require('../../../controllers/token')
@@ -6,8 +6,6 @@ const fbToken = require('../../../controllers/fb-token')
 const users = require('../../../controllers/users')
 const artists = require('../../../controllers/artists')
 const venues = require('../../../controllers/venues')
-
-const router = express.Router()
 
 router.get('/', entryPoint)
 router.post('/', entryPoint)

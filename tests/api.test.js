@@ -1,4 +1,4 @@
-const request = require('supertest')
+const request = require('supertest-as-promised')
 const jwtSign = require('jsonwebtoken').sign
 
 const testUsersData = require('./test-data/users.json')
@@ -386,6 +386,34 @@ describe('GET call to api/v1/venues-proximity', () => {
     expect(res.body[0].name).toEqual(testVenuesData[1].name)
   })
 })
+
+// 10. GET a new facebook token
+describe('GET call to api/v1/fb-token', () => {
+  test('with no api or user token should return server error', async () => {
+    const res = await request(app.express)
+      .get('/api/v1/fb-token')
+    expect(res.status).toEqual(403)
+  })
+
+  test('with api token should return success', async () => {
+    const res = await request(app.express)
+      .get('/api/v1/fb-token')
+      .set('Authorization', `Bearer ${testApiToken}`)
+    expect(res.status).toEqual(200)
+    expect(res.token).toBeTruthy()
+  })
+
+  test('with user token should return success', async () => {
+    const res = await request(app.express)
+      .get('/api/v1/fb-token')
+      .set('Authorization', `Bearer ${testUserToken}`)
+    expect(res.status).toEqual(200)
+    expect(res.token).toBeTruthy()
+  })
+})
+
+
+// DELETE test data
 
 describe('remove test documents', () => {
   test('from user collection', async () => {

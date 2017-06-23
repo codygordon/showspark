@@ -35,6 +35,7 @@
     "redux-thunk": "^2.1.0",
     "semantic-ui-dimmer": "^2.2.10",
     "semantic-ui-loader": "^2.2.10",
+    "semantic-ui-popup": "^2.2.10",
     "semantic-ui-react": "^0.68.5",
     "slug": "^0.9.1"
   },

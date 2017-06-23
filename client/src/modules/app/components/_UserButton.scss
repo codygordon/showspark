@@ -1,0 +1,56 @@
+.user-button {
+  display: flex;
+  flex: 0 0 150px;
+  align-items: center;
+  justify-content: flex-end;
+  transition: ease .2s;
+  margin-left: auto;
+  cursor: pointer;
+  padding-right: 15px;
+  height: 100%;
+
+  &::before {
+    display: none;
+  }
+
+  &:hover {
+    .avatar {
+      transform: scale(1.1);
+    }
+
+    i, .name {
+      color: lighten($spark-yellow, 10%);
+    }
+  }
+
+  .avatar {
+    transition: ease .2s;
+    margin-right: 5px;
+    border-radius: 50%;
+    box-shadow: $user-img-shadow;
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+  }
+
+  .name {
+    padding: 0 10px 0 5px;
+    line-height: 1.1em;
+    color: $white;
+    font-size: .95em;
+    font-weight: 200;
+
+    @media screen and (max-width: 400px) {
+      display: none;
+    }
+  }
+
+  i {
+    padding-top: 1px;
+    color: $white;
+
+    @media only screen and (max-width: 768px) {
+      font-size: 1.5em;
+    }
+  }
+}

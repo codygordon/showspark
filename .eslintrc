@@ -46,6 +46,6 @@
     "react/jsx-closing-bracket-location": ["error", "after-props"],
     "react/prefer-stateless-function": "warn",
     "react/prop-types": "warn",
-    "react/forbid-prop-types": "warn"
+    "react/forbid-prop-types": "off"
   }
 }

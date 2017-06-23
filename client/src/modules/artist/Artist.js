@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import qs from 'query-string'
+// import qs from 'query-string'
 
 // import { Dimmer, Loader } from 'semantic-ui-react'
 import FbPageSearch from '../fb-page-search/FbPageSearch'
@@ -16,8 +16,8 @@ const fbPageFields = ['id', 'username', 'name', 'category', 'fan_count',
 class ArtistContainer extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
-    location: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired,
+    // location: PropTypes.object.isRequired,
+    // history: PropTypes.object.isRequired,
     artist: PropTypes.object.isRequired
   }
 
@@ -31,6 +31,7 @@ class ArtistContainer extends Component {
   }
 
   handleFbPageSelect = (page) => {
+    const { dispatch } = this.props
     console.log(page)
   }
 

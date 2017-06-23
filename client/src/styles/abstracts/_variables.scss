@@ -21,7 +21,8 @@ $container-shadow: 0 0 4px rgba(0, 0, 0, .15);
 $button-shadow: .5px 1px 4px rgba(0, 0, 0, .4);
 $button-shadow-hovered: 0 2px 8px rgba(0, 0, 0, .4);
 $button-shadow-active:  0 0 2px rgba(0, 0, 0, .4);
-$text-black-stroke-shadow: -3px 0 $background, 3px 0 $background, -2px 0 $background, 2px 0 $background, -1px 0 $background, -1px -1px $background, -1px 1px $background, 0 1px $background, 0 2px $background, 1px 1px $background,  2px 0 $background, -2px 0 $background, -1px 1px $background, 2px 1px $background, -2px 1px $background;
+$text-black-stroke-shadow: -4px 0 $background, 4px 0 $background, -3px 0 $background, 3px 0 $background, -2px 0 $background, 2px 0 $background, -1px 0 $background, -1px -1px $background, -1px 1px $background, 0 1px $background, 0 2px $background, 1px 1px $background,  2px 0 $background, -2px 0 $background, -1px 1px $background, 2px 1px $background, -2px 1px $background;
+$text-light-black-stroke-shadow: -4px 0 lighten($background, 5%), 4px 0 lighten($background, 5%), -3px 0 lighten($background, 5%), 3px 0 lighten($background, 5%), -2px 0 lighten($background, 5%), 2px 0 lighten($background, 5%), -1px 0 lighten($background, 5%), -1px -1px lighten($background, 5%), -1px 1px lighten($background, 5%), 0 1px lighten($background, 5%), 0 2px lighten($background, 5%), 1px 1px lighten($background, 5%),  2px 0 lighten($background, 5%), -2px 0 lighten($background, 5%), -1px 1px lighten($background, 5%), 2px 1px lighten($background, 5%), -2px 1px lighten($background, 5%);
 
 // sizes
 $header-height: 50px;
@@ -30,4 +31,5 @@ $footer-height: 60px;
 // images
 $logo-img: url('../img/showspark-logo.png');
 $logo-hover-img: url('../img/showspark-logo-bg-hover.png');
-$home-bg-img: url('../img/home-bg.jpg')
+$home-bg-img: url('../img/home-bg.jpg');
+$artist-bg-img: url('../img/artist-bg.jpg');

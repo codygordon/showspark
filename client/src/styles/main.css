@@ -451,8 +451,9 @@ a {
   position: relative;
   transition: ease .1s;
   z-index: 1;
+  cursor: pointer;
   text-decoration: none;
-  text-shadow: -3px 0 #1a1a1a, 3px 0 #1a1a1a, -2px 0 #1a1a1a, 2px 0 #1a1a1a, -1px 0 #1a1a1a, -1px -1px #1a1a1a, -1px 1px #1a1a1a, 0 1px #1a1a1a, 0 2px #1a1a1a, 1px 1px #1a1a1a, 2px 0 #1a1a1a, -2px 0 #1a1a1a, -1px 1px #1a1a1a, 2px 1px #1a1a1a, -2px 1px #1a1a1a;
+  text-shadow: -4px 0 #1a1a1a, 4px 0 #1a1a1a, -3px 0 #1a1a1a, 3px 0 #1a1a1a, -2px 0 #1a1a1a, 2px 0 #1a1a1a, -1px 0 #1a1a1a, -1px -1px #1a1a1a, -1px 1px #1a1a1a, 0 1px #1a1a1a, 0 2px #1a1a1a, 1px 1px #1a1a1a, 2px 0 #1a1a1a, -2px 0 #1a1a1a, -1px 1px #1a1a1a, 2px 1px #1a1a1a, -2px 1px #1a1a1a;
   color: #f2f2f2;
   font-weight: 600; }
   a:hover {
@@ -463,7 +464,7 @@ a {
       -webkit-transform: scaleX(1); }
   a::before {
     position: absolute;
-    bottom: 1.25px;
+    bottom: 0;
     left: 0;
     transform: scaleX(0);
     transition: .2s ease-in-out 0s;
@@ -479,8 +480,8 @@ a {
 
 button {
   display: flex;
-  align-items: center;
   align-content: center;
+  align-items: center;
   justify-content: center;
   transition: ease .1s;
   border: 0;
@@ -492,7 +493,7 @@ button {
   color: #1a1a1a;
   font-family: inherit;
   font-size: 1.1em;
-  font-weight: 700; }
+  font-weight: 800; }
   button:hover {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
     background: #ffcf40; }
@@ -500,7 +501,7 @@ button {
     transform: scale(0.95);
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.4); }
 
-input[type='text'] {
+input[type='text'], input[type='email'], input[type='password'] {
   z-index: 0;
   border: 0.5px solid #fff;
   border-radius: 3px;
@@ -511,10 +512,10 @@ input[type='text'] {
   color: #fff;
   font-size: 1.2em;
   font-weight: 700; }
-  input[type='text']::placeholder {
+  input[type='text']::placeholder, input[type='email']::placeholder, input[type='password']::placeholder {
     font-size: .85em;
     font-weight: 300; }
-  input[type='text']:focus {
+  input[type='text']:focus, input[type='email']:focus, input[type='password']:focus {
     border: 1.5px solid #ffcf40;
     padding: 14px; }
 
@@ -524,7 +525,7 @@ label {
   z-index: 1;
   margin-bottom: -8px;
   padding-left: 5px;
-  text-shadow: -3px 0 #1a1a1a, 3px 0 #1a1a1a, -2px 0 #1a1a1a, 2px 0 #1a1a1a, -1px 0 #1a1a1a, -1px -1px #1a1a1a, -1px 1px #1a1a1a, 0 1px #1a1a1a, 0 2px #1a1a1a, 1px 1px #1a1a1a, 2px 0 #1a1a1a, -2px 0 #1a1a1a, -1px 1px #1a1a1a, 2px 1px #1a1a1a, -2px 1px #1a1a1a;
+  text-shadow: -4px 0 #1a1a1a, 4px 0 #1a1a1a, -3px 0 #1a1a1a, 3px 0 #1a1a1a, -2px 0 #1a1a1a, 2px 0 #1a1a1a, -1px 0 #1a1a1a, -1px -1px #1a1a1a, -1px 1px #1a1a1a, 0 1px #1a1a1a, 0 2px #1a1a1a, 1px 1px #1a1a1a, 2px 0 #1a1a1a, -2px 0 #1a1a1a, -1px 1px #1a1a1a, 2px 1px #1a1a1a, -2px 1px #1a1a1a;
   font-weight: 700; }
   label i {
     padding-right: 1px; }
@@ -559,55 +560,7 @@ header {
     align-self: flex-end;
     margin: 0 30px 0 auto; }
     header .log-in::before {
-      bottom: 15px; }
-  header .user {
-    display: flex;
-    flex: 0 0 150px;
-    align-items: center;
-    justify-content: flex-end;
-    transition: ease .2s;
-    margin-left: auto;
-    cursor: pointer;
-    padding-right: 15px;
-    height: 100%;
-    color: #404040; }
-    header .user:hover .avatar {
-      transform: scale(1.1); }
-    header .user .avatar {
-      transition: ease .2s;
-      margin-right: 5px;
-      border-radius: 50%;
-      box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
-      width: 30px;
-      height: 30px;
-      object-fit: cover; }
-    header .user .name {
-      padding: 0 10px 0 5px;
-      line-height: 1.1em;
-      font-size: .95em;
-      font-weight: 800; }
-    header .user i {
-      padding-top: 1px; }
-      @media only screen and (max-width: 768px) {
-        header .user i {
-          font-size: 1.5em; } }
-  header .user-menu {
-    top: 38px !important;
-    padding: 0 !important; }
-    header .user-menu button {
-      transition: ease .2s;
-      margin: 6px 0;
-      border: 0;
-      background: transparent;
-      padding: 10px;
-      width: 150px;
-      font-size: 1.1em;
-      font-weight: 700; }
-      header .user-menu button:hover {
-        color: #188ff1; }
-      @media only screen and (max-width: 768px) {
-        header .user-menu button {
-          padding: .75em; } }
+      bottom: 14.5px; }
 
 footer {
   align-self: center;
@@ -618,6 +571,78 @@ footer {
   color: #b3b3b3;
   font-size: .9em;
   font-weight: 200; }
+
+.user-menu {
+  top: 38px !important;
+  right: 25px !important;
+  border-color: #4d4d4d !important;
+  box-shadow: 0 0 6px #000 !important;
+  background-color: #262626 !important;
+  max-width: 200px !important; }
+  @media screen and (max-width: 900px) {
+    .user-menu {
+      right: 10px !important; } }
+  .user-menu nav {
+    width: 100%;
+    text-align: center; }
+    .user-menu nav a {
+      margin: 5px auto;
+      padding: 12.075px;
+      width: 100% !important;
+      text-shadow: -4px 0 #262626, 4px 0 #262626, -3px 0 #262626, 3px 0 #262626, -2px 0 #262626, 2px 0 #262626, -1px 0 #262626, -1px -1px #262626, -1px 1px #262626, 0 1px #262626, 0 2px #262626, 1px 1px #262626, 2px 0 #262626, -2px 0 #262626, -1px 1px #262626, 2px 1px #262626, -2px 1px #262626;
+      font-size: 1em; }
+      .user-menu nav a::before {
+        bottom: 13px;
+        left: 15%;
+        width: 70%;
+        height: 1px; }
+      @media only screen and (max-width: 768px) {
+        .user-menu nav a {
+          padding: .75em; } }
+  .user-menu::before {
+    right: .5rem !important;
+    box-shadow: -1px -1px 0 0 #4d4d4d !important;
+    background: #262626 !important; }
+
+.user-button {
+  display: flex;
+  flex: 0 0 150px;
+  align-items: center;
+  justify-content: flex-end;
+  transition: ease .2s;
+  margin-left: auto;
+  cursor: pointer;
+  padding-right: 15px;
+  height: 100%; }
+  .user-button::before {
+    display: none; }
+  .user-button:hover .avatar {
+    transform: scale(1.1); }
+  .user-button:hover i, .user-button:hover .name {
+    color: #ffdc73; }
+  .user-button .avatar {
+    transition: ease .2s;
+    margin-right: 5px;
+    border-radius: 50%;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
+    width: 30px;
+    height: 30px;
+    object-fit: cover; }
+  .user-button .name {
+    padding: 0 10px 0 5px;
+    line-height: 1.1em;
+    color: #fff;
+    font-size: .95em;
+    font-weight: 200; }
+    @media screen and (max-width: 400px) {
+      .user-button .name {
+        display: none; } }
+  .user-button i {
+    padding-top: 1px;
+    color: #fff; }
+    @media only screen and (max-width: 768px) {
+      .user-button i {
+        font-size: 1.5em; } }
 
 .google-auth-button {
   background: #fff;
@@ -631,11 +656,61 @@ footer {
 
 .facebook-auth-button {
   background: #3b5998;
-  color: #fff; }
+  color: #fff;
+  font-weight: 700; }
   .facebook-auth-button i {
     padding-right: 10px; }
   .facebook-auth-button:hover {
     background: #344e86; }
+
+.email-auth-form {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%; }
+  .email-auth-form input {
+    font-size: 1em; }
+  .email-auth-form .name, .email-auth-form .email {
+    margin-bottom: 5px; }
+  .email-auth-form .signup-toggle-submit {
+    display: flex;
+    margin-top: 10px;
+    padding: 0 1px; }
+    .email-auth-form .signup-toggle-submit .toggle-text {
+      font-weight: 200; }
+    .email-auth-form .signup-toggle-submit .toggle {
+      margin: 0 4px;
+      color: #ffcf40; }
+      .email-auth-form .signup-toggle-submit .toggle::before {
+        bottom: 22px;
+        height: 1; }
+    .email-auth-form .signup-toggle-submit .submit {
+      align-self: flex-end;
+      margin-left: auto;
+      padding: 0;
+      width: 130px;
+      height: 40px;
+      text-transform: uppercase;
+      letter-spacing: -1px; }
+      .email-auth-form .signup-toggle-submit .submit.loading {
+        background-color: #c08f00;
+        pointer-events: none; }
+  .email-auth-form .error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px; }
+    .email-auth-form .error i {
+      margin-right: 8px;
+      color: #fe4944;
+      font-size: 1.8em; }
+    .email-auth-form .error .text {
+      color: #fe4944; }
+    .email-auth-form .error a {
+      margin: 0 4px;
+      color: #ffcf40; }
+      .email-auth-form .error a::before {
+        bottom: -1px;
+        height: 1px; }
 
 .city-input {
   display: flex;
@@ -863,24 +938,6 @@ footer {
       transition: opacity 200ms ease-in;
       opacity: .01; }
 
-.fb-page-search .loading {
-  padding: 20px 10px;
-  font-size: 1.1em; }
-  .fb-page-search .loading .loader {
-    margin-right: 10px; }
-
-.fb-page-search input:focus {
-  border-color: #fff; }
-
-.fb-page-search .items-container {
-  z-index: 1;
-  margin-top: -2px;
-  border: 1px solid #fff;
-  border-top: 0;
-  border-bottom-left-radius: 2px;
-  border-bottom-right-radius: 2px;
-  padding-top: 2px; }
-
 .fb-page-search-item {
   display: flex;
   align-items: center;
@@ -888,7 +945,7 @@ footer {
   border-bottom: 1px solid #666;
   cursor: pointer; }
   .fb-page-search-item:hover {
-    background-color: #262626; }
+    background-color: rgba(41, 41, 41, 0.6); }
   .fb-page-search-item img {
     align-self: flex-start;
     margin: 6px;
@@ -897,10 +954,11 @@ footer {
     width: 50px;
     height: 50px; }
   .fb-page-search-item .name {
+    margin-left: 6px;
     font-size: 1.1em;
     font-weight: 700; }
   .fb-page-search-item .likes {
-    margin-left: 20px;
+    margin-left: 16px;
     border-radius: 2px;
     background-color: #3b5998;
     padding: 3px 5px;
@@ -919,6 +977,9 @@ footer {
     order: 0;
     width: 100%;
     height: 50px; }
+    @media screen and (min-width: 900px) {
+      .app-container header {
+        padding: 0 20px; } }
   .app-container > section {
     height: calc(100% - 50px); }
   .app-container .ui.dimmer.error {
@@ -931,6 +992,11 @@ footer {
     font-weight: 700; }
   .app-container footer {
     align-self: flex-end; }
+  .app-container .auth-enter {
+    opacity: .01; }
+    .app-container .auth-enter.auth-enter-active {
+      transition: opacity 150ms ease-in;
+      opacity: 1; }
 
 .home-container {
   display: flex;
@@ -952,14 +1018,35 @@ footer {
   display: flex;
   flex-wrap: wrap;
   margin: auto;
-  width: 400px;
+  padding: 0 10px;
+  width: 100%;
   height: auto; }
+  @media screen and (min-width: 500px) {
+    .auth-container {
+      padding: 0 20px;
+      width: 400px; } }
   .auth-container .google-auth-button, .auth-container .facebook-auth-button {
-    margin: .25em 20px;
     width: 100%;
     height: 60px;
     line-height: 28px;
-    font-size: 1.3em; }
+    font-size: 1.2em; }
+  .auth-container .divider {
+    position: relative;
+    margin: 10px 30px;
+    width: 100%;
+    text-shadow: -4px 0 #1a1a1a, 4px 0 #1a1a1a, -3px 0 #1a1a1a, 3px 0 #1a1a1a, -2px 0 #1a1a1a, 2px 0 #1a1a1a, -1px 0 #1a1a1a, -1px -1px #1a1a1a, -1px 1px #1a1a1a, 0 1px #1a1a1a, 0 2px #1a1a1a, 1px 1px #1a1a1a, 2px 0 #1a1a1a, -2px 0 #1a1a1a, -1px 1px #1a1a1a, 2px 1px #1a1a1a, -2px 1px #1a1a1a;
+    font-size: .9em;
+    font-weight: 200; }
+    .auth-container .divider::before {
+      position: absolute;
+      bottom: 5px;
+      left: 0;
+      z-index: -1;
+      border-radius: 3px;
+      background-color: #595959;
+      width: 100%;
+      height: .5px;
+      content: ''; }
 
 .venue-search-container {
   display: flex;
@@ -983,7 +1070,15 @@ footer {
 .artist-container {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap; }
+  flex-wrap: wrap;
+  background: linear-gradient(#1a1a1a 5%, rgba(13, 10, 0, 0.75) 50%, #1a1a1a 100%), url("../img/artist-bg.jpg") no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100%; }
+  @media screen and (max-width: 1024px) {
+    .artist-container {
+      background-position: top;
+      background-size: 160%; } }
   .artist-container h1 {
     margin: 0 auto; }
   .artist-container .fb-page-search {
@@ -992,3 +1087,22 @@ footer {
     @media screen and (max-width: 500px) {
       .artist-container .fb-page-search {
         width: 90%; } }
+
+.fb-page-search .loading {
+  padding: 20px 10px;
+  font-size: 1.1em; }
+  .fb-page-search .loading .loader {
+    margin-right: 10px; }
+
+.fb-page-search input:focus {
+  border-color: #fff; }
+
+.fb-page-search .items-container {
+  z-index: 1;
+  margin-top: -2px;
+  border: 1px solid #fff;
+  border-top: 0;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  background: rgba(0, 0, 0, 0.4);
+  padding-top: 2px; }

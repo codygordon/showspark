@@ -1,53 +1,65 @@
 import auth0 from 'auth0-js'
 import decode from 'jwt-decode'
 
+const redirectUri = process.env.NODE_ENV === 'production'
+  ? 'https://showspark/login'
+  : 'http://localhost:3000/login'
+
+
 /* eslint-disable class-methods-use-this */
 export default class AuthService {
   constructor() {
-    // Configure Auth0
-    this.auth0 = new auth0.WebAuth({
+    this.webAuth = new auth0.WebAuth({
       clientID: 'gFHlpDzCR3GFtvT1QPRpKXKLb9mRftih',
       domain: 'showspark.auth0.com',
-      responseType: 'token id_token'
+      responseType: 'token id_token',
+      scope: 'email profile',
+      redirectUri
     })
 
-    this.login = this.login.bind(this)
+    this.signupWithEmail = this.signupWithEmail.bind(this)
+    this.loginWithEmail = this.loginWithEmail.bind(this)
+    this.resetPassword = this.resetPassword.bind(this)
     this.loginWithGoogle = this.loginWithGoogle.bind(this)
     this.loginWithFacebook = this.loginWithFacebook.bind(this)
-    this.signup = this.signup.bind(this)
   }
 
-  login(username, password, uri, cb) {
-    // redirects the call to auth0 instance
-    this.auth0.redirect.loginWithCredentials({
+  signupWithEmail(email, password, name, cb) {
+    this.webAuth.signup({
       connection: 'Username-Password-Authentication',
-      username,
+      email,
       password,
-      redirect_uri: uri
-    }, err => cb(err))
+      user_metadata: {
+        name
+      }
+    }, cb)
   }
 
-  loginWithGoogle(uri, cb) {
-    this.auth0.authorize({
-      connection: 'google-oauth2',
-      redirect_uri: uri
-    }, err => cb(err))
-  }
-
-  loginWithFacebook(uri, cb) {
-    this.auth0.authorize({
-      connection: 'facebook-oauth2',
-      redirect_uri: uri
-    }, err => cb(err))
-  }
-
-  signup(username, password, cb) {
-    // redirects the call to auth0 instance
-    this.auth0.redirect.signupAndLogin({
+  loginWithEmail(username, password, cb) {
+    this.webAuth.redirect.loginWithCredentials({
       connection: 'Username-Password-Authentication',
       username,
       password
-    }, err => cb(err))
+    }, cb)
+  }
+
+  resetPassword(email, cb) {
+    this.webAuth.changePassword({
+      connection: 'Username-Password-Authentication',
+      email
+    }, cb)
+  }
+
+  loginWithGoogle(cb) {
+    this.webAuth.authorize({
+      connection: 'google-oauth2'
+    }, cb)
+  }
+
+  loginWithFacebook(cb) {
+    this.webAuth.authorize({
+      connection: 'facebook'
+    }, cb)
   }
 
   logout() {
@@ -57,12 +69,12 @@ export default class AuthService {
   }
 
   parseHash(hash) {
-    this.auth0.parseHash({ hash, _idTokenVerification: false },
+    this.webAuth.parseHash({ hash, _idTokenVerification: false },
       (err, authResult) => {
         if (err) throw err
         if (authResult && authResult.accessToken && authResult.idToken) {
           this.setToken(authResult.accessToken, authResult.idToken)
-          this.auth0.client.userInfo(authResult.accessToken,
+          this.webAuth.client.userInfo(authResult.accessToken,
             (err, profile) => {
               if (err) console.log('Error loading the Profile', err)
               else this.setProfile(profile)
@@ -74,8 +86,6 @@ export default class AuthService {
   setProfile(profile) {
     // Saves profile data to localStorage
     localStorage.setItem('user_profile', JSON.stringify(profile))
-    // Triggers profile_updated event to update the UI
-    this.emit('profile_updated', profile)
   }
 
   getProfile() {

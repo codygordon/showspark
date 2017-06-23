@@ -17,12 +17,13 @@ export const history = createBrowserHistory()
 
 export const initialState = {
   auth: {
+    isAuthenticated: auth0.loggedIn(),
+    profile: localStorage.getItem('user_profile')
+      ? JSON.parse(localStorage.getItem('user_profile')) : null,
     showingAuth: false,
     showingEmailAuthForm: false,
     showingSignUp: false,
     isFetching: false,
-    isAuthenticated: auth0.loggedIn(),
-    user: localStorage.getItem('user_profile') ? JSON.parse(localStorage.getItem('user_profile')) : null,
     errorMessage: null
   },
   venueSearch: {
@@ -51,7 +52,7 @@ export const initialState = {
     isFetching: false,
     errorMessage: null,
     fetchingFbToken: false,
-    fbToken: null
+    fbToken: 'placeholder'
   }
 }
 

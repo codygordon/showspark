@@ -8,6 +8,10 @@
     order: 0;
     width: 100%;
     height: $header-height;
+
+    @media screen and (min-width: 900px) {
+      padding: 0 20px;
+    }
   }
 
   & > section {
@@ -28,5 +32,15 @@
 
   footer {
     align-self: flex-end;
+  }
+
+  // css transition groups
+  .auth-enter {
+    opacity: .01;
+
+    &.auth-enter-active {
+      transition: opacity 150ms ease-in;
+      opacity: 1;
+    }
   }
 }

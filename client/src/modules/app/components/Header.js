@@ -3,36 +3,54 @@ import PropTypes from 'prop-types'
 
 import { Link } from 'react-router-dom'
 import { Popup } from 'semantic-ui-react'
-import UserButton from './UserButton'
-import UserMenu from './UserMenu'
 
-const Header = ({ location, auth, handleLogOutClick }) => (
-  <header>
-    <Link to="/" className="logo" />
-    {!auth.isAuthenticated ? (
-      <Link
-        className="log-in"
-        to={{
-          pathname: location.pathname,
-          search: location.search ? `${location.search}&showAuth=true` : '?showAuth=true'
-        }}>
+import defaultAvatar from '../../../img/default-avatar.svg'
+
+const Header = ({ location, auth, ...props }) => {
+  const UserButton = (
+    <div>
+      {auth.profile &&
+        <a className="user-button">
+          <img src={auth.profile.picture || defaultAvatar} alt="user" className="avatar" />
+          <span className="name">
+            {auth.profile.name === auth.profile.email
+              ? auth.profile.user_metadata.name : auth.profile.name}
+          </span>
+          <i className="fa fa-chevron-circle-down" aria-hidden="true" />
+        </a>
+      }
+    </div>
+  )
+
+  const UserMenu = (
+    <nav>
+      <a role="button" tabIndex={0} onClick={props.handleLogOutClick}>Sign Out</a>
+    </nav>
+  )
+
+  return (
+    <header>
+      <Link to="/" className="logo" />
+      {!auth.isAuthenticated ? (
+        <Link
+          className="log-in"
+          to={{
+            pathname: location.pathname,
+            search: location.search ? `${location.search}&showAuth=true` : '?showAuth=true'
+          }}>
         Log In
       </Link>
     ) : (
       <Popup
         className="user-menu"
-        trigger={(
-          <UserButton profile={auth.profile} />
-        )}
-        content={(
-          <UserMenu
-            handleLogOutClick={handleLogOutClick} />
-        )}
-        hoverable
+        trigger={UserButton}
+        content={UserMenu}
+        on="click"
         position="bottom right" />
     )}
-  </header>
-)
+    </header>
+  )
+}
 
 Header.propTypes = {
   location: PropTypes.object.isRequired,

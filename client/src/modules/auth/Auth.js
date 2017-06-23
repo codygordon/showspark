@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import GoogleAuthButton from './components/GoogleAuthButton'
 import FacebookAuthButton from './components/FacebookAuthButton'
 import EmailAuthForm from './components/EmailAuthForm'
 
@@ -11,25 +10,12 @@ import * as actions from './actions'
 class AuthContainer extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
-    location: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired
-  }
-
-  authClose = () => {
-    const { dispatch, location, history } = this.props
-    dispatch(actions.showAuthToggle())
-    history.push(`${location.pathname}${location.search}`.replace('&showAuth=true', ''))
-  }
-
-  handleGoogleAuthClick = () => {
-    const { dispatch } = this.props
-    // dispatch(actions.)
   }
 
   handleFacebookAuthClick = () => {
     const { dispatch } = this.props
-    // dispatch(actions.)
+    dispatch(actions.logInUserFacebook())
   }
 
   handleSignUpToggleClick = () => {
@@ -37,26 +23,30 @@ class AuthContainer extends Component {
     dispatch(actions.showSignUpToggle())
   }
 
-  handleEmailAuthFormSubmit = (e) => {
-    e.preventDefault()
-    const { auth, dispatch, location } = this.props
-    const email = this.emailInput.value
-    const password = this.passwordInput.value
-    const uri = location.href
+  handleEmailAuthSubmit = (email, password, name) => {
+    const { auth, dispatch } = this.props
 
     auth.showingSignUp
-      ? dispatch(actions.logInUser(email, password, uri))
-      : dispatch(actions.signUpUser(email, password, uri))
+      ? dispatch(actions.signUpUserEmail(email, password, name))
+      : dispatch(actions.logInUserEmail(email, password))
+  }
+
+  handleEmailAuthPasswordResetClick = (email) => {
+    const { dispatch } = this.props
+    dispatch(actions.resetUserPassword(email))
   }
 
   render() {
+    const { auth } = this.props
     return (
       <div className="auth-container">
-        <GoogleAuthButton handleClick={this.handleGoogleAuthClick} />
         <FacebookAuthButton handleClick={this.handleFacebookAuthClick} />
-        {/* <EmailAuthForm
+        <span className="divider">or with email</span>
+        <EmailAuthForm
+          auth={auth}
           handleSignUpToggle={this.handleSignUpToggleClick}
-          handleSubmit={this.handleEmailAuthSubmit} /> */}
+          handleEmailAuthSubmit={this.handleEmailAuthSubmit}
+          handlePasswordResetClick={this.handleEmailAuthPasswordResetClick} />
       </div>
     )
   }

@@ -1,0 +1,42 @@
+.user-menu {
+  top: 38px !important;
+  right: 25px !important;
+  border-color: lighten($background, 20%) !important;
+  box-shadow: 0 0 6px $black !important;
+  background-color: lighten($background, 5%) !important;
+  max-width: 200px !important;
+
+  @media screen and (max-width: 900px) {
+    right: 10px !important;
+  }
+
+  nav {
+    width: 100%;
+    text-align: center;
+
+    a {
+      margin: 5px auto;
+      padding: 12.075px;
+      width: 100% !important;
+      text-shadow: $text-light-black-stroke-shadow;
+      font-size: 1em;
+
+      &::before {
+        bottom: 13px;
+        left: 15%;
+        width: 70%;
+        height: 1px;
+      }
+
+      @media only screen and (max-width: 768px) {
+        padding: .75em;
+      }
+    }
+  }
+
+  &::before {
+    right: .5rem !important;
+    box-shadow: -1px -1px 0 0 lighten($background, 20%) !important;
+    background: lighten($background, 5%) !important;
+  }
+}

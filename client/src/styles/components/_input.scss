@@ -1,5 +1,5 @@
 input {
-  &[type='text'] {
+  &[type='text'], &[type='email'], &[type='password'] {
     z-index: 0;
     border: .5px solid $white;
     border-radius: 3px;

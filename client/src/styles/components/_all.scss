@@ -10,6 +10,7 @@
 
 @import '../../modules/auth/components/GoogleAuthButton';
 @import '../../modules/auth/components/FacebookAuthButton';
+@import '../../modules/auth/components/EmailAuthForm';
 
 @import '../../modules/home/components/CityInput';
 @import '../../modules/home/components/AutocompleteItem';
@@ -20,5 +21,4 @@
 @import '../../modules/venue-search/components/PaginationMenu';
 @import '../../modules/venue-search/components/VenueList';
 
-@import '../../modules/artist/components/FbPageSearch';
-@import '../../modules/artist/components/FbPageSearchItem';
+@import '../../modules/fb-page-search/components/FbPageSearchItem';

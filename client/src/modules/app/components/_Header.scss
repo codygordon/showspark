@@ -38,73 +38,7 @@ header {
     margin: 0 30px 0 auto;
 
     &::before {
-      bottom: 15px;
-    }
-  }
-
-  .user {
-    display: flex;
-    flex: 0 0 150px;
-    align-items: center;
-    justify-content: flex-end;
-    transition: ease .2s;
-    margin-left: auto;
-    cursor: pointer;
-    padding-right: 15px;
-    height: 100%;
-    color: darken($gray, 15%);
-
-    &:hover .avatar {
-      transform: scale(1.1);
-    }
-
-    .avatar {
-      transition: ease .2s;
-      margin-right: 5px;
-      border-radius: 50%;
-      box-shadow: $user-img-shadow;
-      width: 30px;
-      height: 30px;
-      object-fit: cover;
-    }
-
-    .name {
-      padding: 0 10px 0 5px;
-      line-height: 1.1em;
-      font-size: .95em;
-      font-weight: 800;
-    }
-
-    i {
-      padding-top: 1px;
-
-      @media only screen and (max-width: 768px) {
-        font-size: 1.5em;
-      }
-    }
-  }
-
-  .user-menu {
-    top: 38px !important;
-    padding: 0 !important;
-
-    button {
-      transition: ease .2s;
-      margin: 6px 0;
-      border: 0;
-      background: transparent;
-      padding: 10px;
-      width: 150px;
-      font-size: 1.1em;
-      font-weight: 700;
-
-      &:hover {
-        color: $blue;
-      }
-
-      @media only screen and (max-width: 768px) {
-        padding: .75em;
-      }
+      bottom: 14.5px;
     }
   }
 }

@@ -1,0 +1,75 @@
+.email-auth-form {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+
+  input {
+    font-size: 1em;
+  }
+
+  .name, .email {
+    margin-bottom: 5px;
+  }
+
+  .signup-toggle-submit {
+    display: flex;
+    margin-top: 10px;
+    padding: 0 1px;
+
+    .toggle-text {
+      font-weight: 200;
+    }
+
+    .toggle {
+      margin: 0 4px;
+      color: $spark-yellow;
+
+      &::before {
+        bottom: 22px;
+        height: 1;
+      }
+    }
+
+    .submit {
+      align-self: flex-end;
+      margin-left: auto;
+      padding: 0;
+      width: 130px;
+      height: 40px;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+
+      &.loading {
+        background-color: darken($spark-yellow, 25%);
+        pointer-events: none;
+      }
+    }
+  }
+
+  .error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+
+    i {
+      margin-right: 8px;
+      color: lighten($error-red, 2%);
+      font-size: 1.8em;
+    }
+
+    .text {
+      color: lighten($error-red, 2%);
+    }
+
+    a {
+      margin: 0 4px;
+      color: $spark-yellow;
+
+      &::before {
+        bottom: -1px;
+        height: 1px;
+      }
+    }
+  }
+}

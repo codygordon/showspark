@@ -38,7 +38,8 @@ export default function reducer(state = initialState.auth, action) {
       return {
         ...state,
         isFetching: true,
-        isAuthenticated: false
+        isAuthenticated: false,
+        errorMessage: null
       }
     case SIGNUP_SUCCESS:
       return {
@@ -58,7 +59,8 @@ export default function reducer(state = initialState.auth, action) {
       return {
         ...state,
         isFetching: true,
-        isAuthenticated: false
+        isAuthenticated: false,
+        errorMessage: null
       }
     case LOGIN_SUCCESS:
       return {
@@ -98,7 +100,7 @@ export default function reducer(state = initialState.auth, action) {
         ...state,
         isFetching: false,
         errorMessage: null,
-        user: action.user
+        profile: action.profile
       }
     case USER_FAILURE:
       return {
@@ -181,10 +183,10 @@ export function requestUser() {
   }
 }
 
-export function receiveUser(user) {
+export function receiveProfile(profile) {
   return {
     type: USER_SUCCESS,
-    user
+    profile
   }
 }
 
@@ -197,54 +199,62 @@ export function userError(message) {
 
 /* ASYNC actions using thunk below */
 
-export function signUpUser(user) {
+export function resetUserPassword(email) {
   return (dispatch) => {
-    dispatch(requestSignup())
-
-    auth0.signup(user.email, user.password, (err) => {
-      if (err) dispatch(signupError(err.message))
-      else dispatch(receiveSignup())
+    dispatch(requestLogin())
+    auth0.resetPassword(email, (err, res) => {
+      if (err) dispatch(loginError(err.description))
+      else {
+        dispatch(loginError(res))
+      }
     })
   }
 }
 
-export function logInUser(user, uri) {
+export function logInUserEmail(email, password) {
   return (dispatch) => {
     dispatch(requestLogin())
-
-    auth0.login(user.email, user.password, uri, (err) => {
-      if (err) dispatch(loginError(err.message))
-      else dispatch(receiveLogin())
+    auth0.loginWithEmail(email, password, (err, res) => {
+      if (err) dispatch(loginError(err.description))
+      else dispatch(receiveLogin(res))
     })
   }
 }
 
 export function logInUserGoogle() {
   return dispatch => auth0.loginWithGoogle((err) => {
-    if (err) dispatch(loginError(err.message))
+    if (err) dispatch(loginError(err.description))
     else dispatch(receiveLogin())
   })
 }
 
 export function logInUserFacebook() {
   return dispatch => auth0.loginWithFacebook((err) => {
-    if (err) dispatch(loginError(err.message))
+    if (err) dispatch(loginError(err))
     else dispatch(receiveLogin())
   })
 }
 
+export function signUpUserEmail(email, password, name) {
+  return (dispatch) => {
+    dispatch(requestSignup())
+    auth0.signupWithEmail(email, password, name, (err, res) => {
+      if (err) dispatch(signupError(err.message))
+      else dispatch(logInUserEmail(email, password))
+    })
+  }
+}
 
 export function handleLoginHash(hash) {
   return (dispatch) => {
     dispatch(requestUser())
-    auth0.parseHash(hash, (err, user) => {
-      if (err) {
-        dispatch(userError(err.message))
-      } else {
-        dispatch(receiveUser(user))
+    auth0.parseHash(hash, (err) => {
+      if (err) dispatch(userError(err.message))
+      else {
+        dispatch(receiveLogin())
+        dispatch(receiveProfile(auth0.getProfile()))
       }
     })
-    dispatch(receiveLogin())
   }
 }
 

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import qs from 'query-string'
 
+import { CSSTransitionGroup } from 'react-transition-group'
 import { Dimmer } from 'semantic-ui-react'
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -29,18 +30,27 @@ class AppContainer extends Component {
   }
 
   componentWillMount() {
-    const { dispatch, location } = this.props
+    const { dispatch, location, history } = this.props
     const query = qs.parse(location.search)
     if (query.showAuth) dispatch(authActions.showAuthToggle())
+    if (location.pathname === '/login') {
+      history.replace(`${location.pathname}?showAuth=true`)
+      dispatch(authActions.handleLoginHash(location.hash))
+      setTimeout(() => { history.goBack() }, 500)
+    }
   }
 
   componentWillReceiveProps(nextProps) {
-    const { dispatch, location } = this.props
+    const { dispatch, location, history } = this.props
     const query = qs.parse(location.search)
     const nextQuery = qs.parse(nextProps.location.search)
     if (query && nextQuery) {
       if ((query.showAuth && !nextQuery.showAuth)
       || (!query.showAuth && nextQuery.showAuth)) dispatch(authActions.showAuthToggle())
+    }
+    if (nextProps.auth.isAuthenticated && nextQuery.showAuth) {
+      const newSearch = nextProps.location.search.replace('&showAuth=true', '').replace('?showAuth=true', '')
+      history.replace(`${location.pathname}${newSearch}`)
     }
   }
 
@@ -70,7 +80,14 @@ class AppContainer extends Component {
         <Dimmer
           active={auth.showingAuth}
           onClickOutside={this.authClose}>
-          <Auth location={location} history={history} auth={auth} />
+          <CSSTransitionGroup
+            transitionName="auth"
+            transitionEnterTimeout={150}
+            transitionLeaveTimeout={100}>
+            {auth.showingAuth &&
+              <Auth location={location} history={history} auth={auth} />
+            }
+          </CSSTransitionGroup>
         </Dimmer>
         {children}
         {showFooter &&

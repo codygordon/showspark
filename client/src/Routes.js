@@ -6,8 +6,9 @@ import { ConnectedRouter } from 'react-router-redux'
 import App from './modules/app/App'
 import Home from './modules/home/Home'
 import Artist from './modules/artist/Artist'
-import VenueSearch from './modules/venue-search/VenueSearch'
+// import VenueSearch from './modules/venue-search/VenueSearch'
 import NotFound from './modules/app/components/NotFound'
+import Login from './modules/app/components/Login'
 
 import { history } from './store'
 
@@ -46,20 +47,31 @@ export default class Routes extends Component {
     </App>
   )
 
-  VenueSearchPlusProps = ({ location }) => (
+  // VenueSearchPlusProps = ({ location }) => (
+  //   <App
+  //     location={location}
+  //     history={history}
+  //     auth={this.props.auth}
+  //     errorMessage={this.props.venueSearch.city.errorMessage || this.props.venueSearch.venues.errorMessage}
+  //     showHeader>
+  //     <VenueSearch
+  //       location={location}
+  //       history={history}
+  //       isAuthenticated={this.props.auth.isAuthenticated}
+  //       city={this.props.venueSearch.city}
+  //       venues={this.props.venueSearch.venues}
+  //       artist={this.props.artist} />
+  //   </App>
+  // )
+
+  LoginPlusProps = ({ location }) => (
     <App
       location={location}
       history={history}
       auth={this.props.auth}
-      errorMessage={this.props.venueSearch.city.errorMessage || this.props.venueSearch.venues.errorMessage}
+      errorMessage={this.props.auth.errorMessage}
       showHeader>
-      <VenueSearch
-        location={location}
-        history={history}
-        isAuthenticated={this.props.auth.isAuthenticated}
-        city={this.props.venueSearch.city}
-        venues={this.props.venueSearch.venues}
-        artist={this.props.artist} />
+      <Login />
     </App>
   )
 
@@ -70,6 +82,7 @@ export default class Routes extends Component {
           <Route exact match path="/" render={this.HomePlusProps} />
           <Route path="/artist" render={this.ArtistPlusProps} />
           {/* <Route path="/venue-search" render={this.VenueSearchPlusProps} /> */}
+          <Route path="/login" render={this.LoginPlusProps} />
           <Route component={NotFound} />
         </Switch>
       </ConnectedRouter>

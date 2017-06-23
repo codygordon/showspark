@@ -2,6 +2,7 @@ a {
   position: relative;
   transition: ease .1s;
   z-index: 1;
+  cursor: pointer;
   text-decoration: none;
   text-shadow: $text-black-stroke-shadow;
   color: darken($white, 5%);
@@ -19,7 +20,7 @@ a {
 
   &::before {
     position: absolute;
-    bottom: 1.25px;
+    bottom: 0;
     left: 0;
     transform: scaleX(0);
     transition: .2s ease-in-out 0s;

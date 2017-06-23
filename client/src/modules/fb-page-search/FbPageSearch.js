@@ -35,7 +35,7 @@ export default class FbPageSearch extends Component {
 
   handleInputChange = debounce(async () => {
     if (!this.searchInput.value) return this.setState({ isFetching: false })
-    const { fbToken, limit, minLikes, maxLikes, category } = this.props
+    const { fbToken, limit, minLikes, maxLikes, category, pageFields } = this.props
     try {
       const url = 'https://graph.facebook.com/v2.9/search'
       const params = {
