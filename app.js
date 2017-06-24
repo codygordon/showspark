@@ -3,6 +3,7 @@ const path = require('path')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const jwt = require('express-jwt')
+const sslRedirect = require('heroku-ssl-redirect ')
 const dotenv = require('dotenv')
 const mongoose = require('mongoose')
 const handlers = require('./handlers')
@@ -55,6 +56,7 @@ module.exports = class App {
     this.express.use(bodyParser.json())
     this.express.use(bodyParser.urlencoded({ extended: false }))
     if (process.env.NODE_ENV === 'production') {
+      this.express.use(sslRedirect())
       /* serve all routes via client build if in prod env */
       this.express.use(express.static('client/build'))
       this.express.get('*', (req, res) => {

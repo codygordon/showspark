@@ -2,7 +2,7 @@ import auth0 from 'auth0-js'
 import decode from 'jwt-decode'
 
 const redirectUri = process.env.NODE_ENV === 'production'
-  ? 'https://showspark/login'
+  ? 'https://showspark.com/login'
   : 'http://localhost:3000/login'
 
 
