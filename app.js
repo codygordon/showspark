@@ -14,7 +14,10 @@ const dbUrl = process.env.MLAB_DB_URL
 const dbUser = process.env.MLAB_DB_USER
 const dbPass = process.env.MLAB_DB_PASS
 
-const mongoPath = process.env.NODE_ENV === 'production'
+const productionOrStaging = process.env.NODE_ENV === 'production'
+  || process.env.NODE_ENV === 'staging'
+
+const mongoPath = productionOrStaging
   ? `mongodb://${dbUser}:${dbPass}@${dbUrl}`
   : `mongodb://127.0.0.1:27017/${process.env.LOCAL_DB}`
 
@@ -60,8 +63,8 @@ module.exports = class App {
     })
     /* routes to be imported */
     this.express.use('/api/v1', require('./routes/api/v1/index'))
-    if (process.env.NODE_ENV === 'production') {
-      /* serve all other routes via client build if in prod env */
+    if (productionOrStaging) {
+      /* serve all other routes via client build if in prod / staging env */
       this.express.use(express.static('client/build'))
       this.express.get('*', (req, res) => {
         res.sendFile(path.resolve(`${__dirname}/client/build/index.html`))

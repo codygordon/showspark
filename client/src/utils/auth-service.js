@@ -3,7 +3,9 @@ import decode from 'jwt-decode'
 
 const redirectUri = process.env.NODE_ENV === 'production'
   ? 'https://showspark.com/login'
-  : 'http://localhost:3000/login'
+  : process.env.NODE_ENV === 'staging'
+    ? 'http://stagingshowspark.com/login'
+    : 'http://localhost:3000/login'
 
 
 /* eslint-disable class-methods-use-this */
