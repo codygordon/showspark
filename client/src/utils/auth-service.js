@@ -2,7 +2,7 @@ import auth0 from 'auth0-js'
 import decode from 'jwt-decode'
 
 const redirectUri = process.env.NODE_ENV === 'production'
-  ? 'https://showspark/login'
+  ? 'https://showspark.com/login'
   : 'http://localhost:3000/login'
 
 
@@ -74,11 +74,11 @@ export default class AuthService {
         if (err) throw err
         if (authResult && authResult.accessToken && authResult.idToken) {
           this.setToken(authResult.accessToken, authResult.idToken)
-          this.webAuth.client.userInfo(authResult.accessToken,
-            (err, profile) => {
-              if (err) console.log('Error loading the Profile', err)
-              else this.setProfile(profile)
-            })
+          const profileCb = (err, profile) => {
+            if (err) this.webAuth.client.userInfo(authResult.accessToken, profileCb)
+            else this.setProfile(profile)
+          }
+          this.webAuth.client.userInfo(authResult.accessToken, profileCb)
         }
       })
   }

@@ -19,6 +19,7 @@
     "express-jwt": "^5.1.0",
     "express-promise-router": "^1.1.1",
     "express-rate-limit": "^2.6.0",
+    "heroku-ssl-redirect": "0.0.4",
     "jwks-rsa": "^1.1.1",
     "mongoose": "^4.10.6",
     "morgan": "^1.8.1",

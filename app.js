@@ -3,10 +3,10 @@ const path = require('path')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const jwt = require('express-jwt')
+const sslRedirect = require('heroku-ssl-redirect')
 const dotenv = require('dotenv')
 const mongoose = require('mongoose')
 const handlers = require('./handlers')
-// const jwksRsa = require('jwks-rsa')
 
 dotenv.load()
 
@@ -22,18 +22,6 @@ const jwtCheck = jwt({
   secret: process.env.AUTH0_CLIENT_SECRET,
   issuer: process.env.AUTH0_ISSUER
 }).unless({ path: ['/api/v1/token'] })
-
-// const jwtCheck = jwt({
-//   secret: jwksRsa.expressJwtSecret({
-//     cache: true,
-//     rateLimit: true,
-//     jwksRequestsPerMinute: 5,
-//     jwksUri: process.env.AUTH0_JWKS_URI
-//   }),
-//   audience: process.env.AUTH0_AUDIENCE,
-//   issuer: process.env.AUTH0_ISSUER,
-//   algorithms: ['RS256']
-// })
 
 mongoose.connect(mongoPath)
 mongoose.Promise = global.Promise
@@ -55,15 +43,12 @@ module.exports = class App {
     this.express.use(bodyParser.json())
     this.express.use(bodyParser.urlencoded({ extended: false }))
     if (process.env.NODE_ENV === 'production') {
-      /* serve all routes via client build if in prod env */
-      this.express.use(express.static('client/build'))
-      this.express.get('*', (req, res) => {
-        res.sendFile(path.resolve(`${__dirname}/client/build/index.html`))
-      })
+      /* redirect to https in prod */
+      this.express.use(sslRedirect())
       /* and use production error handling */
       this.express.use(handlers.productionErrors)
     } else {
-      /* otherwise, use development error handling */
+      /* otherwise, use dev error handling */
       this.express.use(handlers.developmentErrors)
     }
   }
@@ -75,8 +60,12 @@ module.exports = class App {
     })
     /* routes to be imported */
     this.express.use('/api/v1', require('./routes/api/v1/index'))
-    this.express.use((req, res) => (
-      res.status(403).send({ message: 'you didn\'t say the magic word!' }))
-    )
+    if (process.env.NODE_ENV === 'production') {
+      /* serve all other routes via client build if in prod env */
+      this.express.use(express.static('client/build'))
+      this.express.get('*', (req, res) => {
+        res.sendFile(path.resolve(`${__dirname}/client/build/index.html`))
+      })
+    }
   }
 }
