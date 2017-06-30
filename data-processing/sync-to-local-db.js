@@ -1,9 +1,9 @@
 const MongoClient = require('mongodb').MongoClient
 const dotenv = require('dotenv')
 
-dotenv.config({ path: '../.env' })
-
 /* eslint-disable no-console */
+
+dotenv.load()
 
 const localMongo = `mongodb://127.0.0.1:27017/${process.env.LOCAL_DB}`
 const mlabCreds = `${process.env.MLAB_DB_USER}:${process.env.MLAB_DB_PASS}`
@@ -21,32 +21,32 @@ MongoClient.connect(prodMongo, async (err, db) => {
     const localVenues = localDb.collection('venues')
     const localShows = localDb.collection('shows')
 
-    try { await localArtists.remove() } catch (err) { console.error(err) }
-    try { await localVenues.remove() } catch (err) { console.error(err) }
-    try { await localShows.remove() } catch (err) { console.error(err) }
+    try {
+      await Promise.all([
+        localArtists.remove(),
+        localVenues.remove(),
+        localShows.remove()
+      ])
+      console.log('removed all local docs')
+    } catch (err) { throw err }
 
     try {
-      const docs = await prodArtists.find()
-      try {
-        await localArtists.insertMany(docs)
-        console.log('done with artists')
-      } catch (err) { console.error(err) }
-    } catch (err) { console.error(err) }
+      const docs = await Promise.all([
+        prodArtists.find({}).toArray(),
+        prodVenues.find({}).toArray(),
+        prodShows.find({}).toArray()
+      ])
 
-    try {
-      const docs = await prodVenues.find()
       try {
-        await localVenues.insertMany(docs)
-        console.log('done with venues')
-      } catch (err) { console.error(err) }
-    } catch (err) { console.error(err) }
+        await Promise.all([
+          localArtists.insertMany(docs[0]),
+          localVenues.insertMany(docs[1]),
+          localShows.insertMany(docs[2])
+        ])
+        console.log('saved all prod docs to dev')
+      } catch (err) { throw err }
+    } catch (err) { throw err }
 
-    try {
-      const docs = await prodShows.find()
-      try {
-        await localShows.insertMany(docs)
-        console.log('done with shows')
-      } catch (err) { console.error(err) }
-    } catch (err) { console.error(err) }
+    process.exit()
   })
 })

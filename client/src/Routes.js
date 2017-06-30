@@ -6,6 +6,7 @@ import { ConnectedRouter } from 'react-router-redux'
 import App from './modules/app/App'
 import Home from './modules/home/Home'
 import Artist from './modules/artist/Artist'
+// import Admin from './modules/artist/Admin'
 // import VenueSearch from './modules/venue-search/VenueSearch'
 import NotFound from './modules/app/components/NotFound'
 import Login from './modules/app/components/Login'
@@ -74,6 +75,17 @@ export default class Routes extends Component {
       <Login />
     </App>
   )
+
+  // AdminPlusProps = ({ location }) => (
+  //   <App
+  //     location={location}
+  //     history={history}
+  //     auth={this.props.auth}
+  //     showHeader
+  //     showFooter>
+  //     <Admin />
+  //   </App>
+  // )
 
   render() {
     return (

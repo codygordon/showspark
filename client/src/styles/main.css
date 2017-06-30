@@ -453,7 +453,7 @@ a {
   z-index: 1;
   cursor: pointer;
   text-decoration: none;
-  text-shadow: -4px 0 #1a1a1a, 4px 0 #1a1a1a, -3px 0 #1a1a1a, 3px 0 #1a1a1a, -2px 0 #1a1a1a, 2px 0 #1a1a1a, -1px 0 #1a1a1a, -1px -1px #1a1a1a, -1px 1px #1a1a1a, 0 1px #1a1a1a, 0 2px #1a1a1a, 1px 1px #1a1a1a, 2px 0 #1a1a1a, -2px 0 #1a1a1a, -1px 1px #1a1a1a, 2px 1px #1a1a1a, -2px 1px #1a1a1a;
+  text-shadow: -2px 0 #1a1a1a, 2px 0 #1a1a1a, -1px 0 #1a1a1a, -1px -1px #1a1a1a, -1px 1px #1a1a1a, 0 1px #1a1a1a, 0 2px #1a1a1a, 1px 1px #1a1a1a, 2px 0 #1a1a1a, -2px 0 #1a1a1a, -1px 1px #1a1a1a, 2px 1px #1a1a1a, -2px 1px #1a1a1a;
   color: #f2f2f2;
   font-weight: 600; }
   a:hover {
@@ -525,7 +525,7 @@ label {
   z-index: 1;
   margin-bottom: -8px;
   padding-left: 5px;
-  text-shadow: -4px 0 #1a1a1a, 4px 0 #1a1a1a, -3px 0 #1a1a1a, 3px 0 #1a1a1a, -2px 0 #1a1a1a, 2px 0 #1a1a1a, -1px 0 #1a1a1a, -1px -1px #1a1a1a, -1px 1px #1a1a1a, 0 1px #1a1a1a, 0 2px #1a1a1a, 1px 1px #1a1a1a, 2px 0 #1a1a1a, -2px 0 #1a1a1a, -1px 1px #1a1a1a, 2px 1px #1a1a1a, -2px 1px #1a1a1a;
+  text-shadow: -2px 0 #1a1a1a, 2px 0 #1a1a1a, -1px 0 #1a1a1a, -1px -1px #1a1a1a, -1px 1px #1a1a1a, 0 1px #1a1a1a, 0 2px #1a1a1a, 1px 1px #1a1a1a, 2px 0 #1a1a1a, -2px 0 #1a1a1a, -1px 1px #1a1a1a, 2px 1px #1a1a1a, -2px 1px #1a1a1a;
   font-weight: 700; }
   label i {
     padding-right: 1px; }
@@ -589,7 +589,7 @@ footer {
       margin: 5px auto;
       padding: 12.075px;
       width: 100% !important;
-      text-shadow: -4px 0 #262626, 4px 0 #262626, -3px 0 #262626, 3px 0 #262626, -2px 0 #262626, 2px 0 #262626, -1px 0 #262626, -1px -1px #262626, -1px 1px #262626, 0 1px #262626, 0 2px #262626, 1px 1px #262626, 2px 0 #262626, -2px 0 #262626, -1px 1px #262626, 2px 1px #262626, -2px 1px #262626;
+      text-shadow: -2px 0 #262626, 2px 0 #262626, -1px 0 #262626, -1px -1px #262626, -1px 1px #262626, 0 1px #262626, 0 2px #262626, 1px 1px #262626, 2px 0 #262626, -2px 0 #262626, -1px 1px #262626, 2px 1px #262626, -2px 1px #262626;
       font-size: 1em; }
       .user-menu nav a::before {
         bottom: 13px;
@@ -1034,7 +1034,7 @@ footer {
     position: relative;
     margin: 10px 30px;
     width: 100%;
-    text-shadow: -4px 0 #1a1a1a, 4px 0 #1a1a1a, -3px 0 #1a1a1a, 3px 0 #1a1a1a, -2px 0 #1a1a1a, 2px 0 #1a1a1a, -1px 0 #1a1a1a, -1px -1px #1a1a1a, -1px 1px #1a1a1a, 0 1px #1a1a1a, 0 2px #1a1a1a, 1px 1px #1a1a1a, 2px 0 #1a1a1a, -2px 0 #1a1a1a, -1px 1px #1a1a1a, 2px 1px #1a1a1a, -2px 1px #1a1a1a;
+    text-shadow: -2px 0 #1a1a1a, 2px 0 #1a1a1a, -1px 0 #1a1a1a, -1px -1px #1a1a1a, -1px 1px #1a1a1a, 0 1px #1a1a1a, 0 2px #1a1a1a, 1px 1px #1a1a1a, 2px 0 #1a1a1a, -2px 0 #1a1a1a, -1px 1px #1a1a1a, 2px 1px #1a1a1a, -2px 1px #1a1a1a;
     font-size: .9em;
     font-weight: 200; }
     .auth-container .divider::before {
