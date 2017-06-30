@@ -4,7 +4,7 @@ import decode from 'jwt-decode'
 const redirectUri = process.env.NODE_ENV === 'production'
   ? 'https://showspark.com/login'
   : process.env.NODE_ENV === 'staging'
-    ? 'http://stagingshowspark.com/login'
+    ? 'http://staging.showspark.com/login'
     : 'http://localhost:3000/login'
 
 
