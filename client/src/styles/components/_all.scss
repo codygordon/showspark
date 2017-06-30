@@ -7,6 +7,7 @@
 @import '../../modules/app/components/UserMenu';
 @import '../../modules/app/components/UserButton';
 @import '../../modules/app/components/NotFound';
+@import '../../modules/app/components/PaginationMenu';
 
 @import '../../modules/auth/components/GoogleAuthButton';
 @import '../../modules/auth/components/FacebookAuthButton';
@@ -18,7 +19,6 @@
 
 @import '../../modules/venue-search/components/VenueMap';
 @import '../../modules/venue-search/components/VenueCard';
-@import '../../modules/venue-search/components/PaginationMenu';
 @import '../../modules/venue-search/components/VenueList';
 
 @import '../../modules/fb-page-search/components/FbPageSearchItem';

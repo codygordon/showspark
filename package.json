@@ -56,7 +56,7 @@
     "server": "nodemon server.js --exec babel-node --presets es2015,stage-0 --optimize_for_size --max_old_space_size=460 --gc_interval=100",
     "client": "babel-node start-client.js",
     "heroku-postbuild": "npm install --only=dev && npm run build-css && cd client/ && npm install --only=dev && npm install && npm run build",
-    "sync-to-local-db": "nodemon data-processing/sync-to-local-db.js --exec babel-node --presets es2015,stage-0"
+    "sync-dev-db": "babel-node data-processing/sync-to-local-db.js --presets es2015,stage-0"
   },
   "babel": {
     "presets": [

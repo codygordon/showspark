@@ -453,7 +453,7 @@ a {
   z-index: 1;
   cursor: pointer;
   text-decoration: none;
-  text-shadow: -4px 0 #1a1a1a, 4px 0 #1a1a1a, -3px 0 #1a1a1a, 3px 0 #1a1a1a, -2px 0 #1a1a1a, 2px 0 #1a1a1a, -1px 0 #1a1a1a, -1px -1px #1a1a1a, -1px 1px #1a1a1a, 0 1px #1a1a1a, 0 2px #1a1a1a, 1px 1px #1a1a1a, 2px 0 #1a1a1a, -2px 0 #1a1a1a, -1px 1px #1a1a1a, 2px 1px #1a1a1a, -2px 1px #1a1a1a;
+  text-shadow: -2px 0 #1a1a1a, 2px 0 #1a1a1a, -1px 0 #1a1a1a, -1px -1px #1a1a1a, -1px 1px #1a1a1a, 0 1px #1a1a1a, 0 2px #1a1a1a, 1px 1px #1a1a1a, 2px 0 #1a1a1a, -2px 0 #1a1a1a, -1px 1px #1a1a1a, 2px 1px #1a1a1a, -2px 1px #1a1a1a;
   color: #f2f2f2;
   font-weight: 600; }
   a:hover {
@@ -525,7 +525,7 @@ label {
   z-index: 1;
   margin-bottom: -8px;
   padding-left: 5px;
-  text-shadow: -4px 0 #1a1a1a, 4px 0 #1a1a1a, -3px 0 #1a1a1a, 3px 0 #1a1a1a, -2px 0 #1a1a1a, 2px 0 #1a1a1a, -1px 0 #1a1a1a, -1px -1px #1a1a1a, -1px 1px #1a1a1a, 0 1px #1a1a1a, 0 2px #1a1a1a, 1px 1px #1a1a1a, 2px 0 #1a1a1a, -2px 0 #1a1a1a, -1px 1px #1a1a1a, 2px 1px #1a1a1a, -2px 1px #1a1a1a;
+  text-shadow: -2px 0 #1a1a1a, 2px 0 #1a1a1a, -1px 0 #1a1a1a, -1px -1px #1a1a1a, -1px 1px #1a1a1a, 0 1px #1a1a1a, 0 2px #1a1a1a, 1px 1px #1a1a1a, 2px 0 #1a1a1a, -2px 0 #1a1a1a, -1px 1px #1a1a1a, 2px 1px #1a1a1a, -2px 1px #1a1a1a;
   font-weight: 700; }
   label i {
     padding-right: 1px; }
@@ -589,7 +589,7 @@ footer {
       margin: 5px auto;
       padding: 12.075px;
       width: 100% !important;
-      text-shadow: -4px 0 #262626, 4px 0 #262626, -3px 0 #262626, 3px 0 #262626, -2px 0 #262626, 2px 0 #262626, -1px 0 #262626, -1px -1px #262626, -1px 1px #262626, 0 1px #262626, 0 2px #262626, 1px 1px #262626, 2px 0 #262626, -2px 0 #262626, -1px 1px #262626, 2px 1px #262626, -2px 1px #262626;
+      text-shadow: -2px 0 #262626, 2px 0 #262626, -1px 0 #262626, -1px -1px #262626, -1px 1px #262626, 0 1px #262626, 0 2px #262626, 1px 1px #262626, 2px 0 #262626, -2px 0 #262626, -1px 1px #262626, 2px 1px #262626, -2px 1px #262626;
       font-size: 1em; }
       .user-menu nav a::before {
         bottom: 13px;
@@ -643,6 +643,46 @@ footer {
     @media only screen and (max-width: 768px) {
       .user-button i {
         font-size: 1.5em; } }
+
+.pagination-menu {
+  display: flex;
+  align-items: center;
+  margin: 10px 0 0 10px; }
+  .pagination-menu .text {
+    margin-right: 5px;
+    min-width: 140px;
+    line-height: 1.1em;
+    font-size: .9em;
+    font-weight: 700; }
+  .pagination-menu .page-button {
+    transition: transform ease .1s;
+    margin: 0 2px;
+    border: 1px solid #666;
+    border-radius: 2px;
+    background-color: #1a1a1a;
+    cursor: pointer;
+    padding: 0;
+    width: 7%;
+    max-width: 34px;
+    height: 34px;
+    color: #fff;
+    font-size: .9em;
+    font-weight: 300; }
+    .pagination-menu .page-button:active {
+      transform: scale(0.95); }
+    .pagination-menu .page-button:hover {
+      border: 1.5px solid #999999; }
+    .pagination-menu .page-button.active {
+      transform: scale(1.05);
+      border: 1px solid #fff;
+      background-color: #1a1a1a;
+      color: #fff; }
+  @media screen and (max-width: 500px) {
+    .pagination-menu .text {
+      min-width: 70px;
+      font-size: .75em; }
+    .pagination-menu .page-button {
+      width: 25%; } }
 
 .google-auth-button {
   background: #fff;
@@ -869,46 +909,6 @@ footer {
       white-space: nowrap;
       font-size: 12px; }
 
-.pagination-menu {
-  display: flex;
-  align-items: center;
-  margin: 10px 0 0 10px; }
-  .pagination-menu .text {
-    margin-right: 5px;
-    min-width: 140px;
-    line-height: 1.1em;
-    font-size: .9em;
-    font-weight: 700; }
-  .pagination-menu .page-button {
-    transition: transform ease .1s;
-    margin: 0 2px;
-    border: 1px solid #666;
-    border-radius: 2px;
-    background-color: #1a1a1a;
-    cursor: pointer;
-    padding: 0;
-    width: 7%;
-    max-width: 34px;
-    height: 34px;
-    color: #fff;
-    font-size: .9em;
-    font-weight: 300; }
-    .pagination-menu .page-button:active {
-      transform: scale(0.95); }
-    .pagination-menu .page-button:hover {
-      border: 1.5px solid #999999; }
-    .pagination-menu .page-button.active {
-      transform: scale(1.05);
-      border: 1px solid #fff;
-      background-color: #1a1a1a;
-      color: #fff; }
-  @media screen and (max-width: 500px) {
-    .pagination-menu .text {
-      min-width: 70px;
-      font-size: .75em; }
-    .pagination-menu .page-button {
-      width: 25%; } }
-
 .venue-list {
   display: flex;
   flex-wrap: wrap;
@@ -1034,7 +1034,7 @@ footer {
     position: relative;
     margin: 10px 30px;
     width: 100%;
-    text-shadow: -4px 0 #1a1a1a, 4px 0 #1a1a1a, -3px 0 #1a1a1a, 3px 0 #1a1a1a, -2px 0 #1a1a1a, 2px 0 #1a1a1a, -1px 0 #1a1a1a, -1px -1px #1a1a1a, -1px 1px #1a1a1a, 0 1px #1a1a1a, 0 2px #1a1a1a, 1px 1px #1a1a1a, 2px 0 #1a1a1a, -2px 0 #1a1a1a, -1px 1px #1a1a1a, 2px 1px #1a1a1a, -2px 1px #1a1a1a;
+    text-shadow: -2px 0 #1a1a1a, 2px 0 #1a1a1a, -1px 0 #1a1a1a, -1px -1px #1a1a1a, -1px 1px #1a1a1a, 0 1px #1a1a1a, 0 2px #1a1a1a, 1px 1px #1a1a1a, 2px 0 #1a1a1a, -2px 0 #1a1a1a, -1px 1px #1a1a1a, 2px 1px #1a1a1a, -2px 1px #1a1a1a;
     font-size: .9em;
     font-weight: 200; }
     .auth-container .divider::before {

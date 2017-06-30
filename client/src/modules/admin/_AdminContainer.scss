@@ -1,0 +1,27 @@
+.artist-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background: linear-gradient($background 5%, transparentize(darken($spark-yellow, 60%), .25) 50%, $background 100%), $artist-bg-img no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+
+  @media screen and (max-width: 1024px) {
+    background-position: top;
+    background-size: 160%;
+  }
+
+  h1 {
+    margin: 0 auto;
+  }
+
+  .fb-page-search {
+    margin: 20px auto;
+    width: 500px;
+
+    @media screen and (max-width: 500px) {
+      width: 90%;
+    }
+  }
+}

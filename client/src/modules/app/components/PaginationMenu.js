@@ -21,7 +21,7 @@ const PaginationMenu = ({ perPage, currentPage, total, handlePageButtonClick }) 
           {offset + 1} -&nbsp;
           {offset + perPage > total
             ? total : offset + perPage}
-          &nbsp;of {total} venues
+          &nbsp;of {total}
         </span>}
       {buttons}
     </nav>

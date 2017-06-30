@@ -1,11 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { CSSTransitionGroup } from 'react-transition-group'
-import VenueCard from './VenueCard'
 import PaginationMenu from '../../app/components/PaginationMenu'
 
-const VenueList = ({ perPage, currentPage, totalVenues, venues, ...props }) => {
+const ArtistList = ({ perPage, currentPage, totalVenues, venues, ...props }) => {
   const paginationMenu = (
     <PaginationMenu
       perPage={perPage}
@@ -15,21 +13,7 @@ const VenueList = ({ perPage, currentPage, totalVenues, venues, ...props }) => {
   )
 
   return (
-    <section className="venue-list">
-      {paginationMenu}
-      <CSSTransitionGroup
-        className="venue-cards"
-        transitionName="venue-cards"
-        transitionEnterTimeout={200}
-        transitionLeaveTimeout={1}>
-        {venues.data.length && venues.data.map(venue => (
-          <VenueCard
-            key={venue._id}
-            venue={venue}
-            handleHover={props.handleCardHover}
-            handleClick={props.handleCardClick} />
-        ))}
-      </CSSTransitionGroup>
+    <section className="artist-list">
       {paginationMenu}
     </section>
   )
@@ -45,4 +29,4 @@ VenueList.propTypes = {
   handlePageButtonClick: PropTypes.func.isRequired
 }
 
-export default VenueList
+export default ArtistList
