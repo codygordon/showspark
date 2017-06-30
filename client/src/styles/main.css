@@ -644,6 +644,46 @@ footer {
       .user-button i {
         font-size: 1.5em; } }
 
+.pagination-menu {
+  display: flex;
+  align-items: center;
+  margin: 10px 0 0 10px; }
+  .pagination-menu .text {
+    margin-right: 5px;
+    min-width: 140px;
+    line-height: 1.1em;
+    font-size: .9em;
+    font-weight: 700; }
+  .pagination-menu .page-button {
+    transition: transform ease .1s;
+    margin: 0 2px;
+    border: 1px solid #666;
+    border-radius: 2px;
+    background-color: #1a1a1a;
+    cursor: pointer;
+    padding: 0;
+    width: 7%;
+    max-width: 34px;
+    height: 34px;
+    color: #fff;
+    font-size: .9em;
+    font-weight: 300; }
+    .pagination-menu .page-button:active {
+      transform: scale(0.95); }
+    .pagination-menu .page-button:hover {
+      border: 1.5px solid #999999; }
+    .pagination-menu .page-button.active {
+      transform: scale(1.05);
+      border: 1px solid #fff;
+      background-color: #1a1a1a;
+      color: #fff; }
+  @media screen and (max-width: 500px) {
+    .pagination-menu .text {
+      min-width: 70px;
+      font-size: .75em; }
+    .pagination-menu .page-button {
+      width: 25%; } }
+
 .google-auth-button {
   background: #fff;
   color: #1a1a1a; }
@@ -868,46 +908,6 @@ footer {
       text-overflow: ellipsis;
       white-space: nowrap;
       font-size: 12px; }
-
-.pagination-menu {
-  display: flex;
-  align-items: center;
-  margin: 10px 0 0 10px; }
-  .pagination-menu .text {
-    margin-right: 5px;
-    min-width: 140px;
-    line-height: 1.1em;
-    font-size: .9em;
-    font-weight: 700; }
-  .pagination-menu .page-button {
-    transition: transform ease .1s;
-    margin: 0 2px;
-    border: 1px solid #666;
-    border-radius: 2px;
-    background-color: #1a1a1a;
-    cursor: pointer;
-    padding: 0;
-    width: 7%;
-    max-width: 34px;
-    height: 34px;
-    color: #fff;
-    font-size: .9em;
-    font-weight: 300; }
-    .pagination-menu .page-button:active {
-      transform: scale(0.95); }
-    .pagination-menu .page-button:hover {
-      border: 1.5px solid #999999; }
-    .pagination-menu .page-button.active {
-      transform: scale(1.05);
-      border: 1px solid #fff;
-      background-color: #1a1a1a;
-      color: #fff; }
-  @media screen and (max-width: 500px) {
-    .pagination-menu .text {
-      min-width: 70px;
-      font-size: .75em; }
-    .pagination-menu .page-button {
-      width: 25%; } }
 
 .venue-list {
   display: flex;
