@@ -5,7 +5,7 @@ const auth0 = new AuthService()
 
 const apiCall = async (params) => {
   let token = auth0.getToken() || localStorage.getItem('api_token')
-  if (!token || auth0.isTokenExpired(token)) {
+  if (!token || !auth0.isTokenValid(token) || auth0.isTokenExpired(token)) {
     try {
       const res = await fetch('/api/v1/token')
       const apiToken = await res.text()

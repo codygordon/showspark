@@ -114,6 +114,13 @@ export default class AuthService {
     return localStorage.getItem('id_token')
   }
 
+  isTokenValid(token) {
+    try {
+      decode(token)
+      return true
+    } catch (err) { return false }
+  }
+
   getTokenExpirationDate(token) {
     const decoded = decode(token)
     if (!decoded.exp) {
