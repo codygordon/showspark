@@ -6,8 +6,9 @@ import { debounce } from 'lodash'
 import { Loader } from 'semantic-ui-react'
 import FbPageSearchItem from './components/FbPageSearchItem'
 
-export default class FbPageSearch extends Component {
+export default class FbPageSearchContainer extends Component {
   static defaultProps = {
+    label: [<i key="i" className="fa fa-facebook-official" aria-hidden="true" />, ' Page'],
     category: null,
     maxLikes: null,
     minLikes: 0,
@@ -18,6 +19,7 @@ export default class FbPageSearch extends Component {
 
   static propTypes = {
     fbToken: PropTypes.string.isRequired,
+    label: PropTypes.array,
     pageFields: PropTypes.array,
     limit: PropTypes.number,
     category: PropTypes.string,
@@ -73,7 +75,7 @@ export default class FbPageSearch extends Component {
     return (
       <div className="fb-page-search">
         <label htmlFor="page-search-input">
-          <i className="fa fa-facebook-official" aria-hidden="true" /> page
+          {this.props.label}
         </label>
         <input
           id="page-search-input"

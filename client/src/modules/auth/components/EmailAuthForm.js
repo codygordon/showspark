@@ -5,33 +5,53 @@ import { Loader } from 'semantic-ui-react'
 
 export default class EmailAuthForm extends Component {
   static propTypes = {
-    auth: PropTypes.object.isRequired,
-    handleSignUpToggle: PropTypes.func.isRequired,
+    errorMessage: PropTypes.string,
+    alertMessage: PropTypes.string,
     handleEmailAuthSubmit: PropTypes.func.isRequired,
     handlePasswordResetClick: PropTypes.func.isRequired
   }
 
+  static defaultProps = {
+    errorMessage: '',
+    alertMessage: ''
+  }
+
   state = {
+    isFetching: false,
+    showSignUp: false,
     name: '',
     email: '',
     password: ''
   }
 
+  componentWillMount() {
+    const { location } = this.props
+    if (location.pathname === '/login') this.setState({ isFetching: true })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errorMessage || nextProps.alertMessage) {
+      this.setState({ isFetching: false })
+    }
+  }
+
   handleSubmit = (e) => {
-    const { name, email, password } = this.state
+    const { name, email, password, showSignUp } = this.state
     const { handleEmailAuthSubmit } = this.props
     e.preventDefault()
-    handleEmailAuthSubmit(email, password, name)
+    this.setState({ isFetching: true })
+    handleEmailAuthSubmit(email, password, showSignUp, name)
   }
 
   render() {
-    const { auth, handleSignUpToggle, handlePasswordResetClick } = this.props
+    const { errorMessage, alertMessage, handlePasswordResetClick } = this.props
+    const { isFetching, showSignUp } = this.state
     return (
       <form
         className="email-auth-form"
         onSubmit={this.handleSubmit}>
-        {auth.showingSignUp && <label htmlFor="your-name">Your Name</label>}
-        {auth.showingSignUp &&
+        {showSignUp && <label htmlFor="your-name">Your Name</label>}
+        {showSignUp &&
           <input
             id="your-name"
             className="name"
@@ -61,32 +81,34 @@ export default class EmailAuthForm extends Component {
           onChange={(e) => { this.setState({ password: e.target.value }) }} />
         <div className="signup-toggle-submit">
           <span className="toggle-text">
-            {auth.showingSignUp ? 'Have an account?' : 'Don\'t have an account?'}
+            {showSignUp ? 'Have an account?' : 'Don\'t have an account?'}
           </span>
           <a
             role="button"
             tabIndex={0}
             className="toggle"
-            onClick={handleSignUpToggle}>
-            {auth.showingSignUp ? 'Log In' : 'Sign Up'}
+            onClick={() => this.setState({ showSignUp: !this.state.showSignUp })}>
+            {showSignUp ? 'Log In' : 'Sign Up'}
           </a>
-          <button className={!auth.isFetching ? 'submit' : 'submit loading'}>
-            {!auth.showingSignUp ? (
-              auth.isFetching
+          <button className={!isFetching ? 'submit' : 'submit loading'}>
+            {!showSignUp ? (
+              isFetching
                 ? <span><Loader inline size="small" /></span>
                 : <span>Log In</span>
             ) : (
-              auth.isFetching
+              isFetching
                 ? <span><Loader inline size="small" /></span>
                 : <span>Sign Up</span>
             )}
           </button>
         </div>
-        {!!auth.errorMessage &&
-          <div className="error">
-            <i className="fa fa-exclamation-circle" aria-hidden="true" />
-            <span className="text">{auth.errorMessage}</span>
-            {auth.errorMessage.includes('Wrong email or password') &&
+        {(errorMessage || alertMessage) &&
+          <div className={errorMessage ? 'error' : 'alert'}>
+            {errorMessage &&
+              <i className="fa fa-exclamation-circle" aria-hidden="true" />
+            }
+            <span className="text">{errorMessage || alertMessage}</span>
+            {errorMessage.includes('Wrong email or password') &&
               <a
                 role="button"
                 tabIndex={0}
@@ -96,7 +118,6 @@ export default class EmailAuthForm extends Component {
             }
           </div>
         }
-
       </form>
     )
   }

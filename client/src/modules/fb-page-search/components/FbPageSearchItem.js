@@ -12,6 +12,12 @@ const FbPageSearchItem = ({ page, handleClick }) => (
       <i className="fa fa-thumbs-up" aria-hidden="true" />
       {page.fan_count.toLocaleString()}
     </span>
+    {page.hometown &&
+      <span className="hometown">
+        <i className="fa fa-map-marker" aria-hidden="true" />
+        {page.hometown}
+      </span>
+    }
   </div>
 )
 

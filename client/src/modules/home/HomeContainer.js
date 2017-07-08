@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 // import qs from 'query-string'
 // import slug from 'slug'
 
@@ -9,7 +8,7 @@ import Jumbotron from './components/Jumbotron'
 
 // import * as venueSearchActions from '../venue-search/actions'
 
-class HomeContainer extends Component {
+export default class HomeContainer extends Component {
   static propTypes = {
     // dispatch: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired
@@ -47,7 +46,3 @@ class HomeContainer extends Component {
     )
   }
 }
-
-const Home = connect()(HomeContainer)
-
-export default Home
