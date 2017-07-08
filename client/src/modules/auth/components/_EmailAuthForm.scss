@@ -72,4 +72,15 @@
       }
     }
   }
+
+  .alert {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 14px;
+
+    .text {
+      color: lighten($blue, 10%);
+    }
+  }
 }

@@ -1,17 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { BroswerRouter, Switch, Route } from 'react-router-dom'
+import { createBrowserHistory as history } from 'history'
 
-import { Switch, Route } from 'react-router-dom'
-import { ConnectedRouter } from 'react-router-redux'
-import App from './modules/app/App'
-import Home from './modules/home/Home'
-import Artist from './modules/artist/Artist'
+import AppContainer from './modules/app/AppContainer'
+import HomeContainer from './modules/home/HomeContainer'
+import ArtistContainer from './modules/artist/ArtistContainer'
 // import Admin from './modules/artist/Admin'
 // import VenueSearch from './modules/venue-search/VenueSearch'
 import NotFound from './modules/app/components/NotFound'
-import Login from './modules/app/components/Login'
-
-import { history } from './store'
+import LoginInterstitial from './modules/app/components/LoginInterstitial'
 
 export default class Routes extends Component {
   static propTypes = {
@@ -91,10 +89,10 @@ export default class Routes extends Component {
     return (
       <ConnectedRouter history={history}>
         <Switch>
-          <Route exact match path="/" render={this.HomePlusProps} />
-          <Route path="/artist" render={this.ArtistPlusProps} />
+          <Route exact match path="/" render={HomeContainer} />
+          <Route path="/artist" render={ArtistContainer} />
           {/* <Route path="/venue-search" render={this.VenueSearchPlusProps} /> */}
-          <Route path="/login" render={this.LoginPlusProps} />
+          <Route path="/login" render={LoginInterstitial} />
           <Route component={NotFound} />
         </Switch>
       </ConnectedRouter>

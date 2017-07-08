@@ -92,8 +92,8 @@ export default class AuthService {
 
   getProfile() {
     // Retrieves the profile data from localStorage
-    const profile = localStorage.getItem('user_profile')
-    return profile ? JSON.parse(localStorage.profile) : {}
+    const profile = JSON.parse(localStorage.getItem('user_profile'))
+    return profile
   }
 
 

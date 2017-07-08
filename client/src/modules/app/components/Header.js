@@ -6,15 +6,15 @@ import { Popup } from 'semantic-ui-react'
 
 import defaultAvatar from '../../../img/default-avatar.svg'
 
-const Header = ({ location, auth, ...props }) => {
+const Header = (props) => {
   const UserButton = (
     <div>
-      {auth.profile &&
+      {props.userProfile &&
         <a className="user-button">
-          <img src={auth.profile.picture || defaultAvatar} alt="user" className="avatar" />
+          <img src={props.userProfile.picture || defaultAvatar} alt="user" className="avatar" />
           <span className="name">
-            {auth.profile.name === auth.profile.email
-              ? auth.profile.user_metadata.name : auth.profile.name}
+            {props.userProfile.name === props.userProfile.email
+              ? props.userProfile.user_metadata.name : props.userProfile.name}
           </span>
           <i className="fa fa-chevron-circle-down" aria-hidden="true" />
         </a>
@@ -31,12 +31,12 @@ const Header = ({ location, auth, ...props }) => {
   return (
     <header>
       <Link to="/" className="logo" />
-      {!auth.isAuthenticated ? (
+      {!props.isAuthenticated ? (
         <Link
           className="log-in"
           to={{
-            pathname: location.pathname,
-            search: location.search ? `${location.search}&showAuth=true` : '?showAuth=true'
+            pathname: props.location.pathname,
+            search: props.location.search ? `${props.location.search}&showAuth=true` : '?showAuth=true'
           }}>
         Log In
       </Link>
@@ -54,7 +54,8 @@ const Header = ({ location, auth, ...props }) => {
 
 Header.propTypes = {
   location: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired,
+  userProfile: PropTypes.object.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
   handleLogOutClick: PropTypes.func.isRequired
 }
 

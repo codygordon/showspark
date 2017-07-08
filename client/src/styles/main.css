@@ -538,11 +538,11 @@ header {
   line-height: 50px; }
   header .logo {
     margin-top: 3px;
-    background: url("../img/showspark-logo.png") no-repeat right;
+    background: url("../img/showspark-logo.svg") no-repeat right;
     background-size: 120px;
     width: 130px; }
     header .logo:hover {
-      background-image: url("../img/showspark-logo.png"), url("../img/showspark-logo-bg-hover.png");
+      background-image: url("../img/showspark-logo.svg"), url("../img/showspark-logo-bg-hover.svg");
       background-repeat: no-repeat, no-repeat;
       background-position: right, right;
       background-size: 120px; }
@@ -751,6 +751,13 @@ footer {
       .email-auth-form .error a::before {
         bottom: -1px;
         height: 1px; }
+  .email-auth-form .alert {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 14px; }
+    .email-auth-form .alert .text {
+      color: #48a6f4; }
 
 .city-input {
   display: flex;
@@ -967,6 +974,12 @@ footer {
     .fb-page-search-item .likes i {
       margin-right: 3px;
       font-size: .9em; }
+  .fb-page-search-item .hometown {
+    margin-left: 20px;
+    font-size: .85em;
+    font-weight: 200; }
+    .fb-page-search-item .hometown i {
+      margin-right: 5px; }
 
 .app-container {
   display: flex;
