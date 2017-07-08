@@ -1,7 +1,9 @@
+// base element components
 @import 'a';
 @import 'button';
 @import 'input';
 
+// App components
 @import '../../modules/app/components/Header';
 @import '../../modules/app/components/Footer';
 @import '../../modules/app/components/UserMenu';
@@ -9,16 +11,22 @@
 @import '../../modules/app/components/NotFound';
 @import '../../modules/app/components/PaginationMenu';
 
+// Auth components
 @import '../../modules/auth/components/GoogleAuthButton';
 @import '../../modules/auth/components/FacebookAuthButton';
 @import '../../modules/auth/components/EmailAuthForm';
 
-@import '../../modules/home/components/CityInput';
-@import '../../modules/home/components/AutocompleteItem';
+// Home components
 @import '../../modules/home/components/Jumbotron';
 
+// Venue Search components
 @import '../../modules/venue-search/components/VenueMap';
 @import '../../modules/venue-search/components/VenueCard';
 @import '../../modules/venue-search/components/VenueList';
 
-@import '../../modules/fb-page-search/components/FbPageSearchItem';
+// Artist components
+@import '../../modules/artist/components/FbPageSearch';
+@import '../../modules/artist/components/FbPageSearchItem';
+@import '../../modules/artist/components/CitySearch';
+@import '../../modules/artist/components/CitySearchItem';
+// @import '../../modules/artist/components/';

@@ -9,7 +9,7 @@ const Jumbotron = ({ handleCTAClick }) => (
 
     <h2>
       Join the <span className="standout">free beta</span>
-      &nbsp;and we&#39;ll get to work booking shows for you today!
+      &nbsp;and we&#39;ll help you book shows with bands you&#39;ll actually like!
     </h2>
     {/*
     <h3>

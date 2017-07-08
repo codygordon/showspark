@@ -4,10 +4,11 @@ import { BrowserRouter } from 'react-router-dom'
 
 import AppContainer from './modules/app/AppContainer'
 
-import '../node_modules/semantic-ui-dropdown/dropdown.min.css'
-import '../node_modules/semantic-ui-popup/popup.min.css'
-import '../node_modules/semantic-ui-dimmer/dimmer.min.css'
-import '../node_modules/semantic-ui-loader/loader.min.css'
+import '../node_modules/semantic-ui-css/semantic.min.css'
+// import '../node_modules/semantic-ui-dropdown/dropdown.min.css'
+// import '../node_modules/semantic-ui-popup/popup.min.css'
+// import '../node_modules/semantic-ui-dimmer/dimmer.min.css'
+// import '../node_modules/semantic-ui-loader/loader.min.css'
 import './styles/main.css'
 
 render(

@@ -12,12 +12,12 @@
       font-weight: 800;
     }
 
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: $md) {
       line-height: .95em;
       font-size: 2.1em;
     }
 
-    @media screen and (max-width: 460px) {
+    @media screen and (max-width: $sm) {
       margin: 20px auto;
       width: 250px;
       text-align: center;
@@ -34,7 +34,11 @@
       font-weight: 400;
     }
 
-    @media screen and (max-width: 500px) {
+    @media screen and (max-width: $lg) {
+      font-size: 1.2em;
+    }
+
+    @media screen and (max-width: $sm) {
       max-width: 370px;
     }
   }

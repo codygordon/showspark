@@ -1,4 +1,6 @@
 .fb-page-search {
+  position: relative;
+
   .loading {
     padding: 20px 10px;
     font-size: 1.1em;
@@ -8,21 +10,16 @@
     }
   }
 
-  input {
-
-    &:focus {
-      border-color: $white;
-    }
-  }
-
   .items-container {
+    position: absolute;
     z-index: 1;
     margin-top: -2px;
-    border: 1px solid $white;
+    border: 1px solid $spark-yellow;
     border-top: 0;
     border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px;
-    background: transparentize($black, .6);
+    box-shadow: 0 0 0 1.5px $spark-yellow !important;
+    background: transparentize($black, .12);
     padding-top: 2px;
   }
 }

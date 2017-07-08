@@ -1,16 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const AutocompleteItem = ({ formattedSuggestion }) => (
-  <a className="autocomplete-item">
+const CitySearchItem = ({ formattedSuggestion }) => (
+  <a className="city-search-item">
     <i className="fa fa-map-marker suggestion-icon" />
     <strong>{formattedSuggestion.mainText}</strong>{' '}
     <small className="text-muted">{formattedSuggestion.secondaryText}</small>
   </a>
 )
 
-AutocompleteItem.propTypes = {
+CitySearchItem.propTypes = {
   formattedSuggestion: PropTypes.string.isRequired
 }
 
-export default AutocompleteItem
+export default CitySearchItem

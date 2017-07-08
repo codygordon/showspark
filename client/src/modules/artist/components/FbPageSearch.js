@@ -4,13 +4,14 @@ import qs from 'query-string'
 import { debounce } from 'lodash'
 
 import { Loader } from 'semantic-ui-react'
-import FbPageSearchItem from './components/FbPageSearchItem'
+import FbPageSearchItem from './FbPageSearchItem'
 
-export default class FbPageSearchContainer extends Component {
+export default class FbPageSearch extends Component {
   static defaultProps = {
-    label: [<i key="i" className="fa fa-facebook-official" aria-hidden="true" />, ' Page'],
+    addClass: '',
+    label: '',
     category: null,
-    maxLikes: null,
+    maxLikes: 999999999,
     minLikes: 0,
     limit: 25,
     placeholder: '',
@@ -19,6 +20,7 @@ export default class FbPageSearchContainer extends Component {
 
   static propTypes = {
     fbToken: PropTypes.string.isRequired,
+    addClass: PropTypes.string,
     label: PropTypes.array,
     pageFields: PropTypes.array,
     limit: PropTypes.number,
@@ -31,6 +33,7 @@ export default class FbPageSearchContainer extends Component {
 
   state = {
     isFetching: false,
+    showItems: false,
     error: '',
     pages: []
   }
@@ -65,28 +68,35 @@ export default class FbPageSearchContainer extends Component {
     } catch (err) { return this.setState({ error: err }) }
   }, 250)
 
-  handlePageItemClick = async (page) => {
-    const { onPageSelect } = this.props
-    onPageSelect(page)
+  handlePageItemClick = (page) => {
+    this.props.onPageSelect(page)
+    this.setState({ pages: [] })
+    this.searchInput.value = ''
+    this.searchInput.focus()
   }
 
   render() {
-    const { isFetching, error, pages } = this.state
+    const { addClass, label, placeholder } = this.props
+    const { showItems, isFetching, error, pages } = this.state
     return (
-      <div className="fb-page-search">
-        <label htmlFor="page-search-input">
-          {this.props.label}
-        </label>
+      <div className={`fb-page-search ${addClass}`.trim()}>
+        {label && <label htmlFor="page-search-input">{label}</label>}
         <input
           id="page-search-input"
           type="text"
-          placeholder={this.props.placeholder}
+          placeholder={placeholder}
           ref={(ref) => { this.searchInput = ref }}
+          onFocus={() => setTimeout(() => {
+            this.setState({ showItems: true })
+          }, 155)}
+          onBlur={() => setTimeout(() => {
+            this.setState({ showItems: false })
+          }, 150)}
           onChange={() => {
             this.setState({ isFetching: true, pages: [] })
             this.handleInputChange()
           }} />
-        {(isFetching || pages.length || error) &&
+        {(isFetching || pages.length || error) && showItems &&
           <div className="items-container">
             {isFetching &&
               <div className="loading">

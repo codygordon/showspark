@@ -16,12 +16,75 @@
     margin: 0 auto;
   }
 
-  .fb-page-search {
+  .fb-page-search,
+  .genre-selector,
+  .place-date-selector {
     margin: 20px auto;
     width: 500px;
 
     @media screen and (max-width: 500px) {
       width: 90%;
+    }
+  }
+
+  // Semantic UI Dropdown overrides
+  .ui.selection.dropdown {
+    border: .5px solid $white !important;
+    background: transparent !important;
+    padding: 12px !important;
+    color: $white !important;
+
+    &.active {
+      border: .5px solid $spark-yellow !important;
+      box-shadow: 0 0 0 1.5px $spark-yellow !important;
+    }
+
+    input {
+      margin: 4px auto !important;
+      height: auto !important;
+    }
+
+    .ui.label {
+      background-color: $spark-yellow !important;
+      text-shadow: none;
+      color: $background;
+
+      &:hover {
+        &::before {
+          visibility: hidden;
+        }
+      }
+    }
+
+    i.dropdown {
+      margin: auto !important;
+
+      &::before {
+        font-size: 1.5em !important;
+      }
+    }
+
+    .menu {
+      border: .5px solid $spark-yellow !important;
+      border-top: 0 !important;
+      box-shadow: 0 0 0 1px $spark-yellow !important;
+      background-color: transparentize($black, .1) !important;
+
+      .item {
+        border: 0 !important;
+        background-color: transparent !important;
+        color: $white !important;
+
+        &:hover {
+          color: $spark-yellow !important;
+        }
+
+        &.selected {
+          background-color: transparentize(lighten($black, 20%), .1) !important;
+          color: $spark-yellow !important;
+          font-weight: 400 !important;
+        }
+      }
     }
   }
 }

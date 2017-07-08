@@ -52,9 +52,13 @@ const Header = (props) => {
   )
 }
 
+Header.defaultProps = {
+  userProfile: null
+}
+
 Header.propTypes = {
   location: PropTypes.object.isRequired,
-  userProfile: PropTypes.object.isRequired,
+  userProfile: PropTypes.object,
   isAuthenticated: PropTypes.bool.isRequired,
   handleLogOutClick: PropTypes.func.isRequired
 }
