@@ -11,12 +11,7 @@ const Jumbotron = ({ handleCTAClick }) => (
       Join the <span className="standout">free beta</span>
       &nbsp;and we&#39;ll help you book shows with bands you&#39;ll actually like!
     </h2>
-    {/*
-    <h3>
-      First, pick a city &nbsp;
-      <i className="fa fa-hand-o-down" aria-hidden="true" />
-    </h3> */}
-    <button className="cta" onClick={handleCTAClick}>GET STARTED</button>
+    {/* <button className="cta" onClick={handleCTAClick}>GET STARTED</button> */}
   </section>
 )
 

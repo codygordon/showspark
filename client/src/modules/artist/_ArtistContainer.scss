@@ -29,14 +29,15 @@
 
   // Semantic UI Dropdown overrides
   .ui.selection.dropdown {
+    transition: box-shadow .12s linear;
     border: .5px solid $white !important;
     background: transparent !important;
-    padding: 12px !important;
+    padding: 11px !important;
     color: $white !important;
 
     &.active {
       border: .5px solid $spark-yellow !important;
-      box-shadow: 0 0 0 1.5px $spark-yellow !important;
+      box-shadow: 0 0 0 2px transparentize($spark-yellow, .1) !important;
     }
 
     input {
@@ -57,18 +58,19 @@
     }
 
     i.dropdown {
-      margin: auto !important;
-
-      &::before {
-        font-size: 1.5em !important;
-      }
+      display: none !important;
     }
 
     .menu {
       border: .5px solid $spark-yellow !important;
       border-top: 0 !important;
-      box-shadow: 0 0 0 1px $spark-yellow !important;
+      box-shadow: 0 0 0 1.5px $spark-yellow !important;
       background-color: transparentize($black, .1) !important;
+
+      .message {
+        color: darken($white, 40%) !important;
+        font-style: italic !important;
+      }
 
       .item {
         border: 0 !important;
@@ -83,6 +85,42 @@
           background-color: transparentize(lighten($black, 20%), .1) !important;
           color: $spark-yellow !important;
           font-weight: 400 !important;
+        }
+      }
+    }
+  }
+
+  .place-date-selector {
+    .city-search {
+      position: relative;
+
+      .city-search-items {
+        position: absolute;
+        top: 100%;
+        z-index: 1;
+        border: 1px solid $spark-yellow;
+        box-shadow: 0 0 0 1.5px $spark-yellow !important;
+        background: transparent !important;
+        border-bottom-left-radius: 2px;
+        border-bottom-right-radius: 2px;
+
+        div {
+          background-color: transparentize($black, .5) !important;
+        }
+
+        .city-search-item {
+          margin: 0;
+          border: 0;
+
+          &:hover {
+            &::before {
+              visibility: hidden;
+            }
+          }
+
+          i {
+            margin-right: 5px;
+          }
         }
       }
     }

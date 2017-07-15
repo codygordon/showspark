@@ -505,12 +505,12 @@ textarea,
 input[type='text'],
 input[type='email'],
 input[type='password'] {
-  transition: box-shadow .15s linear;
+  transition: box-shadow .12s linear;
   z-index: 0;
   border: 0.5px solid #fff;
   border-radius: 3px;
   box-shadow: 0 0 0 0 #ffcf40;
-  background: transparent;
+  background: rgba(0, 0, 0, 0.15);
   padding: 15px;
   width: 100%;
   height: 50px;
@@ -528,7 +528,7 @@ input[type='password'] {
   input[type='email']:focus,
   input[type='password']:focus {
     border: 0.5px solid #ffcf40;
-    box-shadow: 0 0 0 1.5px #ffcf40; }
+    box-shadow: 0 0 0 2px rgba(255, 207, 64, 0.9); }
 
 label {
   display: block;
@@ -571,7 +571,7 @@ header {
     align-self: flex-end;
     margin: 0 30px 0 auto; }
     header .log-in::before {
-      bottom: 14.5px; }
+      bottom: 14px; }
 
 footer {
   align-self: center;
@@ -760,7 +760,7 @@ footer {
       margin: 0 4px;
       color: #ffcf40; }
       .email-auth-form .error a::before {
-        bottom: -1px;
+        bottom: -2.5px;
         height: 1px; }
   .email-auth-form .alert {
     display: flex;
@@ -776,10 +776,10 @@ footer {
   .jumbotron h1 {
     margin-bottom: 10px;
     font-size: 2.5em;
-    font-weight: 700; }
+    font-weight: 700 !important; }
     .jumbotron h1 .standout {
       color: #ffcf40;
-      font-weight: 800; }
+      font-weight: 800 !important; }
     @media screen and (max-width: 768px) {
       .jumbotron h1 {
         line-height: .95em;
@@ -984,22 +984,6 @@ footer {
     .fb-page-search-item .hometown i {
       margin-right: 5px; }
 
-.city-search-container {
-  display: flex;
-  align-items: center;
-  transition: ease .1s;
-  margin: 0 auto;
-  border-radius: 3px;
-  font-size: 1.1em; }
-  .city-search-container .items-container {
-    position: absolute;
-    top: 100%;
-    z-index: 1;
-    border: 1px solid #666;
-    background: #000 !important; }
-  .city-search-container div div {
-    background-color: #1a1a1a !important; }
-
 .city-search-item {
   margin: 0;
   border: 0; }
@@ -1134,13 +1118,14 @@ footer {
       .artist-container .place-date-selector {
         width: 90%; } }
   .artist-container .ui.selection.dropdown {
+    transition: box-shadow .12s linear;
     border: 0.5px solid #fff !important;
     background: transparent !important;
-    padding: 12px !important;
+    padding: 11px !important;
     color: #fff !important; }
     .artist-container .ui.selection.dropdown.active {
       border: 0.5px solid #ffcf40 !important;
-      box-shadow: 0 0 0 1.5px #ffcf40 !important; }
+      box-shadow: 0 0 0 2px rgba(255, 207, 64, 0.9) !important; }
     .artist-container .ui.selection.dropdown input {
       margin: 4px auto !important;
       height: auto !important; }
@@ -1151,14 +1136,15 @@ footer {
       .artist-container .ui.selection.dropdown .ui.label:hover::before {
         visibility: hidden; }
     .artist-container .ui.selection.dropdown i.dropdown {
-      margin: auto !important; }
-      .artist-container .ui.selection.dropdown i.dropdown::before {
-        font-size: 1.5em !important; }
+      display: none !important; }
     .artist-container .ui.selection.dropdown .menu {
       border: 0.5px solid #ffcf40 !important;
       border-top: 0 !important;
-      box-shadow: 0 0 0 1px #ffcf40 !important;
+      box-shadow: 0 0 0 1.5px #ffcf40 !important;
       background-color: rgba(0, 0, 0, 0.9) !important; }
+      .artist-container .ui.selection.dropdown .menu .message {
+        color: #999999 !important;
+        font-style: italic !important; }
       .artist-container .ui.selection.dropdown .menu .item {
         border: 0 !important;
         background-color: transparent !important;
@@ -1169,3 +1155,23 @@ footer {
           background-color: rgba(51, 51, 51, 0.9) !important;
           color: #ffcf40 !important;
           font-weight: 400 !important; }
+  .artist-container .place-date-selector .city-search {
+    position: relative; }
+    .artist-container .place-date-selector .city-search .city-search-items {
+      position: absolute;
+      top: 100%;
+      z-index: 1;
+      border: 1px solid #ffcf40;
+      box-shadow: 0 0 0 1.5px #ffcf40 !important;
+      background: transparent !important;
+      border-bottom-left-radius: 2px;
+      border-bottom-right-radius: 2px; }
+      .artist-container .place-date-selector .city-search .city-search-items div {
+        background-color: rgba(0, 0, 0, 0.5) !important; }
+      .artist-container .place-date-selector .city-search .city-search-items .city-search-item {
+        margin: 0;
+        border: 0; }
+        .artist-container .place-date-selector .city-search .city-search-items .city-search-item:hover::before {
+          visibility: hidden; }
+        .artist-container .place-date-selector .city-search .city-search-items .city-search-item i {
+          margin-right: 5px; }

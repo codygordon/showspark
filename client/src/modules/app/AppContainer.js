@@ -66,6 +66,11 @@ class App extends Component {
     }
   }
 
+  showFooter = () => {
+    const noFooterPaths = ['/artist', '/admin']
+    return !noFooterPaths.includes(this.props.location.pathname)
+  }
+
   handleLogOutClick = () => {
     auth0.logout()
     this.setState({ isAuthenticated: false })
@@ -120,7 +125,7 @@ class App extends Component {
           <Route component={NotFound} />
         </Switch>
 
-        <Footer />
+        {this.showFooter() && <Footer />}
       </main>
     )
   }

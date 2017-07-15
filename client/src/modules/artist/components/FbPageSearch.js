@@ -21,7 +21,7 @@ export default class FbPageSearch extends Component {
   static propTypes = {
     fbToken: PropTypes.string.isRequired,
     addClass: PropTypes.string,
-    label: PropTypes.array,
+    label: PropTypes.string,
     pageFields: PropTypes.array,
     limit: PropTypes.number,
     category: PropTypes.string,

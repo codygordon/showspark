@@ -5,6 +5,8 @@ import slug from 'slug'
 
 // import { Dimmer, Loader } from 'semantic-ui-react'
 import { Dropdown } from 'semantic-ui-react'
+import PlacesAutocomplete from 'react-places-autocomplete'
+import CitySearchItem from './components/CitySearchItem'
 import FbPageSearch from './components/FbPageSearch'
 
 import { fbPageFields, musicGenres } from '../../utils/data'
@@ -19,6 +21,7 @@ export default class ArtistContainer extends Component {
     fbToken: '',
     fbPage: null,
     influences: [],
+    cityInputText: '',
     cities: []
   }
 
@@ -54,7 +57,11 @@ export default class ArtistContainer extends Component {
     this.setState({ genres: data.value })
   }
 
-  handleCitySearchSelect = (city) => {
+  handleCityInputChange = (cityInputText) => {
+    this.setState({ cityInputText })
+  }
+
+  handleCityInputSelect = (city) => {
     this.setState({ cities: [...this.state.cities, city] })
   }
 
@@ -82,13 +89,13 @@ export default class ArtistContainer extends Component {
           multiple
           search
           selection
-          options={musicGenres.map(genre => (
+          options={musicGenres.sort().map(genre => (
             { key: slug(genre), text: genre, value: slug(genre) }
           ))}
           onChange={this.handleGenreChange} />
         {/* CONTAINER FOR SELECTED GENRES */}
         <FbPageSearch
-          addClass="artist"
+          addClass="influences"
           fbToken={fbToken}
           category="Musician/Band"
           minLikes={2000}
@@ -102,6 +109,27 @@ export default class ArtistContainer extends Component {
               <span className="name">{influence.name}</span>
             </div>
           ))}
+        </div>
+        <div className="place-date-selector">
+          <PlacesAutocomplete
+            classNames={{
+              root: 'city-search',
+              autocompleteContainer: 'city-search-items'.trim()
+            }}
+            inputProps={{
+              value: this.state.cityInputText,
+              onChange: this.handleCityInputChange,
+              placeholder: 'What city do you want to play?',
+              autoFocus: true
+            }}
+            onSelect={this.handleCityInputSelect}
+            onEnterKeyDown={this.handleCityInputSelect}
+            autocompleteItem={CitySearchItem}
+            highlightFirstSuggestion
+            options={{
+              types: ['(regions)'],
+              componentRestrictions: { country: 'us' }
+            }} />
         </div>
 
         {/* CONTAINER FOR SELECTED CITIES */}
