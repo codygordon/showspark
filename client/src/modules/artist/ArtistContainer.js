@@ -9,7 +9,7 @@ import PlacesAutocomplete from 'react-places-autocomplete'
 import CitySearchItem from './components/CitySearchItem'
 import FbPageSearch from './components/FbPageSearch'
 
-import { fbPageFields, musicGenres } from '../../utils/data'
+import { fbPageFields, genres } from '../../utils/data'
 import apiCall from '../../utils/api-call'
 
 export default class ArtistContainer extends Component {
@@ -89,7 +89,7 @@ export default class ArtistContainer extends Component {
           multiple
           search
           selection
-          options={musicGenres.sort().map(genre => (
+          options={genres.sort().map(genre => (
             { key: slug(genre), text: genre, value: slug(genre) }
           ))}
           onChange={this.handleGenreChange} />
