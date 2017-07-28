@@ -1,8 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = require('mongoose').Schema
 
-// this has been changed
-
 const ArtistSchema = new Schema({
   name: { type: String, required: true, unique: true },
   facebookPage: { type: Object, required: true },
