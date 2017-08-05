@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 const Jumbotron = ({ handleCTAClick }) => (
   <section className="jumbotron">
     <h2>
-      We{'\''}re building tools to help <span className="standout">connect the music industry.</span>
+      We{'\''}re building tools to help <span className="standout">connect the music industry</span>.
     </h2>
 
     <h3>

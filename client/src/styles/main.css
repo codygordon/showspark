@@ -792,14 +792,14 @@ footer {
   .jumbotron h2 {
     margin: 5px auto 50px;
     padding: 0 10px;
-    font-size: 1.5em;
+    font-size: 2em;
     font-weight: 700; }
     .jumbotron h2 .standout {
       color: #ffcf40;
       font-weight: 800; }
     @media screen and (max-width: 992px) {
       .jumbotron h2 {
-        font-size: 1.75em; } }
+        font-size: 1.7em; } }
     @media screen and (max-width: 576px) {
       .jumbotron h2 {
         max-width: 370px; } }

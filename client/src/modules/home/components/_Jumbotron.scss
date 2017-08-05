@@ -27,7 +27,7 @@
   h2 {
     margin: 5px auto 50px;
     padding: 0 10px;
-    font-size: 1.5em;
+    font-size: 2em;
     font-weight: 700;
 
     .standout {
@@ -36,7 +36,7 @@
     }
 
     @media screen and (max-width: $lg) {
-      font-size: 1.75em;
+      font-size: 1.7em;
     }
 
     @media screen and (max-width: $sm) {
