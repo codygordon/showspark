@@ -53,7 +53,7 @@
     "build-css": "node-sass-chokidar client/src/styles -o client/src/styles",
     "watch-css": "npm run build-css && node-sass-chokidar client/src -o client/src --watch --recursive",
     "start": "concurrently \"npm run server\" \"npm run client\" \"npm run watch-css\"",
-    "server": "nodemon server.js --exec babel-node --presets es2015,stage-0 --optimize_for_size --max_old_space_size=460 --gc_interval=100",
+    "server": "nodemon start-server.js --exec babel-node --presets es2015,stage-0 --optimize_for_size --max_old_space_size=460 --gc_interval=100",
     "client": "babel-node start-client.js",
     "heroku-postbuild": "npm install --only=dev && npm run build-css && cd client/ && npm install --only=dev && npm install && npm run build",
     "sync-dev-db": "babel-node data-processing/sync-to-local-db.js --presets es2015,stage-0"

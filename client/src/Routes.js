@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { BroswerRouter, Switch, Route } from 'react-router-dom'
-import { createBrowserHistory as history } from 'history'
 
 import AppContainer from './modules/app/AppContainer'
 import HomeContainer from './modules/home/HomeContainer'
@@ -19,31 +18,31 @@ export default class Routes extends Component {
   }
 
   HomePlusProps = ({ location }) => (
-    <App
+    <AppContainer
       location={location}
       history={history}
       auth={this.props.auth}
       showHeader
       showFooter>
-      <Home
+      <HomeContainer
         location={location}
         history={history}
         city={this.props.venueSearch.city} />
-    </App>
+    </AppContainer>
   )
 
   ArtistPlusProps = ({ location }) => (
-    <App
+    <AppContainer
       location={location}
       history={history}
       auth={this.props.auth}
       showHeader>
-      <Artist
+      <ArtistContainer
         location={location}
         history={history}
         isAuthenticated={this.props.auth.isAuthenticated}
         artist={this.props.artist} />
-    </App>
+    </AppContainer>
   )
 
   // VenueSearchPlusProps = ({ location }) => (
@@ -63,16 +62,16 @@ export default class Routes extends Component {
   //   </App>
   // )
 
-  LoginPlusProps = ({ location }) => (
-    <App
-      location={location}
-      history={history}
-      auth={this.props.auth}
-      errorMessage={this.props.auth.errorMessage}
-      showHeader>
-      <Login />
-    </App>
-  )
+  // LoginPlusProps = ({ location }) => (
+  //   <AppContainer
+  //     location={location}
+  //     history={history}
+  //     auth={this.props.auth}
+  //     errorMessage={this.props.auth.errorMessage}
+  //     showHeader>
+  //     <Login />
+  //   </AppContainer>
+  // )
 
   // AdminPlusProps = ({ location }) => (
   //   <App
@@ -87,7 +86,7 @@ export default class Routes extends Component {
 
   render() {
     return (
-      <ConnectedRouter history={history}>
+      <BroswerRouter>
         <Switch>
           <Route exact match path="/" render={HomeContainer} />
           <Route path="/artist" render={ArtistContainer} />
@@ -95,7 +94,7 @@ export default class Routes extends Component {
           <Route path="/login" render={LoginInterstitial} />
           <Route component={NotFound} />
         </Switch>
-      </ConnectedRouter>
+      </BroswerRouter>
     )
   }
 }
