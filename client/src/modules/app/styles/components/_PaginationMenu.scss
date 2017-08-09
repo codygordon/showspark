@@ -1,0 +1,55 @@
+.pagination-menu {
+  display: flex;
+  align-items: center;
+  margin: 10px 0 0 10px;
+
+  .text {
+    margin-right: 5px;
+    min-width: 140px;
+    line-height: 1.1em;
+    font-size: .9em;
+    font-weight: 700;
+  }
+
+  .page-button {
+    transition: transform ease .1s;
+    margin: 0 2px;
+    border: 1px solid $gray;
+    border-radius: 2px;
+    background-color: $background;
+    cursor: pointer;
+    padding: 0;
+    width: 7%;
+    max-width: 34px;
+    height: 34px;
+    color: $white;
+    font-size: .9em;
+    font-weight: 300;
+
+    &:active {
+      transform: scale(.95);
+    }
+
+    &:hover {
+      border: 1.5px solid lighten($gray, 20%);
+    }
+
+    &.active {
+      transform: scale(1.05);
+      border: 1px solid $white;
+      background-color: darken($gray, 30%);
+      color: $white;
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    .text {
+      min-width: 70px;
+      font-size: .75em;
+    }
+
+    .page-button {
+      width: 25%;
+    }
+  }
+}

@@ -1,23 +1,36 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 
-import Jumbotron from './components/Jumbotron'
+import Home from './components/Home'
 
-export default class HomeContainer extends Component {
-  static propTypes = {
-    history: PropTypes.object.isRequired
+import * as actions from './actions'
+import { logOut } from '../auth/actions'
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated,
+  userProfile: state.auth.userProfile,
+  ...state.home
+})
+
+const mapDispatchToProps = dispatch => ({
+  handleLoginClick: () => {
+    dispatch(push('/login'))
+  },
+  handleLogOutClick: () => {
+    dispatch(logOut())
+  },
+  handleArtistType: (e) => {
+    dispatch(actions.setArtistType(JSON.parse(e.target.value)))
+  },
+  handleCTASubmit: (e) => {
+    e.preventDefault()
+    dispatch(push('/onboarding'))
   }
+})
 
-  handleCTAClick = () => {
-    const { history } = this.props
-    history.push('/artist')
-  }
+const HomeContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home)
 
-  render() {
-    return (
-      <section className="home-container">
-        <Jumbotron handleCTAClick={this.handleCTAClick} />
-      </section>
-    )
-  }
-}
+export default HomeContainer

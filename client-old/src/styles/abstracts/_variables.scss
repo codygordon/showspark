@@ -1,0 +1,42 @@
+$font-stack: 'Assistant', 'Helvetica', 'Arial', sans-serif !important;
+
+// colors
+$white: #fff;
+$black: #000;
+$background: lighten($black, 10%);
+$gray: #666;
+$error-red: #fe3f3a;
+$good-green: #81cf19;
+$warning-yellow: #f2e319;
+$facebook-blue: #3b5998;
+$blue: #188ff1;
+$blue-gradient: linear-gradient(135deg, lighten($blue, 20%) 0%, lighten($blue, 10%) 33%, $blue 71%);
+$spark-yellow: #ffcf40;
+$spark-gradient: linear-gradient(135deg, darken($spark-yellow, 15%) 0%, darken($spark-yellow, 5%) 60%);
+
+// shadows
+$header-shadow: 0 0 5px rgba(0, 0, 0, .5);
+$user-img-shadow: 0 0 2px rgba(0, 0, 0, .6);
+$container-shadow: 0 0 4px rgba(0, 0, 0, .15);
+$button-shadow: .5px 1px 4px rgba(0, 0, 0, .4);
+$button-shadow-hovered: 0 2px 8px rgba(0, 0, 0, .4);
+$button-shadow-active:  0 0 2px rgba(0, 0, 0, .4);
+$text-black-stroke-shadow: -2px 0 $background, 2px 0 $background, -1px 0 $background, -1px -1px $background, -1px 1px $background, 0 1px $background, 0 2px $background, 1px 1px $background,  2px 0 $background, -2px 0 $background, -1px 1px $background, 2px 1px $background, -2px 1px $background;
+$text-light-black-stroke-shadow: -2px 0 lighten($background, 5%), 2px 0 lighten($background, 5%), -1px 0 lighten($background, 5%), -1px -1px lighten($background, 5%), -1px 1px lighten($background, 5%), 0 1px lighten($background, 5%), 0 2px lighten($background, 5%), 1px 1px lighten($background, 5%),  2px 0 lighten($background, 5%), -2px 0 lighten($background, 5%), -1px 1px lighten($background, 5%), 2px 1px lighten($background, 5%), -2px 1px lighten($background, 5%);
+
+// sizes
+$header-height: 50px;
+$footer-height: 60px;
+
+// images
+$logo-img: url('../img/showspark-logo.svg');
+$logo-hover-img: url('../img/showspark-logo-bg-hover.svg');
+$home-bg-img: url('../img/home-bg.jpg');
+$artist-bg-img: url('../img/artist-bg.jpg');
+
+
+//== Media queries breakpoints
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xlg: 1200px;

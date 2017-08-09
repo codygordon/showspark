@@ -1,67 +1,37 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 
-import FacebookAuthButton from './components/FacebookAuthButton'
-import EmailAuthForm from './components/EmailAuthForm'
+import Auth from './components/Auth'
 
-import AuthService from '../../utils/auth-service'
+import * as actions from './actions'
 
-const auth0 = new AuthService()
+const mapStateToProps = state => ({
+  ...state.auth
+})
 
-export default class AuthContainer extends Component {
-  static propTypes = {
-    location: PropTypes.object.isRequired
+const mapDispatchToProps = dispatch => ({
+  handleFacebookAuthClick: () => {
+    dispatch(actions.loginWithFacebook())
+  },
+  handleEmailAuthSubmit: (email, password, signUp, name) => {
+    dispatch(actions.loginOrSignupWithEmail(email, password, signUp, name))
+  },
+  handleEmailAuthPasswordResetClick: (email) => {
+    dispatch(actions.resetPassword(email))
+  },
+  handleLoginHash: (hash) => {
+    dispatch(actions.receiveLoginHash(hash))
+  },
+  handleLoggedIn: () => {
+    console.log('handling')
+    dispatch(push('/'))
   }
+})
 
-  state = {
-    errorMessage: null,
-    alertMessage: null
-  }
+const AuthContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Auth)
 
-  handleFacebookAuthClick = () => {
-    auth0.loginWithFacebook((err) => {
-      if (err) this.setState({ errorMessage: err })
-    })
-  }
-
-  handleEmailAuthSubmit = (email, password, signUp, name) => {
-    if (signUp) {
-      auth0.signupWithEmail(email, password, name, (err, res) => {
-        if (err) this.setState({ errorMessage: err.description })
-        else {
-          auth0.loginWithEmail(email, password, (err, res) => {
-            if (err) this.setState({ errorMessage: err.description })
-          })
-        }
-      })
-    } else {
-      auth0.loginWithEmail(email, password, (err, res) => {
-        if (err) this.setState({ errorMessage: err.description })
-      })
-    }
-  }
-
-  handleEmailAuthPasswordResetClick = (email) => {
-    auth0.resetPassword(email, (err, res) => {
-      if (err) this.setState({ errorMessage: err.description })
-      else this.setState({ errorMessage: '', alertMessage: res })
-    })
-  }
-
-  render() {
-    const { location } = this.props
-    const { errorMessage, alertMessage } = this.state
-    return (
-      <div className="auth-container">
-        <FacebookAuthButton handleClick={this.handleFacebookAuthClick} />
-        <span className="divider">or with email</span>
-        <EmailAuthForm
-          location={location}
-          errorMessage={errorMessage}
-          alertMessage={alertMessage}
-          handleEmailAuthSubmit={this.handleEmailAuthSubmit}
-          handlePasswordResetClick={this.handleEmailAuthPasswordResetClick} />
-      </div>
-    )
-  }
-}
+export default AuthContainer

@@ -25,8 +25,8 @@ export default class EmailAuthForm extends Component {
   }
 
   componentWillMount() {
-    const { location } = this.props
-    if (location.pathname === '/login') this.setState({ isFetching: true })
+    // const { location } = this.props
+    // if (location.pathname === '/login') this.setState({ isFetching: true })
   }
 
   componentWillReceiveProps(nextProps) {

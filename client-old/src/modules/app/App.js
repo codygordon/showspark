@@ -1,25 +1,18 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { withRouter } from 'react-router'
-import { Switch, Route } from 'react-router-dom'
 import qs from 'query-string'
 
 import { CSSTransitionGroup } from 'react-transition-group'
 import { Dimmer } from 'semantic-ui-react'
 import Header from './components/Header'
 import Footer from './components/Footer'
-import AuthContainer from '../auth/AuthContainer'
-import HomeContainer from '../home/HomeContainer'
-import ArtistContainer from '../artist/ArtistContainer'
-// import Admin from './modules/artist/Admin'
-import LoginInterstitial from './components/LoginInterstitial'
-import NotFound from './components/NotFound'
+import Routes from './components/Routes'
 
 import AuthService from '../../utils/auth-service'
 
 const auth0 = new AuthService()
 
-class App extends Component {
+export default class App extends Component {
   static propTypes = {
     location: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
@@ -83,18 +76,6 @@ class App extends Component {
     history.push(`${location.pathname}${newSearch}`)
   }
 
-  HomePlusProps = () => (
-    <HomeContainer
-      history={this.props.history}
-      isAuthenticated={this.state.isAuthenticated} />
-  )
-
-  ArtistPlusProps = () => (
-    <ArtistContainer
-      history={this.props.history}
-      isAuthenticated={this.state.isAuthenticated} />
-  )
-
   render() {
     const { location, history } = this.props
     return (
@@ -113,24 +94,15 @@ class App extends Component {
             transitionEnterTimeout={150}
             transitionLeaveTimeout={100}>
             {this.state.showAuth &&
-              <AuthContainer location={location} history={history} />
+              <AuthContainer />
             }
           </CSSTransitionGroup>
         </Dimmer>
 
-        <Switch>
-          <Route exact match path="/" render={this.HomePlusProps} />
-          <Route path="/artist" render={this.ArtistPlusProps} />
-          <Route path="/login" render={LoginInterstitial} />
-          <Route component={NotFound} />
-        </Switch>
+        <Routes />
 
         {this.showFooter() && <Footer />}
       </main>
     )
   }
 }
-
-const AppContainer = withRouter(App)
-
-export default AppContainer

@@ -1,0 +1,10 @@
+footer {
+  align-self: center;
+  margin: auto;
+  padding-top: 20px;
+  height: $footer-height;
+  text-align: center;
+  color: darken($white, 30%);
+  font-size: .9em;
+  font-weight: 200;
+}

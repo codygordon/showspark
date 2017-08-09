@@ -64,38 +64,36 @@ export default class AuthService {
     }, cb)
   }
 
-  logout() {
+  logOut() {
     // Clear user token and profile data from local storage
     localStorage.removeItem('id_token')
     localStorage.removeItem('user_profile')
   }
 
-  parseHash(hash) {
+  parseHash(hash, cb) {
     this.webAuth.parseHash({ hash, _idTokenVerification: false },
       (err, authResult) => {
-        if (err) throw err
+        if (err) cb(err)
         if (authResult && authResult.accessToken && authResult.idToken) {
           this.setToken(authResult.accessToken, authResult.idToken)
-          const profileCb = (err, profile) => {
-            if (err) this.webAuth.client.userInfo(authResult.accessToken, profileCb)
-            else this.setProfile(profile)
-          }
-          this.webAuth.client.userInfo(authResult.accessToken, profileCb)
-        }
+          this.webAuth.client.userInfo(authResult.accessToken, (err, profile) => {
+            this.setUserProfile(profile)
+            cb(err, profile)
+          })
+        } else cb(err = new Error('login failed'))
       })
   }
 
-  setProfile(profile) {
+  setUserProfile(profile) {
     // Saves profile data to localStorage
     localStorage.setItem('user_profile', JSON.stringify(profile))
   }
 
-  getProfile() {
+  getUserProfile() {
     // Retrieves the profile data from localStorage
     const profile = JSON.parse(localStorage.getItem('user_profile'))
     return profile
   }
-
 
   loggedIn() {
     // Checks if there is a saved token and it's still valid, returns bool

@@ -3,6 +3,43 @@ export const fbPageFields = ['id', 'username', 'name', 'category', 'fan_count',
   'band_interests', 'band_members', 'general_manager', 'booking_agent',
   'press_contact', 'bio', 'hometown', 'influences', 'record_label']
 
+export const artistTypes = [
+  {
+    key: 'band',
+    text: 'Band',
+    preText: 'in a'
+  },
+  {
+    key: 'singer-songwriter',
+    text: 'Singer-Songwriter',
+    preText: 'a'
+  },
+  {
+    key: 'dj',
+    text: 'DJ / Electronic Artist',
+    preText: 'a'
+  },
+  {
+    key: 'hip-hop',
+    text: 'Hip-Hop / Rap Artist',
+    preText: 'a'
+  }
+]
+
+export const primaryGenres = [
+  'Blues',
+  'Classical',
+  'Country',
+  'Electronic',
+  'Folk',
+  'Jazz',
+  'Hip-Hop',
+  'Pop',
+  'R&B',
+  'Reggae',
+  'Rock'
+]
+
 export const genres = [
   'Blues': [
     'Acoustic',

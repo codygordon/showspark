@@ -1,0 +1,53 @@
+@import 'components/Header';
+@import 'components/Footer';
+@import 'components/NotFound';
+@import 'components/PaginationMenu';
+@import 'components/UserButton';
+@import 'components/UserMenu';
+
+.app {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+
+  header {
+    order: 0;
+    width: 100%;
+    height: $header-height;
+
+    @media screen and (min-width: 900px) {
+      padding: 0 20px;
+    }
+  }
+
+  & > section {
+    height: calc(100% - #{$header-height});
+  }
+
+  .ui.dimmer.error {
+    margin-top: $header-height;
+    height: calc(100% - #{$header-height});
+  }
+
+  .ui.dimmer.error > .content > * {
+    padding: 0 8%;
+    color: $error-red;
+    font-size: 1.4em;
+    font-weight: 700;
+  }
+
+  footer {
+    align-self: flex-end;
+  }
+
+  // css transition groups
+  .auth-enter {
+    opacity: .01;
+
+    &.auth-enter-active {
+      transition: opacity 150ms ease-in;
+      opacity: 1;
+    }
+  }
+}

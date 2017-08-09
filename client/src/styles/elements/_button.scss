@@ -1,0 +1,27 @@
+button {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  transition: ease .1s;
+  border: 0;
+  border-radius: 3px;
+  box-shadow: $button-shadow;
+  background-color: darken($spark-yellow, 10%);
+  cursor: pointer;
+  padding: 16px 24px;
+  color: $background;
+  font-family: inherit;
+  font-size: 1.1em;
+  font-weight: 800;
+
+  &:hover {
+    box-shadow: $button-shadow-hovered;
+    background: $spark-yellow;
+  }
+
+  &:active {
+    transform: scale(.95);
+    box-shadow: $button-shadow-active;
+  }
+}

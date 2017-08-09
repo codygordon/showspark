@@ -4,7 +4,7 @@ import slug from 'slug'
 // import qs from 'query-string'
 
 // import { Dimmer, Loader } from 'semantic-ui-react'
-import { Dropdown } from 'semantic-ui-react'
+// import { Dropdown } from 'semantic-ui-react'
 import PlacesAutocomplete from 'react-places-autocomplete'
 import CitySearchItem from './components/CitySearchItem'
 import FbPageSearch from './components/FbPageSearch'
@@ -12,7 +12,7 @@ import FbPageSearch from './components/FbPageSearch'
 import { fbPageFields, genres } from '../../utils/data'
 import apiCall from '../../utils/api-call'
 
-export default class ArtistContainer extends Component {
+export default class Artist extends Component {
   static propTypes = {
     isAuthenticated: PropTypes.bool.isRequired
   }
@@ -84,7 +84,7 @@ export default class ArtistContainer extends Component {
           placeholder="Enter your band/project name"
           pageFields={fbPageFields}
           onPageSelect={this.handleArtistFbPageSelect} />
-        <Dropdown
+        {/* <Dropdown
           className="genre-selector"
           multiple
           search
@@ -93,7 +93,7 @@ export default class ArtistContainer extends Component {
             { key: slug(genre), text: genre, value: slug(genre) }
           ))}
           onChange={this.handleGenreChange} />
-        {/* CONTAINER FOR SELECTED GENRES */}
+        {/* CONTAINER FOR SELECTED GENRES */} */}
         <FbPageSearch
           addClass="influences"
           fbToken={fbToken}
@@ -110,7 +110,7 @@ export default class ArtistContainer extends Component {
             </div>
           ))}
         </div>
-        <div className="place-date-selector">
+        {/* <div className="place-date-selector">
           <PlacesAutocomplete
             classNames={{
               root: 'city-search',
@@ -130,7 +130,7 @@ export default class ArtistContainer extends Component {
               types: ['(regions)'],
               componentRestrictions: { country: 'us' }
             }} />
-        </div>
+        </div> */}
 
         {/* CONTAINER FOR SELECTED CITIES */}
       </section>

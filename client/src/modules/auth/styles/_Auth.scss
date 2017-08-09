@@ -1,0 +1,45 @@
+@import 'components/EmailAuthForm';
+@import 'components/FacebookAuthButton';
+@import 'components/GoogleAuthButton';
+
+// Auth layout
+.auth {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  padding: 0 10px;
+  width: 100%;
+  height: auto;
+
+  @media screen and (min-width: 500px) {
+    padding: 0 20px;
+    width: 400px;
+  }
+
+  .google-auth-button, .facebook-auth-button {
+    width: 100%;
+    height: 60px;
+    line-height: 28px;
+    font-size: 1.2em;
+  }
+
+  .divider {
+    position: relative;
+    margin: 10px 30px;
+    width: 100%;
+    font-size: .9em;
+    font-weight: 200;
+
+    &::before {
+      position: absolute;
+      bottom: 5px;
+      left: 0;
+      z-index: -1;
+      border-radius: 3px;
+      background-color: darken($gray, 5%);
+      width: 100%;
+      height: .5px;
+      content: '';
+    }
+  }
+}

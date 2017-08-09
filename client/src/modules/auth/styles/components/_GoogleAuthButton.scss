@@ -1,0 +1,14 @@
+.google-auth-button {
+  background: $white;
+  color: $background;
+
+  img {
+    padding-right: 10px;
+    width: 30px;
+  }
+
+  &:hover {
+    background: darken($white, 10%);
+    color: $black;
+  }
+}

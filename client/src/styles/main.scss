@@ -1,7 +1,5 @@
-@import 'abstracts/variables';
-@import 'abstracts/mixins';
-@import 'abstracts/functions';
+@import 'abstracts/all';
 @import 'vendor/normalize';
-@import 'base/base';
-@import 'components/all';
-@import 'containers/all';
+@import 'base';
+@import 'elements/all';
+@import 'modules/all';

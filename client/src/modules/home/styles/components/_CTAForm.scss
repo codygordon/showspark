@@ -1,0 +1,71 @@
+.cta-form {
+  display: inline-block;
+
+  label {
+    display: inline-block;
+    z-index: 1;
+    width: 250px;
+    height: 50px;
+    line-height: 50px;
+    background-color: "";
+    font-size: 19px;
+    transition: .1s ease-in-out;
+    border-radius: 3px;
+    box-shadow: 0 0 5px 1px rgba(0, 0, 0, .2);
+
+    &:hover {
+
+    }
+
+    &::before {
+      font-family: 'FontAwesome';
+      font-style: normal;
+      font-weight: normal;
+      text-decoration: inherit;
+      content: '\f0d7';
+      position: absolute;
+      top: 1px;
+      right: 16px;
+      font-size: 20px;
+      z-index: 2;
+      color: #333;
+    }
+  }
+  select {
+    cursor: pointer;
+    opacity: 0;
+    display: block;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: 100%;
+    min-height: 100%;
+    font-size: 17px;
+    line-height: 21px;
+    border-radius: inherit;
+  }
+
+  .input-overlay {
+    border-radius: inherit;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding-right: 40px;
+    padding-left: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background-color: #fff;
+    color: #222;
+  }
+
+  button {
+    display: inline-block;
+    line-height: 50px;
+  }
+}

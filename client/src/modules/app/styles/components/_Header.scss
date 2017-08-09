@@ -1,0 +1,44 @@
+header {
+  display: flex;
+  flex-direction: row;
+  box-shadow: $header-shadow;
+  height: $header-height;
+  line-height: $header-height;
+
+  .logo {
+    margin-top: 3px;
+    background: $logo-img no-repeat right;
+    background-size: 120px;
+    width: 130px;
+
+    &:hover {
+      background-image:  $logo-img, $logo-hover-img;
+      background-repeat: no-repeat, no-repeat;
+      background-position: right, right;
+      background-size: 120px;
+
+      &::before {
+        visibility: hidden;
+      }
+    }
+
+    &::after {
+      margin-left: 128px;
+      vertical-align: -1%;
+      text-shadow: none;
+      color: $white;
+      font-size: .9em;
+      font-weight: 200;
+      content: 'beta';
+    }
+  }
+
+  .log-in {
+    align-self: flex-end;
+    margin: 0 30px 0 auto;
+
+    &::before {
+      bottom: 14px;
+    }
+  }
+}
